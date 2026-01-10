@@ -10,3 +10,4 @@ textbook/
 *.out
 *.log
 *.asfgz
+*.synctex.gz
