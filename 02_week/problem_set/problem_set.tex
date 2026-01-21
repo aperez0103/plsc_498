@@ -11,222 +11,225 @@
 \begin{document}
 \maketitle
 
-\noindent \textbf{Goal.} Extend the code from the lecture slides to produce a small, reproducible workflow: load the provided dataset, create multiple figures using explicit mappings, and submit your work through GitHub.
+\noindent \textbf{Goal.} Practice a simple, reproducible visualization workflow in R:
+load a dataset, make a small number of plots using fixed variables, save your output,
+and push your work to GitHub.
 
 \medskip
 \noindent \textbf{What to submit (in your GitHub repo).}
 \begin{itemize}
   \item A script file: \texttt{scripts/lab.R}
   \item A short write-up: \texttt{outputs/writeup.md}
-  \item Saved figures: at least 4 image files in \texttt{figures/}
-  \item (Optional but recommended) a log file: \texttt{outputs/log.txt}
+  \item Saved figures: at least 3 image files in \texttt{figures/}
 \end{itemize}
 
 \medskip
 \noindent \textbf{Rules.}
 \begin{itemize}
-  \item Work inside an \textbf{R Project}.
+  \item Work inside an \textbf{single R Project}.
   \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
-  \item You may consult notes and documentation. If you use any external code, cite it in your write-up.
+  \item You may consult notes and documentation. If you use external code, cite it.
 \end{itemize}
 
 \section*{Questions}
 
 \begin{enumerate}
 
-  \item \textbf{Create an R Project (proof required).}
-  \begin{enumerate}
-    \item Create an R Project for this course on your computer.
-    \item \textbf{Proof:} In your \texttt{outputs/writeup.md}, include:
-    \begin{itemize}
-      \item the output of \texttt{getwd()} run from inside the project, and
-      \item a screenshot showing the \texttt{.Rproj} file in your project folder \emph{or} the RStudio Project name visible in the RStudio window.
-    \end{itemize}
-  \end{enumerate}
+%-------------------------------------------------
+\item \textbf{Create an R Project (proof required).}
+\begin{enumerate}
+  \item Create an R Project for this course.
+  \item \textbf{Proof:} In \texttt{outputs/writeup.md}, include:
+  \begin{itemize}
+    \item the output of \texttt{getwd()}, and
+    \item a screenshot showing the project name in RStudio.
+  \end{itemize}
+\end{enumerate}
 
-  \item \textbf{Load the provided dataset from the \texttt{data/} folder.}
-  \begin{enumerate}
-    \item Confirm the dataset file exists in \texttt{data/}. (Do not manually move it.)
-    \item Write code in \texttt{scripts/lab.R} to load it into R as an object named \texttt{vdem}.
+%-------------------------------------------------
+\item \textbf{Load the dataset.}
+\begin{enumerate}
+  \item Confirm the dataset file exists in \texttt{data/}.
+  \item Load the dataset into R as an object named \texttt{vdem}.
+
 \begin{verbatim}
-# PSEUDOCODE:
-# 1) read the .rds file from the data/ folder
-# 2) store it as vdem
-
+# Step 1: load the dataset
 vdem <- readRDS("data/vdem.rds")
 \end{verbatim}
 
-    \item \textbf{Proof:} In \texttt{outputs/writeup.md}, include:
-    \begin{itemize}
-      \item the dimensions of \texttt{vdem} (rows $\times$ columns), and
-      \item the first 3 column names.
-    \end{itemize}
+  \item \textbf{Proof:} In \texttt{outputs/writeup.md}, include:
+  \begin{itemize}
+    \item the dimensions of \texttt{vdem} (rows $\times$ columns),
+    \item the first three column names.
+  \end{itemize}
 
 \begin{verbatim}
-# PSEUDOCODE for the proof:
+# Proof code
 dim(vdem)
 names(vdem)[1:3]
 \end{verbatim}
 
-  \end{enumerate}
+\end{enumerate}
 
-  \item \textbf{Work with fixed variables (no selection required).}
-  \begin{enumerate}
-    \item For all plots in this assignment, use the following variables from the dataset:
-    \begin{itemize}
-      \item Access to justice for women: \texttt{v2clacjstw}
-      \item Access to justice for men: \texttt{v2clacjstm}
-      \item Freedom from political killings: \texttt{v2clkill}
-      \item Freedom from torture: \texttt{v2cltort}
-    \end{itemize}
+%-------------------------------------------------
+\item \textbf{Variables used in all plots.}
 
-    \item Treat \emph{all four variables as continuous}. You do \textbf{not} need to identify or justify variable types.
+For all plots in this assignment, use the following variables:
+\begin{itemize}
+  \item \texttt{v2clacjstw} (access to justice for women)
+  \item \texttt{v2clacjstm} (access to justice for men)
+  \item \texttt{v2clkill} (freedom from political killings)
+  \item \texttt{v2cltort} (freedom from torture)
+\end{itemize}
 
-    \item Your baseline plot will use the following mapping (note: no trailing comma):
+Treat all variables as continuous.
+
+\medskip
+\textbf{Proof:} In \texttt{outputs/writeup.md}, show that these variables exist and report their class.
+
 \begin{verbatim}
-# PSEUDOCODE:
-# x = justice for women
-# y = justice for men
-# points = one row per observation
+names(vdem)
+str(vdem[, c("v2clacjstw","v2clacjstm","v2clkill","v2cltort")])
+\end{verbatim}
 
+%-------------------------------------------------
+\item \textbf{Create the baseline plot.}
+
+Create a scatterplot with:
+\begin{itemize}
+  \item x-axis: \texttt{v2clacjstw}
+  \item y-axis: \texttt{v2clacjstm}
+\end{itemize}
+
+\begin{verbatim}
 library(ggplot2)
 
-p0 <- ggplot(vdem, aes(x = v2clacjstw, y = v2clacjstm)) +
+p0 <- ggplot(vdem, aes(
+  x = v2clacjstw,
+  y = v2clacjstm
+)) +
   geom_point()
 
 p0
 \end{verbatim}
 
-    \item Then create a version that uses \textbf{both} color and size:
+Save the plot to \texttt{figures/}.
+
+\begin{verbatim}
+ggsave("figures/plot_baseline.png", plot = p0)
+\end{verbatim}
+
+%-------------------------------------------------
+\item \textbf{Create two plot extensions (your design choices).}
+
+Starting from the baseline plot, create \textbf{two} additional figures.
+For each extension, you will make a \textbf{design choice} about how to encode extra information.
+
+\medskip
+\textbf{Extension 1 (your choice: add ONE encoding).}
+
+Create a version of the baseline plot where you add \textbf{one} of the following:
+\begin{itemize}
+  \item map one variable to \textbf{color}, \emph{or}
+  \item map one variable to \textbf{size}.
+\end{itemize}
+
+You must use one of these variables as your added information:
+\texttt{v2clkill} or \texttt{v2cltort}.
+
 \begin{verbatim}
 # PSEUDOCODE:
-# color = freedom from political killings
-# size  = freedom from torture
+# Choose ONE:
+# - color = <your choice: v2clkill OR v2cltort>
+# OR
+# - size  = <your choice: v2clkill OR v2cltort>
 
 p1 <- ggplot(vdem, aes(
   x = v2clacjstw,
   y = v2clacjstm,
-  color = v2clkill,
-  size  = v2cltort
+  <your choice goes here>
 )) +
   geom_point()
 
 p1
 \end{verbatim}
 
-    \item \textbf{Proof:} In \texttt{outputs/writeup.md}, include:
-    \begin{itemize}
-      \item confirmation that all four variables exist in the dataset (show \texttt{names(vdem)} output or a short snippet), and
-      \item their reported class from \texttt{str()}.
-    \end{itemize}
+Save this plot.
 
 \begin{verbatim}
-# PSEUDOCODE for the proof:
-names(vdem)
-str(vdem[, c("v2clacjstw","v2clacjstm","v2clkill","v2cltort")])
+ggsave("figures/plot_extension1.png", plot = p1)
 \end{verbatim}
-
-  \end{enumerate}
 
 \medskip
-\textbf{Pseudocode guide (follow this order in \texttt{scripts/lab.R}):}
-\begin{enumerate}
-  \item Load required libraries (\texttt{ggplot2}, optionally \texttt{tidyverse}).
-  \item Read the dataset from \texttt{data/} into \texttt{vdem}.
-  \item Confirm required variables exist (\texttt{names(vdem)}; \texttt{str(...)}).
-  \item Make the baseline plot (x = \texttt{v2clacjstw}, y = \texttt{v2clacjstm}).
-  \item Make the enhanced plot (add color = \texttt{v2clkill}, size = \texttt{v2cltort}).
-  \item Save plots with \texttt{ggsave()} into \texttt{figures/}.
-\end{enumerate}
+\textbf{Extension 2 (your choice: add a SECOND encoding).}
 
-  \item \textbf{Create a reproducible folder structure + (optional) logging.}
-  \begin{enumerate}
-    \item Ensure these folders exist in your project:
-    \begin{itemize}
-      \item \texttt{scripts/}
-      \item \texttt{outputs/}
-      \item \texttt{figures/}
-      \item \texttt{logs/} \textit{(optional but recommended)}
-    \end{itemize}
-    \item In \texttt{scripts/lab.R}, add code that creates any missing directories (without errors).
+Create another version where you add a \textbf{second} encoding, so your plot uses \textbf{both}
+color and size. Use the remaining variable that you did \emph{not} use in Extension 1.
+
 \begin{verbatim}
 # PSEUDOCODE:
-# if a folder does not exist, create it
-dir.create("scripts", showWarnings = FALSE)
-dir.create("outputs", showWarnings = FALSE)
-dir.create("figures", showWarnings = FALSE)
-dir.create("logs", showWarnings = FALSE)
-\end{verbatim}
-    \item \textbf{Proof:} In \texttt{outputs/writeup.md}, include \texttt{list.files()} output showing the folders.
-\begin{verbatim}
-# PSEUDOCODE for proof:
-list.files()
-\end{verbatim}
+# If Extension 1 used:
+#   color = v2clkill
+# then Extension 2 should add:
+#   size  = v2cltort
+#
+# If Extension 1 used:
+#   size  = v2cltort
+# then Extension 2 should add:
+#   color = v2clkill
 
-    \item \textbf{Optional (challenge):} Create a simple log file \texttt{outputs/log.txt} that records:
-    \begin{itemize}
-      \item the current date/time,
-      \item the dataset filename loaded,
-      \item and the names of the four required variables.
-    \end{itemize}
-  \end{enumerate}
+p2 <- ggplot(vdem, aes(
+  x = v2clacjstw,
+  y = v2clacjstm,
+  <your two choices go here>
+)) +
+  geom_point()
 
-  \item \textbf{Make three plot extensions + comment on them.}
-
-  Using your baseline plot as the starting point, create \textbf{three} distinct extensions (three separate figures). Each figure must include a caption in your write-up that explains:
-  \begin{itemize}
-    \item what variables are mapped to what visual properties,
-    \item what comparison is easiest to make,
-    \item and one default choice you are accepting (or changing) and why.
-  \end{itemize}
-
-  \medskip
-  Your three extensions must come from different categories below (choose any three):
-  \begin{enumerate}
-    \item \textbf{Add an annotation layer:} add a title + axis labels.
-    \item \textbf{Handle overplotting:} use transparency (\texttt{alpha}) and briefly explain why.
-    \item \textbf{Scale adjustment:} adjust the color scale and/or size scale and explain the effect.
-  \end{enumerate}
-
-  \medskip
-  \textbf{Saving requirement:} Save each plot to \texttt{figures/} using \texttt{ggsave()} (do not rely on screenshots). Name files clearly (e.g., \texttt{figures/plot1.png}, \texttt{figures/plot2.png}, \texttt{figures/plot3.png}).
-
-\begin{verbatim}
-# PSEUDOCODE for saving:
-ggsave("figures/plot_baseline.png", plot = p0, width = 7, height = 5)
-ggsave("figures/plot_color_size.png", plot = p1, width = 7, height = 5)
+p2
 \end{verbatim}
 
-  \item \textbf{If you finish early:}
-  \begin{itemize}
-    \item Add a short ``limitations'' note (1--2 sentences) about what the plot cannot show.
-    \item Add a deliberately ``bad'' version and write 3 bullets on why it misleads.
-  \end{itemize}
-
-  \item \textbf{GitHub requirement:} Commit and push your work.
-
-  \textbf{Proof:} In \texttt{outputs/writeup.md}, include:
-  \begin{itemize}
-    \item the output of \texttt{git status} \emph{after} committing (showing a clean working tree), and
-    \item either a screenshot of your GitHub repo showing the latest commit \emph{or} the commit hash and message.
-  \end{itemize}
+Save this plot.
 
 \begin{verbatim}
-# PSEUDOCODE (terminal):
+ggsave("figures/plot_extension2.png", plot = p2)
+\end{verbatim}
+
+%-------------------------------------------------
+\item \textbf{Brief written interpretation.}
+
+In \texttt{outputs/writeup.md}, write \textbf{3 short bullets}:
+\begin{itemize}
+  \item One thing you can see in the baseline plot.
+  \item One thing your Extension 1 makes easier to see.
+  \item One thing your Extension 2 makes easier (or harder) to see.
+  \item What argument is being conveyed by these plots. What are some ways the argument can be improved?
+\end{itemize}
+
+%-------------------------------------------------
+\item \textbf{GitHub submission (proof required).}
+
+Commit and push your work.
+
+\begin{verbatim}
 git add .
-git commit -m "finish lab"
-git status
+git commit -m "Finish in-class visualization lab"
 git push
 \end{verbatim}
+
+\textbf{Proof:} In \texttt{outputs/writeup.md}, include:
+\begin{itemize}
+  \item the output of \texttt{git status} after committing,
+  \item the commit hash or a screenshot of the GitHub repo.
+\end{itemize}
 
 \end{enumerate}
 
 \section*{Checklist (before you leave)}
 \begin{itemize}
-  \item \texttt{scripts/lab.R} exists and runs top-to-bottom
-  \item \texttt{outputs/writeup.md} exists and includes required proofs
-  \item At least 4 figures saved in \texttt{figures/}
-  \item Work is pushed to GitHub
+  \item \texttt{scripts/lab.R} runs top-to-bottom without errors
+  \item \texttt{outputs/writeup.md} includes all required proofs
+  \item Three figures saved in \texttt{figures/}
+  \item Changes pushed to GitHub
 \end{itemize}
 
 \end{document}
