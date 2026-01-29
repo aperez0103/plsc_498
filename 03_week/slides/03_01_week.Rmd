@@ -5,6 +5,7 @@ author: "Jared Edgerton"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts, plsc498.css]
+    self_contained: true
     nature:
       highlightStyle: github
       highlightLines: true
@@ -232,6 +233,23 @@ Interpretation:
 
 ---
 
+
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="biden_trump_interest.jpeg" style="width:50%;">
+]
+
+---
+
 # When linear scales fail
 
 Linear scales struggle when:
@@ -293,6 +311,22 @@ ggplot(df_syn, aes(x = x, y = y_pos)) +
 - Relative differences are easier to compare
 - Small values gain visual resolution
 - Absolute distances are no longer additive
+
+---
+
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="alluvial_dating.jpeg" style="width:50%;">
+]
 
 ---
 
