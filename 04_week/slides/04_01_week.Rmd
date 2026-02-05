@@ -148,6 +148,22 @@ Interpretation:
 
 ---
 
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="temperature.png" style="width:50%;">
+]
+
+
+---
+
+
 # Too many colors (problem)
 
 When categories grow:
@@ -291,7 +307,7 @@ Interpretation:
   - After doing this talk to your neighbor briefly and compare notes.
 
 .center[
-<img src="team_slack.png" style="width:70%;">
+<img src="team_slack.png" style="width:60%;">
 ]
 
 
