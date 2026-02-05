@@ -52,7 +52,7 @@ plot_raw <- ggplot(county_df, aes(county_total_votes, rep_share, color = rep_sha
   ggtitle("Figure 1: Republican Share of County Votes") + 
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5)) #centers title with plot
 
-ggsave("figures/plot_raw.png", plot = plot_raw, scale = 1) #scale for readability 
+ggsave("figures/plot_raw.png", plot = plot_raw, scale = 1.5) #scale for readability 
 
 ##scaled plot (log)
 plot_scaled <- ggplot(county_df, aes(county_total_votes, rep_share, color = rep_share)) +
@@ -66,6 +66,6 @@ plot_scaled <- ggplot(county_df, aes(county_total_votes, rep_share, color = rep_
   ggtitle("Figure 2: Republican Share of County Votes (Scaled)") + 
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5)) #centers title with plot
 
-ggsave("figures/plot_scaled.png", plot = plot_scaled, scale = 1) #scale for readability 
+ggsave("figures/plot_scaled.png", plot = plot_scaled, scale = 1.5) #scale for readability 
 
 
