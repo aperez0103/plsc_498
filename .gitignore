@@ -13,3 +13,6 @@ textbook/
 *.synctex.gz
 readings.zip
 *.zip
+HOUSE_precinct_general.csv
+03_week/data/HOUSE_precinct_general.csv
+data/HOUSE_precinct_general.csv
