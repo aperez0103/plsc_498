@@ -34,3 +34,17 @@ In all the plots, there is a diverging color scale. This scale utilized red and 
 ## Accessability 
 
 For the accessibility evaluation, I used the 101st Senate plot, and tested it using protanopia and deuteranopia simulations. Under both conditions, it was hard to differentiate colors in varying shades of red. Because of this, I decided it was best to re-approach the color design. I used more colorblind friendly colors (A dark green for more liberal senators, light blue for more conservative, with a yellow midpoint for moderates). This easily displays changes in color along the x-axis, though it loses the value of implicitly associating conservatives with the color red and liberals with the color blue. With that said, I learned that visualizations carefully balances accessibility for all readers with conveying what is truly important in a meaningful manner. 
+
+## GitHub Proof
+Angels-MacBook-Pro:04_week angel$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+Angels-MacBook-Pro:04_week angel$ git log -1
+commit 997cb912e8e9ea25df03c8535175b1c912397c99 (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Fri Feb 6 22:03:10 2026 -0500
+
+    Week 04 Lab Submission
