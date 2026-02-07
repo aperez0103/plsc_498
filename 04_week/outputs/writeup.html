@@ -352,21 +352,84 @@ display: none;
 </div>
 
 
-<p>##getwd()<br />
-[1] “/Users/angel/Desktop/PSU/2025-26/Spring ’26/PLSC 498/Problem
+<div id="getwd" class="section level2">
+<h2>getwd()</h2>
+<p>[1] “/Users/angel/Desktop/PSU/2025-26/Spring ’26/PLSC 498/Problem
 Sets/plsc_498/04_week”</p>
-<p>##list.files()<br />
-[1] “04_week.Rproj” “data” “figures”<br />
+</div>
+<div id="list.files" class="section level2">
+<h2>list.files()</h2>
+<p>[1] “04_week.Rproj” “data” “figures”<br />
 [4] “outputs” “problem_set” “scripts”<br />
 [7] “slides”</p>
-<p>##nrow(df)<br />
-[1] 10125</p>
-<p>##ncol(df)<br />
-[1] 22</p>
-<p>##table(df4$congress)<br />
-101 106 111 116 102 102 111 102</p>
-<p>##table(df4$chamber)<br />
-Senate 417</p>
+</div>
+<div id="nrowdf" class="section level2">
+<h2>nrow(df)</h2>
+<p>[1] 10125</p>
+</div>
+<div id="ncoldf" class="section level2">
+<h2>ncol(df)</h2>
+<p>[1] 22</p>
+</div>
+<div id="tabledf4congress" class="section level2">
+<h2>table(df4$congress)</h2>
+<p>101 106 111 116 102 102 111 102</p>
+</div>
+<div id="tabledf4chamber" class="section level2">
+<h2>table(df4$chamber)</h2>
+<p>Senate 417</p>
+</div>
+<div id="nominate_dim1" class="section level2">
+<h2>nominate_dim1</h2>
+<p>summary(df4$nominate_dim1) Min. 1st Qu. Median Mean 3rd Qu. Max.
+-0.74700 -0.31900 -0.12300 0.02934 0.39000 0.89100</p>
+<p>The coded variable <code>nominate_dim1</code> is the variable used in
+the visualizations for representing Senators’ ideologies.
+<code>nominate_dim2</code> is used along the y-axis, not used for
+ideological visualization.</p>
+</div>
+<div id="interpretation" class="section level2">
+<h2>Interpretation</h2>
+<p>In all the plots, there is a diverging color scale. This scale
+utilized red and blue colors on either extreme, with grey being the
+midpoint at 0. The colors directly correspond with ideological leaning,
+with more red points indicating more conservative senators and more blue
+points indicating more liberal senators (the more grey/shaded a point
+appeared, the more moderate they were). These colors change on a
+gradient along the x-axis, as the x-axis “dim1” measures ideologies of
+the senators. These ideologies have a range of [-0.747, 0.891], with
+negative values indiacting more liberal (displaying more blue)
+ideologies, while the positive values are more conservative (displaying
+more red) values. When creating the visualization, I initially had the
+background of the plot as black as to not be too harsh on the eye while
+giving good contrast with the points, but with the grey midpoint on my
+divergin color scale, it made more moderate senators difficult to
+interpret. Due to this, the background remains white so there is enough
+contrast for the points to be easily interpretative. In comparing the
+101st Senate and the 116th Senate, it is clear that the conservative
+senators have become more polarized than their liberal counterparts. The
+liberal senators, for the most part, remain relatively unchanged in
+dispersion and did not see a drastic shift towards extreme liberalistic
+values (<code>dim1 &lt; -0.5</code>). The conservative senators become
+significantly less moderate in the 116th Senate, with a large number of
+senators displaying relatively extreme levels of conservatism
+(<code>dim1 &gt; 0.5</code>).</p>
+</div>
+<div id="accessability" class="section level2">
+<h2>Accessability</h2>
+<p>For the accessibility evaluation, I used the 101st Senate plot, and
+tested it using protanopia and deuteranopia simulations. Under both
+conditions, it was hard to differentiate colors in varying shades of
+red. Because of this, I decided it was best to re-approach the color
+design. I used more colorblind friendly colors (A dark green for more
+liberal senators, light blue for more conservative, with a yellow
+midpoint for moderates). This easily displays changes in color along the
+x-axis, though it loses the value of implicitly associating
+conservatives with the color red and liberals with the color blue. With
+that said, I learned that visualizations carefully balances
+accessibility for all readers with conveying what is truly important in
+a meaningful manner.</p>
+</div>
 
 
 

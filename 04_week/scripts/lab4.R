@@ -38,9 +38,9 @@ p <- ggplot(df4 %>% filter(congress == congress_id),
 theme_minimal() +
   theme(plot.background = element_rect(fill = "white", color = NA)) +
   scale_color_gradient2(
-    low = "blue",
-    mid = "grey",
-    high = "red",
+    low = "#003C32",
+    mid = "#FFC107",
+    high = "#1E88E5",
     midpoint = 0
   )
 
