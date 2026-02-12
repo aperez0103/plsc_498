@@ -46,6 +46,8 @@
 
 \section*{Questions}
 
+\noindent \textbf{Pseudo-code expectation.} For Questions 2--5, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ filter missing values $\rightarrow$ plot $\rightarrow$ save figure").
+
 \begin{enumerate}
 
   \item \textbf{Pull the data and set up your workflow (proof required).}
@@ -73,6 +75,7 @@ git pull
 
   \noindent \textbf{Required:}
   \begin{itemize}
+    \item Start this section in your script with 3--5 lines of pseudo-code that outline your workflow.
     \item Use at least \textbf{two different bin widths} for each variable.
     \item Decide whether to include or exclude extreme values and justify your choice.
   \end{itemize}
@@ -93,6 +96,7 @@ git pull
 
   \noindent \textbf{Suggested edit:}
   \begin{itemize}
+    \item Add 2--4 lines of pseudo-code before writing code for this question.
     \item Use the same x-axis limits so the plots are comparable.
     \item Make clear in labels what each plot represents.
   \end{itemize}
@@ -114,6 +118,8 @@ git pull
 
   \noindent \textbf{Important:} You must address overplotting explicitly (e.g., overlapping densities or stacked histograms).
 
+  \noindent \textbf{Pseudo-code prompt:} Write 2--4 pseudo-code lines describing your grouping strategy and whether you will facet or map color.
+
   \noindent Save your figure as:
   \[
     \texttt{figures/grouped\_dep\_delay.png}
@@ -129,6 +135,7 @@ git pull
 
   Then:
   \begin{itemize}
+    \item Add 2--3 pseudo-code lines for your scatterplot plan (raw plot $\rightarrow$ alpha plot $\rightarrow$ compare).
     \item produce one version without transparency,
     \item produce a second version using transparency (\texttt{alpha}).
   \end{itemize}
@@ -150,19 +157,23 @@ git pull
     \item Why transparency matters in the scatter plot.
   \end{itemize}
 
-  \item \textbf{Push your work to GitHub (proof required).}
+  \item \textbf{Submit your work (GitHub or Canvas; proof required).}
   \begin{enumerate}
-    \item In the \textbf{Terminal tab}, run:
+    \item Choose \textbf{one} submission path:
+    \begin{itemize}
+      \item \textbf{GitHub path:} In the \textbf{Terminal tab}, run:
 \begin{verbatim}
 git status
 git add .
 git commit -m "Distribution and overplotting lab: flights data"
 git push
 \end{verbatim}
+      \item \textbf{Canvas path:} Upload \texttt{scripts/lab.R}, \texttt{outputs/writeup.md}, and required files from \texttt{figures/} to Canvas.
+    \end{itemize}
     \item \textbf{Proof (write-up):} Paste:
     \begin{itemize}
-      \item the output of \texttt{git status} after committing, and
-      \item the output of \texttt{git log -1}.
+      \item if using GitHub: the output of \texttt{git status} after committing and \texttt{git log -1},
+      \item if using Canvas: a short note confirming upload date/time and the list of uploaded files.
     \end{itemize}
   \end{enumerate}
 
@@ -181,7 +192,7 @@ Choose one distribution (e.g., \texttt{dep\_delay}) and create a version that im
   \item \texttt{scripts/lab.R} runs top-to-bottom
   \item Required figures exist in \texttt{figures/}
   \item \texttt{outputs/writeup.md} includes interpretation + proofs
-  \item Work is committed and pushed to GitHub
+  \item Work is submitted (either pushed to GitHub or uploaded to Canvas)
 \end{itemize}
 
 \end{document}

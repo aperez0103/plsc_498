@@ -41,6 +41,8 @@
 
 \section*{Questions}
 
+\noindent \textbf{Pseudo-code expectation.} For Questions 2--6, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ clean/inspect $\rightarrow$ plot $\rightarrow$ save figure").
+
 \begin{enumerate}
 
   \item \textbf{Pull the data and set up your workflow (proof required).}
@@ -65,6 +67,7 @@ git pull
     \item Load the dataset into an object named \texttt{df}.
     \item Verify the six key columns exist: \texttt{country}, \texttt{year}, \texttt{battle\_deaths}, \texttt{region}, \texttt{income}.
     \item Summarize the distribution of \texttt{battle\_deaths} (min/median/mean/max is sufficient).
+    \item Add 2--4 lines of pseudo-code before your inspection/summarizing code.
     \item \textbf{Proof (write-up):} Report:
     \begin{itemize}
       \item number of rows and columns,
@@ -78,6 +81,7 @@ git pull
   
   Create a histogram of \texttt{battle\_deaths}.
   \begin{itemize}
+    \item Start this section with 3--5 pseudo-code lines describing your histogram workflow.
     \item You must make a clear binning choice and state it (binwidth or number of bins).
     \item If you restrict the x-axis (e.g., to reduce the influence of extreme values), you must state the rule you used.
   \end{itemize}
@@ -91,6 +95,7 @@ git pull
 
   Create a density plot of \texttt{battle\_deaths}.
   \begin{itemize}
+    \item Add 2--4 pseudo-code lines for your density-plot plan before coding.
     \item Use the same x-axis limits as your histogram (so the two are comparable).
     \item Label the axes clearly.
   \end{itemize}
@@ -104,6 +109,7 @@ git pull
 
   Create a Q--Q plot comparing \texttt{battle\_deaths} to a theoretical normal distribution.
   \begin{itemize}
+    \item Add 2--4 pseudo-code lines for your Q--Q workflow before coding.
     \item Include a Q--Q reference line.
     \item In your write-up, describe what kind of deviation you see (e.g., heavy right tail, skew).
   \end{itemize}
@@ -127,6 +133,7 @@ git pull
   \medskip
   \noindent \textbf{Required:}
   \begin{itemize}
+    \item Add 3--5 pseudo-code lines describing how you will facet by income and region.
     \item Use consistent axis limits across facets (so comparisons are meaningful).
     \item If some facets are too sparse to interpret, state what you did (e.g., dropped very small groups, or noted limitations).
   \end{itemize}
@@ -148,19 +155,23 @@ git pull
     \item Name one concrete plotting choice you made (bins, limits, faceting) and why it helped interpretability.
   \end{itemize}
 
-  \item \textbf{Push your work to GitHub (proof required).}
+  \item \textbf{Submit your work (GitHub or Canvas; proof required).}
   \begin{enumerate}
-    \item In the \textbf{Terminal tab}, run:
+    \item Choose \textbf{one} submission path:
+    \begin{itemize}
+      \item \textbf{GitHub path:} In the \textbf{Terminal tab}, run:
 \begin{verbatim}
 git status
 git add .
 git commit -m "Distributions lab: battle_deaths faceting + QQ"
 git push
 \end{verbatim}
+      \item \textbf{Canvas path:} Upload \texttt{scripts/lab.R}, \texttt{outputs/writeup.md}, and required files from \texttt{figures/} to Canvas.
+    \end{itemize}
     \item \textbf{Proof (write-up):} Paste:
     \begin{itemize}
-      \item the output of \texttt{git status} after committing (clean working tree), and
-      \item the output of \texttt{git log -1}.
+      \item if using GitHub: the output of \texttt{git status} after committing (clean working tree) and \texttt{git log -1},
+      \item if using Canvas: a short note confirming upload date/time and the list of uploaded files.
     \end{itemize}
   \end{enumerate}
 
@@ -182,7 +193,7 @@ Create a ridgeline density plot using \texttt{ggridges} for \texttt{battle\_deat
     \item \texttt{facet\_income.png}, \texttt{facet\_region.png}
   \end{itemize}
   \item \texttt{outputs/writeup.md} includes interpretation + proofs
-  \item Work is committed and pushed to GitHub
+  \item Work is submitted (either pushed to GitHub or uploaded to Canvas)
 \end{itemize}
 
 \end{document}
