@@ -4,7 +4,7 @@ subtitle: "Matching questions to plots and shaping data for ggplot"
 author: "Jared Edgerton"
 output:
   xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    css: [default, metropolis, metropolis-fonts, plsc498.css, slides.css]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -98,8 +98,8 @@ df_xy <- data.frame(
   x = runif(30, 0, 10)) %>%
   mutate(y = 2 + 0.6 * x + rnorm(30, sd = 1.2))
 df_time <- data.frame(
-  t = 1:50,
-  y = 10 + 0.15 * 1:50 + rnorm(length(50), sd = 1.0))
+  t = 1:200,
+  y =  10 + 0.03 * 1:200 + 1.5 * sin(2 * pi * 1:200 / 12)  + arima.sim(model = list(ar = 0.7), n = 200, sd = 0.8))
 df_unc <- data.frame(
   label = c("A","B","C","D","E"),
   est = c(0.2, 0.5, 0.35, 0.6, 0.4),
@@ -241,6 +241,53 @@ Use the default to explore, then justify your bin choice.
 
 ---
 
+
+# Histogram bin size formulas
+
+Common ways to choose bin width $h$ (or number of bins ($k$)):
+
+
+- **Sturges (via number of bins):**  
+  
+  $$
+  k = \lceil \log_2(n) + 1 \rceil, \qquad h = \frac{\max(x)-\min(x)}{k}
+  $$
+
+- **Scott (bin width):**  
+  
+  $$
+  h = 3.5 \, \frac{s}{n^{1/3}}
+  $$ 
+  where $s$ is the sample standard deviation.
+
+- **Freedman–Diaconis (bin width; robust):**  
+  
+  
+  $$
+  h = 2 \, \frac{\mathrm{IQR}(x)}{n^{1/3}}
+  $$ 
+  where $\mathrm{IQR}(x) = Q3 - Q1$.
+
+
+**Practical note:** Freedman–Diaconis is often a good default because it is less sensitive to outliers than Scott.
+
+---
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="height_men.png" style="width:40%;">
+]
+
+---
+
 # Distributions: compare groups (boxplot)
 
 Use when:
@@ -258,13 +305,16 @@ ggplot(df_dist, aes(x = group, y = outcome)) +
 
 A boxplot summarizes a distribution using **five key quantities**:
 
-- median (center line)
-- 25th percentile (bottom of box)
-- 75th percentile (top of box)
-- lower whisker (typical minimum)
-- upper whisker (typical maximum)
+- **Median (50th percentile):** the line inside the box  
+- **Q1 (25th percentile):** bottom of the box  
+- **Q3 (75th percentile):** top of the box  
+- **IQR (Q3 − Q1):** height of the box (the middle 50% of the data)  
+- **Whiskers:** lines that extend from the box to show the typical range of the data  
+  - **Lower whisker:** goes down to the *lowest data point that isn’t unusually low*  
+  - **Upper whisker:** goes up to the *highest data point that isn’t unusually high*  
+  - “Unusually” is defined by the common rule: anything more than **1.5 × IQR** below Q1 or above Q3 is treated as a potential outlier
 
-Points beyond the whiskers are shown as **potential outliers**.
+**Points beyond the whiskers** are plotted individually as **potential outliers**.
 
 ---
 
@@ -319,6 +369,54 @@ ggplot(df_props, aes(x = "", y = prop, fill = segment)) +
 
 ---
 
+
+# Pie charts and area distortions
+
+Pie charts often violate proportional thinking because:
+
+- we judge angles and areas poorly
+- small differences are hard to detect
+
+If magnitude matters:
+- prefer bars or dots
+
+---
+
+# Proportions: waffle plot (contrast to pie)
+
+A waffle plot shows proportions as **counts of equal tiles**.
+It makes “how many” more concrete than angles.
+
+```{r fig.width=4, fig.height=3, warning=FALSE, message=FALSE}
+library(waffle)
+waffle_counts <- setNames(
+  round(df_props$prop * 100),
+  df_props$segment)
+waffle_counts[1] <- waffle_counts[1] + (100 - sum(waffle_counts))
+waffle::waffle(waffle_counts, rows = 10, size = 0.6) +
+  theme_classic()
+```
+
+---
+
+
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="nuclear_weapons.png" style="width:40%;">
+]
+
+---
+
+
 # Relationships: scatterplot
 
 Use when:
@@ -333,30 +431,15 @@ ggplot(df_xy, aes(x = x, y = y)) +
 ---
 
 
-
-# Data visualization critique 
-
-- Take five minutes
-  - What variables are mapped to what (x/y/color/size/etc.)?
-  - Is it persuasive? 
-  - What design choices did they make?
-  - After doing this talk to your neighbor briefly and compare notes.
-
-.center[
-<img src="homicides.png" style="width:65%;">
-]
-
----
-
 # Time: line plot (minimal)
 
 Use when:
 - x is time (ordered)
 - you want to show evolution
 
-```{r fig.width=7, fig.height=4}
+```{r fig.width=7, fig.height=4, message=FALSE, warning=FALSE}
 ggplot(df_time, aes(x = t, y = y)) +
-  geom_smooth(method = "lm") +
+  geom_line() +
   geom_point() + 
   theme_classic()
 ```
@@ -374,6 +457,31 @@ ggplot(df_unc, aes(x = label, y = est)) +
   geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.2) + 
   theme_classic()
 ```
+
+
+---
+
+
+# Confidence intervals (what they are)
+
+
+A **confidence interval (CI)** describes the range of values that are  
+**consistent with the data and the statistical model**. For a 95% confidence interval, if repeated many times, 95% of the intervals constructed this way contain the true value
+
+What a CI **is**:
+- A measure of **estimation uncertainty**
+- A way to compare estimates across groups or time
+- Wider intervals = more uncertainty  
+- Narrower intervals = more precision
+- ❌ The probability that the true value is in this specific interval  or a statement about individual observations
+
+**Visual interpretation:**
+- The point = estimated value , the bars = uncertainty around that estimate, overlapping intervals suggest limited evidence of differences (not a formal test)
+
+**Key idea:**  
+Confidence intervals show how much trust you should place in the estimate,  
+not just where the estimate lies.
+
 
 
 ---
@@ -429,6 +537,8 @@ Bars are a bad choice when:
 ---
 
 
+
+
 # Data visualization critique 
 
 - Take five minutes
@@ -438,37 +548,9 @@ Bars are a bad choice when:
   - After doing this talk to your neighbor briefly and compare notes.
 
 .center[
-<img src="height_men.png" style="width:50%;">
+<img src="homicides.png" style="width:65%;">
 ]
 
----
-
-# Pie charts and area distortions
-
-Pie charts often violate proportional thinking because:
-
-- we judge angles and areas poorly
-- small differences are hard to detect
-
-If magnitude matters:
-- prefer bars or dots
-
----
-
-# Proportions: waffle plot (contrast to pie)
-
-A waffle plot shows proportions as **counts of equal tiles**.
-It makes “how many” more concrete than angles.
-
-```{r fig.width=4, fig.height=3, warning=FALSE, message=FALSE}
-library(waffle)
-waffle_counts <- setNames(
-  round(df_props$prop * 100),
-  df_props$segment)
-waffle_counts[1] <- waffle_counts[1] + (100 - sum(waffle_counts))
-waffle::waffle(waffle_counts, rows = 10, size = 0.6) +
-  theme_classic()
-```
 
 ---
 
@@ -555,15 +637,20 @@ Fix the structure before you fix the plot.
 
 ---
 
-# In-person data visualization example
 
-We will pause here and look at a real visualization.
 
-Focus on:
 
-- what question it seems to answer
-- whether the visual encoding is proportional
-- whether the data structure is clear from the plot
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="earth_minerals.png" style="width:35%;">
+]
 
 ---
 
@@ -588,13 +675,3 @@ With a neighbor:
 - Decide what message the plot is making
 - Suggest one concrete improvement
 
----
-
-# What Comes Next
-
-Next, you will:
-- reshape (tidy) data for plotting
-- choose a plot type based on the question
-- practice avoiding proportional-ink mistakes
-
-Focus on clarity, not complexity.

@@ -9,6 +9,7 @@
     <link href="05_01_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="05_01_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
     <link rel="stylesheet" href="plsc498.css" type="text/css" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -115,8 +116,8 @@ df_xy &lt;- data.frame(
   x = runif(30, 0, 10)) %&gt;%
   mutate(y = 2 + 0.6 * x + rnorm(30, sd = 1.2))
 df_time &lt;- data.frame(
-  t = 1:50,
-  y = 10 + 0.15 * 1:50 + rnorm(length(50), sd = 1.0))
+  t = 1:200,
+  y =  10 + 0.03 * 1:200 + 1.5 * sin(2 * pi * 1:200 / 12)  + arima.sim(model = list(ar = 0.7), n = 200, sd = 0.8))
 df_unc &lt;- data.frame(
   label = c("A","B","C","D","E"),
   est = c(0.2, 0.5, 0.35, 0.6, 0.4),
@@ -280,6 +281,53 @@ Use the default to explore, then justify your bin choice.
 
 ---
 
+
+# Histogram bin size formulas
+
+Common ways to choose bin width `\(h\)` (or number of bins (`\(k\)`)):
+
+
+- **Sturges (via number of bins):**  
+  
+  $$
+  k = \lceil \log_2(n) + 1 \rceil, \qquad h = \frac{\max(x)-\min(x)}{k}
+  $$
+
+- **Scott (bin width):**  
+  
+  $$
+  h = 3.5 \, \frac{s}{n^{1/3}}
+  $$ 
+  where `\(s\)` is the sample standard deviation.
+
+- **Freedman–Diaconis (bin width; robust):**  
+  
+  
+  $$
+  h = 2 \, \frac{\mathrm{IQR}(x)}{n^{1/3}}
+  $$ 
+  where `\(\mathrm{IQR}(x) = Q3 - Q1\)`.
+
+
+**Practical note:** Freedman–Diaconis is often a good default because it is less sensitive to outliers than Scott.
+
+---
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="height_men.png" style="width:40%;"&gt;
+]
+
+---
+
 # Distributions: compare groups (boxplot)
 
 Use when:
@@ -300,13 +348,16 @@ ggplot(df_dist, aes(x = group, y = outcome)) +
 
 A boxplot summarizes a distribution using **five key quantities**:
 
-- median (center line)
-- 25th percentile (bottom of box)
-- 75th percentile (top of box)
-- lower whisker (typical minimum)
-- upper whisker (typical maximum)
+- **Median (50th percentile):** the line inside the box  
+- **Q1 (25th percentile):** bottom of the box  
+- **Q3 (75th percentile):** top of the box  
+- **IQR (Q3 − Q1):** height of the box (the middle 50% of the data)  
+- **Whiskers:** lines that extend from the box to show the typical range of the data  
+  - **Lower whisker:** goes down to the *lowest data point that isn’t unusually low*  
+  - **Upper whisker:** goes up to the *highest data point that isn’t unusually high*  
+  - “Unusually” is defined by the common rule: anything more than **1.5 × IQR** below Q1 or above Q3 is treated as a potential outlier
 
-Points beyond the whiskers are shown as **potential outliers**.
+**Points beyond the whiskers** are plotted individually as **potential outliers**.
 
 ---
 
@@ -367,148 +418,6 @@ ggplot(df_props, aes(x = "", y = prop, fill = segment)) +
 
 ---
 
-# Relationships: scatterplot
-
-Use when:
-- you want to see association + outliers + nonlinearity
-
-
-``` r
-ggplot(df_xy, aes(x = x, y = y)) +
-  geom_point() + 
-  theme_classic()
-```
-
-![](05_01_week_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
-
----
-
-
-
-# Data visualization critique 
-
-- Take five minutes
-  - What variables are mapped to what (x/y/color/size/etc.)?
-  - Is it persuasive? 
-  - What design choices did they make?
-  - After doing this talk to your neighbor briefly and compare notes.
-
-.center[
-&lt;img src="homicides.png" style="width:65%;"&gt;
-]
-
----
-
-# Time: line plot (minimal)
-
-Use when:
-- x is time (ordered)
-- you want to show evolution
-
-
-``` r
-ggplot(df_time, aes(x = t, y = y)) +
-  geom_smooth(method = "lm") +
-  geom_point() + 
-  theme_classic()
-```
-
-```
-## `geom_smooth()` using formula = 'y ~ x'
-```
-
-![](05_01_week_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
-
----
-
-# Uncertainty: points with error bars
-
-Use when:
-- you want to show an estimate and its range
-
-
-``` r
-ggplot(df_unc, aes(x = label, y = est)) +
-  geom_point(size = 2) +
-  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.2) + 
-  theme_classic()
-```
-
-![](05_01_week_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
-
-
----
-
-
-# The principle of proportional ink
-
-A visualization should not exaggerate differences by accident.
-
-Key idea:
-- the visual “ink” used to represent a value should be proportional to that value
-
-Most common violation:
-- truncating a bar axis
-
----
-
-# Proportional ink: misleading truncated bar axis
-
-This makes differences look larger than they are.
-
-
-``` r
-ggplot(df_amounts, aes(x = category, y = value)) +
-  geom_col() +
-  coord_cartesian(ylim = c(30, 45)) + 
-  theme_classic()
-```
-
-![](05_01_week_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
-
----
-
-# Proportional ink: correct baseline (bars start at zero)
-
-
-``` r
-ggplot(df_amounts, aes(x = category, y = value)) +
-  geom_col() + 
-  theme_classic()
-```
-
-![](05_01_week_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
-
-Interpretation:
-- same data
-- different implied magnitude
-
----
-
-# When not to use bars
-
-Bars are a bad choice when:
-
-- the axis is logarithmic (length no longer proportional to value)
-- you only need ranked comparison (dots can be cleaner)
-- you have too many categories (labels become the bottleneck)
-
----
-
-
-# Data visualization critique 
-
-- Take five minutes
-  - What variables are mapped to what (x/y/color/size/etc.)?
-  - Is it persuasive? 
-  - What design choices did they make?
-  - After doing this talk to your neighbor briefly and compare notes.
-
-.center[
-&lt;img src="height_men.png" style="width:50%;"&gt;
-]
-
----
 
 # Pie charts and area distortions
 
@@ -538,7 +447,177 @@ waffle::waffle(waffle_counts, rows = 10, size = 0.6) +
   theme_classic()
 ```
 
+![](05_01_week_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="nuclear_weapons.png" style="width:40%;"&gt;
+]
+
+---
+
+
+# Relationships: scatterplot
+
+Use when:
+- you want to see association + outliers + nonlinearity
+
+
+``` r
+ggplot(df_xy, aes(x = x, y = y)) +
+  geom_point() + 
+  theme_classic()
+```
+
+![](05_01_week_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+
+# Time: line plot (minimal)
+
+Use when:
+- x is time (ordered)
+- you want to show evolution
+
+
+``` r
+ggplot(df_time, aes(x = t, y = y)) +
+  geom_line() +
+  geom_point() + 
+  theme_classic()
+```
+
+![](05_01_week_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+
+# Uncertainty: points with error bars
+
+Use when:
+- you want to show an estimate and its range
+
+
+``` r
+ggplot(df_unc, aes(x = label, y = est)) +
+  geom_point(size = 2) +
+  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.2) + 
+  theme_classic()
+```
+
+![](05_01_week_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+
+---
+
+
+# Confidence intervals (what they are)
+
+
+A **confidence interval (CI)** describes the range of values that are  
+**consistent with the data and the statistical model**. For a 95% confidence interval, if repeated many times, 95% of the intervals constructed this way contain the true value
+
+What a CI **is**:
+- A measure of **estimation uncertainty**
+- A way to compare estimates across groups or time
+- Wider intervals = more uncertainty  
+- Narrower intervals = more precision
+- ❌ The probability that the true value is in this specific interval  or a statement about individual observations
+
+**Visual interpretation:**
+- The point = estimated value , the bars = uncertainty around that estimate, overlapping intervals suggest limited evidence of differences (not a formal test)
+
+**Key idea:**  
+Confidence intervals show how much trust you should place in the estimate,  
+not just where the estimate lies.
+
+
+
+---
+
+
+# The principle of proportional ink
+
+A visualization should not exaggerate differences by accident.
+
+Key idea:
+- the visual “ink” used to represent a value should be proportional to that value
+
+Most common violation:
+- truncating a bar axis
+
+---
+
+# Proportional ink: misleading truncated bar axis
+
+This makes differences look larger than they are.
+
+
+``` r
+ggplot(df_amounts, aes(x = category, y = value)) +
+  geom_col() +
+  coord_cartesian(ylim = c(30, 45)) + 
+  theme_classic()
+```
+
+![](05_01_week_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+# Proportional ink: correct baseline (bars start at zero)
+
+
+``` r
+ggplot(df_amounts, aes(x = category, y = value)) +
+  geom_col() + 
+  theme_classic()
+```
+
 ![](05_01_week_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+Interpretation:
+- same data
+- different implied magnitude
+
+---
+
+# When not to use bars
+
+Bars are a bad choice when:
+
+- the axis is logarithmic (length no longer proportional to value)
+- you only need ranked comparison (dots can be cleaner)
+- you have too many categories (labels become the bottleneck)
+
+---
+
+
+
+
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="homicides.png" style="width:65%;"&gt;
+]
+
 
 ---
 
@@ -659,15 +738,20 @@ Fix the structure before you fix the plot.
 
 ---
 
-# In-person data visualization example
 
-We will pause here and look at a real visualization.
 
-Focus on:
 
-- what question it seems to answer
-- whether the visual encoding is proportional
-- whether the data structure is clear from the plot
+# Data visualization critique 
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive? 
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="earth_minerals.png" style="width:35%;"&gt;
+]
 
 ---
 
@@ -692,16 +776,6 @@ With a neighbor:
 - Decide what message the plot is making
 - Suggest one concrete improvement
 
----
-
-# What Comes Next
-
-Next, you will:
-- reshape (tidy) data for plotting
-- choose a plot type based on the question
-- practice avoiding proportional-ink mistakes
-
-Focus on clarity, not complexity.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
