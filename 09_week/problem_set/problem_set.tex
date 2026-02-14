@@ -45,6 +45,8 @@
 
 \section*{Questions}
 
+\noindent \textbf{Pseudo-code expectation.} For Questions 2--5, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ derive variables $\rightarrow$ summarize $\rightarrow$ visualize").
+
 \begin{enumerate}
 
   \item \textbf{Pull the data and set up your workflow (proof required).}
@@ -67,6 +69,7 @@ git pull
   \begin{enumerate}
     \item Load the dataset into an object named \texttt{df}.
     \item Summarize the data structure.
+    \item Add 2--4 pseudo-code lines before your inspection/summarizing code.
     
     \textbf{Suggested edit:} Use \texttt{dim(df)}, \texttt{names(df)}, and a focused summary of vote and death variables.
     \item \textbf{Proof (write-up):} Report:
@@ -84,6 +87,7 @@ git pull
       \texttt{total\_illness\_deaths = covid\_deaths + pneumonia\_deaths}
     \]
     \item Compute total illness deaths aggregated across all states.
+    \item Add 2--4 pseudo-code lines before coding this derivation and aggregation.
     \item \textbf{Proof (write-up):} Report the national total and the minimum/maximum state totals.
   \end{enumerate}
 
@@ -94,6 +98,7 @@ git pull
   \medskip
   \noindent \textbf{Required:}
   \begin{itemize}
+    \item Add 3--5 pseudo-code lines describing your totals bar-plot workflow.
     \item Order states by total illness deaths.
     \item Clearly label axes.
     \item State explicitly that this is a \emph{total}, not a proportion.
@@ -114,6 +119,7 @@ git pull
 
   Then:
   \begin{enumerate}
+    \item Add 3--5 pseudo-code lines describing your winner classification and proportional plot workflow.
     \item Create a bar plot showing the \textbf{proportion of total illness deaths} accounted for by Trump- vs Biden-won states.
     \item Use an appropriate color scheme:
     \begin{itemize}
@@ -144,19 +150,23 @@ git pull
     \item One way these plots could be misinterpreted if shown without context.
   \end{itemize}
 
-  \item \textbf{Push your work to GitHub (proof required).}
+  \item \textbf{Submit your work (GitHub or Canvas; proof required).}
   \begin{enumerate}
-    \item In the \textbf{Terminal tab}, run:
+    \item Choose \textbf{one} submission path:
+    \begin{itemize}
+      \item \textbf{GitHub path:} In the \textbf{Terminal tab}, run:
 \begin{verbatim}
 git status
 git add .
 git commit -m "Totals vs proportions lab"
 git push
 \end{verbatim}
+      \item \textbf{Canvas path:} Upload \texttt{scripts/lab.R}, \texttt{outputs/writeup.md}, and required files from \texttt{figures/} to Canvas.
+    \end{itemize}
     \item \textbf{Proof (write-up):} Paste:
     \begin{itemize}
-      \item the output of \texttt{git status} after committing,
-      \item the output of \texttt{git log -1}.
+      \item if using GitHub: the output of \texttt{git status} after committing and \texttt{git log -1},
+      \item if using Canvas: a short note confirming upload date/time and the list of uploaded files.
     \end{itemize}
   \end{enumerate}
 
@@ -175,7 +185,7 @@ In 5--7 sentences, explain which version is clearer and for what audience.
   \item \texttt{scripts/lab.R} runs top-to-bottom
   \item Required figures exist in \texttt{figures/}
   \item \texttt{outputs/writeup.md} includes interpretation + proofs
-  \item Work is committed and pushed to GitHub
+  \item Work is submitted (either pushed to GitHub or uploaded to Canvas)
 \end{itemize}
 
 \end{document}
