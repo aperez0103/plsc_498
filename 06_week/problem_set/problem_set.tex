@@ -4,17 +4,17 @@
 \setlist{nosep}
 \usepackage[margin=1in]{geometry}
 
-\title{In-Class Problem Set: Distributions and Overplotting with Flight Data (R + GitHub)}
+\title{In-Class Problem Set: Distributions and Overplotting with Flight Data (R + GitHub \emph{or} Canvas)}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
 
-\noindent \textbf{Goal.} Practice visualizing and interpreting distributions using real transportation data. You will use histograms and density plots to explore skewed variables, compare groups, and diagnose overplotting. You will submit your work through GitHub using a reproducible workflow.
+\noindent \textbf{Goal.} Practice visualizing and interpreting distributions using real transportation data. You will use histograms and density plots to explore skewed variables, compare groups, diagnose overplotting, and assess how bin width and smoothing adjustments change interpretation. You may submit via \textbf{GitHub or Canvas}.
 
 \medskip
-\noindent \textbf{Dataset.} This problem set uses the \texttt{nycflights13} dataset, which contains detailed information on flights departing from NYC airports.
+\noindent \textbf{Dataset.} This problem set uses the \texttt{nycflights13} dataset.
 
 \medskip
 \noindent \textbf{Key variables.}
@@ -28,11 +28,11 @@
 \end{itemize}
 
 \medskip
-\noindent \textbf{What to submit (in your GitHub repo).}
+\noindent \textbf{What to submit (GitHub or Canvas).}
 \begin{itemize}
-  \item A script file: \texttt{scripts/lab.R}
-  \item A short write-up: \texttt{outputs/writeup.md}
-  \item Saved figures in \texttt{figures/} (see requirements below)
+  \item \texttt{scripts/lab.R}
+  \item \texttt{outputs/writeup.md}
+  \item Required figures in \texttt{figures/}
 \end{itemize}
 
 \medskip
@@ -40,159 +40,235 @@
 \begin{itemize}
   \item Work inside an \textbf{R Project}.
   \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
-  \item Save all plots using \texttt{ggsave()} (no screenshots).
-  \item Git commands must be run in the \textbf{Terminal tab}, not the R Console.
+  \item Save all plots using \texttt{ggsave()}.
+  \item If submitting via GitHub, Git commands must be run in the \textbf{Terminal tab}.
 \end{itemize}
 
 \section*{Questions}
 
-\noindent \textbf{Pseudo-code expectation.} For Questions 2--5, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ filter missing values $\rightarrow$ plot $\rightarrow$ save figure").
-
 \begin{enumerate}
 
-  \item \textbf{Pull the data and set up your workflow (proof required).}
-  \begin{enumerate}
-    \item Pull the latest course repository from GitHub:
+\item \textbf{Load data and confirm setup (proof required).}
+
 \begin{verbatim}
-git status
-git pull
+# load required packages
+library(__________)
+library(__________)
+
+# access dataset
+df <- nycflights13::flights
+
+# quick inspection
+dim(df)
+names(df)
+head(df)
 \end{verbatim}
-    \item Confirm you can load the \texttt{nycflights13} package in R.
-    \item \textbf{Proof (write-up):} In \texttt{outputs/writeup.md}, paste:
-    \begin{itemize}
-      \item the output of \texttt{getwd()},
-      \item the output of \texttt{head(nycflights13::flights)}.
-    \end{itemize}
-  \end{enumerate}
 
-  \item \textbf{Explore skew with histograms.}
+Include in your write-up:
+\begin{itemize}
+  \item number of rows and columns,
+  \item confirmation that \texttt{dep\_delay} and \texttt{arr\_delay} exist.
+\end{itemize}
 
-  Create histograms for the following variables:
-  \begin{itemize}
-    \item \texttt{dep\_delay}
-    \item \texttt{arr\_delay}
-  \end{itemize}
+\item \textbf{Histograms and bin width comparison.}
 
-  \noindent \textbf{Required:}
-  \begin{itemize}
-    \item Start this section in your script with 3--5 lines of pseudo-code that outline your workflow.
-    \item Use at least \textbf{two different bin widths} for each variable.
-    \item Decide whether to include or exclude extreme values and justify your choice.
-  \end{itemize}
+Create histograms for:
+\begin{itemize}
+  \item \texttt{dep\_delay}
+  \item \texttt{arr\_delay}
+\end{itemize}
 
-  \noindent Save your figures as:
-  \begin{itemize}
-    \item \texttt{figures/dep\_delay\_hist.png}
-    \item \texttt{figures/arr\_delay\_hist.png}
-  \end{itemize}
+You must:
+\begin{itemize}
+  \item Use at least \textbf{two different bin widths}.
+  \item Compare how bin width changes apparent skew, modality, and tail behavior.
+\end{itemize}
 
-  \item \textbf{Histogram vs density: same data, different views.}
+\textbf{Pseudo-code structure:}
 
-  For \texttt{dep\_delay}, create:
-  \begin{itemize}
-    \item one histogram, and
-    \item one density plot.
-  \end{itemize}
+\begin{verbatim}
+# Step 1: choose variable
+# Step 2: remove NA values
+# Step 3: create histogram with binwidth = ___
+# Step 4: create histogram with different binwidth = ___
+# Step 5: save figure
+\end{verbatim}
 
-  \noindent \textbf{Suggested edit:}
-  \begin{itemize}
-    \item Add 2--4 lines of pseudo-code before writing code for this question.
-    \item Use the same x-axis limits so the plots are comparable.
-    \item Make clear in labels what each plot represents.
-  \end{itemize}
+\begin{verbatim}
+ggplot(df, aes(x = __________)) +
+  geom_histogram(binwidth = ________) +
+  labs(title = "Histogram with binwidth = ___")
 
-  \noindent Save your figures as:
-  \begin{itemize}
-    \item \texttt{figures/dep\_delay\_hist\_vs\_density.png}
-  \end{itemize}
+ggplot(df, aes(x = __________)) +
+  geom_histogram(binwidth = ________) +
+  labs(title = "Histogram with binwidth = ___")
+\end{verbatim}
 
-  \item \textbf{Grouped distributions.}
+Save as:
+\begin{itemize}
+  \item \texttt{figures/dep\_delay\_hist.png}
+  \item \texttt{figures/arr\_delay\_hist.png}
+\end{itemize}
 
-  Compare the distribution of \texttt{dep\_delay} across:
-  \begin{itemize}
-    \item \textbf{origins} (JFK, LGA, EWR), or
-    \item \textbf{carriers} (choose at least three major carriers).
-  \end{itemize}
+\item \textbf{Histogram vs Density (including smoothing adjustments).}
 
-  \noindent Create one plot that shows all groups together using color or faceting.
+For \texttt{dep\_delay}, create:
+\begin{itemize}
+  \item One histogram
+  \item One density plot
+  \item A second density plot with a different smoothing adjustment (\texttt{adjust})
+\end{itemize}
 
-  \noindent \textbf{Important:} You must address overplotting explicitly (e.g., overlapping densities or stacked histograms).
+\textbf{Pseudo-code structure:}
 
-  \noindent \textbf{Pseudo-code prompt:} Write 2--4 pseudo-code lines describing your grouping strategy and whether you will facet or map color.
+\begin{verbatim}
+# histogram
+ggplot(df, aes(x = ________)) +
+  geom_histogram(binwidth = ________)
 
-  \noindent Save your figure as:
-  \[
-    \texttt{figures/grouped\_dep\_delay.png}
-  \]
+# density (default smoothing)
+ggplot(df, aes(x = ________)) +
+  geom_density()
 
-  \item \textbf{Overplotting and transparency.}
+# density with different smoothing
+ggplot(df, aes(x = ________)) +
+  geom_density(adjust = ________)
+\end{verbatim}
 
-  Create a scatter plot with:
-  \begin{itemize}
-    \item x-axis: \texttt{distance}
-    \item y-axis: \texttt{air\_time}
-  \end{itemize}
+Compare:
+\begin{itemize}
+  \item How smoothing affects perceived multimodality.
+  \item Whether density exaggerates or hides tail behavior relative to histogram.
+\end{itemize}
 
-  Then:
-  \begin{itemize}
-    \item Add 2--3 pseudo-code lines for your scatterplot plan (raw plot $\rightarrow$ alpha plot $\rightarrow$ compare).
-    \item produce one version without transparency,
-    \item produce a second version using transparency (\texttt{alpha}).
-  \end{itemize}
+Save as:
+\texttt{figures/dep\_delay\_hist\_vs\_density.png}
 
-  \noindent Save your figures as:
-  \begin{itemize}
-    \item \texttt{figures/airtime\_distance\_raw.png}
-    \item \texttt{figures/airtime\_distance\_alpha.png}
-  \end{itemize}
+\item \textbf{Grouped distributions (color and faceting).}
 
-  \item \textbf{Interpretation (write-up required).}
+Compare \texttt{dep\_delay} across:
+\begin{itemize}
+  \item \texttt{origin} or
+  \item at least three major \texttt{carrier}s.
+\end{itemize}
 
-  In \texttt{outputs/writeup.md}, write 12--16 sentences addressing:
-  \begin{itemize}
-    \item How skew appears in the delay variables.
-    \item How bin width changes what patterns are visible.
-    \item What information density plots emphasize relative to histograms.
-    \item How grouping changes your interpretation of delays.
-    \item Why transparency matters in the scatter plot.
-  \end{itemize}
+You must:
+\begin{itemize}
+  \item Create one version using color mapping.
+  \item Create one version using \texttt{facet\_wrap()}.
+\end{itemize}
 
-  \item \textbf{Submit your work (GitHub or Canvas; proof required).}
-  \begin{enumerate}
-    \item Choose \textbf{one} submission path:
-    \begin{itemize}
-      \item \textbf{GitHub path:} In the \textbf{Terminal tab}, run:
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+# grouped with color
+ggplot(df, aes(x = ________, fill = ________)) +
+  geom_histogram(position = "identity", alpha = 0.4)
+
+# grouped with faceting
+ggplot(df, aes(x = ________)) +
+  geom_histogram(binwidth = ________) +
+  facet_wrap(~ ________)
+\end{verbatim}
+
+Save as:
+\texttt{figures/grouped\_dep\_delay.png}
+
+\item \textbf{Overplotting and transparency.}
+
+Create scatter plots:
+\begin{itemize}
+  \item x-axis: \texttt{distance}
+  \item y-axis: \texttt{air\_time}
+\end{itemize}
+
+Produce:
+\begin{itemize}
+  \item One raw version
+  \item One version using \texttt{alpha}
+\end{itemize}
+
+\begin{verbatim}
+# raw scatter
+ggplot(df, aes(x = ________, y = ________)) +
+  geom_point()
+
+# transparent scatter
+ggplot(df, aes(x = ________, y = ________)) +
+  geom_point(alpha = ________)
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/airtime\_distance\_raw.png}
+  \item \texttt{figures/airtime\_distance\_alpha.png}
+\end{itemize}
+
+\item \textbf{Interpretation (write-up required).}
+
+Write 12--16 sentences addressing:
+\begin{itemize}
+  \item How skew appears in delay variables.
+  \item How bin width changes visible patterns.
+  \item How density smoothing alters interpretation.
+  \item When histograms are preferable to density plots.
+  \item How faceting changes clarity relative to color overlays.
+  \item Why transparency matters in scatter plots.
+\end{itemize}
+
+\item \textbf{Submit your work (GitHub or Canvas; proof required).}
+
+\begin{itemize}
+  \item \textbf{GitHub option:}
 \begin{verbatim}
 git status
 git add .
-git commit -m "Distribution and overplotting lab: flights data"
+git commit -m "Distributions and overplotting lab"
 git push
 \end{verbatim}
-      \item \textbf{Canvas path:} Upload \texttt{scripts/lab.R}, \texttt{outputs/writeup.md}, and required files from \texttt{figures/} to Canvas.
-    \end{itemize}
-    \item \textbf{Proof (write-up):} Paste:
-    \begin{itemize}
-      \item if using GitHub: the output of \texttt{git status} after committing and \texttt{git log -1},
-      \item if using Canvas: a short note confirming upload date/time and the list of uploaded files.
-    \end{itemize}
-  \end{enumerate}
+
+  \item \textbf{Canvas option:}
+  Upload required files to Canvas.
+\end{itemize}
+
+Include proof in write-up:
+\begin{itemize}
+  \item GitHub: output of \texttt{git status} and \texttt{git log -1}
+  \item Canvas: confirmation note + list of uploaded files
+\end{itemize}
 
 \end{enumerate}
 
-\section*{Optional challenge (if you finish early)}
-Choose one distribution (e.g., \texttt{dep\_delay}) and create a version that improves interpretability for a \textbf{general audience}. In 5--7 sentences, explain:
+\section*{Optional Extension: Faceting and Scaling}
+
+Choose \texttt{dep\_delay} and create:
 \begin{itemize}
-  \item what design choices you changed (bins, scale, labels, grouping),
-  \item what you simplified or emphasized,
-  \item and why these choices help a non-technical viewer.
+  \item A faceted histogram by \texttt{origin}
+  \item A faceted density plot by \texttt{origin}
 \end{itemize}
 
-\section*{Checklist (before you leave)}
+Then compare:
 \begin{itemize}
-  \item \texttt{scripts/lab.R} runs top-to-bottom
-  \item Required figures exist in \texttt{figures/}
-  \item \texttt{outputs/writeup.md} includes interpretation + proofs
-  \item Work is submitted (either pushed to GitHub or uploaded to Canvas)
+  \item Whether scale differences distort interpretation.
+  \item Whether fixed vs free scales change conclusions.
+\end{itemize}
+
+\begin{verbatim}
+ggplot(df, aes(x = dep_delay)) +
+  geom_histogram(binwidth = ________) +
+  facet_wrap(~ origin, scales = "fixed")
+
+ggplot(df, aes(x = dep_delay)) +
+  geom_histogram(binwidth = ________) +
+  facet_wrap(~ origin, scales = "free")
+\end{verbatim}
+
+\section*{Checklist}
+\begin{itemize}
+  \item Script runs top-to-bottom
+  \item Required figures saved
+  \item Write-up complete
+  \item Submitted via GitHub or Canvas
 \end{itemize}
 
 \end{document}
