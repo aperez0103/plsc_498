@@ -82,7 +82,7 @@ ggplot(top_6_carriers, aes(x = dep_delay, fill = carrier)) +
   scale_y_continuous(labels = scales::comma) + 
   scale_fill_brewer(palette = "Set2") +
   theme(legend.position = "none") + 
-  facet_wrap(~carrier, scales = "free")
+  facet_wrap(~carrier)
 
 
 ## Question 5: Overplotting and transparency 
@@ -97,7 +97,7 @@ ggplot(df, aes(x = distance, y = air_time)) +
   geom_bin2d() +  
   theme_classic() + 
   scale_fill_gradientn(
-    colors = c("lightyellow", "orange", "darkred"),
+    colors = c("black", "orange", "darkred"),
     breaks = scales::pretty_breaks(n = 3),     # fewer tick labels
     labels = scales::comma
   ) + 
