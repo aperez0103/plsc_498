@@ -41,7 +41,7 @@
 
 \section*{Questions}
 
-\noindent \textbf{Pseudo-code expectation.} For Questions 2--6, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ clean/inspect $\rightarrow$ plot $\rightarrow$ save figure").
+\noindent \textbf{Code snippet expectation.} For Questions 2--6, include \textbf{small R snippets (2--4 lines)} near the relevant instructions as reminders of correct syntax. These are not full solutions---just scaffolding.
 
 \begin{enumerate}
 
@@ -60,14 +60,21 @@ git pull
       \item the output of \texttt{list.files()} from the project root, and
       \item the output of \texttt{list.files("data")} showing the dataset file.
     \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (for proofs in your write-up):}
+\begin{verbatim}
+getwd()
+list.files()
+list.files("data")
+\end{verbatim}
   \end{enumerate}
 
   \item \textbf{Load and summarize \texttt{battle\_deaths}.}
   \begin{enumerate}
     \item Load the dataset into an object named \texttt{df}.
-    \item Verify the six key columns exist: \texttt{country}, \texttt{year}, \texttt{battle\_deaths}, \texttt{region}, \texttt{income}.
+    \item Verify the key columns exist: \texttt{country}, \texttt{year}, \texttt{battle\_deaths}, \texttt{region}, \texttt{income}.
     \item Summarize the distribution of \texttt{battle\_deaths} (min/median/mean/max is sufficient).
-    \item Add 2--4 lines of pseudo-code before your inspection/summarizing code.
     \item \textbf{Proof (write-up):} Report:
     \begin{itemize}
       \item number of rows and columns,
@@ -75,16 +82,40 @@ git pull
       \item the range of years,
       \item a short summary of \texttt{battle\_deaths}.
     \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (load + quick checks):}
+\begin{verbatim}
+df <- read.csv("data/battle_deaths.csv")
+names(df)
+summary(df$battle_deaths)
+\end{verbatim}
+
+\medskip
+\noindent \textbf{R snippet (proof statistics):}
+\begin{verbatim}
+dim(df)
+length(unique(df$country))
+range(df$year, na.rm = TRUE)
+\end{verbatim}
   \end{enumerate}
 
   \item \textbf{Histogram of battle deaths (baseline).}
   
   Create a histogram of \texttt{battle\_deaths}.
   \begin{itemize}
-    \item Start this section with 3--5 pseudo-code lines describing your histogram workflow.
     \item You must make a clear binning choice and state it (binwidth or number of bins).
     \item If you restrict the x-axis (e.g., to reduce the influence of extreme values), you must state the rule you used.
   \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (histogram + save):}
+\begin{verbatim}
+p_hist <- ggplot(df, aes(x = battle_deaths)) +
+ geom_histogram(bins = 40) + 
+ theme_classic()
+ggsave("figures/battle_deaths_hist.png", p_hist, width = 7, height = 5)
+\end{verbatim}
 
   \noindent Save as:
   \[
@@ -95,10 +126,18 @@ git pull
 
   Create a density plot of \texttt{battle\_deaths}.
   \begin{itemize}
-    \item Add 2--4 pseudo-code lines for your density-plot plan before coding.
     \item Use the same x-axis limits as your histogram (so the two are comparable).
     \item Label the axes clearly.
   \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (density + same x limits idea):}
+\begin{verbatim}
+p_den <- ggplot(df, aes(x = battle_deaths)) + 
+geom_density() + coord_cartesian(xlim = c(0, 5000)) + 
+theme_classic()
+ggsave("figures/battle_deaths_density.png", p_den, width = 7, height = 5)
+\end{verbatim}
 
   \noindent Save as:
   \[
@@ -109,10 +148,19 @@ git pull
 
   Create a Q--Q plot comparing \texttt{battle\_deaths} to a theoretical normal distribution.
   \begin{itemize}
-    \item Add 2--4 pseudo-code lines for your Q--Q workflow before coding.
     \item Include a Q--Q reference line.
     \item In your write-up, describe what kind of deviation you see (e.g., heavy right tail, skew).
   \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (correct ggplot Q--Q syntax):}
+\begin{verbatim}
+p_qq <- ggplot(df, aes(sample = battle_deaths)) + 
+stat_qq() + 
+stat_qq_line() + 
+theme_classic()
+ggsave("figures/battle_deaths_qq.png", p_qq, width = 7, height = 5)
+\end{verbatim}
 
   \noindent Save as:
   \[
@@ -122,7 +170,6 @@ git pull
   \item \textbf{Faceting by income and region (required).}
 
   Create two sets of faceted distribution plots:
-
   \begin{enumerate}
     \item A faceted plot by \textbf{income}
     \item A faceted plot by \textbf{region}
@@ -133,10 +180,29 @@ git pull
   \medskip
   \noindent \textbf{Required:}
   \begin{itemize}
-    \item Add 3--5 pseudo-code lines describing how you will facet by income and region.
     \item Use consistent axis limits across facets (so comparisons are meaningful).
     \item If some facets are too sparse to interpret, state what you did (e.g., dropped very small groups, or noted limitations).
   \end{itemize}
+
+\medskip
+\noindent \textbf{R snippet (facet by income):}
+\begin{verbatim}
+p_inc <- ggplot(df, aes(x = battle_deaths)) + 
+geom_histogram(bins = 30) + 
+facet_wrap(~ income) + 
+theme_classic()
+ggsave("figures/facet_income.png", p_inc, width = 9, height = 6)
+\end{verbatim}
+
+\medskip
+\noindent \textbf{R snippet (facet by region):}
+\begin{verbatim}
+p_reg <- ggplot(df, aes(x = battle_deaths)) + 
+geom_histogram(bins = 30) + 
+facet_wrap(~ region) + 
+theme_classic()
+ggsave("figures/facet_region.png", p_reg, width = 9, height = 6)
+\end{verbatim}
 
   \noindent Save as:
   \begin{itemize}
@@ -184,6 +250,13 @@ Create a ridgeline density plot using \texttt{ggridges} for \texttt{battle\_deat
   \item In 4--6 sentences, explain what the ridgeline plot makes easier (or harder) to compare relative to faceting.
 \end{itemize}
 
+\medskip
+\noindent \textbf{R snippet (ridgeline starter):}
+\begin{verbatim}
+library(ggridges)
+ggplot(df, aes(x = battle_deaths, y = income)) + geom_density_ridges() + theme_classic()
+\end{verbatim}
+
 \section*{Checklist (before you leave)}
 \begin{itemize}
   \item \texttt{scripts/lab.R} runs top-to-bottom
@@ -197,3 +270,4 @@ Create a ridgeline density plot using \texttt{ggridges} for \texttt{battle\_deat
 \end{itemize}
 
 \end{document}
+```
