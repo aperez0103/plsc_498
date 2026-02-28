@@ -4,7 +4,7 @@
 \setlist{nosep}
 \usepackage[margin=1in]{geometry}
 
-\title{Take-Home Midterm: Visualizing War, Regime Type, Distance, and Trade (R + GitHub)}
+\title{Take-Home Midterm: Visualizing War, Regime Type, Distance, and Trade (R + GitHub / Canvas)}
 \author{}
 \date{}
 
@@ -17,12 +17,13 @@
 \noindent \textbf{Allowed resources.} You may use course materials, textbooks, documentation, and online resources.
 
 \medskip
-\noindent \textbf{AI restriction (required).} 
+\noindent \textbf{AI restriction (required).}
 
 \begin{itemize}
-\item You \textbf{may not} use AI tools (e.g., ChatGPT, Copilot, or similar systems) to write your answers. Your written interpretations and explanations must be your own. The exam is open book, note, web, AI. \textbf{However, you are responsible for understanding and explaining your code and results. However, you can use any resource to help you.}
-\item You may not work with anyone else on the exam. This has to be your own work. 
-\end{itemize} 
+\item You \textbf{may not} use AI tools (e.g., ChatGPT, Copilot, or similar systems) to write your answers. Your written interpretations and explanations must be your own.
+\item The exam is open book, note, and web. \textbf{However, you are responsible for understanding and explaining your code and results.}
+\item You may not work with anyone else on the exam. This has to be your own work.
+\end{itemize}
 
 \medskip
 \noindent \textbf{Provided dataset (required).} You will begin from a provided dyad-year dataset (not from \texttt{peacesciencer}). The dataset is a dyad-year panel with one row per country-pair per year.
@@ -38,29 +39,36 @@
   \item \texttt{cowinteronset}: indicator (0/1) for an inter-state war onset in that dyad-year (may contain missing values).
   \item \texttt{cowinterongoing}: indicator (0/1) for an inter-state war ongoing in that dyad-year (may contain missing values).
   \item \texttt{polity21}, \texttt{polity22}: regime category for each state in the dyad-year. Values include \texttt{Democracy}, \texttt{Autocracy}, and \texttt{Anocracy}.
-    \item \texttt{initiator1}, \texttt{initiator2}: Country that started the conflict. 
+  \item \texttt{initiator1}, \texttt{initiator2}: Country that started the conflict.
 \end{itemize}
 
 \medskip
 \noindent \textbf{Important note on aggregation.} You will need to construct at least one \textbf{system-year} (or year-level) dataset from this dyad-year data. For example, you may aggregate dyad-year war indicators into counts per year (total wars per year; wars between democracies per year), and you may aggregate dyad-year relationships into year-level summaries as needed for visualization.
 
-
-
-
 \medskip
-\noindent \textbf{What to submit (in your GitHub repo).}
+\noindent \textbf{Submission options (choose ONE): Canvas \emph{or} GitHub.}
+
 \begin{itemize}
-  \item A script file (or Quarto/Rmd) that runs top-to-bottom:
+  \item \textbf{Option A (Canvas submission).}
   \begin{itemize}
-    \item \texttt{scripts/midterm.R} \textit{(preferred)} or \texttt{midterm.qmd} / \texttt{midterm.Rmd}
+    \item Upload \textbf{one ZIP file} to Canvas.
+    \item The ZIP must contain (at minimum) these folders and files:
+    \begin{itemize}
+      \item \texttt{scripts/midterm.R} \textit{(preferred)} or \texttt{midterm.qmd} / \texttt{midterm.Rmd}
+      \item \texttt{outputs/writeup.md}
+      \item \texttt{figures/} (your saved figures)
+    \end{itemize}
+    \item \textbf{Do not} upload many loose files individually. Submit a single ZIP that preserves the folder structure.
   \end{itemize}
-  \item A short write-up:
+
+  \item \textbf{Option B (GitHub submission).}
   \begin{itemize}
-    \item \texttt{outputs/writeup.md}
-  \end{itemize}
-  \item Figures saved to:
-  \begin{itemize}
-    \item \texttt{figures/}
+    \item Push your work to your GitHub repo with the same required structure:
+    \begin{itemize}
+      \item \texttt{scripts/midterm.R} \textit{(preferred)} or \texttt{midterm.qmd} / \texttt{midterm.Rmd}
+      \item \texttt{outputs/writeup.md}
+      \item \texttt{figures/} (your saved figures)
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
@@ -70,7 +78,7 @@
   \item Use an \textbf{R Project}.
   \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
   \item Save figures using \texttt{ggsave()} (no screenshots).
-  \item Organize your repo with \texttt{scripts/}, \texttt{outputs/}, and \texttt{figures/}.
+  \item Organize your work with \texttt{scripts/}, \texttt{outputs/}, and \texttt{figures/}.
 \end{itemize}
 
 \medskip
@@ -197,15 +205,20 @@
     \item and why your palette is accessibility-conscious.
   \end{itemize}
 
-  \item \textbf{GitHub submission (required; proof required).}
+  \item \textbf{Submission proof (required). Choose the proof that matches your submission method.}
 
-  Commit and push your work to GitHub.
-
-  \medskip
-  \noindent In your write-up, paste:
   \begin{itemize}
-    \item the output of \texttt{git status} after committing (clean working tree), and
-    \item the output of \texttt{git log -3} showing at least three commits.
+    \item \textbf{If you submit via GitHub:} In your write-up, paste:
+    \begin{itemize}
+      \item the output of \texttt{git status} after committing (clean working tree), and
+      \item the output of \texttt{git log -3} showing at least three commits.
+    \end{itemize}
+
+    \item \textbf{If you submit via Canvas:} In your write-up, include:
+    \begin{itemize}
+      \item a short \textbf{file tree} of what is inside your ZIP (you can type it manually), showing \texttt{scripts/}, \texttt{outputs/}, and \texttt{figures/}, and
+      \item the \textbf{exact filename} of the ZIP you uploaded to Canvas (e.g., \texttt{Lastname\_Firstname\_Midterm.zip}).
+    \end{itemize}
   \end{itemize}
 
 \end{enumerate}
@@ -218,7 +231,8 @@
   \item At least four distinct figures saved in \texttt{figures/}
   \item One figure appears in raw and transformed versions
   \item One intentionally ``bad'' visualization included with critique bullets
-  \item GitHub proof included: \texttt{git status} (clean) and \texttt{git log -3}
+  \item You submitted via \textbf{either} Canvas \textbf{or} GitHub (not both)
+  \item You included the correct submission proof for your chosen method (GitHub proof \emph{or} Canvas ZIP proof)
 \end{itemize}
 
 \end{document}

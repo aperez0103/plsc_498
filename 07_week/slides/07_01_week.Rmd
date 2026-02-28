@@ -239,18 +239,17 @@ Look for:
 
 ---
 
-# Pause and discuss with a neighbor
+# Data visualization critique 
 
-You have two distribution diagnostics:
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this, talk to your neighbor briefly and compare notes.
 
-1) ECDF  
-2) Q–Q plot vs normal
-
-**Prompt:**
-
-- Which plot is better for comparing *groups*?
-- Which plot is better for diagnosing *non-normality*?
-- What could each plot hide?
+.center[
+<img src="cumulative_appointments.png" style="width:50%;">
+]
 
 ---
 
