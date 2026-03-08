@@ -55,3 +55,31 @@ Figure 4.0 develops a full analysis of the relationship between trade volume, wa
 ![](../figures/tradedistwar_scaled.png)
 
 Figure 4.2 addresses this issue by transforming the trade volume data. By adding 1 to all trade volume data points and logging the resulting values, the resulting visualization allows more data to be seen, while avoiding infinitely negative values and bringing into view potential outliers. There are several drawbacks with this. First, while bringing outliers into view is helpful for interpretation, it can both fail to identify any outliers, as well as undermine the perceived effect any outlier may have on trends in the data. Second, logged data is not highly intuitive for determining if there’s linearity within the plotted relationship. In the same light, it can also obscure the interpretation of the color encoded data as well. Despite these drawbacks, we can still draw general trends and relationships over distance in Figure 4.2, though they will not be quantitatively intuitive or representative of magnitude, it offers the ability to understand trends in the data. Figure 4.2 shows the same inverse relationship between trade volume and distance between states, as well as war occurrences being more common in states with smaller distances between them.
+
+##git status 
+Angels-MacBook-Pro:08_week angel$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+##git log -3 
+Angels-MacBook-Pro:08_week angel$ git log -3
+commit 066038652ccac7f7f2a68f2e15c431e2fc8949d7 (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Sat Mar 7 23:27:18 2026 -0500
+
+    midterm push
+
+commit c831231e62ca3e729a6afa5b005bf285ae2b673c
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Tue Mar 3 14:48:17 2026 -0500
+
+    Update Branch
+
+commit 87c3bb20793c95f74ea26c3efd79cd3f244c2fce
+Merge: 5314ada 487bb99
+Author: aperez0103 <92343392+aperez0103@users.noreply.github.com>
+Date:   Fri Feb 27 19:03:37 2026 -0500
+
+:
