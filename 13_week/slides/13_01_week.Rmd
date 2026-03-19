@@ -1,0 +1,380 @@
+---
+title: "Geospatial Data and Mapping Social Phenomena"
+subtitle: "Projections, choropleths, normalization, and when maps are the wrong chart"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Geospatial Data and Mapping Social Phenomena
+]
+.subtitle[
+## Projections, choropleths, normalization, and when maps are the wrong chart
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# Quiz on canvas
+
+- Log on to the course website to take it.
+- You have 10 minutes.
+- It is open notes and web.
+- Do not generate your answers with AI.
+
+---
+
+# Quick Recap
+
+- Last time, we focused on **time series**:
+  - line charts and their assumptions
+  - annotation and smoothing
+  - seasonality vs trend
+
+Today, we focus on **maps**:
+
+- projections: why all maps lie
+- choropleths: coloring regions by a variable
+- normalization: rates vs counts (a critical decision)
+- ecological fallacy: what maps can't tell you
+- when maps are the wrong chart
+
+---
+
+# Setup
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(sf)
+library(maps)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Why maps are persuasive (and dangerous)
+
+Maps look authoritative. People trust them.
+
+But every map makes hidden choices:
+
+- **Projection:** how 3D earth becomes 2D paper
+- **Boundaries:** what counts as a "region"
+- **Color:** what palette, how many bins, where the breaks fall
+- **Variable:** counts vs rates vs ranks
+
+Each choice changes the story.
+
+---
+
+# Projections: all maps distort
+
+A projection converts latitude/longitude (a sphere) to x/y (a flat surface).
+
+Every projection preserves some properties and distorts others:
+
+- **Mercator:** preserves angles, distorts area (Greenland looks huge)
+- **Albers equal-area:** preserves area, distorts shape
+- **Robinson:** compromises on everything (common for world maps)
+
+**Rule:**
+Know what your projection distorts. For area comparisons, use an equal-area projection.
+
+---
+
+# Getting map data into R
+
+The `maps` package provides simple boundary data. The `sf` package handles spatial data properly.
+
+```{r, fig.width=7, fig.height=4}
+us_states <- map_data("state")
+
+ggplot(us_states, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "grey90", color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  theme_void() +
+  labs(title = "US states: basic boundary map")
+```
+
+---
+
+# Choropleths: coloring regions by data
+
+A choropleth maps a variable to the fill color of geographic regions.
+
+Steps:
+1. Get boundary data (polygons)
+2. Get your data (one row per region)
+3. Join them
+4. Map the variable to fill
+
+---
+
+# Simulated state-level data
+
+```{r}
+state_data <- data.frame(
+  region = tolower(state.name),
+  turnout = runif(50, 35, 75),
+  pop = state.x77[, "Population"] * 1000,
+  college = state.x77[, "HS Grad"]
+) %>%
+  mutate(
+    turnout_cat = cut(turnout, breaks = c(0, 45, 55, 65, 100),
+                      labels = c("Low", "Medium-Low", "Medium-High", "High"))
+  )
+```
+
+---
+
+# Join data to map boundaries
+
+```{r, fig.width=7, fig.height=4}
+us_merged <- us_states %>%
+  left_join(state_data, by = "region")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = turnout)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_viridis_c(option = "C", name = "Turnout (%)") +
+  theme_void() +
+  labs(title = "Simulated voter turnout by state")
+```
+
+---
+
+# Choropleth pitfall: counts vs rates
+
+This is the most common mistake in mapping social data.
+
+**Counts** (e.g., total votes, total crimes) mostly show **population**.
+**Rates** (e.g., votes per capita, crimes per 100k) show the **phenomenon**.
+
+If you map counts, you are mapping where people live.
+
+---
+
+# Example: counts vs rates
+
+```{r, fig.width=7, fig.height=4}
+state_data <- state_data %>%
+  mutate(voters = round(pop * turnout / 100))
+
+us_merged <- us_states %>%
+  left_join(state_data, by = "region")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = voters)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_viridis_c(option = "C", name = "Total voters", labels = comma) +
+  theme_void() +
+  labs(title = "Total voters by state (mostly shows population)")
+```
+
+---
+
+# Same data, mapped as a rate
+
+```{r, fig.width=7, fig.height=4}
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = turnout)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_viridis_c(option = "C", name = "Turnout (%)") +
+  theme_void() +
+  labs(title = "Turnout rate by state (shows the phenomenon)")
+```
+
+---
+
+# Pause and discuss with a neighbor
+
+Look at the two maps (counts vs rates).
+
+**Prompt:**
+- What story does each map tell?
+- Which one would be misleading in a news article?
+- Can you think of a political science example where this distinction matters?
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="tourism.png" style="width:50%;">
+]
+
+---
+
+# Color scale choices for maps
+
+Choropleth effectiveness depends on the color scale.
+
+Key decisions:
+
+- **Sequential** (light → dark): for ordered variables (higher = more)
+- **Diverging** (two colors from a midpoint): for deviations from a baseline
+- **Categorical** (distinct colors): for unordered groups
+
+---
+
+# Sequential vs diverging
+
+```{r, fig.width=7, fig.height=4}
+state_data <- state_data %>%
+  mutate(turnout_dev = turnout - mean(turnout))
+
+us_merged <- us_states %>%
+  left_join(state_data, by = "region")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = turnout_dev)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue",
+                       midpoint = 0, name = "Deviation\nfrom mean") +
+  theme_void() +
+  labs(title = "Turnout deviation from national mean (diverging scale)")
+```
+
+---
+
+# Binning: continuous vs discrete classes
+
+Sometimes binning a continuous variable into classes makes the map easier to read.
+
+```{r, fig.width=7, fig.height=4}
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = turnout_cat)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_brewer(palette = "YlOrRd", name = "Turnout") +
+  theme_void() +
+  labs(title = "Turnout by state (binned into categories)")
+```
+
+---
+
+# The ecological fallacy
+
+Maps show **aggregate** patterns (state, county, district).
+
+You cannot conclude individual behavior from aggregate data:
+
+- "States with more education voted for X" ≠ "educated people voted for X"
+- "Counties with more poverty have more crime" ≠ "poor people commit crime"
+
+This is the **ecological fallacy**. Always acknowledge the unit of analysis.
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="strategies.png" style="width:50%;">
+]
+
+---
+
+# When maps are the wrong chart
+
+Maps are not always the best choice:
+
+- When geography is not the main comparison (use a bar chart or dot plot)
+- When small regions are invisible (e.g., Rhode Island on a US map)
+- When the spatial pattern is weak or absent
+- When you need precise value comparisons (hard to read from color)
+
+**Rule:**
+Use a map when the *spatial pattern* is the argument. Otherwise, a non-spatial chart is often clearer.
+
+---
+
+# Alternative: a dot plot instead of a map
+
+```{r, fig.width=6, fig.height=5}
+state_data_sorted <- state_data %>%
+  mutate(region = reorder(region, turnout)) %>%
+  slice_max(turnout, n = 20)
+
+ggplot(state_data_sorted, aes(x = turnout, y = region)) +
+  geom_point(size = 2.5) +
+  theme_classic() +
+  labs(x = "Turnout (%)", y = NULL,
+       title = "Top 20 states by turnout (dot plot)")
+```
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="3d_weird.png" style="width:50%;">
+]
+
+---
+
+# What success looks like
+
+- You understand that projections distort and can name the tradeoffs
+- You can build a choropleth by joining data to map boundaries
+- You choose between counts and rates deliberately
+- You can select sequential, diverging, or categorical color scales
+- You recognize the ecological fallacy
+- You know when a map is the wrong chart
+
+---
+
+# In-Class Activity
+
+Find a visualization online.
+
+With a neighbor:
+- Identify the data variables
+- Identify the visual mappings
+- Decide what message the plot is making
+- Suggest one concrete improvement
+
+---
+
+# What Comes Next
+
+Next, we will practice these patterns in lab:
+
+- building choropleths with `sf` and `ggplot2`
+- joining data to spatial boundaries
+- projection choices
+- legend and binning decisions
+- (optional) interactive mapping or alternative spatial designs
+
+Focus on clarity, not complexity.

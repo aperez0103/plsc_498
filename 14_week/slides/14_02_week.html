@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Coding Assignment: Uncertainty, Redesign, and Publication Quality</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jared Edgerton" />
+    <script src="14_02_week_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="14_02_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="14_02_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="14_02_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="plsc498.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Uncertainty, Redesign, and Publication Quality
+]
+.subtitle[
+## A quick recap + practical extensions (error bars, ribbons, checklists, export)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Uncertainty, Redesign, and Publication Quality
+]
+.subtitle[
+## A quick recap + practical extensions (error bars, ribbons, checklists, export)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# What you should remember
+
+This is a short recap and extension.
+
+You should already be comfortable with:
+
+- Error bars and confidence intervals
+- Uncertainty ribbons on line charts
+- The publishing-quality checklist
+- Color accessibility basics
+
+Today we extend that with:
+
+- building error bar plots from summary data
+- adding ribbons to time series
+- redesigning a "before" plot into a polished "after" version
+- export settings (dpi, size, format)
+- peer critique workflow
+
+---
+
+# Setup
+
+
+``` r
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Simulated survey data
+
+We simulate survey estimates for policy support across countries and policy areas.
+
+
+``` r
+df_survey &lt;- expand.grid(
+  country = c("Aurelia", "Belvica", "Cordonia", "Deltara"),
+  policy = c("Climate", "Immigration", "Healthcare")
+) %&gt;%
+  mutate(
+    estimate = round(runif(12, 30, 75), 1),
+    n = sample(400:1200, 12, replace = TRUE),
+    se = round(sqrt(estimate * (100 - estimate) / n), 2),
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se
+  )
+```
+
+---
+
+# Quick check
+
+
+``` r
+df_survey %&gt;%
+  select(country, policy, estimate, se, n) %&gt;%
+  arrange(policy, desc(estimate))
+```
+
+```
+##     country      policy estimate   se    n
+## 1   Belvica     Climate     72.2 1.42 1000
+## 2   Aurelia     Climate     71.2 1.65  755
+## 3   Deltara     Climate     67.4 1.47 1021
+## 4  Cordonia     Climate     42.9 2.08  564
+## 5  Cordonia Immigration     63.1 1.83  696
+## 6   Aurelia Immigration     58.9 1.61  931
+## 7   Belvica Immigration     53.4 1.75  809
+## 8   Deltara Immigration     36.1 1.52 1000
+## 9   Deltara  Healthcare     62.4 1.96  611
+## 10  Belvica  Healthcare     61.7 1.52 1020
+## 11  Aurelia  Healthcare     59.6 1.88  682
+## 12 Cordonia  Healthcare     50.6 1.65  916
+```
+
+---
+
+# Starter pattern: dot plot with error bars
+
+
+``` r
+df_climate &lt;- df_survey %&gt;% filter(policy == "Climate") %&gt;%
+  mutate(country = reorder(country, estimate))
+
+ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
+  geom_point(size = 3) +
+  theme_classic() +
+  labs(x = "Support (%)", y = NULL,
+       title = "Climate policy support with 95% CIs")
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# Starter pattern: grouped error bars
+
+
+``` r
+df_survey &lt;- df_survey %&gt;%
+  mutate(country = factor(country))
+
+ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.25, position = position_dodge(0.6)) +
+  geom_point(size = 2.5, position = position_dodge(0.6)) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "Support (%)", y = NULL, color = NULL,
+       title = "Policy support by country and topic")
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+# Simulated time series with uncertainty
+
+
+``` r
+df_ts &lt;- data.frame(
+  year = rep(2005:2024, 2),
+  party = rep(c("Party A", "Party B"), each = 20)
+) %&gt;%
+  group_by(party) %&gt;%
+  mutate(
+    t = row_number(),
+    estimate = ifelse(party == "Party A",
+                      48 + 0.4 * t + rnorm(20, 0, 2),
+                      52 - 0.2 * t + rnorm(20, 0, 2.5)),
+    se = runif(20, 1.5, 4),
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se
+  ) %&gt;%
+  ungroup()
+```
+
+---
+
+# Time series with uncertainty ribbons
+
+
+``` r
+ggplot(df_ts, aes(x = year, color = party, fill = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.15, color = NA) +
+  geom_line(aes(y = estimate), linewidth = 0.7) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL,
+       title = "Party approval with 95% confidence ribbons")
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+# The redesign exercise
+
+Now we practice the **publication pass**. Take a rough figure and make it polished.
+
+Here is a "before" version (deliberately rough):
+
+
+``` r
+p_before &lt;- ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = lower, xmax = upper))
+
+p_before
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+# Redesign: applying the checklist
+
+Apply each checklist item one at a time:
+
+1. Clear title
+2. Axis labels with units
+3. Caption with source
+4. Reference line (e.g., 50% = majority)
+5. Color for emphasis
+6. Readable text size
+7. Clean theme
+
+---
+
+# After the checklist
+
+
+``` r
+p_after &lt;- ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.4) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.2, color = "grey50") +
+  geom_point(size = 3, color = "steelblue") +
+  theme_classic(base_size = 13) +
+  labs(
+    x = "Support (%)",
+    y = NULL,
+    title = "Public support for climate policy",
+    subtitle = "Point estimates with 95% confidence intervals",
+    caption = "Source: Simulated survey data | Dashed line = 50% threshold"
+  )
+
+p_after
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+# Export: saving at publication quality
+
+
+``` r
+ggsave("climate_support_polished.png",
+       plot = p_after,
+       width = 7, height = 4,
+       dpi = 300, units = "in")
+```
+
+```
+## `height` was translated to `width`.
+```
+
+Key settings:
+- `dpi = 300` for print-quality resolution
+- `width` and `height` control aspect ratio explicitly
+- PNG for raster, PDF for vector graphics
+
+---
+
+# Peer critique workflow
+
+When reviewing a classmate's figure:
+
+1. **What is the main message?** (Can you state it in one sentence?)
+2. **What is mapped vs styled?** (Is the encoding appropriate?)
+3. **Is uncertainty shown?** (If applicable)
+4. **Checklist items:** title, labels, units, caption, legend, color, aspect ratio
+5. **One concrete suggestion** (not "make it better" but "move the legend to bottom")
+
+---
+
+# Color accessibility check
+
+
+``` r
+ggplot(df_survey, aes(x = estimate, y = country, color = policy, shape = policy)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.25, position = position_dodge(0.6)) +
+  geom_point(size = 2.5, position = position_dodge(0.6)) +
+  scale_color_brewer(palette = "Dark2") +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "Support (%)", y = NULL, color = NULL, shape = NULL,
+       title = "Redundant encoding: color + shape for accessibility")
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+
+# Shiny starter (for your final project)
+
+A minimal Shiny app for one of today's figures:
+
+```r
+library(shiny)
+library(ggplot2)
+library(dplyr)
+
+ui &lt;- fluidPage(
+  titlePanel("Policy Support Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("policy", "Choose a policy area:",
+                  choices = c("Climate", "Immigration", "Healthcare"))
+    ),
+    mainPanel(plotOutput("supportPlot"))
+  )
+)
+
+server &lt;- function(input, output) {
+  output$supportPlot &lt;- renderPlot({
+    df_filtered &lt;- df_survey %&gt;% filter(policy == input$policy) %&gt;%
+      mutate(country = reorder(country, estimate))
+    ggplot(df_filtered, aes(x = estimate, y = country)) +
+      geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.4) +
+      geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+      geom_point(size = 3, color = "steelblue") +
+      theme_classic(base_size = 14) +
+      labs(x = "Support (%)", y = NULL,
+           title = paste(input$policy, "policy support"))
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+# Save a figure
+
+
+``` r
+p &lt;- ggplot(df_ts, aes(x = year, color = party, fill = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.15, color = NA) +
+  geom_line(aes(y = estimate), linewidth = 0.7) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL)
+
+p
+```
+
+![](14_02_week_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+``` r
+ggsave("approval_uncertainty.png", plot = p, width = 7, height = 4, dpi = 300)
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": ""
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

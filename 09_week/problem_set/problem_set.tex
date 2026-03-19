@@ -45,7 +45,7 @@
 
 \section*{Questions}
 
-\noindent \textbf{Pseudo-code expectation.} For Questions 2--5, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ derive variables $\rightarrow$ summarize $\rightarrow$ visualize").
+\noindent \textbf{Pseudo-code expectation.} For Questions 2--6, include short pseudo-code comments in \texttt{scripts/lab.R} before each major block (for example: ``load data $\rightarrow$ derive variables $\rightarrow$ summarize $\rightarrow$ visualize").
 
 \begin{enumerate}
 
@@ -70,7 +70,14 @@ git pull
     \item Load the dataset into an object named \texttt{df}.
     \item Summarize the data structure.
     \item Add 2--4 pseudo-code lines before your inspection/summarizing code.
-    
+
+    \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: load the RDS/CSV file into df
+# Step 2: check dimensions and column names
+# Step 3: summarize vote and death columns
+\end{verbatim}
+
     \textbf{Suggested edit:} Use \texttt{dim(df)}, \texttt{names(df)}, and a focused summary of vote and death variables.
     \item \textbf{Proof (write-up):} Report:
     \begin{itemize}
@@ -88,14 +95,30 @@ git pull
     \]
     \item Compute total illness deaths aggregated across all states.
     \item Add 2--4 pseudo-code lines before coding this derivation and aggregation.
+
+    \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: create total_illness_deaths column (sum of two death cols)
+# Step 2: compute national total with sum()
+# Step 3: find state-level min and max
+\end{verbatim}
     \item \textbf{Proof (write-up):} Report the national total and the minimum/maximum state totals.
   \end{enumerate}
 
   \item \textbf{Visualize totals: bar plot of total illness deaths by state.}
-  
+
   Create a bar plot showing \textbf{total illness deaths by state}.
 
   \medskip
+  \noindent \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: reorder states by total_illness_deaths
+# Step 2: build bar plot with geom_col()
+# Step 3: flip coordinates for readability
+# Step 4: add title, axis labels (note: totals, not proportions)
+# Step 5: save with ggsave()
+\end{verbatim}
+
   \noindent \textbf{Required:}
   \begin{itemize}
     \item Add 3--5 pseudo-code lines describing your totals bar-plot workflow.
@@ -116,6 +139,15 @@ git pull
     \item \texttt{winner = "Biden"} if \texttt{biden\_share > trump\_share}
     \item \texttt{winner = "Trump"} otherwise
   \end{itemize}
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: create winner variable based on biden_share vs trump_share
+# Step 2: group by winner and compute proportion of total illness deaths
+# Step 3: build bar plot with proportions (geom_col)
+# Step 4: apply red/blue color scale
+# Step 5: add labels clarifying these are proportions
+\end{verbatim}
 
   Then:
   \begin{enumerate}
@@ -139,6 +171,34 @@ git pull
     \texttt{figures/illness\_deaths\_by\_winner\_proportion.png}
   \]
 
+  \item \textbf{Faceted visualization: deaths by state, grouped by winner.}
+
+  Using \texttt{facet\_wrap()} or \texttt{facet\_grid()}, create a faceted bar plot that shows total illness deaths by state, split into separate panels by \texttt{winner} (Biden vs Trump).
+
+  \medskip
+  \noindent \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: reorder states by total_illness_deaths within each facet
+# Step 2: build bar plot with geom_col()
+# Step 3: facet by winner using facet_wrap() or facet_grid()
+# Step 4: use scales = "free_y" so each panel has its own state list
+# Step 5: add appropriate colors, title, axis labels
+# Step 6: save with ggsave()
+\end{verbatim}
+
+  \noindent \textbf{Required:}
+  \begin{itemize}
+    \item Use \texttt{facet\_wrap(\textasciitilde winner, scales = "free\_y")} or an equivalent \texttt{facet\_grid()} call.
+    \item States should be ordered by death count within each panel.
+    \item Use color to encode winner (red/blue) consistently with Question 5.
+    \item Clearly label the plot so it is interpretable on its own.
+  \end{itemize}
+
+  \noindent Save as:
+  \[
+    \texttt{figures/illness\_deaths\_faceted\_by\_winner.png}
+  \]
+
   \item \textbf{Interpretation (write-up required).}
 
   In \texttt{outputs/writeup.md}, write 12--16 sentences addressing:
@@ -146,6 +206,7 @@ git pull
     \item How interpretation changes when moving from totals to proportions.
     \item What the bar plot of totals emphasizes that the proportional plot hides.
     \item What the proportional plot emphasizes that the totals plot hides.
+    \item How the faceted plot compares to the single proportional plot---what does faceting reveal or obscure?
     \item Why your color choices are appropriate for the task.
     \item One way these plots could be misinterpreted if shown without context.
   \end{itemize}
@@ -173,12 +234,7 @@ git push
 \end{enumerate}
 
 \section*{Optional challenge (if you finish early)}
-Create an alternative visualization where:
-\begin{itemize}
-  \item the same data are shown using \textbf{faceting} instead of color, or
-  \item you encode \texttt{biden\_margin} as a continuous color scale (red--purple--blue).
-\end{itemize}
-In 5--7 sentences, explain which version is clearer and for what audience.
+Create an alternative visualization where you encode \texttt{biden\_margin} as a continuous color scale (red--purple--blue) instead of the binary winner variable. In 5--7 sentences, explain which version is clearer and for what audience.
 
 \section*{Checklist (before you leave)}
 \begin{itemize}

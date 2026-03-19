@@ -1,0 +1,257 @@
+---
+title: "Coding Assignment: Geospatial Data and Mapping"
+subtitle: "A quick recap + practical extensions (choropleths, sf, joins, projections)"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Geospatial Data and Mapping
+]
+.subtitle[
+## A quick recap + practical extensions (choropleths, sf, joins, projections)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# What you should remember
+
+This is a short recap and extension.
+
+You should already be comfortable with:
+
+- Choropleths as fill-colored geographic regions
+- Counts vs rates (normalization)
+- Sequential, diverging, and categorical color scales
+- The ecological fallacy
+
+Today we extend that with:
+
+- building maps using `map_data()` and `sf` objects
+- joining attribute data to boundary data
+- projection choices with `coord_sf()`
+- binning and legend design for clarity
+- when to use a map vs a non-spatial chart
+
+---
+
+# Setup
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(sf)
+library(maps)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Map data: two approaches
+
+**Approach 1: `map_data()` from the `maps` package**
+
+Returns a data frame of polygon coordinates. Simple but limited.
+
+```{r}
+us <- map_data("state")
+head(us, 4)
+```
+
+**Approach 2: `sf` objects**
+
+The modern standard. Geometries are stored in a special column. Supports projections, spatial operations, and easy ggplot integration.
+
+---
+
+# Starter pattern: basic US map with map_data
+
+```{r, fig.width=7, fig.height=4}
+ggplot(us, aes(x = long, y = lat, group = group)) +
+  geom_polygon(fill = "grey90", color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  theme_void() +
+  labs(title = "US states (map_data approach)")
+```
+
+---
+
+# Starter pattern: sf approach (world map)
+
+```{r, fig.width=7, fig.height=4}
+world <- rnaturalearth::ne_countries(scale = "medium", returnclass = "sf")
+
+ggplot(world) +
+  geom_sf(fill = "grey90", color = "white", linewidth = 0.2) +
+  theme_void() +
+  labs(title = "World map (sf approach with rnaturalearth)")
+```
+
+---
+
+# Building a choropleth: step by step
+
+1. Get boundary data (polygons with a region identifier)
+2. Get your attribute data (one row per region)
+3. Make sure the join key matches (e.g., both lowercase state names)
+4. Join
+5. Map the variable to `fill`
+
+---
+
+# Simulated political data
+
+```{r}
+state_data <- data.frame(
+  region = tolower(state.name),
+  dem_share = rnorm(50, mean = 50, sd = 8),
+  median_income = round(rnorm(50, mean = 55000, sd = 10000)),
+  pop = state.x77[, "Population"] * 1000
+) %>%
+  mutate(
+    dem_share = pmin(pmax(dem_share, 25), 75),
+    dem_win = ifelse(dem_share > 50, "Dem", "Rep")
+  )
+```
+
+---
+
+# Join and map: continuous variable
+
+```{r, fig.width=7, fig.height=4}
+us_merged <- us %>%
+  left_join(state_data, by = "region")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = dem_share)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue",
+                       midpoint = 50, name = "Dem %") +
+  theme_void() +
+  labs(title = "Simulated two-party vote share (diverging scale)")
+```
+
+---
+
+# Join and map: categorical variable
+
+```{r, fig.width=7, fig.height=4}
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = dem_win)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_manual(values = c("Dem" = "steelblue", "Rep" = "firebrick"),
+                    name = "Winner") +
+  theme_void() +
+  labs(title = "Simulated election result (categorical)")
+```
+
+---
+
+# Projections matter
+
+```{r, fig.width=7, fig.height=4}
+us_sf <- st_as_sf(map("state", plot = FALSE, fill = TRUE))
+
+ggplot(us_sf) +
+  geom_sf(fill = "grey90", color = "white", linewidth = 0.3) +
+  coord_sf(crs = st_crs(5070)) +
+  theme_void() +
+  labs(title = "US states: Albers equal-area projection (EPSG:5070)")
+```
+
+Interpretation:
+- Albers preserves area: states are proportional to their real size
+- Better for choropleths than the default Mercator-like projection
+
+---
+
+# Binning for choropleths
+
+Binning a continuous variable into classes can make the map easier to read.
+
+```{r, fig.width=7, fig.height=4}
+state_data <- state_data %>%
+  mutate(income_cat = cut(median_income,
+    breaks = c(0, 45000, 55000, 65000, Inf),
+    labels = c("< $45k", "$45k-$55k", "$55k-$65k", "> $65k")))
+
+us_merged <- us %>%
+  left_join(state_data, by = "region")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group, fill = income_cat)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_brewer(palette = "YlGnBu", name = "Median income") +
+  theme_void() +
+  labs(title = "Median income by state (binned)")
+```
+
+---
+
+# World choropleth: life expectancy
+
+```{r, fig.width=7, fig.height=4}
+gap_2007 <- gapminder::gapminder %>%
+  filter(year == 2007)
+
+world_merged <- world %>%
+  left_join(gap_2007, by = c("name" = "country"))
+
+ggplot(world_merged) +
+  geom_sf(aes(fill = lifeExp), color = "white", linewidth = 0.1) +
+  scale_fill_viridis_c(option = "C", name = "Life exp.", na.value = "grey80") +
+  theme_void() +
+  labs(title = "Life expectancy by country (2007)")
+```
+
+---
+
+# When a map is not the best chart
+
+Sometimes a dot plot or bar chart communicates the same information more precisely.
+
+```{r, fig.width=6, fig.height=4}
+top_states <- state_data %>%
+  arrange(desc(median_income)) %>%
+  slice_head(n = 15) %>%
+  mutate(region = reorder(region, median_income))
+
+ggplot(top_states, aes(x = median_income, y = region)) +
+  geom_point(size = 2.5) +
+  scale_x_continuous(labels = dollar) +
+  theme_classic() +
+  labs(x = "Median income", y = NULL,
+       title = "Top 15 states by median income (dot plot)")
+```
+
+---
+
+# Save a figure
+
+```{r, fig.width=7, fig.height=4}
+p <- ggplot(us_merged, aes(x = long, y = lat, group = group, fill = dem_share)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_gradient2(low = "red", mid = "white", high = "blue",
+                       midpoint = 50, name = "Dem %") +
+  theme_void()
+
+p
+
+ggsave("choropleth_vote_share.png", plot = p, width = 7, height = 4, dpi = 300)
+```

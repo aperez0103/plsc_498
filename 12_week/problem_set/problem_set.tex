@@ -1,0 +1,263 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, graphicx, hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage[margin=1in]{geometry}
+
+\title{In-Class Problem Set: Time Series and Trends with Presidential Approval Data (R + GitHub \emph{or} Canvas)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Goal.} Practice visualizing and interpreting time series using real political data. You will use line charts, smoothing, annotation, and uncertainty ribbons to explore how presidential approval changes over time. You may submit via \textbf{GitHub or Canvas}.
+
+\medskip
+\noindent \textbf{Dataset.} This problem set uses presidential approval data from the \texttt{ggplot2} package (\texttt{presidential} and \texttt{economics} datasets) combined with the \texttt{gapminder} package.
+
+\medskip
+\noindent \textbf{Key variables (economics).}
+\begin{itemize}
+  \item \texttt{date}: Month of observation
+  \item \texttt{unemploy}: Number of unemployed (thousands)
+  \item \texttt{uempmed}: Median duration of unemployment (weeks)
+  \item \texttt{pop}: Total population (thousands)
+  \item \texttt{psavert}: Personal savings rate
+  \item \texttt{pce}: Personal consumption expenditures
+\end{itemize}
+
+\noindent \textbf{Key variables (gapminder).}
+\begin{itemize}
+  \item \texttt{country}, \texttt{continent}, \texttt{year}
+  \item \texttt{lifeExp}: Life expectancy at birth
+  \item \texttt{pop}: Population
+  \item \texttt{gdpPercap}: GDP per capita
+\end{itemize}
+
+\medskip
+\noindent \textbf{What to submit (GitHub or Canvas).}
+\begin{itemize}
+  \item \texttt{scripts/lab.R}
+  \item \texttt{outputs/writeup.md}
+  \item Required figures in \texttt{figures/}
+\end{itemize}
+
+\medskip
+\noindent \textbf{Rules.}
+\begin{itemize}
+  \item Work inside an \textbf{R Project}.
+  \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
+  \item Save all plots using \texttt{ggsave()}.
+  \item If submitting via GitHub, Git commands must be run in the \textbf{Terminal tab}.
+\end{itemize}
+
+\section*{Questions}
+
+\begin{enumerate}
+
+\item \textbf{Load data and confirm setup (proof required).}
+
+\begin{verbatim}
+# load required packages
+library(__________)
+library(__________)
+library(__________)
+
+# access datasets
+econ <- ggplot2::economics
+pres <- ggplot2::presidential
+
+# gapminder data
+library(gapminder)
+gap <- gapminder
+
+# quick inspection
+dim(econ)
+names(econ)
+head(econ)
+\end{verbatim}
+
+Include in your write-up:
+\begin{itemize}
+  \item number of rows and columns for each dataset,
+  \item confirmation that \texttt{date} and \texttt{unemploy} exist in the economics data,
+  \item the range of years in the gapminder data.
+\end{itemize}
+
+\item \textbf{Line chart: unemployment over time.}
+
+Create a line chart of \texttt{unemploy} over \texttt{date}.
+
+You must:
+\begin{itemize}
+  \item Format the x-axis with readable date labels (use \texttt{scale\_x\_date()}).
+  \item Add a clear title and axis labels.
+  \item Use \texttt{theme\_classic()}.
+\end{itemize}
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+# Step 1: plot unemployment over time
+# Step 2: format the x-axis
+# Step 3: add labels
+# Step 4: save figure
+\end{verbatim}
+
+\begin{verbatim}
+ggplot(econ, aes(x = ________, y = ________)) +
+  geom_line() +
+  scale_x_date(date_breaks = "______", date_labels = "______") +
+  theme_classic() +
+  labs(title = "________", x = "________", y = "________")
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/unemployment\_line.png}
+\end{itemize}
+
+\item \textbf{Smoothing comparison: rolling mean vs LOESS.}
+
+For \texttt{unemploy}, create:
+\begin{itemize}
+  \item A line chart with a \textbf{12-month rolling mean} overlaid
+  \item A line chart with a \textbf{LOESS smoother} overlaid
+\end{itemize}
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+# rolling mean
+econ <- econ %>%
+  mutate(roll_12 = zoo::rollmean(________, k = 12,
+                                  fill = NA, align = "right"))
+
+ggplot(econ, aes(x = date)) +
+  geom_line(aes(y = ________), alpha = 0.3) +
+  geom_line(aes(y = ________), color = "steelblue", linewidth = 1)
+
+# LOESS
+ggplot(econ, aes(x = date, y = ________)) +
+  geom_line(alpha = 0.3) +
+  geom_smooth(method = "loess", se = FALSE)
+\end{verbatim}
+
+Compare:
+\begin{itemize}
+  \item How smoothing affects perceived trends and turning points.
+  \item Whether the rolling mean or LOESS better preserves the timing of recessions.
+\end{itemize}
+
+Save as:
+\texttt{figures/unemployment\_smoothed.png}
+
+\item \textbf{Annotation: marking presidential terms.}
+
+Create a line chart of \texttt{unemploy} over time with presidential terms marked using \texttt{geom\_rect()} or \texttt{geom\_vline()}.
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+ggplot(econ, aes(x = date, y = unemploy)) +
+  geom_rect(data = pres, aes(xmin = ________, xmax = ________,
+            fill = ________), ymin = -Inf, ymax = Inf,
+            alpha = 0.15, inherit.aes = FALSE) +
+  geom_line() +
+  theme_classic()
+\end{verbatim}
+
+Save as:
+\texttt{figures/unemployment\_presidents.png}
+
+\item \textbf{Multiple time series: GDP per capita across countries.}
+
+Using the gapminder data, create a faceted line chart showing GDP per capita over time for \textbf{at least four countries} from at least two continents.
+
+\begin{itemize}
+  \item Use \texttt{facet\_wrap()} with a sensible layout.
+  \item Consider whether you need free y-axis scales (justify your choice).
+\end{itemize}
+
+\begin{verbatim}
+gap_sub <- gap %>%
+  filter(country %in% c("________", "________",
+                         "________", "________"))
+
+ggplot(gap_sub, aes(x = year, y = gdpPercap)) +
+  geom_line() +
+  geom_point(size = 1.5) +
+  facet_wrap(~ country, scales = "________") +
+  theme_classic()
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/gdp\_faceted.png}
+\end{itemize}
+
+\item \textbf{Interpretation (write-up required).}
+
+Write 12--16 sentences addressing:
+\begin{itemize}
+  \item What long-run trends do you see in unemployment? Are there cyclical patterns?
+  \item How does the smoothing method (rolling mean vs LOESS) change your interpretation of when recessions start and end?
+  \item What does annotating presidential terms add to (or distract from) the unemployment story?
+  \item In the GDP comparison, what cross-country patterns are visible? Do levels or growth rates differ more?
+  \item Name one concrete plotting choice you made and why it helped interpretability.
+\end{itemize}
+
+\item \textbf{Submit your work (GitHub or Canvas; proof required).}
+
+\begin{itemize}
+  \item \textbf{GitHub option:}
+\begin{verbatim}
+git status
+git add .
+git commit -m "Time series lab: unemployment + GDP trends"
+git push
+\end{verbatim}
+
+  \item \textbf{Canvas option:}
+  Upload required files to Canvas.
+\end{itemize}
+
+Include proof in write-up:
+\begin{itemize}
+  \item GitHub: output of \texttt{git status} and \texttt{git log -1}
+  \item Canvas: confirmation note + list of uploaded files
+\end{itemize}
+
+\end{enumerate}
+
+\section*{Optional Extension: Savings Rate and Recessions}
+
+Create a line chart of \texttt{psavert} (personal savings rate) over time.
+\begin{itemize}
+  \item Overlay a LOESS smoother with a 95\% confidence ribbon.
+  \item Annotate at least one recession period using \texttt{geom\_rect()}.
+\end{itemize}
+
+Then compare:
+\begin{itemize}
+  \item Whether savings rate appears to respond to recessions (leading, lagging, or coincident).
+  \item How the confidence ribbon changes your interpretation of the trend.
+\end{itemize}
+
+\begin{verbatim}
+ggplot(econ, aes(x = date, y = psavert)) +
+  geom_line(alpha = 0.4) +
+  geom_smooth(method = "loess", se = TRUE) +
+  theme_classic()
+\end{verbatim}
+
+\section*{Checklist}
+\begin{itemize}
+  \item Script runs top-to-bottom
+  \item Required figures saved
+  \item Write-up complete
+  \item Submitted via GitHub or Canvas
+\end{itemize}
+
+\end{document}

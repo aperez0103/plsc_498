@@ -1,0 +1,752 @@
+---
+title: "Interactive Visualization with R Shiny"
+subtitle: "PLSC 498 - Week 15, Lecture 2: Advanced Layouts"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+# Lecture 2: Advanced Shiny
+
+Today we'll explore different approaches to building Shiny applications:
+
+1. **Navigation Bar Layout** - Multi-section apps with top navigation
+2. **Shinydashboard** - Professional dashboard framework
+3. **bslib** - Modern Bootstrap 5 theming
+4. **Case Study:** Correlates of War interactive app
+
+---
+
+# Approach 2: Navigation Bar Layout
+
+## When to Use `navbarPage()`
+
+```r
+navbarPage(
+  title = "My App Title",
+  tabPanel("Home", "Content here"),
+  tabPanel("Analysis", "More content"),
+  tabPanel("Data", "Table here"),
+  tabPanel("About", "Information")
+)
+```
+
+**Best for:**
+- Apps with multiple distinct sections
+- Logical flow or workflow
+- Clear hierarchical organization
+- 3-6 main sections
+
+**vs Sidebar Layout:**
+- More scalable for many controls
+- Better for complex analyses
+- Cleaner navigation
+
+---
+
+# navbarPage Example: Senate Explorer
+
+```r
+library(shiny)
+
+ui <- navbarPage(
+  title = "Senate Explorer",
+  theme = bslib::bs_theme(primary = "#003366"),
+
+  # Main visualization
+  tabPanel(
+    "Visualization",
+    br(),
+    fluidRow(
+      column(3,
+        h4("Controls"),
+        selectInput("congress", "Congress:",
+                    choices = unique(senate_data$congress)),
+        checkboxGroupInput("parties", "Parties:",
+                          choices = c("D", "R"), selected = c("D", "R"))
+      ),
+      column(9,
+        plotOutput("main_plot", height = "600px")
+      )
+    )
+  ),
+
+  # Statistics tab
+  tabPanel(
+    "Statistics",
+    h4("Summary Statistics"),
+    fluidRow(
+      column(6, tableOutput("party_stats")),
+      column(6, plotOutput("distribution"))
+    )
+  ),
+
+  # Data explorer
+  tabPanel(
+    "Data",
+    downloadButton("download", "Download CSV"),
+    dataTableOutput("table")
+  ),
+
+  # About page
+  tabPanel(
+    "About",
+    h3("About This App"),
+    p("This app explores US Senate ideology scores...")
+  )
+)
+```
+
+---
+
+# navbarPage Structure
+
+**Key Components:**
+
+1. **Title** - appears in navbar
+2. **Theme** - optional Bootstrap theme
+3. **Tab Panels** - each tab in navbar
+4. **Nested Layouts** - use `fluidRow()` and `column()` within tabs
+
+**Server logic same as before:**
+```r
+server <- function(input, output) {
+  filtered <- reactive({
+    senate_data %>%
+      filter(congress == input$congress,
+             party %in% input$parties)
+  })
+
+  output$main_plot <- renderPlot({ /* plot */ })
+  output$party_stats <- renderTable({ /* table */ })
+  output$table <- renderDataTable({ filtered() })
+  output$download <- downloadHandler(...)
+}
+```
+
+---
+
+# Approach 3: Shinydashboard
+
+## Dashboard Framework for Professional Layouts
+
+```r
+library(shinydashboard)
+
+ui <- dashboardPage(
+  # Header with title
+  dashboardHeader(title = "Analytics Dashboard"),
+
+  # Left sidebar with menu
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Dashboard", tabName = "dashboard"),
+      menuItem("Reports", tabName = "reports"),
+      menuItem("Settings", tabName = "settings")
+    )
+  ),
+
+  # Main content area
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "dashboard",
+        # Dashboard content
+      ),
+      tabItem(tabName = "reports",
+        # Reports content
+      )
+    )
+  )
+)
+```
+
+**Best for:**
+- Professional dashboards
+- Multiple sections with sidebar menu
+- Business/admin interfaces
+- KPI monitoring
+
+---
+
+# shinydashboard: Value Boxes
+
+Display key metrics with **value boxes**:
+
+```r
+# In dashboardBody or tabItem
+fluidRow(
+  valueBox(
+    value = 45,
+    subtitle = "Total Conflicts",
+    icon = icon("crosshairs"),
+    color = "red"
+  ),
+  valueBox(
+    value = 12500,
+    subtitle = "Total Fatalities",
+    icon = icon("heartbeat"),
+    color = "maroon"
+  ),
+  valueBox(
+    value = 32,
+    subtitle = "Countries Involved",
+    icon = icon("flag"),
+    color = "blue"
+  )
+)
+```
+
+Creates highlighted metric boxes at the top of dashboard.
+
+---
+
+# shinydashboard: Boxes for Content
+
+```r
+# Regular boxes for plots/tables
+fluidRow(
+  box(
+    title = "Conflict Timeline",
+    plotOutput("timeline"),
+    width = 8,
+    height = 500
+  ),
+  box(
+    title = "War Type Distribution",
+    plotOutput("wartype_pie"),
+    width = 4,
+    height = 500
+  )
+)
+
+# Box with collapsible/closable options
+box(
+  title = "Advanced Options",
+  "Content here",
+  collapsible = TRUE,
+  collapsed = TRUE,
+  closable = TRUE
+)
+```
+
+---
+
+# shinydashboard: Complete Example
+
+```r
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Conflicts Dashboard"),
+
+  dashboardSidebar(
+    sliderInput("year_range", "Year Range:",
+                min = 1950, max = 2020, value = c(1980, 2020)),
+    checkboxGroupInput("war_type", "War Type:",
+                      choices = c("Inter-state", "Intra-state"))
+  ),
+
+  dashboardBody(
+    fluidRow(
+      valueBoxOutput("total_conflicts"),
+      valueBoxOutput("total_deaths"),
+      valueBoxOutput("countries_involved")
+    ),
+    fluidRow(
+      box(plotOutput("timeline"), width = 12)
+    ),
+    fluidRow(
+      box(plotOutput("by_type"), width = 6),
+      box(tableOutput("top_countries"), width = 6)
+    )
+  )
+)
+
+server <- function(input, output) {
+  filtered <- reactive({
+    cow_data %>%
+      filter(year >= input$year_range[1],
+             year <= input$year_range[2],
+             war_type %in% input$war_type)
+  })
+
+  output$total_conflicts <- renderValueBox({
+    valueBox(nrow(filtered()), "Total Conflicts")
+  })
+  # ... more outputs
+}
+
+shinyApp(ui, server)
+```
+
+---
+
+# Approach 4: bslib for Modern Design
+
+## Bootstrap 5 Theming with `bslib`
+
+bslib provides modern, responsive design:
+
+```r
+library(bslib)
+
+theme <- bs_theme(
+  version = 5,
+  primary = "#1f77b4",
+  secondary = "#d62728",
+  success = "#2ca02c",
+  base_font = font_google("Roboto")
+)
+
+ui <- page_navbar(
+  title = "Modern Dashboard",
+  theme = theme,
+
+  nav_panel(
+    "Dashboard",
+    layout_sidebar(
+      sidebar = sidebar("Filter controls"),
+      navset_card_tab(
+        nav_panel("Overview", "Content"),
+        nav_panel("Details", "More content")
+      )
+    )
+  )
+)
+```
+
+**Advantages:**
+- ✓ Modern Bootstrap 5 design
+- ✓ Responsive on mobile
+- ✓ Beautiful default styling
+- ✓ Easy color customization
+
+---
+
+# bslib Components
+
+## `page_navbar()` - Top Navigation
+
+```r
+page_navbar(
+  title = "My App",
+  nav_panel("Home", "Welcome"),
+  nav_panel("Analysis", "Results"),
+  nav_panel("Data", "Download")
+)
+```
+
+## `layout_sidebar()` - Sidebar Layout
+
+```r
+layout_sidebar(
+  sidebar = sidebar(
+    sliderInput("n", "N:", 1, 100, 50)
+  ),
+  # Main content
+  plotOutput("plot")
+)
+```
+
+## `navset_card_tab()` - Tabbed Cards
+
+```r
+navset_card_tab(
+  nav_panel("Tab 1", "Content 1"),
+  nav_panel("Tab 2", "Content 2"),
+  nav_panel("Tab 3", "Content 3")
+)
+```
+
+## `value_box()` - Metric Display
+
+```r
+value_box(
+  title = "Total Revenue",
+  value = "$1.2M",
+  theme = "primary"
+)
+```
+
+---
+
+# bslib Color System
+
+Pre-defined color themes (like Bootstrap):
+
+```r
+# Create custom theme
+theme <- bs_theme(
+  version = 5,
+  primary = "#1f77b4",      # Main color
+  secondary = "#d62728",    # Accent
+  success = "#2ca02c",      # Positive
+  danger = "#ff7f0e",       # Warning/Negative
+  info = "#17a2b8",         # Informational
+  warning = "#ffc107",      # Caution
+  light = "#f8f9fa",        # Light background
+  dark = "#343a40"          # Dark text
+)
+
+# Use in ui
+ui <- page_navbar(theme = theme, ...)
+
+# Apply to components
+value_box(value = 42, theme = "success")
+card(card_header("Title"), theme = "primary")
+```
+
+---
+
+# bslib Full App Example
+
+```r
+library(shiny)
+library(bslib)
+
+theme <- bs_theme(
+  version = 5,
+  primary = "#1f77b4",
+  secondary = "#d62728"
+)
+
+ui <- page_navbar(
+  title = "Conflict Explorer",
+  theme = theme,
+
+  nav_panel(
+    "Dashboard",
+    layout_sidebar(
+      sidebar = sidebar(
+        sliderInput("year", "Year:", 1950, 2020, c(1980, 2020)),
+        checkboxGroupInput("type", "Type:", c("Inter-state", "Intra-state"))
+      ),
+      layout_column_wrap(
+        value_box("45", "Total Conflicts", theme = "primary"),
+        value_box("12,500", "Deaths", theme = "danger"),
+        value_box("32", "Countries", theme = "success"),
+        col_widths = c(4, 4, 4)
+      ),
+      br(),
+      card(
+        full_screen = TRUE,
+        card_header("Timeline"),
+        plotOutput("timeline")
+      )
+    )
+  ),
+
+  nav_panel(
+    "Data",
+    dataTableOutput("table")
+  )
+)
+```
+
+---
+
+# Comparison of Approaches
+
+| Aspect | Sidebar | navbarPage | shinydashboard | bslib |
+|--------|---------|-----------|----------------|-------|
+| Learning Curve | Easy | Easy | Medium | Medium |
+| Customization | Good | Good | Limited | Excellent |
+| Modern Look | Basic | Good | Professional | Excellent |
+| Mobile Responsive | Yes | Yes | Yes | Yes |
+| Best For | Simple apps | Multi-section | Dashboards | Modern apps |
+| Setup Time | Fast | Fast | Medium | Fast |
+| Documentation | Excellent | Good | Good | Growing |
+
+---
+
+# Correlates of War Dataset
+
+**What is COW?**
+- Comprehensive database of interstate conflicts since 1816
+- Key variables: duration, fatalities, war type, participants
+- Public data from https://correlatesofwar.org/
+
+**Our Data:**
+- Recent conflicts (1945-2020)
+- Interstate wars only
+- Variables: country, year, war number, type, duration, deaths
+
+---
+
+# COW App: shinydashboard Approach
+
+The shinydashboard version provides:
+
+1. **Header with KPI boxes:**
+   - Total conflicts
+   - Total fatalities
+   - Average duration
+   - Countries involved
+
+2. **Sidebar filtering:**
+   - Year range slider
+   - War type checkboxes
+   - Country selector
+
+3. **Tabbed analysis:**
+   - Overview: timeline + distributions
+   - Conflicts: fatalities, duration, initiator patterns
+   - Countries: participation rankings
+   - Data: raw data explorer + download
+
+---
+
+# COW App: bslib Approach
+
+Modern design using Bootstrap 5:
+
+1. **Top navigation with 4 sections:**
+   - Dashboard (main overview)
+   - Countries (country-specific analysis)
+   - Data (explorer + download)
+   - About (information)
+
+2. **Responsive cards:**
+   - Full-screen toggle for visualizations
+   - Modern color scheme
+   - Smooth interactions
+
+3. **Interactive elements:**
+   - Plotly for tooltips and hover
+   - Country selection for detailed view
+   - Multiple visualization types
+
+---
+
+# Building Your Own App: Best Practices
+
+**1. Start Simple**
+- Begin with basic sidebar layout
+- Add features incrementally
+- Test frequently
+
+**2. Organize Code**
+- Put UI and server in separate sections
+- Use comments to mark sections
+- Create reactive expressions for reuse
+
+**3. Performance**
+- Cache expensive computations
+- Use `reactive()` for shared data
+- Filter early, visualize later
+
+**4. User Experience**
+- Clear labels and instructions
+- Sensible defaults
+- Loading indicators for slow operations
+
+**5. Deployment**
+- Test locally first with `shiny::runApp()`
+- Consider shinyapps.io or Shiny Server
+- Document dependencies in requirements.txt
+
+---
+
+# Example: Adding Interactivity
+
+```r
+# Basic: static visualization
+output$plot <- renderPlot({
+  ggplot(data, aes(x, y)) + geom_point()
+})
+
+# Better: filtering based on input
+output$plot <- renderPlot({
+  filtered <- data %>%
+    filter(year >= input$year_min,
+           year <= input$year_max)
+
+  ggplot(filtered, aes(x, y)) +
+    geom_point(color = input$color)
+})
+
+# Advanced: multiple reactive steps
+filtered <- reactive({
+  data %>%
+    filter(year >= input$year_min,
+           year <= input$year_max,
+           type %in% input$type)
+})
+
+summarized <- reactive({
+  filtered() %>%
+    group_by(region) %>%
+    summarize(mean_value = mean(value))
+})
+
+output$plot <- renderPlot({
+  ggplot(summarized(), aes(region, mean_value)) +
+    geom_col()
+})
+
+output$table <- renderTable({
+  summarized()
+})
+```
+
+---
+
+# Common Advanced Patterns
+
+## Pattern 1: Conditional Tabs
+```r
+output$ui <- renderUI({
+  if (input$data_type == "senate") {
+    tabsetPanel(
+      tabPanel("Ideology Plot", plotOutput("ideology")),
+      tabPanel("Party Stats", tableOutput("stats"))
+    )
+  } else {
+    tabsetPanel(
+      tabPanel("Conflict Timeline", plotOutput("timeline")),
+      tabPanel("Deaths by Type", plotOutput("deaths"))
+    )
+  }
+})
+```
+
+## Pattern 2: Downloadable Reports
+```r
+output$download <- downloadHandler(
+  filename = function() {
+    paste0("report_", Sys.Date(), ".csv")
+  },
+  content = function(file) {
+    write.csv(filtered_data(), file)
+  }
+)
+```
+
+## Pattern 3: Reactive Dependent Inputs
+```r
+observe({
+  # When year changes, update available countries
+  filtered_countries <- data %>%
+    filter(year == input$year) %>%
+    pull(country) %>%
+    unique()
+
+  updateSelectInput(session, "country",
+                   choices = filtered_countries)
+})
+```
+
+---
+
+# Debugging Shiny Apps
+
+**Common Issues:**
+
+1. **"object not found"**
+   - Missing `library()` call
+   - Typo in variable name
+   - Check RStudio error message
+
+2. **Reactive not updating**
+   - Forgot parentheses: `filtered()` not `filtered`
+   - Input name mismatch with input$name
+
+3. **Slow performance**
+   - Compute-intensive operations in reactive
+   - Use `shiny::isolate()` to break reactivity
+   - Cache results with `reactive({...})`
+
+4. **App won't run**
+   - Syntax error (check console)
+   - Missing closing parenthesis
+   - Look at RStudio's error highlighting
+
+**RStudio Debugging:**
+- Check console for error messages
+- Add `cat()` or `print()` in server
+- Use `browser()` to pause execution
+
+---
+
+# Key Takeaways
+
+1. **Multiple layout approaches** - choose based on complexity
+2. **navbarPage** - for multi-section apps
+3. **shinydashboard** - for professional dashboards
+4. **bslib** - for modern, responsive design
+5. **Reactive programming** is key to all approaches
+6. **COW and Senate apps** demonstrate different styles
+7. **Start simple** and add complexity incrementally
+
+---
+
+# Deployment Options
+
+## Local Sharing
+```r
+shiny::runApp("path/to/app")
+# Others access via your IP: http://your.ip:8100
+```
+
+## shinyapps.io (Easiest)
+```r
+# First time:
+library(rsconnect)
+rsconnect::deployApp("path/to/app")
+
+# App hosted at your-account.shinyapps.io/appname
+```
+
+## Shiny Server
+- Self-hosted on Linux server
+- Full control, more setup required
+- Academic licenses available
+
+## Docker
+```dockerfile
+FROM rocker/shiny:latest
+# Copy app files
+COPY app.R /srv/shiny-server/app/app.R
+```
+
+---
+
+# Resources and Next Steps
+
+**Official Shiny Resources:**
+- [Shiny Gallery](https://shiny.rstudio.com/gallery/)
+- [Shiny Articles](https://shiny.rstudio.com/articles/)
+- [shinydashboard docs](https://rstudio.github.io/shinydashboard/)
+- [bslib docs](https://rstudio.github.io/bslib/)
+
+**Our Course Files:**
+- `senate_app_01_basic.R` - Sidebar layout
+- `senate_app_02_navbar.R` - Navigation bar
+- `cow_app_03_dashboard.R` - Shinydashboard
+- `cow_app_04_bslib.R` - Modern bslib design
+
+**Practice:**
+- Modify apps with different data
+- Create your own visualizations
+- Deploy to shinyapps.io (free tier)
+
+---
+
+# Final Project Ideas
+
+**Using Shiny:**
+
+1. **Exploratory Data Analysis** app for your research
+2. **Interactive policy simulator** showing outcomes
+3. **Data dashboard** for public datasets
+4. **Educational tool** for statistical concepts
+5. **Competition tracker** with real-time updates
+
+All can be deployed and shared with stakeholders!

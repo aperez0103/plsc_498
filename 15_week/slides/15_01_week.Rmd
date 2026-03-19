@@ -1,0 +1,428 @@
+---
+title: "Interactive Visualization with R Shiny"
+subtitle: "PLSC 498 - Week 15, Lecture 1"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+# What is R Shiny?
+
+.pull-left[
+## Interactive Web Applications
+
+Shiny is a framework for building interactive web applications directly from R.
+
+**Key Features:**
+- No JavaScript knowledge required
+- Reactive programming model
+- Deploy to web servers
+- Real-time interactivity
+- Customizable UI/UX
+]
+
+.pull-right[
+## Why Use Shiny?
+
+- **Share insights** without requiring R knowledge
+- **Exploratory data analysis** with students/collaborators
+- **Publication-quality** dashboards
+- **Educational tool** for visualization
+- **Rapid prototyping** of interactive ideas
+]
+
+---
+
+# Shiny Applications Structure
+
+Every Shiny app has two key components:
+
+```r
+library(shiny)
+
+# 1. UI (User Interface) - defines layout and controls
+ui <- fluidPage(
+  titlePanel("My App"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("n", "Select n:", min=1, max=100, value=50)
+    ),
+    mainPanel(
+      plotOutput("plot")
+    )
+  )
+)
+
+# 2. Server - defines reactive logic
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    plot(1:input$n, main = paste("Plot with", input$n, "points"))
+  })
+}
+
+# 3. Run the app
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+# Understanding Reactive Programming
+
+Shiny uses **reactive programming**: when inputs change, outputs automatically update.
+
+```
+User Input (slider, button, text)
+    ↓
+Shiny Detects Change
+    ↓
+Updates Reactive Expression
+    ↓
+Automatically Re-renders Output
+    ↓
+User Sees New Result
+```
+
+This happens **instantly** in the browser.
+
+---
+
+# Key Input Functions
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `textInput()` | Text box | `textInput("name", "Your name:")` |
+| `numericInput()` | Number entry | `numericInput("age", "Age:", 25)` |
+| `sliderInput()` | Slider bar | `sliderInput("n", "N:", 1, 100, 50)` |
+| `selectInput()` | Dropdown | `selectInput("year", "Year:", 2020:2024)` |
+| `checkboxInput()` | Single checkbox | `checkboxInput("agree", "I agree")` |
+| `checkboxGroupInput()` | Multiple checkboxes | `checkboxGroupInput("parties", "Parties:", c("D","R"))` |
+| `radioButtons()` | Radio buttons | `radioButtons("choice", "Pick one:", c("A","B"))` |
+| `actionButton()` | Clickable button | `actionButton("go", "Run Analysis")` |
+| `dateInput()` | Date picker | `dateInput("date", "Select date:")` |
+| `fileInput()` | File upload | `fileInput("upload", "Choose file:")` |
+
+---
+
+# Key Output Functions
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `textOutput()` | Text display | `textOutput("summary")` |
+| `plotOutput()` | Plot display | `plotOutput("scatter")` |
+| `tableOutput()` | Table (static) | `tableOutput("data")` |
+| `dataTableOutput()` | Table (interactive) | `dataTableOutput("data")` |
+| `htmlOutput()` | HTML content | `htmlOutput("info")` |
+| `verbatimTextOutput()` | Code/text | `verbatimTextOutput("output")` |
+
+**In server:**
+```r
+output$scatter <- renderPlot({ ggplot(...) })
+output$summary <- renderText({ "Summary here" })
+output$data <- renderTable({ my_data })
+```
+
+---
+
+# Common UI Layouts
+
+## Sidebar Layout (Most Common)
+```r
+sidebarLayout(
+  sidebarPanel( /* controls */ ),
+  mainPanel( /* outputs */ )
+)
+```
+
+## Multiple Tabs
+```r
+tabsetPanel(
+  tabPanel("Tab 1", /* content */),
+  tabPanel("Tab 2", /* content */)
+)
+```
+
+## Navbar (Navigation Bar)
+```r
+navbarPage(
+  title = "App Name",
+  tabPanel("Home", /* content */),
+  tabPanel("About", /* content */)
+)
+```
+
+## Column Layout
+```r
+fluidRow(
+  column(6, /* left side */),
+  column(6, /* right side */)
+)
+```
+
+---
+
+# Reactive Expressions
+
+A **reactive expression** recalculates whenever its inputs change:
+
+```r
+server <- function(input, output) {
+
+  # Define a reactive expression
+  filtered_data <- reactive({
+    data %>%
+      filter(year >= input$year_min,
+             year <= input$year_max,
+             party %in% input$party_choice)
+  })
+
+  # Use the reactive expression in outputs
+  output$plot <- renderPlot({
+    ggplot(filtered_data(), aes(x = ideology, y = votes)) +
+      geom_point()
+  })
+
+  output$table <- renderTable({
+    filtered_data()
+  })
+
+  # Both outputs update when inputs change!
+}
+```
+
+**Key Point:** `filtered_data()` is called like a function, not a variable.
+
+---
+
+# Senate Ideology App: Overview
+
+We'll create an interactive app to explore US Senate voting patterns.
+
+**Data:** US Senators' DW-NOMINATE ideology scores (liberal → conservative)
+
+**Features:**
+- Filter by Congress (time period)
+- Filter by party
+- Interactive scatter plot
+- Summary statistics
+- Data download option
+
+---
+
+# Senate App: Basic Structure
+
+```r
+library(shiny)
+library(dplyr)
+library(ggplot2)
+
+# Load data
+senate_data <- readRDS("senate_ideology.rds")
+
+# UI
+ui <- fluidPage(
+  titlePanel("US Senate Ideology"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("congress", "Congress:",
+                  choices = unique(senate_data$congress)),
+      checkboxGroupInput("party", "Parties:",
+                        choices = c("D", "R"), selected = c("D", "R"))
+    ),
+    mainPanel(
+      plotOutput("plot"),
+      tableOutput("summary")
+    )
+  )
+)
+
+# Server
+server <- function(input, output) {
+  filtered <- reactive({
+    senate_data %>%
+      filter(congress == input$congress,
+             party %in% input$party)
+  })
+
+  output$plot <- renderPlot({
+    ggplot(filtered(), aes(x = dwnom1, y = dwnom2, color = party)) +
+      geom_point(size = 3) +
+      scale_color_manual(values = c("D" = "blue", "R" = "red"))
+  })
+
+  output$summary <- renderTable({
+    filtered() %>%
+      group_by(party) %>%
+      summarize(mean_ideology = mean(dwnom1))
+  })
+}
+
+shinyApp(ui, server)
+```
+
+---
+
+# Running Your App
+
+**In RStudio:**
+
+1. Write your Shiny code in a file called `app.R`
+2. Click the **"Run App"** button in the toolbar
+3. A window opens with your interactive app
+4. Stop the app by pressing Escape or clicking Stop
+
+**From Command Line:**
+```r
+# In R console
+setwd("path/to/app/directory")
+shiny::runApp("app.R")
+```
+
+**Your browser opens automatically** and you can interact with the app.
+
+---
+
+# Reactive Flow Diagram
+
+```
+┌─────────────────────────────────┐
+│   User Inputs                   │
+│  (sliders, dropdowns, buttons)  │
+└──────────────┬──────────────────┘
+               │
+               ↓
+      ┌────────────────┐
+      │ Reactive Value │
+      └────────┬───────┘
+               │
+               ↓
+    ┌──────────────────────┐
+    │ Reactive Expression  │
+    │ (filtered_data())    │
+    └──────────┬───────────┘
+               │
+         ┌─────┴─────┐
+         ↓           ↓
+    ┌────────┐  ┌────────┐
+    │Output1 │  │Output2 │
+    └────────┘  └────────┘
+         │           │
+         └─────┬─────┘
+               ↓
+        ┌─────────────┐
+        │ Web Browser │
+        └─────────────┘
+```
+
+---
+
+# Common Mistakes to Avoid
+
+1. **Forgetting parentheses on reactive:**
+```r
+# Wrong:
+plot(filtered_data)  # filtered_data is a function!
+
+# Correct:
+plot(filtered_data())  # Call the function with ()
+```
+
+2. **Putting all code in server without reactives:**
+```r
+# Inefficient - recalculates everything
+output$plot1 <- renderPlot({ data %>% filter(...) %>% plot() })
+output$plot2 <- renderPlot({ data %>% filter(...) %>% summary() })
+
+# Better - calculate once, reuse
+filtered <- reactive({ data %>% filter(...) })
+output$plot1 <- renderPlot({ plot(filtered()) })
+output$plot2 <- renderPlot({ summary(filtered()) })
+```
+
+3. **Not loading required packages**
+```r
+# Easy to forget:
+library(shiny)
+library(dplyr)  # Need this for %>%
+library(ggplot2)  # Need this for ggplot()
+```
+
+---
+
+# Senate App: Walkthrough
+
+The complete basic Senate app includes:
+
+- **Sidebar controls:** Congress selector, party checkboxes, slider for N senators
+- **Three output tabs:**
+  - Scatter plot of ideology in 2D space
+  - Histogram distribution
+  - Interactive data table
+- **Reactive filtering:** All outputs update together
+- **Professional styling:** Customized colors, labels, themes
+
+This approach is ideal for **simple, focused dashboards** with a few outputs.
+
+---
+
+# When to Use Basic Sidebar Layout
+
+**Good for:**
+- ✓ Small apps with few controls
+- ✓ Single primary visualization
+- ✓ Quick prototyping
+- ✓ Teaching/learning Shiny
+
+**Consider alternatives if:**
+- ✗ Many different sections (use `navbarPage`)
+- ✗ Multiple related analyses (use `tabsetPanel`)
+- ✗ Dashboard-style layout (use `shinydashboard`)
+- ✗ Modern appearance important (use `bslib`)
+
+---
+
+# Key Takeaways
+
+1. **Shiny creates interactive web apps from R** - no web development needed
+2. **Two components:** UI (layout) and Server (logic)
+3. **Reactive programming:** inputs → reactives → outputs automatically
+4. **Input/Output functions** provide the building blocks
+5. **Sidebar layout** is simple and effective for basic apps
+6. **Reactive expressions** avoid code duplication
+7. **Always remember:** call reactives with parentheses `reactive()`
+
+---
+
+# Next Lecture Preview
+
+Lecture 2 will cover:
+
+- ✓ Advanced layouts (navbarPage, multiple tabs)
+- ✓ Shinydashboard for professional dashboards
+- ✓ bslib for modern theming
+- ✓ COW interstate conflicts app walkthrough
+- ✓ Deployment and sharing apps
+
+---
+
+# Resources
+
+**Official Documentation:**
+- [Shiny Official Site](https://shiny.rstudio.com/)
+- [Shiny Cheat Sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/master/shiny.pdf)
+
+**Tutorials:**
+- [RStudio Shiny Tutorial](https://shiny.rstudio.com/tutorial/)
+- [Shiny Gallery](https://shiny.rstudio.com/gallery/)
+
+**Books:**
+- "Mastering Shiny" by Hadley Wickham (free online)
+
+**Our Course Apps:**
+- `senate_app_01_basic.R` - Basic sidebar layout
+- `senate_app_02_navbar.R` - Navigation bar layout
