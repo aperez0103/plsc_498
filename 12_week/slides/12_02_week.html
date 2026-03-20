@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Coding Assignment: Time Series and Trends</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jared Edgerton" />
+    <script src="12_02_week_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="12_02_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="12_02_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="12_02_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="plsc498.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Time Series and Trends
+]
+.subtitle[
+## A quick recap + practical extensions (line charts, smoothing, annotation, uncertainty)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Time Series and Trends
+]
+.subtitle[
+## A quick recap + practical extensions (line charts, smoothing, annotation, uncertainty)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# What you should remember
+
+This is a short recap and extension.
+
+You should already be comfortable with:
+
+- Line charts as claims about temporal order
+- Trend vs seasonality vs noise
+- Annotation (vertical lines, text labels)
+- Smoothing as a modeling decision
+
+Today we extend that with:
+
+- building line charts from data with dates
+- rolling means vs LOESS in practice
+- adding uncertainty ribbons (`geom_ribbon`)
+- formatting date axes (`scale_x_date`)
+- multiple series (color vs facets)
+
+---
+
+# Setup
+
+
+``` r
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Simulated data
+
+We simulate quarterly approval data for two parties over 15 years, with: (a) different trends, (b) a seasonal component, (c) an event shock, and (d) uncertainty (standard errors).
+
+
+``` r
+quarters &lt;- seq(as.Date("2008-01-01"), as.Date("2022-10-01"), by = "quarter")
+n_q &lt;- length(quarters)
+
+df &lt;- expand.grid(date = quarters, party = c("Party A", "Party B")) %&gt;%
+  arrange(party, date) %&gt;%
+  group_by(party) %&gt;%
+  mutate(
+    t = row_number(),
+    trend = ifelse(party == "Party A", 48 + 0.15 * t, 42 - 0.05 * t),
+    season = 2 * sin(2 * pi * t / 4),
+    shock = ifelse(party == "Party A" &amp; date &gt;= as.Date("2016-01-01") &amp;
+                     date &lt;= as.Date("2016-07-01"), -6, 0),
+    noise = rnorm(n(), 0, 2),
+    approval = trend + season + shock + noise,
+    se = runif(n(), 1.5, 3.5),
+    lower = approval - 1.96 * se,
+    upper = approval + 1.96 * se,
+    year = as.numeric(format(date, "%Y"))
+  ) %&gt;%
+  ungroup()
+```
+
+---
+
+# Quick check
+
+
+``` r
+df %&gt;%
+  group_by(party) %&gt;%
+  summarise(
+    n = n(),
+    min_date = min(date),
+    max_date = max(date),
+    mean_approval = round(mean(approval), 1)
+  )
+```
+
+```
+## # A tibble: 2 × 5
+##   party       n min_date   max_date   mean_approval
+##   &lt;fct&gt;   &lt;int&gt; &lt;date&gt;     &lt;date&gt;             &lt;dbl&gt;
+## 1 Party A    60 2008-01-01 2022-10-01          52.2
+## 2 Party B    60 2008-01-01 2022-10-01          40.6
+```
+
+---
+
+# Starter pattern: single line chart
+
+
+``` r
+df_a &lt;- df %&gt;% filter(party == "Party A")
+
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: quarterly approval")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+
+# Starter pattern: multiple series (color)
+
+
+``` r
+ggplot(df, aes(x = date, y = approval, color = party)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL,
+       title = "Two parties: overlaid time series")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+# Starter pattern: faceted time series
+
+
+``` r
+ggplot(df, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.6) +
+  facet_wrap(~ party, ncol = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Two parties: faceted for clarity")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+---
+
+# Smoothing: rolling mean
+
+A rolling mean averages the last *k* observations. Transparent and easy to explain.
+
+
+``` r
+df_a &lt;- df_a %&gt;%
+  arrange(date) %&gt;%
+  mutate(roll_4 = zoo::rollmean(approval, k = 4, fill = NA, align = "right"))
+
+ggplot(df_a, aes(x = date)) +
+  geom_line(aes(y = approval), alpha = 0.35, linewidth = 0.4) +
+  geom_line(aes(y = roll_4), color = "steelblue", linewidth = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: raw data + 4-quarter rolling mean")
+```
+
+```
+## Warning: Removed 3 rows containing missing values or values outside the scale range
+## (`geom_line()`).
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+# Smoothing: LOESS
+
+
+``` r
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(alpha = 0.35, linewidth = 0.4) +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1, color = "firebrick") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: raw data + LOESS smoother")
+```
+
+```
+## `geom_smooth()` using formula = 'y ~ x'
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+---
+
+# Annotation: marking an event
+
+
+``` r
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  geom_vline(xintercept = as.Date("2016-01-01"), linetype = "dashed", color = "red") +
+  annotate("text", x = as.Date("2016-04-01"), y = max(df_a$approval) - 2,
+           label = "Crisis event", hjust = 0, size = 3.5) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: annotated time series")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+# Uncertainty ribbons
+
+Use `geom_ribbon()` to show confidence bands around a time series.
+
+
+``` r
+ggplot(df_a, aes(x = date)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
+  geom_line(aes(y = approval), linewidth = 0.6) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: approval with 95% confidence ribbon")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+Interpretation:
+- the ribbon shows the **estimated uncertainty** around each value
+- wider ribbons = less certainty
+
+---
+
+# Uncertainty ribbons for two groups
+
+
+``` r
+ggplot(df, aes(x = date, fill = party, color = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+  geom_line(aes(y = approval), linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL,
+       title = "Both parties: approval with uncertainty")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+
+# Formatting date axes
+
+Control date labels with `scale_x_date()`.
+
+
+``` r
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Formatted date axis (2-year breaks)")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+# Year-over-year comparison
+
+Sometimes it helps to overlay years on the same axis (month or quarter).
+
+
+``` r
+df_recent &lt;- df %&gt;%
+  filter(party == "Party A", year &gt;= 2018) %&gt;%
+  mutate(quarter = as.numeric(format(date, "%m")))
+
+ggplot(df_recent, aes(x = quarter, y = approval, color = factor(year), group = year)) +
+  geom_line(linewidth = 0.7) +
+  geom_point(size = 1.5) +
+  scale_x_continuous(breaks = c(1, 4, 7, 10), labels = c("Q1", "Q2", "Q3", "Q4")) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = "Year",
+       title = "Party A: year-over-year seasonal comparison")
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+
+# Save a figure
+
+
+``` r
+p &lt;- ggplot(df, aes(x = date, y = approval, color = party)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL)
+
+p
+```
+
+![](12_02_week_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+``` r
+ggsave("time_series_two_parties.png", plot = p, width = 7, height = 4, dpi = 300)
+```
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": ""
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

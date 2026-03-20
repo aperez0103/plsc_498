@@ -1,0 +1,275 @@
+---
+title: "Coding Assignment: Time Series and Trends"
+subtitle: "A quick recap + practical extensions (line charts, smoothing, annotation, uncertainty)"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Time Series and Trends
+]
+.subtitle[
+## A quick recap + practical extensions (line charts, smoothing, annotation, uncertainty)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# What you should remember
+
+This is a short recap and extension.
+
+You should already be comfortable with:
+
+- Line charts as claims about temporal order
+- Trend vs seasonality vs noise
+- Annotation (vertical lines, text labels)
+- Smoothing as a modeling decision
+
+Today we extend that with:
+
+- building line charts from data with dates
+- rolling means vs LOESS in practice
+- adding uncertainty ribbons (`geom_ribbon`)
+- formatting date axes (`scale_x_date`)
+- multiple series (color vs facets)
+
+---
+
+# Setup
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Simulated data
+
+We simulate quarterly approval data for two parties over 15 years, with: (a) different trends, (b) a seasonal component, (c) an event shock, and (d) uncertainty (standard errors).
+
+```{r}
+quarters <- seq(as.Date("2008-01-01"), as.Date("2022-10-01"), by = "quarter")
+n_q <- length(quarters)
+
+df <- expand.grid(date = quarters, party = c("Party A", "Party B")) %>%
+  arrange(party, date) %>%
+  group_by(party) %>%
+  mutate(
+    t = row_number(),
+    trend = ifelse(party == "Party A", 48 + 0.15 * t, 42 - 0.05 * t),
+    season = 2 * sin(2 * pi * t / 4),
+    shock = ifelse(party == "Party A" & date >= as.Date("2016-01-01") &
+                     date <= as.Date("2016-07-01"), -6, 0),
+    noise = rnorm(n(), 0, 2),
+    approval = trend + season + shock + noise,
+    se = runif(n(), 1.5, 3.5),
+    lower = approval - 1.96 * se,
+    upper = approval + 1.96 * se,
+    year = as.numeric(format(date, "%Y"))
+  ) %>%
+  ungroup()
+```
+
+---
+
+# Quick check
+
+```{r}
+df %>%
+  group_by(party) %>%
+  summarise(
+    n = n(),
+    min_date = min(date),
+    max_date = max(date),
+    mean_approval = round(mean(approval), 1)
+  )
+```
+
+---
+
+# Starter pattern: single line chart
+
+```{r, fig.width=7, fig.height=4}
+df_a <- df %>% filter(party == "Party A")
+
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: quarterly approval")
+```
+
+---
+
+# Starter pattern: multiple series (color)
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df, aes(x = date, y = approval, color = party)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL,
+       title = "Two parties: overlaid time series")
+```
+
+---
+
+# Starter pattern: faceted time series
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.6) +
+  facet_wrap(~ party, ncol = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Two parties: faceted for clarity")
+```
+
+---
+
+# Smoothing: rolling mean
+
+A rolling mean averages the last *k* observations. Transparent and easy to explain.
+
+```{r, fig.width=7, fig.height=4}
+df_a <- df_a %>%
+  arrange(date) %>%
+  mutate(roll_4 = zoo::rollmean(approval, k = 4, fill = NA, align = "right"))
+
+ggplot(df_a, aes(x = date)) +
+  geom_line(aes(y = approval), alpha = 0.35, linewidth = 0.4) +
+  geom_line(aes(y = roll_4), color = "steelblue", linewidth = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: raw data + 4-quarter rolling mean")
+```
+
+---
+
+# Smoothing: LOESS
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(alpha = 0.35, linewidth = 0.4) +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1, color = "firebrick") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: raw data + LOESS smoother")
+```
+
+---
+
+# Annotation: marking an event
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  geom_vline(xintercept = as.Date("2016-01-01"), linetype = "dashed", color = "red") +
+  annotate("text", x = as.Date("2016-04-01"), y = max(df_a$approval) - 2,
+           label = "Crisis event", hjust = 0, size = 3.5) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: annotated time series")
+```
+
+---
+
+# Uncertainty ribbons
+
+Use `geom_ribbon()` to show confidence bands around a time series.
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_a, aes(x = date)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
+  geom_line(aes(y = approval), linewidth = 0.6) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Party A: approval with 95% confidence ribbon")
+```
+
+Interpretation:
+- the ribbon shows the **estimated uncertainty** around each value
+- wider ribbons = less certainty
+
+---
+
+# Uncertainty ribbons for two groups
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df, aes(x = date, fill = party, color = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2, color = NA) +
+  geom_line(aes(y = approval), linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL,
+       title = "Both parties: approval with uncertainty")
+```
+
+---
+
+# Formatting date axes
+
+Control date labels with `scale_x_date()`.
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Formatted date axis (2-year breaks)")
+```
+
+---
+
+# Year-over-year comparison
+
+Sometimes it helps to overlay years on the same axis (month or quarter).
+
+```{r, fig.width=7, fig.height=4}
+df_recent <- df %>%
+  filter(party == "Party A", year >= 2018) %>%
+  mutate(quarter = as.numeric(format(date, "%m")))
+
+ggplot(df_recent, aes(x = quarter, y = approval, color = factor(year), group = year)) +
+  geom_line(linewidth = 0.7) +
+  geom_point(size = 1.5) +
+  scale_x_continuous(breaks = c(1, 4, 7, 10), labels = c("Q1", "Q2", "Q3", "Q4")) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = "Year",
+       title = "Party A: year-over-year seasonal comparison")
+```
+
+---
+
+# Save a figure
+
+```{r, fig.width=7, fig.height=4}
+p <- ggplot(df, aes(x = date, y = approval, color = party)) +
+  geom_line(linewidth = 0.6) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL)
+
+p
+
+ggsave("time_series_two_parties.png", plot = p, width = 7, height = 4, dpi = 300)
+```

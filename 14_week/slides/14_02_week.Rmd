@@ -1,0 +1,311 @@
+---
+title: "Coding Assignment: Uncertainty, Redesign, and Publication Quality"
+subtitle: "A quick recap + practical extensions (error bars, ribbons, checklists, export)"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Coding Assignment: Uncertainty, Redesign, and Publication Quality
+]
+.subtitle[
+## A quick recap + practical extensions (error bars, ribbons, checklists, export)
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# What you should remember
+
+This is a short recap and extension.
+
+You should already be comfortable with:
+
+- Error bars and confidence intervals
+- Uncertainty ribbons on line charts
+- The publishing-quality checklist
+- Color accessibility basics
+
+Today we extend that with:
+
+- building error bar plots from summary data
+- adding ribbons to time series
+- redesigning a "before" plot into a polished "after" version
+- export settings (dpi, size, format)
+- peer critique workflow
+
+---
+
+# Setup
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Simulated survey data
+
+We simulate survey estimates for policy support across countries and policy areas.
+
+```{r}
+df_survey <- expand.grid(
+  country = c("Aurelia", "Belvica", "Cordonia", "Deltara"),
+  policy = c("Climate", "Immigration", "Healthcare")
+) %>%
+  mutate(
+    estimate = round(runif(12, 30, 75), 1),
+    n = sample(400:1200, 12, replace = TRUE),
+    se = round(sqrt(estimate * (100 - estimate) / n), 2),
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se
+  )
+```
+
+---
+
+# Quick check
+
+```{r}
+df_survey %>%
+  select(country, policy, estimate, se, n) %>%
+  arrange(policy, desc(estimate))
+```
+
+---
+
+# Starter pattern: dot plot with error bars
+
+```{r, fig.width=7, fig.height=4}
+df_climate <- df_survey %>% filter(policy == "Climate") %>%
+  mutate(country = reorder(country, estimate))
+
+ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
+  geom_point(size = 3) +
+  theme_classic() +
+  labs(x = "Support (%)", y = NULL,
+       title = "Climate policy support with 95% CIs")
+```
+
+---
+
+# Starter pattern: grouped error bars
+
+```{r, fig.width=7, fig.height=5}
+df_survey <- df_survey %>%
+  mutate(country = factor(country))
+
+ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.25, position = position_dodge(0.6)) +
+  geom_point(size = 2.5, position = position_dodge(0.6)) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "Support (%)", y = NULL, color = NULL,
+       title = "Policy support by country and topic")
+```
+
+---
+
+# Simulated time series with uncertainty
+
+```{r}
+df_ts <- data.frame(
+  year = rep(2005:2024, 2),
+  party = rep(c("Party A", "Party B"), each = 20)
+) %>%
+  group_by(party) %>%
+  mutate(
+    t = row_number(),
+    estimate = ifelse(party == "Party A",
+                      48 + 0.4 * t + rnorm(20, 0, 2),
+                      52 - 0.2 * t + rnorm(20, 0, 2.5)),
+    se = runif(20, 1.5, 4),
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se
+  ) %>%
+  ungroup()
+```
+
+---
+
+# Time series with uncertainty ribbons
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_ts, aes(x = year, color = party, fill = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.15, color = NA) +
+  geom_line(aes(y = estimate), linewidth = 0.7) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL,
+       title = "Party approval with 95% confidence ribbons")
+```
+
+---
+
+# The redesign exercise
+
+Now we practice the **publication pass**. Take a rough figure and make it polished.
+
+Here is a "before" version (deliberately rough):
+
+```{r, fig.width=7, fig.height=4}
+p_before <- ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_point() +
+  geom_errorbarh(aes(xmin = lower, xmax = upper))
+
+p_before
+```
+
+---
+
+# Redesign: applying the checklist
+
+Apply each checklist item one at a time:
+
+1. Clear title
+2. Axis labels with units
+3. Caption with source
+4. Reference line (e.g., 50% = majority)
+5. Color for emphasis
+6. Readable text size
+7. Clean theme
+
+---
+
+# After the checklist
+
+```{r, fig.width=7, fig.height=4}
+p_after <- ggplot(df_climate, aes(x = estimate, y = country)) +
+  geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.4) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.2, color = "grey50") +
+  geom_point(size = 3, color = "steelblue") +
+  theme_classic(base_size = 13) +
+  labs(
+    x = "Support (%)",
+    y = NULL,
+    title = "Public support for climate policy",
+    subtitle = "Point estimates with 95% confidence intervals",
+    caption = "Source: Simulated survey data | Dashed line = 50% threshold"
+  )
+
+p_after
+```
+
+---
+
+# Export: saving at publication quality
+
+```{r}
+ggsave("climate_support_polished.png",
+       plot = p_after,
+       width = 7, height = 4,
+       dpi = 300, units = "in")
+```
+
+Key settings:
+- `dpi = 300` for print-quality resolution
+- `width` and `height` control aspect ratio explicitly
+- PNG for raster, PDF for vector graphics
+
+---
+
+# Peer critique workflow
+
+When reviewing a classmate's figure:
+
+1. **What is the main message?** (Can you state it in one sentence?)
+2. **What is mapped vs styled?** (Is the encoding appropriate?)
+3. **Is uncertainty shown?** (If applicable)
+4. **Checklist items:** title, labels, units, caption, legend, color, aspect ratio
+5. **One concrete suggestion** (not "make it better" but "move the legend to bottom")
+
+---
+
+# Color accessibility check
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_survey, aes(x = estimate, y = country, color = policy, shape = policy)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),
+                 height = 0.25, position = position_dodge(0.6)) +
+  geom_point(size = 2.5, position = position_dodge(0.6)) +
+  scale_color_brewer(palette = "Dark2") +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = "Support (%)", y = NULL, color = NULL, shape = NULL,
+       title = "Redundant encoding: color + shape for accessibility")
+```
+
+---
+
+# Shiny starter (for your final project)
+
+A minimal Shiny app for one of today's figures:
+
+```r
+library(shiny)
+library(ggplot2)
+library(dplyr)
+
+ui <- fluidPage(
+  titlePanel("Policy Support Explorer"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("policy", "Choose a policy area:",
+                  choices = c("Climate", "Immigration", "Healthcare"))
+    ),
+    mainPanel(plotOutput("supportPlot"))
+  )
+)
+
+server <- function(input, output) {
+  output$supportPlot <- renderPlot({
+    df_filtered <- df_survey %>% filter(policy == input$policy) %>%
+      mutate(country = reorder(country, estimate))
+    ggplot(df_filtered, aes(x = estimate, y = country)) +
+      geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.4) +
+      geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
+      geom_point(size = 3, color = "steelblue") +
+      theme_classic(base_size = 14) +
+      labs(x = "Support (%)", y = NULL,
+           title = paste(input$policy, "policy support"))
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+# Save a figure
+
+```{r, fig.width=7, fig.height=4}
+p <- ggplot(df_ts, aes(x = year, color = party, fill = party)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.15, color = NA) +
+  geom_line(aes(y = estimate), linewidth = 0.7) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL, fill = NULL)
+
+p
+
+ggsave("approval_uncertainty.png", plot = p, width = 7, height = 4, dpi = 300)
+```

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Uncertainty, Publishing-Quality Figures, and Shiny</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jared Edgerton" />
+    <script src="14_01_week_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="14_01_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="14_01_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="14_01_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="plsc498.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Uncertainty, Publishing-Quality Figures, and Shiny
+]
+.subtitle[
+## Communicating what you know and what you don’t
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Uncertainty, Publishing-Quality Figures, and Shiny
+]
+.subtitle[
+## Communicating what you know and what you don't
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# Quiz on canvas
+
+- Log on to the course website to take it.
+- You have 10 minutes.
+- It is open notes and web.
+- Do not generate your answers with AI.
+
+---
+
+# Quick Recap
+
+- Last time, we focused on **geospatial data**:
+  - choropleths and projections
+  - counts vs rates
+  - ecological fallacy
+
+Today, we focus on three connected topics:
+
+- **Uncertainty:** showing what you don't know
+- **Publishing-quality figures:** checklists, export, accessibility
+- **Shiny (brief intro):** making one figure interactive
+
+---
+
+# Setup
+
+
+``` r
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Why uncertainty matters
+
+Every estimate has uncertainty:
+
+- survey margins of error
+- regression confidence intervals
+- model predictions
+
+If you don't show uncertainty, you are claiming **false precision**.
+
+**Core rule:**
+Show the reader how sure you are. If you can't quantify it, say so.
+
+---
+
+# Simulated data for today
+
+We simulate survey data: estimated support for a policy across 8 countries, with different sample sizes (and therefore different standard errors).
+
+
+``` r
+df &lt;- data.frame(
+  country = c("Aurelia", "Belvica", "Cordonia", "Deltara",
+              "Eltonia", "Farland", "Galvinia", "Hestova"),
+  estimate = c(62, 55, 48, 71, 44, 58, 52, 66),
+  se = c(3.2, 4.1, 2.8, 5.5, 3.0, 6.2, 2.5, 4.8)
+) %&gt;%
+  mutate(
+    lower = estimate - 1.96 * se,
+    upper = estimate + 1.96 * se,
+    country = reorder(country, estimate)
+  )
+```
+
+---
+
+# Point estimates alone are misleading
+
+
+``` r
+ggplot(df, aes(x = estimate, y = country)) +
+  geom_point(size = 3) +
+  theme_classic() +
+  labs(x = "Support (%)", y = NULL,
+       title = "Policy support by country (no uncertainty shown)")
+```
+
+![](14_01_week_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+This looks precise. But some estimates are much less certain than others.
+
+---
+
+# Adding error bars
+
+
+``` r
+ggplot(df, aes(x = estimate, y = country)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
+  geom_point(size = 3) +
+  theme_classic() +
+  labs(x = "Support (%)", y = NULL,
+       title = "Policy support with 95% confidence intervals")
+```
+
+```
+## Warning: `geom_errobarh()` was deprecated in ggplot2 4.0.0.
+## ℹ Please use the `orientation` argument of `geom_errorbar()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_01_week_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+Now you can see which differences are real and which overlap.
+
+---
+
+# Interpretation: overlapping intervals
+
+Two intervals that overlap **does not** mean the difference is zero.
+
+But it does mean:
+- the difference is *uncertain*
+- you should not claim a clear ranking
+
+**Practical rule:**
+If intervals overlap substantially, say "the estimates are not clearly different" rather than ranking them.
+
+---
+
+# Uncertainty with line charts (ribbons)
+
+
+``` r
+set.seed(123)
+ts &lt;- data.frame(
+  year = 2000:2024,
+  estimate = cumsum(rnorm(25, 0.3, 1)) + 50
+) %&gt;%
+  mutate(se = runif(25, 1.5, 4),
+         lower = estimate - 1.96 * se,
+         upper = estimate + 1.96 * se)
+
+ggplot(ts, aes(x = year, y = estimate)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
+  geom_line(linewidth = 0.7) +
+  theme_classic() +
+  labs(x = NULL, y = "Index",
+       title = "Trend with uncertainty ribbon")
+```
+
+![](14_01_week_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+# Pause and discuss with a neighbor
+
+Look at the ribbon plot.
+
+**Prompt:**
+- Where is the estimate most uncertain?
+- Does the ribbon change whether you believe the trend is upward?
+- What would happen if the ribbon crossed zero?
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="truncated_axis.png" style="width:50%;"&gt;
+]
+
+---
+
+# Frequency framing vs probability
+
+Two ways to communicate uncertainty:
+
+- **Probability:** "There is a 30% chance of rain"
+- **Frequency:** "3 out of 10 days like this have rain"
+
+Research shows frequency framing is easier for most readers to understand.
+
+When possible, express uncertainty as frequencies:
+- "In 20 surveys like this, about 19 would produce an estimate within this range"
+- "If we repeated the experiment 100 times, about 95 results would fall in this band"
+
+---
+
+# "Don't go 3D" and other high-impact rules
+
+Some design decisions almost always hurt clarity:
+
+- **3D effects:** distort perception (especially 3D pie charts and bar charts)
+- **Dual y-axes:** invite misinterpretation (different scales suggest false correlations)
+- **Too many colors:** overwhelm the reader
+- **Missing units:** "the index went up by 5" means nothing without context
+
+---
+
+# Publishing-quality figure checklist
+
+Before you finalize a figure, check:
+
+1. **Title:** descriptive, not generic ("GDP by country" not "Figure 1")
+2. **Axis labels:** include units (%, dollars, per 100k)
+3. **Caption/source:** where did the data come from?
+4. **Legend:** positioned where it doesn't block data
+5. **Color accessibility:** works in grayscale? colorblind-safe?
+6. **Aspect ratio:** does the shape of the figure match the data?
+7. **Text size:** readable at the intended display size
+8. **Reproducibility:** can someone regenerate this from your code?
+
+---
+
+# Example: before the checklist
+
+
+``` r
+ggplot(df, aes(x = estimate, y = country)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
+  geom_point(size = 3)
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_01_week_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+Problems: no title, no axis labels with units, default theme, no caption.
+
+---
+
+# Example: after the checklist
+
+
+``` r
+ggplot(df, aes(x = estimate, y = country)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25, color = "grey40") +
+  geom_point(size = 3, color = "steelblue") +
+  geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.5) +
+  theme_classic(base_size = 13) +
+  labs(
+    x = "Support (%)",
+    y = NULL,
+    title = "Public support for climate policy",
+    subtitle = "Point estimates with 95% confidence intervals",
+    caption = "Source: Simulated survey data (n varies by country)"
+  )
+```
+
+```
+## `height` was translated to `width`.
+```
+
+![](14_01_week_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="3d_bars_misleading.png" style="width:50%;"&gt;
+]
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+&lt;img src="overloaded_chart.png" style="width:50%;"&gt;
+]
+
+---
+
+# Export settings matter
+
+When saving figures for reports or presentations:
+
+```r
+ggsave("figure.png", plot = p,
+       width = 7, height = 4,
+       dpi = 300,          # high resolution
+       units = "in")       # explicit units
+```
+
+Key settings:
+- **dpi:** 300 for print, 150 for screen
+- **width/height:** control aspect ratio explicitly
+- **format:** PNG for raster, PDF for vector (scales cleanly)
+
+---
+
+# Color accessibility
+
+About 8% of men have some form of color vision deficiency.
+
+Design for accessibility:
+
+- Use **viridis** or **ColorBrewer** palettes (designed to be distinguishable)
+- Add **redundant encoding** (shape + color, or pattern + color)
+- Test with a simulator (e.g., `colorBlindness` package or online tools)
+
+---
+
+# Brief intro to Shiny
+
+Shiny lets you make a figure interactive with R code.
+
+A minimal Shiny app has two parts:
+
+- **UI (user interface):** what the user sees (inputs + plot area)
+- **Server:** what R computes (reactive logic + plot code)
+
+For the final project, you need a **basic** Shiny component: at minimum, one input (e.g., a dropdown) that changes one figure.
+
+---
+
+# Minimal Shiny structure
+
+```r
+library(shiny)
+library(ggplot2)
+
+ui &lt;- fluidPage(
+  titlePanel("My first Shiny app"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("country", "Choose a country:",
+                  choices = c("Aurelia", "Belvica", "Cordonia"))
+    ),
+    mainPanel(
+      plotOutput("myPlot")
+    )
+  )
+)
+
+server &lt;- function(input, output) {
+  output$myPlot &lt;- renderPlot({
+    # filter data based on input
+    # create ggplot
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+---
+
+# Key Shiny concepts
+
+- **Reactive:** the plot updates when the input changes
+- **`input$variable`:** reads what the user selected
+- **`renderPlot({})`:** wraps your ggplot code
+- **`plotOutput()`:** places the plot in the UI
+
+You do **not** need to learn advanced Shiny. A dropdown + one updating plot is sufficient.
+
+---
+
+# What success looks like
+
+- You show uncertainty (error bars, ribbons, or frequency framing) when estimates have it
+- You recognize when overlapping intervals prevent strong claims
+- You can apply the publishing-quality checklist to any figure
+- You choose appropriate export settings (dpi, aspect ratio, format)
+- You design for color accessibility
+- You understand the basic structure of a Shiny app
+
+---
+
+# In-Class Activity
+
+Find a visualization online.
+
+With a neighbor:
+- Identify the data variables
+- Identify the visual mappings
+- Decide what message the plot is making
+- Suggest one concrete improvement
+
+---
+
+# What Comes Next
+
+Next, we will practice in lab:
+
+- adding confidence intervals and uncertainty ribbons to existing plots
+- applying the publishing-quality checklist (redesign lab)
+- peer critique workflow
+- (optional) building a minimal Shiny app
+
+Focus on clarity, not complexity.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": ""
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

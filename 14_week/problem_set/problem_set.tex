@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, graphicx, hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage[margin=1in]{geometry}
+
+\title{In-Class Problem Set: Uncertainty and Publication-Quality Figures with World Development Indicators (R + GitHub \emph{or} Canvas)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Goal.} Practice communicating uncertainty and applying the publishing-quality checklist using real political and economic data. You will build error bar plots, uncertainty ribbons, and redesign a rough figure into a polished version. You may submit via \textbf{GitHub or Canvas}.
+
+\medskip
+\noindent \textbf{Dataset.} This problem set uses two sources:
+\begin{itemize}
+  \item The \texttt{gapminder} package (country-level panel data on life expectancy, GDP per capita, and population).
+  \item Simulated survey data you will create in R (following the structure from lecture).
+\end{itemize}
+
+\medskip
+\noindent \textbf{Key variables (gapminder).}
+\begin{itemize}
+  \item \texttt{country}, \texttt{continent}, \texttt{year}
+  \item \texttt{lifeExp}: Life expectancy at birth
+  \item \texttt{pop}: Population
+  \item \texttt{gdpPercap}: GDP per capita (inflation-adjusted)
+\end{itemize}
+
+\medskip
+\noindent \textbf{What to submit (GitHub or Canvas).}
+\begin{itemize}
+  \item \texttt{scripts/lab.R}
+  \item \texttt{outputs/writeup.md}
+  \item Required figures in \texttt{figures/}
+\end{itemize}
+
+\medskip
+\noindent \textbf{Rules.}
+\begin{itemize}
+  \item Work inside an \textbf{R Project}.
+  \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
+  \item Save all plots using \texttt{ggsave()}.
+  \item If submitting via GitHub, Git commands must be run in the \textbf{Terminal tab}.
+\end{itemize}
+
+\section*{Questions}
+
+\begin{enumerate}
+
+\item \textbf{Load data and create simulated survey estimates (proof required).}
+
+\begin{verbatim}
+# load required packages
+library(__________)
+library(__________)
+library(__________)
+
+# gapminder data
+library(gapminder)
+gap <- gapminder
+
+# create simulated survey data
+set.seed(42)
+df_survey <- data.frame(
+  country = c("United States", "United Kingdom", "Germany",
+              "France", "Japan", "Brazil", "India", "Nigeria"),
+  dem_support = c(72, 68, 65, 61, 54, 48, 42, 38),
+  n = c(1200, 1000, 950, 1100, 800, 600, 750, 500)
+)
+df_survey$se <- sqrt(df_survey$dem_support *
+  (100 - df_survey$dem_support) / df_survey$n)
+df_survey$lower <- df_survey$dem_support - 1.96 * df_survey$se
+df_survey$upper <- df_survey$dem_support + 1.96 * df_survey$se
+
+dim(gap)
+head(df_survey)
+\end{verbatim}
+
+Include in your write-up:
+\begin{itemize}
+  \item number of rows and columns in \texttt{gapminder},
+  \item the range of years,
+  \item confirmation that \texttt{df\_survey} has 8 rows with \texttt{estimate}, \texttt{se}, \texttt{lower}, \texttt{upper}.
+\end{itemize}
+
+\item \textbf{Error bar plot: support for democracy.}
+
+Create a dot plot of \texttt{dem\_support} by \texttt{country} with 95\% confidence intervals.
+
+You must:
+\begin{itemize}
+  \item Reorder countries by estimate.
+  \item Add error bars using \texttt{geom\_errorbarh()}.
+  \item Add a reference line at 50\% (majority threshold).
+  \item Use \texttt{theme\_classic()} and clear labels.
+\end{itemize}
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+df_survey$country <- reorder(df_survey$country, df_survey$dem_support)
+
+ggplot(df_survey, aes(x = ________, y = ________)) +
+  geom_vline(xintercept = 50, linetype = "dashed") +
+  geom_errorbarh(aes(xmin = ________, xmax = ________),
+                 height = 0.25) +
+  geom_point(size = 3) +
+  theme_classic() +
+  labs(x = "________", y = NULL, title = "________")
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/democracy\_support\_ci.png}
+\end{itemize}
+
+\item \textbf{Time series with uncertainty ribbon.}
+
+Using \texttt{gapminder}, compute the mean and standard error of \texttt{lifeExp} by \texttt{continent} and \texttt{year}. Then create a time series with uncertainty ribbons.
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+gap_summary <- gap %>%
+  group_by(________, ________) %>%
+  summarise(
+    mean_le = mean(________),
+    se_le = sd(________) / sqrt(n()),
+    lower = mean_le - 1.96 * se_le,
+    upper = mean_le + 1.96 * se_le,
+    .groups = "drop"
+  )
+
+ggplot(gap_summary, aes(x = year, color = ________, fill = ________)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.15, color = NA) +
+  geom_line(aes(y = mean_le), linewidth = 0.7) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "________", color = NULL, fill = NULL,
+       title = "________")
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/life\_exp\_ribbon.png}
+\end{itemize}
+
+\item \textbf{Redesign exercise: before and after.}
+
+Create a deliberately rough ``before'' version of any figure from this lab (no title, default theme, no units, no caption). Then create a polished ``after'' version applying the full publishing-quality checklist:
+\begin{itemize}
+  \item Descriptive title and subtitle
+  \item Axis labels with units
+  \item Caption with data source
+  \item Reference lines if appropriate
+  \item Color for emphasis (not decoration)
+  \item Readable text size (\texttt{base\_size} argument)
+  \item Clean theme
+\end{itemize}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/redesign\_before.png}
+  \item \texttt{figures/redesign\_after.png}
+\end{itemize}
+
+\item \textbf{Regression uncertainty: GDP and life expectancy.}
+
+Using \texttt{gapminder} data from 2007 only, create a scatterplot of \texttt{gdpPercap} (x-axis, log scale) vs \texttt{lifeExp} (y-axis) with a linear smoother and 95\% confidence ribbon.
+
+\begin{verbatim}
+gap_2007 <- gap %>% filter(year == 2007)
+
+ggplot(gap_2007, aes(x = ________, y = ________)) +
+  geom_point(alpha = 0.5, aes(size = pop)) +
+  geom_smooth(method = "lm", se = TRUE) +
+  scale_x_log10(labels = dollar) +
+  scale_size_continuous(labels = comma, guide = "none") +
+  theme_classic() +
+  labs(x = "________", y = "________", title = "________")
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/gdp\_lifeexp\_lm\_se.png}
+\end{itemize}
+
+\item \textbf{Interpretation (write-up required).}
+
+Write 12--16 sentences addressing:
+\begin{itemize}
+  \item In the democracy support plot, which countries have overlapping confidence intervals? What does that mean for ranking them?
+  \item How does the uncertainty ribbon on the life expectancy time series change your reading of continent-level trends?
+  \item In your before/after redesign, name three specific changes you made and why each improved the figure.
+  \item In the GDP--life expectancy regression, what does the confidence ribbon around the fitted line represent in plain language?
+  \item Name one figure from this lab where uncertainty was especially important to show and explain why.
+\end{itemize}
+
+\item \textbf{Submit your work (GitHub or Canvas; proof required).}
+
+\begin{itemize}
+  \item \textbf{GitHub option:}
+\begin{verbatim}
+git status
+git add .
+git commit -m "Uncertainty lab: CIs + ribbons + redesign"
+git push
+\end{verbatim}
+
+  \item \textbf{Canvas option:}
+  Upload required files to Canvas.
+\end{itemize}
+
+Include proof in write-up:
+\begin{itemize}
+  \item GitHub: output of \texttt{git status} and \texttt{git log -1}
+  \item Canvas: confirmation note + list of uploaded files
+\end{itemize}
+
+\end{enumerate}
+
+\section*{Optional Extension: Shiny App}
+
+Build a minimal Shiny app that lets the user choose a continent from a dropdown and displays the life expectancy time series (with uncertainty ribbon) for that continent only.
+
+\begin{verbatim}
+library(shiny)
+
+ui <- fluidPage(
+  selectInput("continent", "Choose continent:",
+              choices = unique(gap_summary$continent)),
+  plotOutput("lePlot")
+)
+
+server <- function(input, output) {
+  output$lePlot <- renderPlot({
+    df_filtered <- gap_summary %>% filter(continent == input$continent)
+    ggplot(df_filtered, aes(x = year, y = mean_le)) +
+      geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
+      geom_line(linewidth = 0.8) +
+      theme_classic() +
+      labs(x = NULL, y = "Life expectancy (years)",
+           title = paste(input$continent, ": life expectancy over time"))
+  })
+}
+
+shinyApp(ui, server)
+\end{verbatim}
+
+\section*{Checklist}
+\begin{itemize}
+  \item Script runs top-to-bottom
+  \item Required figures saved
+  \item Write-up complete
+  \item Submitted via GitHub or Canvas
+\end{itemize}
+
+\end{document}

@@ -67,6 +67,16 @@ git pull
   \end{enumerate}
 
   \item \textbf{Load and clean \texttt{basketball} (proof required).}
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: load the RDS/CSV into basketball
+# Step 2: copy to basketball_clean
+# Step 3: convert character columns to numeric with as.numeric()
+# Step 4: create draft_status indicator from DRAFT_YEAR
+# Step 5: inspect with dim(), summary()
+\end{verbatim}
+
   \begin{enumerate}
     \item Load the dataset into an object named \texttt{basketball}.
     \item Create a cleaned object named \texttt{basketball\_clean} where you convert the following columns to numeric:
@@ -92,6 +102,16 @@ git pull
   \item \textbf{Relationship 1: usage and scoring (scatterplot baseline).}
 
   Make a scatterplot of \texttt{USG\_PCT} (x) vs \texttt{PTS} (y).
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: set up ggplot with USG_PCT on x, PTS on y
+# Step 2: add geom_point() with alpha for overplotting
+# Step 3: format x-axis as percent if applicable
+# Step 4: apply theme_classic() and labels
+# Step 5: save with ggsave()
+\end{verbatim}
+
   \begin{itemize}
     \item Use \texttt{geom\_point()} with an overplotting fix (e.g., \texttt{alpha} and/or smaller \texttt{size}).
     \item Use clear labels. Since \texttt{USG\_PCT} is a proportion, format the x-axis as percent if you can.
@@ -106,6 +126,15 @@ git pull
   \item \textbf{Relationship 1 (extension): add a linear smoother with standard errors.}
 
   Using the same x/y pairing as the previous question, add a linear fit:
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: start from the previous scatter plot
+# Step 2: add geom_smooth(method = "lm", se = TRUE)
+# Step 3: keep geom_point() visible underneath
+# Step 4: save with ggsave()
+\end{verbatim}
+
   \begin{itemize}
     \item \texttt{geom\_smooth(method = "lm", se = TRUE)}
     \item Keep the points visible (do not remove them).
@@ -127,6 +156,16 @@ git pull
   \item \textbf{Relationship 1B: usage and scoring efficiency.}
 
   Make a scatterplot of \texttt{USG\_PCT} (x) vs \texttt{TS\_PCT} (y).
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: set up ggplot with USG_PCT on x, TS_PCT on y
+# Step 2: add geom_point() with alpha for overplotting
+# Step 3: format both axes as percent
+# Step 4: add geom_smooth(method = "lm", se = TRUE)
+# Step 5: apply theme_classic() and save
+\end{verbatim}
+
   \begin{itemize}
     \item Use \texttt{geom\_point()} with an overplotting fix (e.g., \texttt{alpha} and/or smaller \texttt{size}).
     \item Format \texttt{USG\_PCT} and \texttt{TS\_PCT} as percents if you can.
@@ -148,6 +187,16 @@ git pull
   \item \textbf{Relationship 1C: assists (raw vs rate).}
 
   Make a scatterplot of \texttt{AST} (x) vs \texttt{AST\_PCT} (y).
+
+  \textbf{Pseudo-code structure:}
+\begin{verbatim}
+# Step 1: set up ggplot with AST on x, AST_PCT on y
+# Step 2: add geom_point() with alpha for overplotting
+# Step 3: format AST_PCT axis as percent
+# Step 4: add geom_smooth(method = "lm", se = TRUE)
+# Step 5: apply theme_classic() and save
+\end{verbatim}
+
   \begin{itemize}
     \item Use \texttt{geom\_point()} with an overplotting fix (e.g., \texttt{alpha} and/or smaller \texttt{size}).
     \item Format \texttt{AST\_PCT} as a percent if you can.

@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, graphicx, hyperref}
+\usepackage{enumitem}
+\setlist{nosep}
+\usepackage[margin=1in]{geometry}
+
+\title{In-Class Problem Set: Mapping Social Phenomena with US Election Data (R + GitHub \emph{or} Canvas)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent \textbf{Goal.} Practice building and interpreting choropleth maps using real political data. You will join election data to state boundaries, choose appropriate color scales, compare counts vs rates, and decide when a map is the right (or wrong) chart. You may submit via \textbf{GitHub or Canvas}.
+
+\medskip
+\noindent \textbf{Dataset.} This problem set uses two sources:
+\begin{itemize}
+  \item \textbf{US state boundaries} from the \texttt{maps} package (\texttt{map\_data("state")}).
+  \item \textbf{Built-in state data} from R's \texttt{state.x77} matrix and \texttt{state.name} vector, plus the \texttt{USArrests} dataset.
+\end{itemize}
+
+\medskip
+\noindent \textbf{Key variables (state.x77).}
+\begin{itemize}
+  \item \texttt{Population}: estimated population (thousands, 1975 est.)
+  \item \texttt{Income}: per capita income (1974)
+  \item \texttt{Illiteracy}: illiteracy rate (\%, 1970)
+  \item \texttt{Life.Exp}: life expectancy (years, 1969--71)
+  \item \texttt{Murder}: murder rate (per 100,000, 1976)
+  \item \texttt{HS.Grad}: high-school graduation rate (\%, 1970)
+\end{itemize}
+
+\noindent \textbf{Key variables (USArrests).}
+\begin{itemize}
+  \item \texttt{Murder}: murder arrests per 100,000
+  \item \texttt{Assault}: assault arrests per 100,000
+  \item \texttt{UrbanPop}: percent urban population
+  \item \texttt{Rape}: rape arrests per 100,000
+\end{itemize}
+
+\medskip
+\noindent \textbf{What to submit (GitHub or Canvas).}
+\begin{itemize}
+  \item \texttt{scripts/lab.R}
+  \item \texttt{outputs/writeup.md}
+  \item Required figures in \texttt{figures/}
+\end{itemize}
+
+\medskip
+\noindent \textbf{Rules.}
+\begin{itemize}
+  \item Work inside an \textbf{R Project}.
+  \item Use a \textbf{sequential, hard-coded workflow} (no user-defined functions).
+  \item Save all plots using \texttt{ggsave()}.
+  \item If submitting via GitHub, Git commands must be run in the \textbf{Terminal tab}.
+\end{itemize}
+
+\section*{Questions}
+
+\begin{enumerate}
+
+\item \textbf{Load data and prepare for joining (proof required).}
+
+\begin{verbatim}
+# load required packages
+library(__________)
+library(__________)
+library(__________)
+
+# get map boundary data
+us <- map_data("state")
+
+# build state attribute data
+state_data <- data.frame(
+  region = tolower(state.name),
+  as.data.frame(state.x77)
+)
+
+# quick inspection
+dim(us)
+dim(state_data)
+head(state_data)
+\end{verbatim}
+
+Include in your write-up:
+\begin{itemize}
+  \item number of rows in boundary data vs attribute data,
+  \item confirmation that the \texttt{region} column matches between the two,
+  \item a quick summary of at least two numeric columns.
+\end{itemize}
+
+\item \textbf{Choropleth 1: murder rate (sequential scale).}
+
+Create a choropleth mapping \texttt{Murder} (rate per 100,000) to fill color.
+
+You must:
+\begin{itemize}
+  \item Join \texttt{state\_data} to \texttt{us} on \texttt{region}.
+  \item Use a \textbf{sequential} color scale (e.g., \texttt{scale\_fill\_viridis\_c()}).
+  \item Use \texttt{coord\_quickmap()} and \texttt{theme\_void()}.
+  \item Include a clear legend title.
+\end{itemize}
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+us_merged <- us %>% left_join(________, by = "________")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group,
+                       fill = ________)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_viridis_c(name = "________") +
+  theme_void()
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/murder\_rate\_map.png}
+\end{itemize}
+
+\item \textbf{Choropleth 2: life expectancy (diverging scale).}
+
+Create a choropleth of \texttt{Life.Exp} using a \textbf{diverging} color scale centered on the national mean.
+
+\textbf{Pseudo-code structure:}
+
+\begin{verbatim}
+state_data <- state_data %>%
+  mutate(life_dev = Life.Exp - mean(Life.Exp))
+
+us_merged <- us %>% left_join(________, by = "________")
+
+ggplot(us_merged, aes(x = long, y = lat, group = group,
+                       fill = ________)) +
+  geom_polygon(color = "white", linewidth = 0.3) +
+  coord_quickmap() +
+  scale_fill_gradient2(low = "________", mid = "________",
+                       high = "________", midpoint = 0,
+                       name = "________") +
+  theme_void()
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/life\_exp\_diverging.png}
+\end{itemize}
+
+\item \textbf{Choropleth 3: binned variable (categorical scale).}
+
+Create a choropleth of \texttt{HS.Grad} (high-school graduation rate) using a \textbf{binned/categorical} color scale.
+
+You must:
+\begin{itemize}
+  \item Create a new variable that bins \texttt{HS.Grad} into 4 categories using \texttt{cut()}.
+  \item Use \texttt{scale\_fill\_brewer()} with an appropriate palette.
+  \item Justify your bin boundaries in the write-up.
+\end{itemize}
+
+\begin{verbatim}
+state_data <- state_data %>%
+  mutate(grad_cat = cut(HS.Grad,
+    breaks = c(0, ________, ________, ________, 100),
+    labels = c("________", "________", "________", "________")))
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/hs\_grad\_binned.png}
+\end{itemize}
+
+\item \textbf{Map vs dot plot comparison.}
+
+For the same variable (\texttt{Murder}), create:
+\begin{itemize}
+  \item The choropleth you already made (reuse from Question 2).
+  \item A \textbf{dot plot} showing the top 20 states by murder rate.
+\end{itemize}
+
+\begin{verbatim}
+top_20 <- state_data %>%
+  arrange(desc(________)) %>%
+  slice_head(n = 20) %>%
+  mutate(region = reorder(region, ________))
+
+ggplot(top_20, aes(x = ________, y = region)) +
+  geom_point(size = 2.5) +
+  theme_classic() +
+  labs(x = "________", y = NULL)
+\end{verbatim}
+
+Save as:
+\begin{itemize}
+  \item \texttt{figures/murder\_dotplot.png}
+\end{itemize}
+
+\item \textbf{Interpretation (write-up required).}
+
+Write 12--16 sentences addressing:
+\begin{itemize}
+  \item What spatial pattern does the murder-rate choropleth suggest? Is there a regional clustering?
+  \item For life expectancy, does the diverging scale help you see above/below-average states more clearly than a sequential scale would?
+  \item What did your binning choices for HS graduation rate reveal or hide?
+  \item Compare the choropleth vs the dot plot for murder rate: when would you prefer each?
+  \item Name one concrete plotting choice you made (projection, color scale, binning) and why it helped interpretability.
+\end{itemize}
+
+\item \textbf{Submit your work (GitHub or Canvas; proof required).}
+
+\begin{itemize}
+  \item \textbf{GitHub option:}
+\begin{verbatim}
+git status
+git add .
+git commit -m "Geospatial lab: choropleths + state data"
+git push
+\end{verbatim}
+
+  \item \textbf{Canvas option:}
+  Upload required files to Canvas.
+\end{itemize}
+
+Include proof in write-up:
+\begin{itemize}
+  \item GitHub: output of \texttt{git status} and \texttt{git log -1}
+  \item Canvas: confirmation note + list of uploaded files
+\end{itemize}
+
+\end{enumerate}
+
+\section*{Optional Extension: USArrests Choropleth}
+
+Using the \texttt{USArrests} dataset, create a choropleth of \texttt{Assault} arrests per 100,000.
+\begin{itemize}
+  \item Join \texttt{USArrests} to map boundaries (you will need to add a \texttt{region} column from \texttt{tolower(rownames(USArrests))}).
+  \item Compare a continuous vs binned version.
+\end{itemize}
+
+\begin{verbatim}
+arrests <- USArrests %>%
+  mutate(region = tolower(rownames(USArrests)))
+us_arrests <- us %>% left_join(arrests, by = "region")
+
+ggplot(us_arrests, aes(x = long, y = lat, group = group,
+                        fill = Assault)) +
+  geom_polygon(color = "white") +
+  coord_quickmap() +
+  scale_fill_viridis_c() +
+  theme_void()
+\end{verbatim}
+
+\section*{Checklist}
+\begin{itemize}
+  \item Script runs top-to-bottom
+  \item Required figures saved
+  \item Write-up complete
+  \item Submitted via GitHub or Canvas
+\end{itemize}
+
+\end{document}

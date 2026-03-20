@@ -1,0 +1,431 @@
+---
+title: "Time Series and Trends"
+subtitle: "Multiple series, annotation, smoothing, and the risks of connecting the dots"
+author: "Jared Edgerton"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, plsc498.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: ""
+---
+
+class: center, middle, inverse, title-slide
+
+.title[
+# Time Series and Trends
+]
+.subtitle[
+## Multiple series, annotation, smoothing, and the risks of connecting the dots
+]
+.author[
+### Jared Edgerton
+]
+
+---
+
+# Quiz on canvas
+
+- Log on to the course website to take it.
+- You have 10 minutes.
+- It is open notes and web.
+- Do not generate your answers with AI.
+
+---
+
+# Quick Recap
+
+- Last time, we focused on **associations among quantitative variables**:
+  - scatterplots and smoothers
+  - correlation (Pearson vs rank-based)
+  - correlograms
+  - paired data and slopegraphs
+
+Today, we focus on **time series**:
+
+- line charts and their assumptions
+- multiple time series (color vs facets)
+- annotation (events, labels)
+- smoothing and functional forms (rolling mean vs LOESS)
+- seasonality vs trend
+- when "connecting the dots" misleads
+
+---
+
+# Setup
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+set.seed(42)
+```
+
+---
+
+# Simulated data for today
+
+We simulate monthly data for three countries over 20 years. This gives us: (a) trends, (b) seasonality, (c) noise, and (d) a structural break (event).
+
+```{r}
+dates <- seq(as.Date("2003-01-01"), as.Date("2022-12-01"), by = "month")
+n <- length(dates)
+
+df <- expand.grid(date = dates, country = c("Aurelia", "Belvica", "Cordonia")) %>%
+  arrange(country, date) %>%
+  group_by(country) %>%
+  mutate(
+    t = row_number(),
+    trend = case_when(
+      country == "Aurelia" ~ 50 + 0.08 * t,
+      country == "Belvica" ~ 55 - 0.03 * t,
+      country == "Cordonia" ~ 45 + 0.05 * t + ifelse(t > 150, -8, 0)
+    ),
+    season = 3 * sin(2 * pi * t / 12),
+    noise = rnorm(n(), 0, 2.5),
+    approval = trend + season + noise,
+    year = as.numeric(format(date, "%Y")),
+    month = as.numeric(format(date, "%m"))
+  ) %>%
+  ungroup()
+```
+
+---
+
+# Why time series plots are different
+
+A time series plot is a claim that **order matters**.
+
+When you connect points with a line, you assert:
+
+- adjacent observations are meaningfully related
+- the path between them is interpretable
+
+This is different from a scatterplot, where x-y order is arbitrary.
+
+**Core question:** is the x-axis (time) evenly spaced and complete?
+
+---
+
+# Baseline: a single time series
+
+```{r, fig.width=7, fig.height=4}
+df_a <- df %>% filter(country == "Aurelia")
+
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Aurelia: monthly approval rating")
+```
+
+---
+
+# What can you see?
+
+From this single line chart:
+
+- **Trend:** is approval going up, down, or flat?
+- **Seasonality:** are there regular cycles?
+- **Noise:** how much month-to-month variation?
+- **Events:** any sudden jumps or drops?
+
+Always start by describing these four features.
+
+---
+
+# Multiple series: color
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df, aes(x = date, y = approval, color = country)) +
+  geom_line(linewidth = 0.5) +
+  theme_classic() +
+  theme(legend.position = "bottom") +
+  labs(x = NULL, y = "Approval (%)", color = NULL,
+       title = "Three countries on one panel")
+```
+
+Interpretation:
+- good for **a few series** with different levels
+- gets messy when lines cross frequently
+
+---
+
+# Multiple series: small multiples
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df, aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  facet_wrap(~ country, ncol = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Same data, faceted for clarity")
+```
+
+Interpretation:
+- easier to see each country's pattern
+- harder to compare exact levels
+
+---
+
+# Pause and discuss with a neighbor
+
+You have two time series designs:
+
+1) overlaid colored lines
+2) faceted panels
+
+**Prompt:**
+- Which one would you choose for a policy brief?
+- What question is each one better at answering?
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="airline_preference.png" style="width:50%;">
+]
+
+---
+
+# Annotation: marking events
+
+Good time series plots often need context. Annotation = text, lines, or shading that marks when something happened.
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df %>% filter(country == "Cordonia"), aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  geom_vline(xintercept = as.Date("2015-07-01"), linetype = "dashed", color = "red") +
+  annotate("text", x = as.Date("2015-10-01"), y = 65,
+           label = "Policy reform", hjust = 0, size = 3.5) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Cordonia: approval with event annotation")
+```
+
+---
+
+# Annotation principles
+
+When annotating time series:
+
+- **Label the event**, not just the date
+- Use vertical lines or shaded regions for periods
+- Keep annotation text short (2--4 words)
+- Place labels where they don't overlap the data
+
+**Rule:**
+If the reader has to guess what happened at a date, your annotation is missing.
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="coconut_pinneapple.png" style="width:50%;">
+]
+
+---
+
+# Smoothing: separating signal from noise
+
+Raw time series are noisy. Smoothing helps the reader focus on the trend.
+
+Two common choices:
+
+- **Rolling mean:** average of the last *k* observations
+- **LOESS:** locally weighted regression (ggplot default smoother)
+
+Both are modeling decisions. The reader sees your choice of smoothness.
+
+---
+
+# Rolling mean (manual)
+
+```{r, fig.width=7, fig.height=4}
+df_a <- df_a %>%
+  arrange(date) %>%
+  mutate(roll_12 = zoo::rollmean(approval, k = 12, fill = NA, align = "right"))
+
+ggplot(df_a, aes(x = date)) +
+  geom_line(aes(y = approval), alpha = 0.35, linewidth = 0.4) +
+  geom_line(aes(y = roll_12), color = "steelblue", linewidth = 1) +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Aurelia: raw data + 12-month rolling mean")
+```
+
+---
+
+# LOESS smoother (ggplot default)
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df_a, aes(x = date, y = approval)) +
+  geom_line(alpha = 0.35, linewidth = 0.4) +
+  geom_smooth(method = "loess", se = FALSE, linewidth = 1, color = "firebrick") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Aurelia: raw data + LOESS smoother")
+```
+
+Interpretation:
+- LOESS adapts to local patterns
+- can pick up curvature that a rolling mean smooths away
+
+---
+
+# Smoothing comparison: what changes
+
+- **Too smooth:** hides real events (e.g., a crisis)
+- **Too wiggly:** makes noise look like events
+- **Rolling mean:** transparent (you know it averages *k* points)
+- **LOESS:** flexible but harder to explain
+
+**Practical habit:**
+Try at least two smoothing levels. If the story changes, report both.
+
+---
+
+# Seasonality vs trend
+
+Many time series have both:
+
+- a **trend** (long-run direction)
+- **seasonality** (regular, repeating cycles)
+
+Confusing these leads to bad conclusions:
+
+- "Approval is spiking!" (no, it does that every January)
+- "The trend reversed!" (no, you're seeing winter vs summer)
+
+---
+
+# Highlighting seasonality
+
+```{r, fig.width=7, fig.height=4}
+df_season <- df %>%
+  filter(country == "Aurelia") %>%
+  group_by(month) %>%
+  summarise(mean_approval = mean(approval), .groups = "drop")
+
+ggplot(df_season, aes(x = factor(month), y = mean_approval, group = 1)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  theme_classic() +
+  labs(x = "Month", y = "Mean approval (%)",
+       title = "Aurelia: seasonal pattern (averaged across years)")
+```
+
+---
+
+# Data visualization critique
+
+- Take five minutes
+  - What variables are mapped to what (x/y/color/size/etc.)?
+  - Is it persuasive?
+  - What design choices did they make?
+  - After doing this talk to your neighbor briefly and compare notes.
+
+.center[
+<img src="mother_partner_age.png" style="width:50%;">
+]
+
+---
+
+# When connecting the dots misleads
+
+A line chart assumes evenly spaced, complete data.
+
+If measurements are irregular:
+- the line implies interpolation that may be wrong
+- slopes can be misleading (steeper = faster, but the gap might be longer)
+
+**Rule:**
+If your time axis has gaps, show points. Only connect when spacing is regular.
+
+---
+
+# Example: irregular spacing
+
+```{r, fig.width=7, fig.height=4}
+set.seed(99)
+irreg <- data.frame(
+  date = sort(sample(seq(as.Date("2010-01-01"), as.Date("2020-12-31"), by = "month"), 30)),
+  value = cumsum(rnorm(30, 0.2, 1.5)) + 50
+)
+
+ggplot(irreg, aes(x = date, y = value)) +
+  geom_point(size = 2) +
+  geom_line(alpha = 0.4) +
+  theme_classic() +
+  labs(x = NULL, y = "Value",
+       title = "Irregular spacing: line can mislead about rate of change")
+```
+
+---
+
+# Axis formatting for dates
+
+Good time series labeling:
+
+```{r, fig.width=7, fig.height=4}
+ggplot(df %>% filter(country == "Aurelia"), aes(x = date, y = approval)) +
+  geom_line(linewidth = 0.5) +
+  scale_x_date(date_breaks = "2 years", date_labels = "%Y") +
+  theme_classic() +
+  labs(x = NULL, y = "Approval (%)",
+       title = "Formatted x-axis with scale_x_date()")
+```
+
+---
+
+# What success looks like
+
+- You can identify **trend**, **seasonality**, **noise**, and **events** in a time series
+- You can choose between overlaid lines and facets deliberately
+- You annotate events with text and reference lines
+- You can explain your smoothing choice (rolling mean vs LOESS) and its implications
+- You recognize when connecting dots is misleading (irregular spacing)
+
+---
+
+# In-Class Activity
+
+Find a visualization online.
+
+With a neighbor:
+- Identify the data variables
+- Identify the visual mappings
+- Decide what message the plot is making
+- Suggest one concrete improvement
+
+---
+
+# What Comes Next
+
+Next, we will practice these patterns in lab:
+
+- line charts with real data
+- annotation and labeling
+- smoothing choices (rolling mean vs LOESS)
+- uncertainty ribbons as a preview of Week 14
+- clear axis formatting for time data
+
+Focus on clarity, not complexity.
