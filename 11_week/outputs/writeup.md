@@ -74,3 +74,23 @@ The quadratic fit seems to capture the data trend better than a straight. The SE
 ## Final Interpretation
 
 In Figure 1 and Figure 2, the scatterplot reveals a strong positive relationship between points scored and usage percentage. This trend follows a fairly linear shape. In Figure 3, the relationship is slightly more ambiguous. True shooting percentage as a weak positive relationship with player usage percentage, still following a positive, relatively linear pattern. However, confidence in linearity falls off beyond 30% player usage. Figure 4 displays a strong positive linear relationship between assist rates and assist volume. Figure 5 has a moderate positive linear relationship between rebounds and player weight. Figure 5 has an interesting point pattern compared to the other figures, in that it has a lot of high value outliers with respect to rebounds, spreading the data more than any other relationship examined. This could imply potential randomness in this relationship, or confounding variables that may better explain the effect player stats have on rebounds. Figure 6 shows a strong parabolic relationship between age and scoring efficiency. Here, scoring efficiency peaks around ages 31-34, with scoring efficiency decreasing as player age both increases and decreases. Across all figures, I made the point sizes both smaller and more translucent to help avoid overplotting and give a more intuitive sense of data trends, without needing to rely on a smoothing line. For Figure 6 specifically, I increased the translucency of each point, as there is a lot of similar shooting efficiency rates for each cohort of player. Increasing translucency allows for density around these ages to be better seen and examined. 
+
+## Angels-MacBook-Pro:11_week angel$ git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+## Angels-MacBook-Pro:11_week angel$ git log -2 
+commit 62d02586c0a1e5010105f6625e88dbff791391bc (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Sat Apr 4 00:12:35 2026 -0400
+
+    NBA relationships: clean basketball types
+
+commit d19f26cf13a2502cb1b91df5103b1afdfd8376f3
+Merge: 53c860e ee79311
+Author: aperez0103 <92343392+aperez0103@users.noreply.github.com>
+Date:   Fri Apr 3 13:42:35 2026 -0400
+
+    Merge branch 'jfedgerton:main' into main
