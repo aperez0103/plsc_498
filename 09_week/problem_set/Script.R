@@ -21,7 +21,7 @@ list.files("data")
 # Step 2: check dimensions and column names
 # Step 3: summarize vote and death columns
 
-df <- readRDS("data/state_df.rds")
+df <- readRDS("09_week/data/state_df.rds")
 
 dim(df)
 names(df)
@@ -136,10 +136,10 @@ ggsave("figures/illness_deaths_by_winner_proportion.png", p_proportions,
 # Step 6: save with ggsave()
 
 df_facet <- df |>
-  mutate(state = tidytext::reorder_within(state, total_illness_deaths, winner))
+  mutate(state_po = tidytext::reorder_within(state_po, total_illness_deaths, winner))
 
 p_faceted <- df_facet |>
-  ggplot(aes(x = total_illness_deaths, y = state, fill = winner)) +
+  ggplot(aes(x = total_illness_deaths, y = state_po, fill = winner)) +
   geom_col(width = 0.7) +
   tidytext::scale_y_reordered() +
   facet_wrap(~ winner, scales = "free_y") +
@@ -163,4 +163,56 @@ p_faceted <- df_facet |>
   )
 
 ggsave("figures/illness_deaths_faceted_by_winner.png", p_faceted,
+       width = 12, height = 10, dpi = 300)
+
+
+df_by_illness <- df |>
+  dplyr::select(c(state_po, winner, pneumonia_deaths_to_2020_11_07, covid_deaths_to_2020_11_07)) |>
+  pivot_longer(cols = c(pneumonia_deaths_to_2020_11_07, covid_deaths_to_2020_11_07),
+               names_to = "death_type",
+               values_to = "deaths") |>
+  mutate(death_type = ifelse(grepl("pneumonia", death_type), "Pneumonia", "COVID-19"))
+
+covid_pct <- df$covid_deaths_to_2020_11_07/df$total_illness_deaths
+state_po_covid  <- data.frame(
+  state_po = df$state_po,
+  covid_pct
+) 
+
+state_po_covid <- state_po_covid |> 
+  arrange(
+    covid_pct
+  )
+df_by_illness <- df_by_illness |> 
+  as.data.frame(.) |> 
+  mutate(state_po = factor(state_po, levels = unique(state_po_covid$state_po)))
+
+p_illness_prop <- df_by_illness |>
+  mutate(death_type = factor(death_type, levels = c("Pneumonia", "COVID-19"))) |>
+  ggplot(aes(x = deaths, y = state_po, fill = death_type)) +
+  geom_col(position = "fill") +
+  tidytext::scale_y_reordered() +
+  facet_wrap(~ winner, scales = "free_y") +
+  scale_fill_manual(values = c("gold", "purple")) +
+  scale_x_continuous(labels = scales::percent_format(), expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Illness Deaths by State, Faceted by 2020 Election Winner",
+    subtitle = "COVID and pneumonia deaths proportion through Nov 7, 2020 — states ordered within each panel",
+    x = "Total Illness Deaths (proportion)",
+    y = NULL
+  ) +
+  theme_classic(base_size = 10) +
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(color = "grey40", size = 9),
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(size = 6.5),
+    strip.text = element_text(face = "bold", size = 11)
+  )
+
+
+ggsave("figures/illness_death_type_faceted_by_winner.png", p_illness_prop,
        width = 12, height = 10, dpi = 300)

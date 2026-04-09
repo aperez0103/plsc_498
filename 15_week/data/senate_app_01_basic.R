@@ -7,7 +7,7 @@ library(dplyr)
 library(ggplot2)
 
 # Load data
-senate_data <- readRDS("senate_ideology.rds")
+senate_data <- readRDS("15_week/data/senate_ideology.rds")
 
 # Define UI
 ui <- fluidPage(

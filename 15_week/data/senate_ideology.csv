@@ -1,0 +1,310 @@
+"member_id","name","state","party","congress","dwnom1","dwnom2"
+"MS11694659","SHELBY, Richard C.","Alabama","Republican Party",116,0.446,0.57
+"MS11641705","JONES, Gordon Douglas (Doug)","Alabama","Democratic Party",116,-0.088,0.187
+"MS11742102","TUBERVILLE, Thomas Hawley (Tommy)","Alabama","Republican Party",117,0.936,-0.352
+"MS11794659","SHELBY, Richard C.","Alabama","Republican Party",117,0.446,0.57
+"MS11842102","TUBERVILLE, Thomas Hawley (Tommy)","Alabama","Republican Party",118,0.936,-0.352
+"MS11842300","BRITT, Katie Elizabeth","Alabama","Republican Party",118,0.586,0.587
+"MS11641500","SULLIVAN, Daniel Scott","Alaska","Republican Party",116,0.476,0.156
+"MS11640300","MURKOWSKI, Lisa","Alaska","Republican Party",116,0.203,-0.304
+"MS11741500","SULLIVAN, Daniel Scott","Alaska","Republican Party",117,0.476,0.156
+"MS11740300","MURKOWSKI, Lisa","Alaska","Republican Party",117,0.203,-0.304
+"MS11841500","SULLIVAN, Daniel Scott","Alaska","Republican Party",118,0.476,0.156
+"MS11840300","MURKOWSKI, Lisa","Alaska","Republican Party",118,0.203,-0.304
+"MS11621501","MCSALLY, Martha","Arizona","Republican Party",116,0.345,0.027
+"MS11621300","SINEMA, Kyrsten","Arizona","Democratic Party",116,-0.105,0.076
+"MS11641905","KELLY, Mark Edward","Arizona","Democratic Party",116,-0.264,0.29
+"MS11721300","SINEMA, Kyrsten","Arizona","Democratic Party",117,-0.105,0.076
+"MS11741905","KELLY, Mark Edward","Arizona","Democratic Party",117,-0.264,0.29
+"MS11891300","SINEMA, Kyrsten","Arizona","Independent",118,-0.186,0.387
+"MS11841905","KELLY, Mark Edward","Arizona","Democratic Party",118,-0.264,0.29
+"MS11621301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",116,0.578,0.199
+"MS11620101","BOOZMAN, John","Arkansas","Republican Party",116,0.426,0.34
+"MS11721301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",117,0.578,0.199
+"MS11720101","BOOZMAN, John","Arkansas","Republican Party",117,0.426,0.34
+"MS11821301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",118,0.578,0.199
+"MS11820101","BOOZMAN, John","Arkansas","Republican Party",118,0.426,0.34
+"MS11649300","FEINSTEIN, Dianne","California","Democratic Party",116,-0.268,-0.184
+"MS11641701","HARRIS, Kamala Devi","California","Democratic Party",116,-0.709,-0.105
+"MS11749300","FEINSTEIN, Dianne","California","Democratic Party",117,-0.268,-0.184
+"MS11742104","PADILLA, Alejandro (Alex)","California","Democratic Party",117,-0.438,-0.249
+"MS11741701","HARRIS, Kamala Devi","California","Democratic Party",117,-0.709,-0.105
+"MS11849300","FEINSTEIN, Dianne","California","Democratic Party",118,-0.268,-0.184
+"MS11820104","SCHIFF, Adam","California","Democratic Party",118,-0.352,-0.119
+"MS11842104","PADILLA, Alejandro (Alex)","California","Democratic Party",118,-0.438,-0.249
+"MS11842305","BUTLER, Laphonza Romanique","California","Democratic Party",118,-0.447,-0.073
+"MS11621112","GARDNER, Cory","Colorado","Republican Party",116,0.444,-0.029
+"MS11640910","BENNET, Michael F.","Colorado","Democratic Party",116,-0.242,-0.191
+"MS11740910","BENNET, Michael F.","Colorado","Democratic Party",117,-0.242,-0.191
+"MS11742101","HICKENLOOPER, John Wright","Colorado","Democratic Party",117,-0.29,-0.016
+"MS11840910","BENNET, Michael F.","Colorado","Democratic Party",118,-0.242,-0.191
+"MS11842101","HICKENLOOPER, John Wright","Colorado","Democratic Party",118,-0.29,-0.016
+"MS11620707","MURPHY, Christopher","Connecticut","Democratic Party",116,-0.287,-0.258
+"MS11641101","BLUMENTHAL, Richard","Connecticut","Democratic Party",116,-0.434,-0.152
+"MS11720707","MURPHY, Christopher","Connecticut","Democratic Party",117,-0.287,-0.258
+"MS11741101","BLUMENTHAL, Richard","Connecticut","Democratic Party",117,-0.434,-0.152
+"MS11820707","MURPHY, Christopher","Connecticut","Democratic Party",118,-0.287,-0.258
+"MS11841101","BLUMENTHAL, Richard","Connecticut","Democratic Party",118,-0.434,-0.152
+"MS11615015","CARPER, Thomas Richard","Delaware","Democratic Party",116,-0.179,-0.225
+"MS11640916","COONS, Christopher A.","Delaware","Democratic Party",116,-0.238,-0.215
+"MS11715015","CARPER, Thomas Richard","Delaware","Democratic Party",117,-0.179,-0.225
+"MS11740916","COONS, Christopher A.","Delaware","Democratic Party",117,-0.238,-0.215
+"MS11815015","CARPER, Thomas Richard","Delaware","Democratic Party",118,-0.179,-0.225
+"MS11840916","COONS, Christopher A.","Delaware","Democratic Party",118,-0.238,-0.215
+"MS11641903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",116,0.722,-0.037
+"MS11641102","RUBIO, Marco","Florida","Republican Party",116,0.616,-0.184
+"MS11741903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",117,0.722,-0.037
+"MS11741102","RUBIO, Marco","Florida","Republican Party",117,0.616,-0.184
+"MS11841903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",118,0.722,-0.037
+"MS11841102","RUBIO, Marco","Florida","Republican Party",118,0.616,-0.184
+"MS11641501","PERDUE, David Alfred, Jr.","Georgia","Republican Party",116,0.562,-0.075
+"MS11641904","LOEFFLER, Kelly","Georgia","Republican Party",116,0.555,-0.203
+"MS11629909","ISAKSON, Johnny","Georgia","Republican Party",116,0.402,-0.011
+"MS11741904","LOEFFLER, Kelly","Georgia","Republican Party",117,0.555,-0.203
+"MS11742105","WARNOCK, Raphael Gamaliel","Georgia","Democratic Party",117,-0.431,0.423
+"MS11742103","OSSOFF, Thomas Jonathan (Jon)","Georgia","Democratic Party",117,-0.459,0.475
+"MS11842105","WARNOCK, Raphael Gamaliel","Georgia","Democratic Party",118,-0.431,0.423
+"MS11842103","OSSOFF, Thomas Jonathan (Jon)","Georgia","Democratic Party",118,-0.459,0.475
+"MS11641112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",116,-0.448,-0.119
+"MS11620713","HIRONO, Mazie","Hawaii","Democratic Party",116,-0.512,-0.089
+"MS11741112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",117,-0.448,-0.119
+"MS11720713","HIRONO, Mazie","Hawaii","Democratic Party",117,-0.512,-0.089
+"MS11841112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",118,-0.448,-0.119
+"MS11820713","HIRONO, Mazie","Hawaii","Democratic Party",118,-0.512,-0.089
+"MS11640902","RISCH, James","Idaho","Republican Party",116,0.552,0.384
+"MS11629345","CRAPO, Michael Dean","Idaho","Republican Party",116,0.505,0.291
+"MS11740902","RISCH, James","Idaho","Republican Party",117,0.552,0.384
+"MS11729345","CRAPO, Michael Dean","Idaho","Republican Party",117,0.505,0.291
+"MS11840902","RISCH, James","Idaho","Republican Party",118,0.552,0.384
+"MS11829345","CRAPO, Michael Dean","Idaho","Republican Party",118,0.505,0.291
+"MS11615021","DURBIN, Richard Joseph","Illinois","Democratic Party",116,-0.34,-0.311
+"MS11621325","DUCKWORTH, Tammy","Illinois","Democratic Party",116,-0.345,0.056
+"MS11715021","DURBIN, Richard Joseph","Illinois","Democratic Party",117,-0.34,-0.311
+"MS11721325","DUCKWORTH, Tammy","Illinois","Democratic Party",117,-0.345,0.056
+"MS11815021","DURBIN, Richard Joseph","Illinois","Democratic Party",118,-0.34,-0.311
+"MS11821325","DUCKWORTH, Tammy","Illinois","Democratic Party",118,-0.345,0.056
+"MS11641900","BRAUN, Michael","Indiana","Republican Party",116,0.8,0.6
+"MS11621133","YOUNG, Todd","Indiana","Republican Party",116,0.439,-0.024
+"MS11741900","BRAUN, Michael","Indiana","Republican Party",117,0.8,0.6
+"MS11721133","YOUNG, Todd","Indiana","Republican Party",117,0.439,-0.024
+"MS11841900","BRAUN, Michael","Indiana","Republican Party",118,0.8,0.6
+"MS11821133","YOUNG, Todd","Indiana","Republican Party",118,0.439,-0.024
+"MS11641502","ERNST, Joni","Iowa","Republican Party",116,0.537,-0.032
+"MS11614226","GRASSLEY, Charles Ernest","Iowa","Republican Party",116,0.362,-0.035
+"MS11741502","ERNST, Joni","Iowa","Republican Party",117,0.537,-0.032
+"MS11714226","GRASSLEY, Charles Ernest","Iowa","Republican Party",117,0.362,-0.035
+"MS11841502","ERNST, Joni","Iowa","Republican Party",118,0.537,-0.032
+"MS11814226","GRASSLEY, Charles Ernest","Iowa","Republican Party",118,0.362,-0.035
+"MS11614852","ROBERTS, Charles Patrick (Pat)","Kansas","Republican Party",116,0.413,-0.09
+"MS11629722","MORAN, Jerry","Kansas","Republican Party",116,0.413,0.221
+"MS11721734","MARSHALL, Roger Wayne","Kansas","Republican Party",117,0.607,0.139
+"MS11729722","MORAN, Jerry","Kansas","Republican Party",117,0.413,0.221
+"MS11821734","MARSHALL, Roger Wayne","Kansas","Republican Party",118,0.607,0.139
+"MS11829722","MORAN, Jerry","Kansas","Republican Party",118,0.413,0.221
+"MS11641104","PAUL, Rand","Kentucky","Republican Party",116,0.891,-0.454
+"MS11614921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",116,0.402,0.018
+"MS11741104","PAUL, Rand","Kentucky","Republican Party",117,0.891,-0.454
+"MS11714921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",117,0.402,0.018
+"MS11841104","PAUL, Rand","Kentucky","Republican Party",118,0.891,-0.454
+"MS11814921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",118,0.402,0.018
+"MS11641703","KENNEDY, John Neely","Louisiana","Republican Party",116,0.56,-0.149
+"MS11620919","CASSIDY, Bill","Louisiana","Republican Party",116,0.464,-0.048
+"MS11741703","KENNEDY, John Neely","Louisiana","Republican Party",117,0.56,-0.149
+"MS11720919","CASSIDY, Bill","Louisiana","Republican Party",117,0.464,-0.048
+"MS11841703","KENNEDY, John Neely","Louisiana","Republican Party",118,0.56,-0.149
+"MS11820919","CASSIDY, Bill","Louisiana","Republican Party",118,0.464,-0.048
+"MS11649703","COLLINS, Susan Margaret","Maine","Republican Party",116,0.124,-0.505
+"MS11641300","KING, Angus Stanley, Jr.","Maine","Independent",116,-0.167,-0.187
+"MS11749703","COLLINS, Susan Margaret","Maine","Republican Party",117,0.124,-0.505
+"MS11741300","KING, Angus Stanley, Jr.","Maine","Independent",117,-0.167,-0.187
+"MS11849703","COLLINS, Susan Margaret","Maine","Republican Party",118,0.124,-0.505
+"MS11841300","KING, Angus Stanley, Jr.","Maine","Independent",118,-0.167,-0.187
+"MS11615408","CARDIN, Benjamin Louis","Maryland","Democratic Party",116,-0.32,-0.224
+"MS11620330","VAN HOLLEN, Christopher","Maryland","Democratic Party",116,-0.398,-0.227
+"MS11715408","CARDIN, Benjamin Louis","Maryland","Democratic Party",117,-0.32,-0.224
+"MS11720330","VAN HOLLEN, Christopher","Maryland","Democratic Party",117,-0.398,-0.227
+"MS11815408","CARDIN, Benjamin Louis","Maryland","Democratic Party",118,-0.32,-0.224
+"MS11820330","VAN HOLLEN, Christopher","Maryland","Democratic Party",118,-0.398,-0.227
+"MS11614435","MARKEY, Edward John","Massachusetts","Democratic Party",116,-0.517,-0.471
+"MS11641301","WARREN, Elizabeth","Massachusetts","Democratic Party",116,-0.745,-0.37
+"MS11714435","MARKEY, Edward John","Massachusetts","Democratic Party",117,-0.517,-0.471
+"MS11741301","WARREN, Elizabeth","Massachusetts","Democratic Party",117,-0.745,-0.37
+"MS11814435","MARKEY, Edward John","Massachusetts","Democratic Party",118,-0.517,-0.471
+"MS11841301","WARREN, Elizabeth","Massachusetts","Democratic Party",118,-0.745,-0.37
+"MS11620923","PETERS, Gary C.","Michigan","Democratic Party",116,-0.25,-0.183
+"MS11629732","STABENOW, Deborah Ann","Michigan","Democratic Party",116,-0.343,-0.019
+"MS11720923","PETERS, Gary C.","Michigan","Democratic Party",117,-0.25,-0.183
+"MS11729732","STABENOW, Deborah Ann","Michigan","Democratic Party",117,-0.343,-0.019
+"MS11820923","PETERS, Gary C.","Michigan","Democratic Party",118,-0.25,-0.183
+"MS11829732","STABENOW, Deborah Ann","Michigan","Democratic Party",118,-0.343,-0.019
+"MS11640700","KLOBUCHAR, Amy","Minnesota","Democratic Party",116,-0.278,-0.325
+"MS11641706","SMITH, Tina","Minnesota","Democratic Party",116,-0.409,-0.121
+"MS11740700","KLOBUCHAR, Amy","Minnesota","Democratic Party",117,-0.278,-0.325
+"MS11741706","SMITH, Tina","Minnesota","Democratic Party",117,-0.409,-0.121
+"MS11840700","KLOBUCHAR, Amy","Minnesota","Democratic Party",118,-0.278,-0.325
+"MS11841706","SMITH, Tina","Minnesota","Democratic Party",118,-0.409,-0.121
+"MS11641707","HYDE-SMITH, Cindy","Mississippi","Republican Party",116,0.449,0.333
+"MS11629534","WICKER, Roger F.","Mississippi","Republican Party",116,0.377,0.341
+"MS11741707","HYDE-SMITH, Cindy","Mississippi","Republican Party",117,0.449,0.333
+"MS11729534","WICKER, Roger F.","Mississippi","Republican Party",117,0.377,0.341
+"MS11841707","HYDE-SMITH, Cindy","Mississippi","Republican Party",118,0.449,0.333
+"MS11829534","WICKER, Roger F.","Mississippi","Republican Party",118,0.377,0.341
+"MS11641901","HAWLEY, Joshua David","Missouri","Republican Party",116,0.83,-0.372
+"MS11629735","BLUNT, Roy","Missouri","Republican Party",116,0.398,0.18
+"MS11741901","HAWLEY, Joshua David","Missouri","Republican Party",117,0.83,-0.372
+"MS11729735","BLUNT, Roy","Missouri","Republican Party",117,0.398,0.18
+"MS11842303","SCHMITT, Eric Stephen","Missouri","Republican Party",118,0.902,0.076
+"MS11841901","HAWLEY, Joshua David","Missouri","Republican Party",118,0.83,-0.372
+"MS11621338","DAINES, Steve","Montana","Republican Party",116,0.59,-0.024
+"MS11640702","TESTER, Jon","Montana","Democratic Party",116,-0.213,0.153
+"MS11721338","DAINES, Steve","Montana","Republican Party",117,0.59,-0.024
+"MS11740702","TESTER, Jon","Montana","Democratic Party",117,-0.213,0.153
+"MS11821338","DAINES, Steve","Montana","Republican Party",118,0.59,-0.024
+"MS11840702","TESTER, Jon","Montana","Democratic Party",118,-0.213,0.153
+"MS11641503","SASSE, Benjamin Eric","Nebraska","Republican Party",116,0.669,-0.25
+"MS11641302","FISCHER, Debra (Deb)","Nebraska","Republican Party",116,0.46,0.335
+"MS11741503","SASSE, Benjamin Eric","Nebraska","Republican Party",117,0.669,-0.25
+"MS11741302","FISCHER, Debra (Deb)","Nebraska","Republican Party",117,0.46,0.335
+"MS11841302","FISCHER, Debra (Deb)","Nebraska","Republican Party",118,0.46,0.335
+"MS11842302","RICKETTS, John Peter (Pete)","Nebraska","Republican Party",118,0.441,0.506
+"MS11621743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",116,-0.286,0.317
+"MS11641700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",116,-0.347,0.35
+"MS11721743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",117,-0.286,0.317
+"MS11741700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",117,-0.347,0.35
+"MS11821743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",118,-0.286,0.317
+"MS11841700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",118,-0.347,0.35
+"MS11640906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",116,-0.221,-0.139
+"MS11641702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",116,-0.225,0.019
+"MS11740906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",117,-0.221,-0.139
+"MS11741702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",117,-0.225,0.019
+"MS11840906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",118,-0.221,-0.139
+"MS11841702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",118,-0.225,0.019
+"MS11629373","MENENDEZ, Robert","New Jersey","Democratic Party",116,-0.366,-0.126
+"MS11641308","BOOKER, Cory Anthony","New Jersey","Democratic Party",116,-0.558,-0.25
+"MS11729373","MENENDEZ, Robert","New Jersey","Democratic Party",117,-0.366,-0.126
+"MS11741308","BOOKER, Cory Anthony","New Jersey","Democratic Party",117,-0.558,-0.25
+"MS11842306","HELMY, George S.","New Jersey","Democratic Party",118,-0.347,-0.308
+"MS11829373","MENENDEZ, Robert","New Jersey","Democratic Party",118,-0.366,-0.126
+"MS11821937","KIM, Andy","New Jersey","Democratic Party",118,-0.408,0.231
+"MS11841308","BOOKER, Cory Anthony","New Jersey","Democratic Party",118,-0.558,-0.25
+"MS11620930","HEINRICH, Martin","New Mexico","Democratic Party",116,-0.334,-0.001
+"MS11629924","UDALL, Thomas (Tom)","New Mexico","Democratic Party",116,-0.453,0.161
+"MS11720930","HEINRICH, Martin","New Mexico","Democratic Party",117,-0.334,-0.001
+"MS11720932","LUJÁN, Ben Ray","New Mexico","Democratic Party",117,-0.38,0.032
+"MS11820930","HEINRICH, Martin","New Mexico","Democratic Party",118,-0.334,-0.001
+"MS11820932","LUJÁN, Ben Ray","New Mexico","Democratic Party",118,-0.38,0.032
+"MS11614858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",116,-0.355,-0.411
+"MS11620735","GILLIBRAND, Kirsten","New York","Democratic Party",116,-0.449,-0.308
+"MS11714858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",117,-0.355,-0.411
+"MS11720735","GILLIBRAND, Kirsten","New York","Democratic Party",117,-0.449,-0.308
+"MS11814858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",118,-0.355,-0.411
+"MS11820735","GILLIBRAND, Kirsten","New York","Democratic Party",118,-0.449,-0.308
+"MS11629548","BURR, Richard M.","North Carolina","Republican Party",116,0.435,-0.07
+"MS11641504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",116,0.386,-0.104
+"MS11729548","BURR, Richard M.","North Carolina","Republican Party",117,0.435,-0.07
+"MS11741504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",117,0.386,-0.104
+"MS11821708","BUDD, Theodore Paul","North Carolina","Republican Party",118,0.633,-0.077
+"MS11841504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",118,0.386,-0.104
+"MS11641107","HOEVEN, John","North Dakota","Republican Party",116,0.401,0.449
+"MS11621350","CRAMER, Kevin","North Dakota","Republican Party",116,0.4,0.367
+"MS11741107","HOEVEN, John","North Dakota","Republican Party",117,0.401,0.449
+"MS11721350","CRAMER, Kevin","North Dakota","Republican Party",117,0.4,0.367
+"MS11841107","HOEVEN, John","North Dakota","Republican Party",118,0.401,0.449
+"MS11821350","CRAMER, Kevin","North Dakota","Republican Party",118,0.4,0.367
+"MS11629386","PORTMAN, Robert Jones (Rob)","Ohio","Republican Party",116,0.371,-0.208
+"MS11629389","BROWN, Sherrod","Ohio","Democratic Party",116,-0.425,-0.097
+"MS11729386","PORTMAN, Robert Jones (Rob)","Ohio","Republican Party",117,0.371,-0.208
+"MS11729389","BROWN, Sherrod","Ohio","Democratic Party",117,-0.425,-0.097
+"MS11842304","VANCE, James David","Ohio","Republican Party",118,0.85,-0.527
+"MS11829389","BROWN, Sherrod","Ohio","Democratic Party",118,-0.425,-0.097
+"MS11621166","LANKFORD, James","Oklahoma","Republican Party",116,0.59,0.148
+"MS11615424","INHOFE, James Mountain","Oklahoma","Republican Party",116,0.552,0.045
+"MS11721166","LANKFORD, James","Oklahoma","Republican Party",117,0.59,0.148
+"MS11715424","INHOFE, James Mountain","Oklahoma","Republican Party",117,0.552,0.045
+"MS11821166","LANKFORD, James","Oklahoma","Republican Party",118,0.59,0.148
+"MS11821355","MULLIN, Markwayne","Oklahoma","Republican Party",118,0.531,0.251
+"MS11614871","WYDEN, Ronald Lee","Oregon","Democratic Party",116,-0.334,-0.487
+"MS11640908","MERKLEY, Jeff","Oregon","Democratic Party",116,-0.453,-0.719
+"MS11714871","WYDEN, Ronald Lee","Oregon","Democratic Party",117,-0.334,-0.487
+"MS11740908","MERKLEY, Jeff","Oregon","Democratic Party",117,-0.453,-0.719
+"MS11814871","WYDEN, Ronald Lee","Oregon","Democratic Party",118,-0.334,-0.487
+"MS11840908","MERKLEY, Jeff","Oregon","Democratic Party",118,-0.453,-0.719
+"MS11629935","TOOMEY, Patrick Joseph","Pennsylvania","Republican Party",116,0.624,-0.378
+"MS11640703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",116,-0.313,0.166
+"MS11729935","TOOMEY, Patrick Joseph","Pennsylvania","Republican Party",117,0.624,-0.378
+"MS11740703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",117,-0.313,0.166
+"MS11842301","FETTERMAN, John Karl","Pennsylvania","Democratic Party",118,-0.186,0.146
+"MS11840703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",118,-0.313,0.166
+"MS11640704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",116,-0.349,-0.112
+"MS11629142","REED, John F. (Jack)","Rhode Island","Democratic Party",116,-0.36,-0.155
+"MS11740704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",117,-0.349,-0.112
+"MS11729142","REED, John F. (Jack)","Rhode Island","Democratic Party",117,-0.36,-0.155
+"MS11840704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",118,-0.349,-0.112
+"MS11829142","REED, John F. (Jack)","Rhode Island","Democratic Party",118,-0.36,-0.155
+"MS11621173","SCOTT, Tim","South Carolina","Republican Party",116,0.629,0.023
+"MS11629566","GRAHAM, Lindsey O.","South Carolina","Republican Party",116,0.367,-0.269
+"MS11721173","SCOTT, Tim","South Carolina","Republican Party",117,0.629,0.023
+"MS11729566","GRAHAM, Lindsey O.","South Carolina","Republican Party",117,0.367,-0.269
+"MS11821173","SCOTT, Tim","South Carolina","Republican Party",118,0.629,0.023
+"MS11829566","GRAHAM, Lindsey O.","South Carolina","Republican Party",118,0.367,-0.269
+"MS11629754","THUNE, John","South Dakota","Republican Party",116,0.432,0.226
+"MS11641505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",116,0.351,0.086
+"MS11729754","THUNE, John","South Dakota","Republican Party",117,0.432,0.226
+"MS11741505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",117,0.351,0.086
+"MS11829754","THUNE, John","South Dakota","Republican Party",118,0.432,0.226
+"MS11841505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",118,0.351,0.086
+"MS11620351","BLACKBURN, Marsha","Tennessee","Republican Party",116,0.632,0.141
+"MS11640304","ALEXANDER, Lamar","Tennessee","Republican Party",116,0.324,-0.176
+"MS11742100","HAGERTY, William Francis (Bill)","Tennessee","Republican Party",117,0.679,-0.085
+"MS11720351","BLACKBURN, Marsha","Tennessee","Republican Party",117,0.632,0.141
+"MS11842100","HAGERTY, William Francis (Bill)","Tennessee","Republican Party",118,0.679,-0.085
+"MS11820351","BLACKBURN, Marsha","Tennessee","Republican Party",118,0.632,0.141
+"MS11641304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",116,0.781,-0.179
+"MS11640305","CORNYN, John","Texas","Republican Party",116,0.471,-0.062
+"MS11741304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",117,0.781,-0.179
+"MS11740305","CORNYN, John","Texas","Republican Party",117,0.471,-0.062
+"MS11841304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",118,0.781,-0.179
+"MS11840305","CORNYN, John","Texas","Republican Party",118,0.471,-0.062
+"MS11641110","LEE, Mike","Utah","Republican Party",116,0.891,-0.454
+"MS11641902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",116,0.286,0.294
+"MS11741110","LEE, Mike","Utah","Republican Party",117,0.891,-0.454
+"MS11741902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",117,0.286,0.294
+"MS11841110","LEE, Mike","Utah","Republican Party",118,0.891,-0.454
+"MS11841902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",118,0.286,0.294
+"MS11614307","LEAHY, Patrick Joseph","Vermont","Democratic Party",116,-0.36,-0.121
+"MS11629147","SANDERS, Bernard","Vermont","Independent",116,-0.545,-0.428
+"MS11714307","LEAHY, Patrick Joseph","Vermont","Democratic Party",117,-0.36,-0.121
+"MS11729147","SANDERS, Bernard","Vermont","Independent",117,-0.545,-0.428
+"MS11820750","WELCH, Peter","Vermont","Democratic Party",118,-0.401,-0.405
+"MS11829147","SANDERS, Bernard","Vermont","Independent",118,-0.545,-0.428
+"MS11640909","WARNER, Mark R.","Virginia","Democratic Party",116,-0.213,-0.037
+"MS11641305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",116,-0.237,-0.112
+"MS11740909","WARNER, Mark R.","Virginia","Democratic Party",117,-0.213,-0.037
+"MS11741305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",117,-0.237,-0.112
+"MS11840909","WARNER, Mark R.","Virginia","Democratic Party",118,-0.213,-0.037
+"MS11841305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",118,-0.237,-0.112
+"MS11639310","CANTWELL, Maria E.","Washington","Democratic Party",116,-0.308,-0.402
+"MS11649308","MURRAY, Patty","Washington","Democratic Party",116,-0.356,-0.314
+"MS11739310","CANTWELL, Maria E.","Washington","Democratic Party",117,-0.308,-0.402
+"MS11749308","MURRAY, Patty","Washington","Democratic Party",117,-0.356,-0.314
+"MS11839310","CANTWELL, Maria E.","Washington","Democratic Party",118,-0.308,-0.402
+"MS11849308","MURRAY, Patty","Washington","Democratic Party",118,-0.356,-0.314
+"MS11620146","CAPITO, Shelley Moore","West Virginia","Republican Party",116,0.284,0.144
+"MS11640915","MANCHIN, Joe, III","West Virginia","Democratic Party",116,-0.057,0.4
+"MS11720146","CAPITO, Shelley Moore","West Virginia","Republican Party",117,0.284,0.144
+"MS11740915","MANCHIN, Joe, III","West Virginia","Democratic Party",117,-0.057,0.4
+"MS11820146","CAPITO, Shelley Moore","West Virginia","Republican Party",118,0.284,0.144
+"MS11840915","MANCHIN, Joe, III","West Virginia","Democratic Party",118,-0.057,0.4
+"MS11890915","MANCHIN, Joe, III","West Virginia","Independent",118,-0.06,-0.805
+"MS11641111","JOHNSON, Ron","Wisconsin","Republican Party",116,0.643,-0.144
+"MS11629940","BALDWIN, Tammy","Wisconsin","Democratic Party",116,-0.486,-0.124
+"MS11741111","JOHNSON, Ron","Wisconsin","Republican Party",117,0.643,-0.144
+"MS11729940","BALDWIN, Tammy","Wisconsin","Democratic Party",117,-0.486,-0.124
+"MS11841111","JOHNSON, Ron","Wisconsin","Republican Party",118,0.643,-0.144
+"MS11829940","BALDWIN, Tammy","Wisconsin","Democratic Party",118,-0.486,-0.124
+"MS11649706","ENZI, Michael B.","Wyoming","Republican Party",116,0.545,0.199
+"MS11640707","BARRASSO, John A.","Wyoming","Republican Party",116,0.54,0.193
+"MS11720953","LUMMIS, Cynthia M.","Wyoming","Republican Party",117,0.685,-0.327
+"MS11740707","BARRASSO, John A.","Wyoming","Republican Party",117,0.54,0.193
+"MS11820953","LUMMIS, Cynthia M.","Wyoming","Republican Party",118,0.685,-0.327
+"MS11840707","BARRASSO, John A.","Wyoming","Republican Party",118,0.54,0.193

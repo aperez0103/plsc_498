@@ -4,7 +4,10 @@
       "Bash(ls:*)",
       "WebSearch",
       "WebFetch(domain:www.reddit.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(Rscript -e ':*)",
+      "Bash('/c/Program Files/R/R-4.5.0/bin/Rscript.exe' -e ':*)",
+      "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" 15_week/data/_tmp_inspect.R)"
     ]
   }
 }
