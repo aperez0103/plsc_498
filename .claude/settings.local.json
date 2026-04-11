@@ -4,7 +4,13 @@
       "Bash(ls:*)",
       "WebSearch",
       "WebFetch(domain:www.reddit.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(Rscript -e ':*)",
+      "Bash('/c/Program Files/R/R-4.5.0/bin/Rscript.exe' -e ':*)",
+      "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" 15_week/data/_tmp_inspect.R)",
+      "Bash(curl -sL https://api.github.com/repos/jfedgerton/Edgerton-2023-JCR/contents/)",
+      "Bash(curl -sL -o isis_count_data.rds https://raw.githubusercontent.com/jfedgerton/Edgerton-2023-JCR/main/replication_data/isis_count_data.rds)",
+      "Bash(curl -sL -o data_for_analysis.Rda https://raw.githubusercontent.com/jfedgerton/Edgerton-2023-JCR/main/replication_data/data_for_analysis.Rda)"
     ]
   }
 }

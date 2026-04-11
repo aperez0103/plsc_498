@@ -94,7 +94,7 @@ tryCatch({
         TRUE ~ sample(1:2, n(), replace = TRUE)
       )
     ) %>%
-    uncount(n) %>%
+    tidyr::uncount(n) %>%
     mutate(
       member_id = row_number(),
       name = case_when(

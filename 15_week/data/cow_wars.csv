@@ -1,0 +1,932 @@
+"ccode","state_name","year","cow_war_warnum","cow_war_wartype","cow_war_outcome","cow_wartype","cow_war_fatalities"
+2,"United States of America",1861,572,"local issues",1,"local issues",618000
+2,"United States of America",1862,572,"local issues",1,"local issues",618000
+2,"United States of America",1863,572,"local issues",1,"local issues",618000
+2,"United States of America",1864,572,"local issues",1,"local issues",618000
+2,"United States of America",1865,572,"local issues",1,"local issues",618000
+40,"Cuba",1912,658,"local issues",1,"local issues",1050
+40,"Cuba",1958,745,"central control",2,"central control",3000
+40,"Cuba",1959,745,"central control",2,"central control",3000
+41,"Haiti",1869,592,"central control",2,"central control",-18
+41,"Haiti",1883,611,"central control",1,"central control",8100
+41,"Haiti",1884,611,"central control",1,"central control",8100
+42,"Dominican Republic",1965,766,"central control",7,"central control",2491
+70,"Mexico",1832,520,"central control",2,"central control",-18
+70,"Mexico",1835,527,"local issues",2,"local issues",2200
+70,"Mexico",1836,527,"local issues",2,"local issues",2200
+70,"Mexico",1841,541,"central control",2,"central control",-18
+70,"Mexico",1848,553,"local issues",1,"local issues",-18
+70,"Mexico",1849,553,"local issues",1,"local issues",-18
+70,"Mexico",1850,553,"local issues",1,"local issues",-18
+70,"Mexico",1851,553,"local issues",1,"local issues",-18
+70,"Mexico",1852,553,"local issues",1,"local issues",-18
+70,"Mexico",1853,553,"local issues",1,"local issues",-18
+70,"Mexico",1854,553,"local issues",1,"local issues",-18
+70,"Mexico",1855,558,"central control",1,"central control",3600
+70,"Mexico",1856,558,"central control",1,"central control",3600
+70,"Mexico",1858,561,"central control",4,"central control",-18
+70,"Mexico",1859,561,"central control",4,"central control",-18
+70,"Mexico",1860,561,"central control",4,"central control",-18
+70,"Mexico",1861,561,"central control",4,"central control",-18
+70,"Mexico",1867,587,"central control",2,"central control",2500
+70,"Mexico",1876,602,"central control",2,"central control",1891
+70,"Mexico",1899,635,"local issues",1,"local issues",1600
+70,"Mexico",1900,635,"local issues",1,"local issues",1600
+70,"Mexico",1910,652,"central control",2,"central control",93750
+70,"Mexico",1911,652,"central control",2,"central control",93750
+70,"Mexico",1912,652,"central control",2,"central control",93750
+70,"Mexico",1913,652,"central control",2,"central control",93750
+70,"Mexico",1914,673,"central control",1,"central control",31250
+70,"Mexico",1915,673,"central control",1,"central control",31250
+70,"Mexico",1916,673,"central control",1,"central control",31250
+70,"Mexico",1917,673,"central control",1,"central control",31250
+70,"Mexico",1918,673,"central control",1,"central control",31250
+70,"Mexico",1919,673,"central control",1,"central control",31250
+70,"Mexico",1920,673,"central control",1,"central control",31250
+70,"Mexico",1923,695,"central control",1,"central control",-18
+70,"Mexico",1924,695,"central control",1,"central control",-18
+70,"Mexico",1926,701,"central control",3,"central control",10000
+70,"Mexico",1927,701,"central control",3,"central control",10000
+70,"Mexico",1928,701,"central control",3,"central control",10000
+70,"Mexico",1929,707,"central control",1,"central control",2000
+90,"Guatemala",1966,770,"central control",1,"central control",1000
+90,"Guatemala",1967,770,"central control",1,"central control",1000
+90,"Guatemala",1968,770,"central control",1,"central control",1000
+90,"Guatemala",1970,781,"central control",1,"central control",1000
+90,"Guatemala",1971,781,"central control",1,"central control",1000
+90,"Guatemala",1978,809,"central control",1,"central control",6000
+90,"Guatemala",1979,809,"central control",1,"central control",6000
+90,"Guatemala",1980,809,"central control",1,"central control",6000
+90,"Guatemala",1981,809,"central control",1,"central control",6000
+90,"Guatemala",1982,809,"central control",1,"central control",6000
+90,"Guatemala",1983,809,"central control",1,"central control",6000
+90,"Guatemala",1984,809,"central control",1,"central control",6000
+91,"Honduras",1924,696,"central control",2,"central control",-18
+92,"El Salvador",1932,712,"central control",1,"central control",2600
+92,"El Salvador",1979,817,"central control",3,"central control",-18
+92,"El Salvador",1980,817,"central control",3,"central control",-18
+92,"El Salvador",1981,817,"central control",3,"central control",-18
+92,"El Salvador",1982,817,"central control",3,"central control",-18
+92,"El Salvador",1983,817,"central control",3,"central control",-18
+92,"El Salvador",1984,817,"central control",3,"central control",-18
+92,"El Salvador",1985,817,"central control",3,"central control",-18
+92,"El Salvador",1986,817,"central control",3,"central control",-18
+92,"El Salvador",1987,817,"central control",3,"central control",-18
+92,"El Salvador",1988,817,"central control",3,"central control",-18
+92,"El Salvador",1989,817,"central control",3,"central control",-18
+92,"El Salvador",1990,817,"central control",3,"central control",-18
+92,"El Salvador",1991,817,"central control",3,"central control",-18
+92,"El Salvador",1992,817,"central control",3,"central control",-18
+93,"Nicaragua",1978,815,"central control",2,"central control",4000
+93,"Nicaragua",1979,815,"central control",2,"central control",4000
+93,"Nicaragua",1982,828,"central control",6,"central control",32200
+93,"Nicaragua",1983,828,"central control",6,"central control",32200
+93,"Nicaragua",1984,828,"central control",6,"central control",32200
+93,"Nicaragua",1985,828,"central control",6,"central control",32200
+93,"Nicaragua",1986,828,"central control",6,"central control",32200
+93,"Nicaragua",1987,828,"central control",6,"central control",32200
+93,"Nicaragua",1988,828,"central control",6,"central control",32200
+93,"Nicaragua",1989,828,"central control",6,"central control",32200
+93,"Nicaragua",1990,828,"central control",6,"central control",32200
+94,"Costa Rica",1948,730,"central control",2,"central control",2000
+100,"Colombia",1840,536,"central control",2,"central control",-18
+100,"Colombia",1841,536,"central control",2,"central control",-18
+100,"Colombia",1842,536,"central control",2,"central control",-18
+100,"Colombia",1860,565,"central control",2,"central control",-18
+100,"Colombia",1861,565,"central control",2,"central control",-18
+100,"Colombia",1876,605,"central control",1,"central control",3870
+100,"Colombia",1877,605,"central control",1,"central control",3870
+100,"Colombia",1884,612,"central control",1,"central control",1000
+100,"Colombia",1885,612,"central control",1,"central control",1000
+100,"Colombia",1895,626,"central control",1,"central control",1200
+100,"Colombia",1899,636,"central control",1,"central control",1e+05
+100,"Colombia",1900,636,"central control",1,"central control",1e+05
+100,"Colombia",1901,636,"central control",1,"central control",1e+05
+100,"Colombia",1902,636,"central control",1,"central control",1e+05
+100,"Colombia",1948,731,"central control",1,"central control",29800
+100,"Colombia",1949,731,"central control",1,"central control",29800
+100,"Colombia",1950,731,"central control",1,"central control",29800
+100,"Colombia",1951,731,"central control",1,"central control",29800
+100,"Colombia",1952,731,"central control",1,"central control",29800
+100,"Colombia",1953,731,"central control",1,"central control",29800
+100,"Colombia",1954,731,"central control",1,"central control",29800
+100,"Colombia",1955,731,"central control",1,"central control",29800
+100,"Colombia",1956,731,"central control",1,"central control",29800
+100,"Colombia",1957,731,"central control",1,"central control",29800
+100,"Colombia",1958,731,"central control",1,"central control",29800
+100,"Colombia",1989,856,"local issues",5,"local issues",28161
+100,"Colombia",1990,856,"local issues",5,"local issues",28161
+100,"Colombia",1991,856,"local issues",5,"local issues",28161
+100,"Colombia",1992,856,"local issues",5,"local issues",28161
+100,"Colombia",1993,856,"local issues",5,"local issues",28161
+100,"Colombia",1994,856,"local issues",5,"local issues",28161
+100,"Colombia",1995,856,"local issues",5,"local issues",28161
+100,"Colombia",1996,856,"local issues",5,"local issues",28161
+100,"Colombia",1997,856,"local issues",5,"local issues",28161
+100,"Colombia",1998,856,"local issues",5,"local issues",28161
+100,"Colombia",1999,856,"local issues",5,"local issues",28161
+100,"Colombia",2000,856,"local issues",5,"local issues",28161
+100,"Colombia",2001,856,"local issues",5,"local issues",28161
+100,"Colombia",2002,856,"local issues",5,"local issues",28161
+100,"Colombia",2003,856,"local issues",5,"local issues",28161
+100,"Colombia",2004,856,"local issues",5,"local issues",28161
+100,"Colombia",2005,856,"local issues",5,"local issues",28161
+100,"Colombia",2006,856,"local issues",5,"local issues",28161
+100,"Colombia",2007,856,"local issues",5,"local issues",28161
+101,"Venezuela",1848,548,"central control",1,"central control",1491
+101,"Venezuela",1849,548,"central control",1,"central control",1491
+101,"Venezuela",1859,563,"central control",2,"central control",20000
+101,"Venezuela",1860,563,"central control",2,"central control",20000
+101,"Venezuela",1861,563,"central control",2,"central control",20000
+101,"Venezuela",1862,563,"central control",2,"central control",20000
+101,"Venezuela",1863,563,"central control",2,"central control",20000
+101,"Venezuela",1868,590,"central control",2,"central control",-18
+101,"Venezuela",1869,590,"central control",2,"central control",-18
+101,"Venezuela",1870,590,"central control",2,"central control",-18
+101,"Venezuela",1871,590,"central control",2,"central control",-18
+101,"Venezuela",1899,633,"central control",2,"central control",2100
+101,"Venezuela",1901,638,"central control",1,"central control",4000
+101,"Venezuela",1902,638,"central control",1,"central control",4000
+101,"Venezuela",1903,638,"central control",1,"central control",4000
+130,"Ecuador",1895,627,"central control",2,"central control",1000
+130,"Ecuador",1912,670,"local issues",1,"local issues",-18
+130,"Ecuador",1913,670,"local issues",1,"local issues",-18
+130,"Ecuador",1914,670,"local issues",1,"local issues",-18
+135,"Peru",1853,557,"central control",2,"central control",-18
+135,"Peru",1854,557,"central control",2,"central control",-18
+135,"Peru",1855,557,"central control",2,"central control",-18
+135,"Peru",1856,560,"central control",1,"central control",-18
+135,"Peru",1857,560,"central control",1,"central control",-18
+135,"Peru",1858,560,"central control",1,"central control",-18
+135,"Peru",1885,613,"local issues",1,"local issues",2200
+135,"Peru",1894,625,"central control",2,"central control",-18
+135,"Peru",1895,625,"central control",2,"central control",-18
+135,"Peru",1932,713,"central control",1,"central control",1100
+135,"Peru",1982,827,"central control",1,"central control",16000
+135,"Peru",1983,827,"central control",1,"central control",16000
+135,"Peru",1984,827,"central control",1,"central control",16000
+135,"Peru",1985,827,"central control",1,"central control",16000
+135,"Peru",1986,827,"central control",1,"central control",16000
+135,"Peru",1987,827,"central control",1,"central control",16000
+135,"Peru",1988,827,"central control",1,"central control",16000
+135,"Peru",1989,827,"central control",1,"central control",16000
+135,"Peru",1990,827,"central control",1,"central control",16000
+135,"Peru",1991,827,"central control",1,"central control",16000
+135,"Peru",1992,827,"central control",1,"central control",16000
+140,"Brazil",1835,525,"local issues",1,"local issues",-18
+140,"Brazil",1836,525,"local issues",1,"local issues",-18
+140,"Brazil",1837,531,"local issues",1,"local issues",1800
+140,"Brazil",1838,531,"local issues",1,"local issues",1800
+140,"Brazil",1839,526,"local issues",1,"local issues",-18
+140,"Brazil",1840,526,"local issues",1,"local issues",-18
+140,"Brazil",1841,526,"local issues",1,"local issues",-18
+140,"Brazil",1842,526,"local issues",1,"local issues",-18
+140,"Brazil",1843,526,"local issues",1,"local issues",-18
+140,"Brazil",1844,526,"local issues",1,"local issues",-18
+140,"Brazil",1845,526,"local issues",1,"local issues",-18
+140,"Brazil",1893,620,"local issues",1,"local issues",1491
+140,"Brazil",1894,620,"local issues",1,"local issues",1491
+140,"Brazil",1896,632,"local issues",1,"local issues",5200
+140,"Brazil",1897,632,"local issues",1,"local issues",5200
+140,"Brazil",1932,715,"central control",1,"central control",-18
+145,"Bolivia",1862,578,"central control",1,"central control",-18
+145,"Bolivia",1870,595,"central control",2,"central control",-18
+145,"Bolivia",1871,595,"central control",2,"central control",-18
+145,"Bolivia",1952,737,"central control",2,"central control",-18
+150,"Paraguay",1911,656,"central control",2,"central control",5000
+150,"Paraguay",1912,656,"central control",2,"central control",5000
+150,"Paraguay",1947,727,"central control",1,"central control",-18
+155,"Chile",1851,555,"central control",1,"central control",4000
+155,"Chile",1891,617,"central control",2,"central control",1700
+155,"Chile",1973,793,"central control",2,"central control",3400
+160,"Argentina",1841,538,"central control",1,"central control",3300
+160,"Argentina",1842,538,"central control",1,"central control",3300
+160,"Argentina",1861,573,"local issues",2,"local issues",1000
+160,"Argentina",1863,581,"central control",1,"central control",-18
+160,"Argentina",1866,586,"central control",1,"central control",-18
+160,"Argentina",1867,586,"central control",1,"central control",-18
+160,"Argentina",1870,593,"local issues",1,"local issues",-18
+160,"Argentina",1871,593,"local issues",1,"local issues",-18
+160,"Argentina",1874,600,"central control",1,"central control",-18
+160,"Argentina",1879,608,"local issues",1,"local issues",1700
+160,"Argentina",1880,610,"local issues",1,"local issues",1200
+160,"Argentina",1955,740,"central control",2,"central control",-18
+160,"Argentina",1975,800,"central control",1,"central control",2850
+160,"Argentina",1976,800,"central control",1,"central control",2850
+160,"Argentina",1977,800,"central control",1,"central control",2850
+165,"Uruguay",1904,641,"central control",1,"central control",-18
+210,"Netherlands",1830,515,"local issues",2,"local issues",1100
+220,"France",1830,513,"central control",2,"central control",2200
+220,"France",1848,552,"central control",1,"central control",2800
+220,"France",1871,596,"central control",1,"central control",25879
+230,"Spain",1821,503,"central control",4,"central control",-18
+230,"Spain",1822,503,"central control",4,"central control",-18
+230,"Spain",1823,503,"central control",4,"central control",-18
+230,"Spain",1834,522,"central control",1,"central control",125000
+230,"Spain",1835,522,"central control",1,"central control",125000
+230,"Spain",1836,522,"central control",1,"central control",125000
+230,"Spain",1837,522,"central control",1,"central control",125000
+230,"Spain",1838,522,"central control",1,"central control",125000
+230,"Spain",1839,522,"central control",1,"central control",125000
+230,"Spain",1840,522,"central control",1,"central control",125000
+230,"Spain",1847,546,"central control",1,"central control",10000
+230,"Spain",1848,546,"central control",1,"central control",10000
+230,"Spain",1849,546,"central control",1,"central control",10000
+230,"Spain",1868,591,"central control",2,"central control",-18
+230,"Spain",1872,597,"central control",1,"central control",50000
+230,"Spain",1873,597,"central control",1,"central control",50000
+230,"Spain",1874,598,"local issues",1,"local issues",-18
+230,"Spain",1875,597,"central control",1,"central control",50000
+230,"Spain",1876,597,"central control",1,"central control",50000
+230,"Spain",1934,717,"local issues",1,"local issues",1335
+230,"Spain",1936,718,"central control",2,"central control",460000
+230,"Spain",1937,718,"central control",2,"central control",460000
+230,"Spain",1938,718,"central control",2,"central control",460000
+230,"Spain",1939,718,"central control",2,"central control",460000
+235,"Portugal",1828,510,"central control",2,"central control",20000
+235,"Portugal",1829,510,"central control",2,"central control",20000
+235,"Portugal",1830,510,"central control",2,"central control",20000
+235,"Portugal",1831,510,"central control",2,"central control",20000
+235,"Portugal",1832,510,"central control",2,"central control",20000
+235,"Portugal",1833,510,"central control",2,"central control",20000
+235,"Portugal",1834,510,"central control",2,"central control",20000
+290,"Poland",1945,721,"local issues",1,"local issues",19700
+290,"Poland",1946,721,"local issues",1,"local issues",19700
+290,"Poland",1947,721,"local issues",1,"local issues",19700
+300,"Austria-Hungary",1848,554,"local issues",1,"local issues",66000
+300,"Austria-Hungary",1849,554,"local issues",1,"local issues",66000
+310,"Hungary",1919,683,"central control",2,"central control",1500
+310,"Hungary",1920,683,"central control",2,"central control",1500
+325,"Italy",1821,505,"central control",1,"central control",-18
+329,"Two Sicilies",1820,502,"central control",1,"central control",-18
+329,"Two Sicilies",1821,502,"central control",1,"central control",-18
+329,"Two Sicilies",1848,547,"central control",1,"central control",1491
+329,"Two Sicilies",1849,547,"central control",1,"central control",1491
+344,"Croatia",1995,891,"local issues",1,"local issues",-18
+345,"Yugoslavia",1991,864,"local issues",2,"local issues",-18
+345,"Yugoslavia",1992,864,"local issues",2,"local issues",-18
+345,"Yugoslavia",1998,900,"local issues",4,"local issues",1200
+345,"Yugoslavia",1999,900,"local issues",4,"local issues",1200
+346,"Bosnia and Herzegovina",1992,877,"local issues",1,"local issues",46043
+346,"Bosnia and Herzegovina",1993,877,"local issues",1,"local issues",46043
+346,"Bosnia and Herzegovina",1994,877,"local issues",1,"local issues",46043
+346,"Bosnia and Herzegovina",1995,877,"local issues",1,"local issues",46043
+350,"Greece",1944,720,"central control",1,"central control",67970
+350,"Greece",1945,720,"central control",1,"central control",67970
+350,"Greece",1946,720,"central control",1,"central control",67970
+350,"Greece",1947,720,"central control",1,"central control",67970
+350,"Greece",1948,720,"central control",1,"central control",67970
+350,"Greece",1949,720,"central control",1,"central control",67970
+355,"Bulgaria",1923,693,"central control",1,"central control",-18
+359,"Moldova",1991,873,"local issues",3,"local issues",-18
+359,"Moldova",1992,873,"local issues",3,"local issues",-18
+360,"Romania",1907,645,"central control",1,"central control",1991
+360,"Romania",1989,858,"central control",2,"central control",1000
+365,"Russia",1818,500,"local issues",1,"local issues",11000
+365,"Russia",1819,500,"local issues",1,"local issues",11000
+365,"Russia",1820,500,"local issues",1,"local issues",11000
+365,"Russia",1821,500,"local issues",1,"local issues",11000
+365,"Russia",1822,500,"local issues",1,"local issues",11000
+365,"Russia",1830,511,"local issues",1,"local issues",1500
+365,"Russia",1831,517,"local issues",1,"local issues",35000
+365,"Russia",1832,511,"local issues",1,"local issues",1500
+365,"Russia",1834,523,"local issues",7,"local issues",-18
+365,"Russia",1836,530,"local issues",1,"local issues",14991
+365,"Russia",1837,530,"local issues",1,"local issues",14991
+365,"Russia",1838,530,"local issues",1,"local issues",14991
+365,"Russia",1839,530,"local issues",1,"local issues",14991
+365,"Russia",1840,530,"local issues",1,"local issues",14991
+365,"Russia",1841,530,"local issues",1,"local issues",14991
+365,"Russia",1842,530,"local issues",1,"local issues",14991
+365,"Russia",1843,530,"local issues",1,"local issues",14991
+365,"Russia",1844,530,"local issues",1,"local issues",14991
+365,"Russia",1845,530,"local issues",1,"local issues",14991
+365,"Russia",1846,530,"local issues",1,"local issues",14991
+365,"Russia",1847,530,"local issues",1,"local issues",14991
+365,"Russia",1848,530,"local issues",1,"local issues",14991
+365,"Russia",1849,530,"local issues",1,"local issues",14991
+365,"Russia",1850,530,"local issues",1,"local issues",14991
+365,"Russia",1851,530,"local issues",1,"local issues",14991
+365,"Russia",1852,530,"local issues",1,"local issues",14991
+365,"Russia",1863,580,"local issues",1,"local issues",16500
+365,"Russia",1864,580,"local issues",1,"local issues",16500
+365,"Russia",1905,643,"central control",1,"central control",1491
+365,"Russia",1906,643,"central control",1,"central control",1491
+365,"Russia",1916,676,"local issues",1,"local issues",1350
+365,"Russia",1917,677,"central control",1,"central control",8e+05
+365,"Russia",1918,677,"central control",1,"central control",8e+05
+365,"Russia",1919,677,"central control",1,"central control",8e+05
+365,"Russia",1920,686,"local issues",1,"local issues",6700
+365,"Russia",1921,691,"local issues",1,"local issues",3500
+365,"Russia",1922,691,"local issues",1,"local issues",3500
+365,"Russia",1923,691,"local issues",1,"local issues",3500
+365,"Russia",1945,722,"local issues",1,"local issues",34991
+365,"Russia",1946,722,"local issues",1,"local issues",34991
+365,"Russia",1947,722,"local issues",1,"local issues",34991
+365,"Russia",1948,723,"local issues",1,"local issues",32400
+365,"Russia",1949,723,"local issues",1,"local issues",32400
+365,"Russia",1950,723,"local issues",1,"local issues",32400
+365,"Russia",1951,723,"local issues",1,"local issues",32400
+365,"Russia",1994,888,"local issues",2,"local issues",10000
+365,"Russia",1995,888,"local issues",2,"local issues",10000
+365,"Russia",1996,888,"local issues",2,"local issues",10000
+365,"Russia",1999,915,"local issues",1,"local issues",20000
+365,"Russia",2000,915,"local issues",1,"local issues",20000
+365,"Russia",2001,915,"local issues",1,"local issues",20000
+365,"Russia",2002,915,"local issues",1,"local issues",20000
+365,"Russia",2003,915,"local issues",1,"local issues",20000
+372,"Georgia",1991,871,"central control",2,"central control",-18
+372,"Georgia",1992,871,"central control",2,"central control",-18
+372,"Georgia",1993,882,"local issues",2,"local issues",8000
+372,"Georgia",1994,882,"local issues",2,"local issues",8000
+373,"Azerbaijan",1991,872,"local issues",4,"local issues",10000
+373,"Azerbaijan",1992,872,"local issues",4,"local issues",10000
+373,"Azerbaijan",1993,872,"local issues",4,"local issues",10000
+375,"Finland",1918,680,"central control",1,"central control",13800
+404,"Guinea-Bissau",1998,902,"central control",2,"central control",-18
+404,"Guinea-Bissau",1999,902,"central control",2,"central control",-18
+437,"Ivory Coast",2002,925,"central control",2,"central control",2700
+437,"Ivory Coast",2003,925,"central control",2,"central control",2700
+437,"Ivory Coast",2004,925,"central control",2,"central control",2700
+438,"Guinea",2000,917,"central control",6,"central control",-18
+438,"Guinea",2001,917,"central control",6,"central control",-18
+450,"Liberia",1989,860,"central control",7,"central control",-18
+450,"Liberia",1990,860,"central control",7,"central control",-18
+450,"Liberia",1992,878,"central control",3,"central control",-18
+450,"Liberia",1993,878,"central control",3,"central control",-18
+450,"Liberia",1994,878,"central control",3,"central control",-18
+450,"Liberia",1995,878,"central control",3,"central control",-18
+450,"Liberia",1996,892,"central control",3,"central control",-18
+450,"Liberia",2002,922,"central control",2,"central control",-18
+450,"Liberia",2003,922,"central control",2,"central control",-18
+451,"Sierra Leone",1991,863,"central control",1,"central control",-18
+451,"Sierra Leone",1992,863,"central control",1,"central control",-18
+451,"Sierra Leone",1993,863,"central control",1,"central control",-18
+451,"Sierra Leone",1994,863,"central control",1,"central control",-18
+451,"Sierra Leone",1995,863,"central control",1,"central control",-18
+451,"Sierra Leone",1996,863,"central control",1,"central control",-18
+451,"Sierra Leone",1998,898,"central control",2,"central control",-18
+451,"Sierra Leone",1999,898,"central control",2,"central control",-18
+451,"Sierra Leone",2000,898,"central control",2,"central control",-18
+475,"Nigeria",1967,775,"local issues",1,"local issues",-18
+475,"Nigeria",1968,775,"local issues",1,"local issues",-18
+475,"Nigeria",1969,775,"local issues",1,"local issues",-18
+475,"Nigeria",1970,775,"local issues",1,"local issues",-18
+475,"Nigeria",1980,823,"local issues",1,"local issues",1050
+475,"Nigeria",1981,823,"local issues",1,"local issues",1050
+483,"Chad",1966,771,"local issues",1,"local issues",3500
+483,"Chad",1967,771,"local issues",1,"local issues",3500
+483,"Chad",1968,771,"local issues",1,"local issues",3500
+483,"Chad",1969,771,"local issues",1,"local issues",3500
+483,"Chad",1970,771,"local issues",1,"local issues",3500
+483,"Chad",1971,771,"local issues",1,"local issues",3500
+483,"Chad",1980,820,"local issues",2,"local issues",5000
+483,"Chad",1981,820,"local issues",2,"local issues",5000
+483,"Chad",1982,820,"local issues",2,"local issues",5000
+483,"Chad",1983,820,"local issues",2,"local issues",5000
+483,"Chad",1984,820,"local issues",2,"local issues",5000
+483,"Chad",1989,852,"central control",2,"central control",3800
+483,"Chad",1990,852,"central control",2,"central control",3800
+483,"Chad",1998,906,"central control",7,"central control",-18
+483,"Chad",1999,906,"central control",7,"central control",-18
+483,"Chad",2000,906,"central control",7,"central control",-18
+483,"Chad",2005,937,"central control",1,"central control",1100
+483,"Chad",2006,937,"central control",1,"central control",1100
+484,"Congo",1997,897,"central control",2,"central control",-18
+484,"Congo",1998,908,"central control",1,"central control",-18
+484,"Congo",1999,908,"central control",1,"central control",-18
+490,"Democratic Republic of the Congo",1960,750,"local issues",1,"local issues",-18
+490,"Democratic Republic of the Congo",1961,750,"local issues",1,"local issues",-18
+490,"Democratic Republic of the Congo",1962,750,"local issues",1,"local issues",-18
+490,"Democratic Republic of the Congo",1963,760,"local issues",1,"local issues",-18
+490,"Democratic Republic of the Congo",1964,762,"central control",1,"central control",4250
+490,"Democratic Republic of the Congo",1965,762,"central control",1,"central control",4250
+490,"Democratic Republic of the Congo",1978,811,"central control",1,"central control",1000
+490,"Democratic Republic of the Congo",1996,895,"central control",2,"central control",-18
+490,"Democratic Republic of the Congo",1997,895,"central control",2,"central control",-18
+490,"Democratic Republic of the Congo",1998,905,"central control",3,"central control",-18
+490,"Democratic Republic of the Congo",1999,905,"central control",3,"central control",-18
+490,"Democratic Republic of the Congo",2000,905,"central control",3,"central control",-18
+490,"Democratic Republic of the Congo",2001,905,"central control",3,"central control",-18
+490,"Democratic Republic of the Congo",2002,905,"central control",3,"central control",-18
+500,"Uganda",1966,768,"local issues",1,"local issues",-18
+500,"Uganda",1980,822,"local issues",2,"local issues",46000
+500,"Uganda",1981,822,"local issues",2,"local issues",46000
+500,"Uganda",1982,822,"local issues",2,"local issues",46000
+500,"Uganda",1983,822,"local issues",2,"local issues",46000
+500,"Uganda",1984,822,"local issues",2,"local issues",46000
+500,"Uganda",1985,822,"local issues",2,"local issues",46000
+500,"Uganda",1986,843,"central control",1,"central control",7000
+500,"Uganda",1987,843,"central control",1,"central control",7000
+511,"Zanzibar",1964,763,"central control",2,"central control",-18
+516,"Burundi",1972,789,"central control",1,"central control",2000
+516,"Burundi",1993,883,"central control",7,"central control",-18
+516,"Burundi",1994,883,"central control",7,"central control",-18
+516,"Burundi",1995,883,"central control",7,"central control",-18
+516,"Burundi",1996,883,"central control",7,"central control",-18
+516,"Burundi",1997,883,"central control",7,"central control",-18
+516,"Burundi",1998,883,"central control",7,"central control",-18
+516,"Burundi",2001,918,"central control",3,"central control",3150
+516,"Burundi",2002,918,"central control",3,"central control",3150
+516,"Burundi",2003,918,"central control",3,"central control",3150
+517,"Rwanda",1963,761,"central control",1,"central control",1000
+517,"Rwanda",1964,761,"central control",1,"central control",1000
+517,"Rwanda",1994,886,"central control",2,"central control",-18
+517,"Rwanda",1997,896,"central control",1,"central control",3300
+517,"Rwanda",1998,896,"central control",1,"central control",3300
+517,"Rwanda",2001,920,"central control",1,"central control",1791
+520,"Somalia",1988,848,"central control",2,"central control",-18
+520,"Somalia",1989,848,"central control",2,"central control",-18
+520,"Somalia",1990,848,"central control",2,"central control",-18
+520,"Somalia",1991,870,"central control",3,"central control",-18
+520,"Somalia",1992,870,"central control",3,"central control",-18
+520,"Somalia",1993,870,"central control",3,"central control",-18
+520,"Somalia",1994,870,"central control",3,"central control",-18
+520,"Somalia",1995,870,"central control",3,"central control",-18
+520,"Somalia",1996,870,"central control",3,"central control",-18
+520,"Somalia",1997,870,"central control",3,"central control",-18
+520,"Somalia",2006,938,"central control",1,"central control",-18
+520,"Somalia",2007,938,"central control",1,"central control",-18
+520,"Somalia",2008,938,"central control",1,"central control",-18
+530,"Ethiopia",1928,702,"local issues",1,"local issues",-18
+530,"Ethiopia",1929,702,"local issues",1,"local issues",-18
+530,"Ethiopia",1930,702,"local issues",1,"local issues",-18
+530,"Ethiopia",1963,757,"local issues",1,"local issues",-18
+530,"Ethiopia",1964,757,"local issues",1,"local issues",-18
+530,"Ethiopia",1975,798,"local issues",1,"local issues",12500
+530,"Ethiopia",1976,805,"local issues",4,"local issues",29000
+530,"Ethiopia",1977,805,"local issues",4,"local issues",29000
+530,"Ethiopia",1978,808,"local issues",1,"local issues",22000
+530,"Ethiopia",1979,808,"local issues",1,"local issues",22000
+530,"Ethiopia",1980,808,"local issues",1,"local issues",22000
+530,"Ethiopia",1982,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1983,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1984,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1985,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1986,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1987,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1988,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1989,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1990,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1991,826,"local issues",2,"local issues",75000
+530,"Ethiopia",1999,913,"local issues",1,"local issues",1000
+540,"Angola",1976,804,"central control",3,"central control",-18
+540,"Angola",1977,804,"central control",3,"central control",-18
+540,"Angola",1978,804,"central control",3,"central control",-18
+540,"Angola",1979,804,"central control",3,"central control",-18
+540,"Angola",1980,804,"central control",3,"central control",-18
+540,"Angola",1981,804,"central control",3,"central control",-18
+540,"Angola",1982,804,"central control",3,"central control",-18
+540,"Angola",1983,804,"central control",3,"central control",-18
+540,"Angola",1984,804,"central control",3,"central control",-18
+540,"Angola",1985,804,"central control",3,"central control",-18
+540,"Angola",1986,804,"central control",3,"central control",-18
+540,"Angola",1987,804,"central control",3,"central control",-18
+540,"Angola",1988,804,"central control",3,"central control",-18
+540,"Angola",1989,804,"central control",3,"central control",-18
+540,"Angola",1990,804,"central control",3,"central control",-18
+540,"Angola",1991,804,"central control",3,"central control",-18
+540,"Angola",1992,880,"central control",3,"central control",-18
+540,"Angola",1993,880,"central control",3,"central control",-18
+540,"Angola",1994,880,"central control",3,"central control",-18
+540,"Angola",1998,907,"central control",1,"central control",-18
+540,"Angola",1999,907,"central control",1,"central control",-18
+540,"Angola",2000,907,"central control",1,"central control",-18
+540,"Angola",2001,907,"central control",1,"central control",-18
+540,"Angola",2002,907,"central control",1,"central control",-18
+541,"Mozambique",1979,818,"central control",1,"central control",-18
+541,"Mozambique",1980,818,"central control",1,"central control",-18
+541,"Mozambique",1981,818,"central control",1,"central control",-18
+541,"Mozambique",1982,818,"central control",1,"central control",-18
+541,"Mozambique",1983,818,"central control",1,"central control",-18
+541,"Mozambique",1984,818,"central control",1,"central control",-18
+541,"Mozambique",1985,818,"central control",1,"central control",-18
+541,"Mozambique",1986,818,"central control",1,"central control",-18
+541,"Mozambique",1987,818,"central control",1,"central control",-18
+541,"Mozambique",1988,818,"central control",1,"central control",-18
+541,"Mozambique",1989,818,"central control",1,"central control",-18
+541,"Mozambique",1990,818,"central control",1,"central control",-18
+541,"Mozambique",1991,818,"central control",1,"central control",-18
+541,"Mozambique",1992,818,"central control",1,"central control",-18
+552,"Zimbabwe",1972,791,"central control",2,"central control",11000
+552,"Zimbabwe",1973,791,"central control",2,"central control",11000
+552,"Zimbabwe",1974,791,"central control",2,"central control",11000
+552,"Zimbabwe",1975,791,"central control",2,"central control",11000
+552,"Zimbabwe",1976,791,"central control",2,"central control",11000
+552,"Zimbabwe",1977,791,"central control",2,"central control",11000
+552,"Zimbabwe",1978,791,"central control",2,"central control",11000
+552,"Zimbabwe",1979,791,"central control",2,"central control",11000
+552,"Zimbabwe",1983,831,"central control",1,"central control",-18
+552,"Zimbabwe",1984,831,"central control",1,"central control",-18
+552,"Zimbabwe",1985,831,"central control",1,"central control",-18
+552,"Zimbabwe",1986,831,"central control",1,"central control",-18
+552,"Zimbabwe",1987,831,"central control",1,"central control",-18
+600,"Morocco",1907,646,"central control",2,"central control",1200
+600,"Morocco",1908,646,"central control",2,"central control",1200
+615,"Algeria",1962,753,"central control",2,"central control",1500
+615,"Algeria",1963,753,"central control",2,"central control",1500
+615,"Algeria",1992,875,"central control",3,"central control",-18
+615,"Algeria",1993,875,"central control",3,"central control",-18
+615,"Algeria",1994,875,"central control",3,"central control",-18
+615,"Algeria",1995,875,"central control",3,"central control",-18
+615,"Algeria",1996,875,"central control",3,"central control",-18
+615,"Algeria",1997,875,"central control",3,"central control",-18
+615,"Algeria",1998,875,"central control",3,"central control",-18
+615,"Algeria",1999,875,"central control",3,"central control",-18
+625,"Sudan",1963,758,"local issues",3,"local issues",-18
+625,"Sudan",1964,758,"local issues",3,"local issues",-18
+625,"Sudan",1965,758,"local issues",3,"local issues",-18
+625,"Sudan",1966,758,"local issues",3,"local issues",-18
+625,"Sudan",1967,758,"local issues",3,"local issues",-18
+625,"Sudan",1968,758,"local issues",3,"local issues",-18
+625,"Sudan",1969,758,"local issues",3,"local issues",-18
+625,"Sudan",1970,758,"local issues",3,"local issues",-18
+625,"Sudan",1971,758,"local issues",3,"local issues",-18
+625,"Sudan",1972,758,"local issues",3,"local issues",-18
+625,"Sudan",1983,836,"central control",3,"central control",-18
+625,"Sudan",1984,836,"central control",3,"central control",-18
+625,"Sudan",1985,836,"central control",3,"central control",-18
+625,"Sudan",1986,836,"central control",3,"central control",-18
+625,"Sudan",1987,836,"central control",3,"central control",-18
+625,"Sudan",1988,836,"central control",3,"central control",-18
+625,"Sudan",1989,836,"central control",3,"central control",-18
+625,"Sudan",1990,836,"central control",3,"central control",-18
+625,"Sudan",1991,836,"central control",3,"central control",-18
+625,"Sudan",1992,836,"central control",3,"central control",-18
+625,"Sudan",1993,836,"central control",3,"central control",-18
+625,"Sudan",1994,836,"central control",3,"central control",-18
+625,"Sudan",1995,836,"central control",3,"central control",-18
+625,"Sudan",1996,836,"central control",3,"central control",-18
+625,"Sudan",1997,836,"central control",3,"central control",-18
+625,"Sudan",1998,836,"central control",3,"central control",-18
+625,"Sudan",1999,836,"central control",3,"central control",-18
+625,"Sudan",2000,836,"central control",3,"central control",-18
+625,"Sudan",2001,836,"central control",3,"central control",-18
+625,"Sudan",2002,836,"central control",3,"central control",-18
+625,"Sudan",2003,927,"local issues",6,"local issues",-18
+625,"Sudan",2004,836,"central control",3,"central control",-18
+625,"Sudan",2005,836,"central control",3,"central control",-18
+625,"Sudan",2006,927,"local issues",6,"local issues",-18
+630,"Iran",1908,647,"central control",2,"central control",-18
+630,"Iran",1909,647,"central control",2,"central control",-18
+630,"Iran",1920,687,"central control",1,"central control",-18
+630,"Iran",1921,687,"central control",1,"central control",-18
+630,"Iran",1978,813,"central control",2,"central control",1100
+630,"Iran",1979,816,"central control",1,"central control",-18
+630,"Iran",1980,816,"central control",1,"central control",-18
+630,"Iran",1981,816,"central control",1,"central control",-18
+630,"Iran",1982,816,"central control",1,"central control",-18
+630,"Iran",1983,816,"central control",1,"central control",-18
+630,"Iran",1984,816,"central control",1,"central control",-18
+640,"Turkey",1821,506,"local issues",4,"local issues",9000
+640,"Turkey",1822,506,"local issues",4,"local issues",9000
+640,"Turkey",1823,506,"local issues",4,"local issues",9000
+640,"Turkey",1824,506,"local issues",4,"local issues",9000
+640,"Turkey",1825,506,"local issues",4,"local issues",9000
+640,"Turkey",1826,508,"central control",1,"central control",6300
+640,"Turkey",1827,506,"local issues",4,"local issues",9000
+640,"Turkey",1828,506,"local issues",4,"local issues",9000
+640,"Turkey",1830,512,"local issues",1,"local issues",15000
+640,"Turkey",1831,518,"local issues",2,"local issues",12000
+640,"Turkey",1832,518,"local issues",2,"local issues",12000
+640,"Turkey",1836,528,"local issues",1,"local issues",-18
+640,"Turkey",1837,528,"local issues",1,"local issues",-18
+640,"Turkey",1839,533,"local issues",2,"local issues",3000
+640,"Turkey",1840,537,"local issues",1,"local issues",27000
+640,"Turkey",1841,540,"local issues",1,"local issues",-18
+640,"Turkey",1842,542,"local issues",1,"local issues",4600
+640,"Turkey",1843,542,"local issues",1,"local issues",4600
+640,"Turkey",1852,556,"local issues",2,"local issues",-18
+640,"Turkey",1853,556,"local issues",2,"local issues",-18
+640,"Turkey",1858,562,"local issues",2,"local issues",4400
+640,"Turkey",1859,562,"local issues",2,"local issues",4400
+640,"Turkey",1861,575,"local issues",3,"local issues",-18
+640,"Turkey",1862,575,"local issues",3,"local issues",-18
+640,"Turkey",1866,583,"local issues",1,"local issues",-18
+640,"Turkey",1867,583,"local issues",1,"local issues",-18
+640,"Turkey",1875,601,"local issues",4,"local issues",9000
+640,"Turkey",1876,601,"local issues",4,"local issues",9000
+640,"Turkey",1890,616,"local issues",1,"local issues",-18
+640,"Turkey",1891,616,"local issues",1,"local issues",-18
+640,"Turkey",1892,616,"local issues",1,"local issues",-18
+640,"Turkey",1895,630,"local issues",1,"local issues",-18
+640,"Turkey",1896,631,"local issues",4,"local issues",-18
+640,"Turkey",1897,631,"local issues",4,"local issues",-18
+640,"Turkey",1903,640,"local issues",1,"local issues",6330
+640,"Turkey",1904,642,"local issues",6,"local issues",29991
+640,"Turkey",1905,642,"local issues",6,"local issues",29991
+640,"Turkey",1906,642,"local issues",6,"local issues",29991
+640,"Turkey",1909,648,"central control",1,"central control",-18
+640,"Turkey",1910,651,"local issues",6,"local issues",9000
+640,"Turkey",1911,651,"local issues",6,"local issues",9000
+640,"Turkey",1912,650,"local issues",4,"local issues",-18
+640,"Turkey",1984,838,"local issues",7,"local issues",10500
+640,"Turkey",1985,838,"local issues",7,"local issues",10500
+640,"Turkey",1986,838,"local issues",7,"local issues",10500
+640,"Turkey",1991,865,"local issues",6,"local issues",16500
+640,"Turkey",1992,865,"local issues",6,"local issues",16500
+640,"Turkey",1993,865,"local issues",6,"local issues",16500
+640,"Turkey",1994,865,"local issues",6,"local issues",16500
+640,"Turkey",1995,865,"local issues",6,"local issues",16500
+640,"Turkey",1996,865,"local issues",6,"local issues",16500
+640,"Turkey",1997,865,"local issues",6,"local issues",16500
+640,"Turkey",1998,865,"local issues",6,"local issues",16500
+640,"Turkey",1999,865,"local issues",6,"local issues",16500
+645,"Iraq",1959,747,"central control",1,"central control",-18
+645,"Iraq",1961,752,"local issues",6,"local issues",2500
+645,"Iraq",1962,752,"local issues",6,"local issues",2500
+645,"Iraq",1963,752,"local issues",6,"local issues",2500
+645,"Iraq",1965,765,"local issues",3,"local issues",3000
+645,"Iraq",1966,765,"local issues",3,"local issues",3000
+645,"Iraq",1969,777,"local issues",3,"local issues",4000
+645,"Iraq",1970,777,"local issues",3,"local issues",4000
+645,"Iraq",1974,797,"local issues",1,"local issues",20000
+645,"Iraq",1975,797,"local issues",1,"local issues",20000
+645,"Iraq",1985,840,"local issues",1,"local issues",-18
+645,"Iraq",1986,840,"local issues",1,"local issues",-18
+645,"Iraq",1987,840,"local issues",1,"local issues",-18
+645,"Iraq",1988,840,"local issues",1,"local issues",-18
+645,"Iraq",1991,862,"local issues",1,"local issues",-18
+645,"Iraq",1996,893,"local issues",6,"local issues",-18
+652,"Syria",1981,825,"central control",1,"central control",3000
+652,"Syria",1982,825,"central control",1,"central control",3000
+660,"Lebanon",1958,743,"central control",1,"central control",-18
+660,"Lebanon",1983,833,"central control",2,"central control",-18
+660,"Lebanon",1984,833,"central control",2,"central control",-18
+660,"Lebanon",1989,850,"central control",2,"central control",2491
+660,"Lebanon",1990,850,"central control",2,"central control",2491
+663,"Jordan",1970,780,"central control",1,"central control",3440
+670,"Saudi Arabia",1929,708,"central control",1,"central control",5500
+670,"Saudi Arabia",1930,708,"central control",1,"central control",5500
+678,"Yemen Arab Republic",1948,728,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1962,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1963,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1964,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1965,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1966,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1967,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1968,755,"central control",1,"central control",-18
+678,"Yemen Arab Republic",1969,755,"central control",1,"central control",-18
+679,"Yemen",1994,885,"local issues",1,"local issues",-18
+679,"Yemen",2004,935,"central control",1,"central control",2250
+679,"Yemen",2005,935,"central control",1,"central control",2250
+679,"Yemen",2007,941,"central control",6,"central control",3500
+680,"Yemen People's Republic",1986,842,"central control",2,"central control",13000
+698,"Oman",1973,795,"local issues",1,"local issues",2870
+698,"Oman",1974,795,"local issues",1,"local issues",2870
+698,"Oman",1975,795,"local issues",1,"local issues",2870
+700,"Afghanistan",1924,697,"central control",1,"central control",-18
+700,"Afghanistan",1925,697,"central control",1,"central control",-18
+700,"Afghanistan",1928,705,"central control",1,"central control",15000
+700,"Afghanistan",1929,705,"central control",1,"central control",15000
+700,"Afghanistan",1978,812,"central control",4,"central control",33000
+700,"Afghanistan",1979,812,"central control",4,"central control",33000
+700,"Afghanistan",1980,812,"central control",4,"central control",33000
+700,"Afghanistan",1989,851,"central control",4,"central control",-18
+700,"Afghanistan",1990,851,"central control",4,"central control",-18
+700,"Afghanistan",1991,851,"central control",4,"central control",-18
+700,"Afghanistan",1992,851,"central control",4,"central control",-18
+700,"Afghanistan",1993,851,"central control",4,"central control",-18
+700,"Afghanistan",1994,851,"central control",4,"central control",-18
+700,"Afghanistan",1995,851,"central control",4,"central control",-18
+700,"Afghanistan",1996,851,"central control",4,"central control",-18
+700,"Afghanistan",1997,851,"central control",4,"central control",-18
+700,"Afghanistan",1998,851,"central control",4,"central control",-18
+700,"Afghanistan",1999,851,"central control",4,"central control",-18
+700,"Afghanistan",2000,851,"central control",4,"central control",-18
+700,"Afghanistan",2001,851,"central control",4,"central control",-18
+702,"Tajikistan",1992,876,"central control",3,"central control",-18
+702,"Tajikistan",1993,876,"central control",3,"central control",-18
+702,"Tajikistan",1994,876,"central control",3,"central control",-18
+702,"Tajikistan",1995,876,"central control",3,"central control",-18
+702,"Tajikistan",1996,876,"central control",3,"central control",-18
+702,"Tajikistan",1997,876,"central control",3,"central control",-18
+710,"China",1860,567,"central control",1,"central control",111000
+710,"China",1861,567,"central control",1,"central control",111000
+710,"China",1862,576,"local issues",1,"local issues",-18
+710,"China",1863,567,"central control",1,"central control",111000
+710,"China",1864,582,"local issues",2,"local issues",-18
+710,"China",1865,567,"central control",1,"central control",111000
+710,"China",1866,585,"local issues",1,"local issues",-18
+710,"China",1867,568,"local issues",1,"local issues",-18
+710,"China",1868,568,"local issues",1,"local issues",-18
+710,"China",1869,570,"local issues",1,"local issues",-18
+710,"China",1870,570,"local issues",1,"local issues",-18
+710,"China",1871,570,"local issues",1,"local issues",-18
+710,"China",1872,570,"local issues",1,"local issues",-18
+710,"China",1873,576,"local issues",1,"local issues",-18
+710,"China",1876,603,"local issues",1,"local issues",-18
+710,"China",1877,603,"local issues",1,"local issues",-18
+710,"China",1891,618,"local issues",1,"local issues",10500
+710,"China",1895,628,"local issues",1,"local issues",-18
+710,"China",1896,628,"local issues",1,"local issues",-18
+710,"China",1911,657,"central control",2,"central control",1000
+710,"China",1913,671,"central control",1,"central control",-18
+710,"China",1914,672,"local issues",1,"local issues",-18
+710,"China",1916,675,"local issues",1,"local issues",-18
+710,"China",1917,675,"local issues",1,"local issues",-18
+710,"China",1918,675,"local issues",1,"local issues",-18
+710,"China",1926,700,"central control",2,"central control",126000
+710,"China",1927,700,"central control",2,"central control",126000
+710,"China",1928,703,"local issues",1,"local issues",-18
+710,"China",1929,706,"central control",1,"central control",-18
+710,"China",1930,710,"central control",6,"central control",5e+05
+710,"China",1931,711,"local issues",1,"local issues",20000
+710,"China",1932,710,"central control",6,"central control",5e+05
+710,"China",1933,710,"central control",6,"central control",5e+05
+710,"China",1934,716,"central control",1,"central control",-18
+710,"China",1935,710,"central control",6,"central control",5e+05
+710,"China",1936,710,"central control",6,"central control",5e+05
+710,"China",1946,725,"central control",2,"central control",1200000
+710,"China",1947,726,"local issues",1,"local issues",1250
+710,"China",1948,725,"central control",2,"central control",1200000
+710,"China",1949,725,"central control",2,"central control",1200000
+710,"China",1950,725,"central control",2,"central control",1200000
+710,"China",1956,741,"local issues",1,"local issues",16000
+710,"China",1957,741,"local issues",1,"local issues",16000
+710,"China",1958,741,"local issues",1,"local issues",16000
+710,"China",1959,741,"local issues",1,"local issues",16000
+710,"China",1967,776,"central control",1,"central control",-18
+710,"China",1968,776,"central control",1,"central control",-18
+730,"Korea",1894,623,"central control",1,"central control",-18
+740,"Japan",1868,588,"central control",1,"central control",-18
+740,"Japan",1877,607,"local issues",1,"local issues",17000
+750,"India",1970,778,"local issues",1,"local issues",2100
+750,"India",1971,778,"local issues",1,"local issues",2100
+750,"India",1984,837,"local issues",6,"local issues",1191
+750,"India",1990,861,"local issues",7,"local issues",27700
+750,"India",1991,861,"local issues",7,"local issues",27700
+750,"India",1992,861,"local issues",7,"local issues",27700
+750,"India",1993,861,"local issues",7,"local issues",27700
+750,"India",1994,861,"local issues",7,"local issues",27700
+750,"India",1995,861,"local issues",7,"local issues",27700
+750,"India",1996,861,"local issues",7,"local issues",27700
+750,"India",1997,861,"local issues",7,"local issues",27700
+750,"India",1998,861,"local issues",7,"local issues",27700
+750,"India",1999,861,"local issues",7,"local issues",27700
+750,"India",2000,861,"local issues",7,"local issues",27700
+750,"India",2001,861,"local issues",7,"local issues",27700
+750,"India",2002,861,"local issues",7,"local issues",27700
+750,"India",2003,861,"local issues",7,"local issues",27700
+750,"India",2004,861,"local issues",7,"local issues",27700
+750,"India",2005,861,"local issues",7,"local issues",27700
+770,"Pakistan",1971,782,"local issues",4,"local issues",2491
+770,"Pakistan",1973,792,"local issues",1,"local issues",8600
+770,"Pakistan",1974,792,"local issues",1,"local issues",8600
+770,"Pakistan",1975,792,"local issues",1,"local issues",8600
+770,"Pakistan",1976,792,"local issues",1,"local issues",8600
+770,"Pakistan",1977,792,"local issues",1,"local issues",8600
+770,"Pakistan",2004,932,"local issues",2,"local issues",3000
+770,"Pakistan",2005,932,"local issues",2,"local issues",3000
+770,"Pakistan",2006,932,"local issues",2,"local issues",3000
+775,"Myanmar",1948,732,"local issues",1,"local issues",-18
+775,"Myanmar",1949,732,"local issues",1,"local issues",-18
+775,"Myanmar",1950,732,"local issues",1,"local issues",-18
+775,"Myanmar",1951,732,"local issues",1,"local issues",-18
+775,"Myanmar",1958,746,"central control",7,"central control",3150
+775,"Myanmar",1959,746,"central control",7,"central control",3150
+775,"Myanmar",1960,746,"central control",7,"central control",3150
+775,"Myanmar",1967,773,"local issues",7,"local issues",29200
+775,"Myanmar",1968,773,"local issues",7,"local issues",29200
+775,"Myanmar",1969,773,"local issues",7,"local issues",29200
+775,"Myanmar",1970,773,"local issues",7,"local issues",29200
+775,"Myanmar",1971,773,"local issues",7,"local issues",29200
+775,"Myanmar",1972,773,"local issues",7,"local issues",29200
+775,"Myanmar",1973,773,"local issues",7,"local issues",29200
+775,"Myanmar",1974,773,"local issues",7,"local issues",29200
+775,"Myanmar",1975,773,"local issues",7,"local issues",29200
+775,"Myanmar",1976,773,"local issues",7,"local issues",29200
+775,"Myanmar",1977,773,"local issues",7,"local issues",29200
+775,"Myanmar",1978,773,"local issues",7,"local issues",29200
+775,"Myanmar",1979,773,"local issues",7,"local issues",29200
+775,"Myanmar",1980,773,"local issues",7,"local issues",29200
+775,"Myanmar",1983,832,"local issues",1,"local issues",4000
+775,"Myanmar",1984,832,"local issues",1,"local issues",4000
+775,"Myanmar",1985,832,"local issues",1,"local issues",4000
+775,"Myanmar",1986,832,"local issues",1,"local issues",4000
+775,"Myanmar",1987,832,"local issues",1,"local issues",4000
+775,"Myanmar",1988,847,"central control",1,"central control",-18
+780,"Sri Lanka",1971,783,"central control",1,"central control",4053
+780,"Sri Lanka",1983,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1984,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1985,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1986,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1987,845,"central control",1,"central control",-18
+780,"Sri Lanka",1988,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1989,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1990,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1991,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1992,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1993,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1994,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1995,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1996,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1997,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1998,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",1999,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",2000,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",2001,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",2002,835,"local issues",3,"local issues",25500
+780,"Sri Lanka",2006,940,"local issues",5,"local issues",-18
+780,"Sri Lanka",2007,940,"local issues",5,"local issues",-18
+790,"Nepal",2001,921,"central control",6,"central control",3780
+790,"Nepal",2002,921,"central control",6,"central control",3780
+790,"Nepal",2003,931,"central control",3,"central control",7030
+790,"Nepal",2004,931,"central control",3,"central control",7030
+790,"Nepal",2005,931,"central control",3,"central control",7030
+790,"Nepal",2006,931,"central control",3,"central control",7030
+800,"Thailand",1972,787,"central control",6,"central control",2200
+800,"Thailand",1973,787,"central control",6,"central control",2200
+811,"Cambodia",1971,785,"central control",2,"central control",85000
+811,"Cambodia",1972,785,"central control",2,"central control",85000
+811,"Cambodia",1973,785,"central control",2,"central control",85000
+811,"Cambodia",1974,785,"central control",2,"central control",85000
+811,"Cambodia",1975,785,"central control",2,"central control",85000
+811,"Cambodia",1989,857,"central control",3,"central control",-18
+811,"Cambodia",1990,857,"central control",3,"central control",-18
+811,"Cambodia",1991,857,"central control",3,"central control",-18
+811,"Cambodia",1993,881,"central control",1,"central control",-18
+811,"Cambodia",1994,881,"central control",1,"central control",-18
+811,"Cambodia",1995,881,"central control",1,"central control",-18
+811,"Cambodia",1996,881,"central control",1,"central control",-18
+811,"Cambodia",1997,881,"central control",1,"central control",-18
+812,"Laos",1960,751,"central control",3,"central control",5000
+812,"Laos",1961,751,"central control",3,"central control",5000
+812,"Laos",1962,751,"central control",3,"central control",5000
+812,"Laos",1963,756,"central control",4,"central control",18500
+812,"Laos",1964,756,"central control",4,"central control",18500
+812,"Laos",1965,756,"central control",4,"central control",18500
+812,"Laos",1966,756,"central control",4,"central control",18500
+812,"Laos",1967,756,"central control",4,"central control",18500
+812,"Laos",1968,756,"central control",4,"central control",18500
+812,"Laos",1976,803,"local issues",1,"local issues",6000
+812,"Laos",1977,803,"local issues",1,"local issues",6000
+812,"Laos",1978,803,"local issues",1,"local issues",6000
+812,"Laos",1979,803,"local issues",1,"local issues",6000
+817,"Republic of Vietnam",1960,748,"central control",4,"central control",100200
+817,"Republic of Vietnam",1961,748,"central control",4,"central control",100200
+817,"Republic of Vietnam",1962,748,"central control",4,"central control",100200
+817,"Republic of Vietnam",1963,748,"central control",4,"central control",100200
+817,"Republic of Vietnam",1964,748,"central control",4,"central control",100200
+817,"Republic of Vietnam",1965,748,"central control",4,"central control",100200
+840,"Philippines",1950,735,"central control",1,"central control",11300
+840,"Philippines",1951,735,"central control",1,"central control",11300
+840,"Philippines",1952,735,"central control",1,"central control",11300
+840,"Philippines",1953,735,"central control",1,"central control",11300
+840,"Philippines",1954,735,"central control",1,"central control",11300
+840,"Philippines",1972,790,"central control",6,"central control",31000
+840,"Philippines",1973,790,"central control",6,"central control",31000
+840,"Philippines",1974,790,"central control",6,"central control",31000
+840,"Philippines",1975,790,"central control",6,"central control",31000
+840,"Philippines",1976,790,"central control",6,"central control",31000
+840,"Philippines",1977,790,"central control",6,"central control",31000
+840,"Philippines",1978,790,"central control",6,"central control",31000
+840,"Philippines",1979,790,"central control",6,"central control",31000
+840,"Philippines",1980,790,"central control",6,"central control",31000
+840,"Philippines",1981,790,"central control",6,"central control",31000
+840,"Philippines",1982,790,"central control",6,"central control",31000
+840,"Philippines",1983,790,"central control",6,"central control",31000
+840,"Philippines",1984,790,"central control",6,"central control",31000
+840,"Philippines",1985,790,"central control",6,"central control",31000
+840,"Philippines",1986,790,"central control",6,"central control",31000
+840,"Philippines",1987,790,"central control",6,"central control",31000
+840,"Philippines",1988,790,"central control",6,"central control",31000
+840,"Philippines",1989,790,"central control",6,"central control",31000
+840,"Philippines",1990,790,"central control",6,"central control",31000
+840,"Philippines",1991,790,"central control",6,"central control",31000
+840,"Philippines",1992,790,"central control",6,"central control",31000
+840,"Philippines",2000,916,"local issues",3,"local issues",-18
+840,"Philippines",2001,916,"local issues",3,"local issues",-18
+840,"Philippines",2003,926,"local issues",7,"local issues",1000
+840,"Philippines",2005,936,"local issues",7,"local issues",2823
+840,"Philippines",2006,936,"local issues",7,"local issues",2823
+850,"Indonesia",1950,733,"local issues",1,"local issues",-18
+850,"Indonesia",1953,738,"central control",1,"central control",2700
+850,"Indonesia",1956,742,"central control",1,"central control",27200
+850,"Indonesia",1957,742,"central control",1,"central control",27200
+850,"Indonesia",1958,742,"central control",1,"central control",27200
+850,"Indonesia",1959,742,"central control",1,"central control",27200
+850,"Indonesia",1960,742,"central control",1,"central control",27200
+850,"Indonesia",1961,742,"central control",1,"central control",27200
+850,"Indonesia",1962,742,"central control",1,"central control",27200
+850,"Indonesia",1965,767,"local issues",6,"local issues",-18
+850,"Indonesia",1966,767,"local issues",6,"local issues",-18
+850,"Indonesia",1967,767,"local issues",6,"local issues",-18
+850,"Indonesia",1968,767,"local issues",6,"local issues",-18
+850,"Indonesia",1969,767,"local issues",6,"local issues",-18
+850,"Indonesia",1976,802,"local issues",6,"local issues",2100
+850,"Indonesia",1977,802,"local issues",6,"local issues",2100
+850,"Indonesia",1978,802,"local issues",6,"local issues",2100
+850,"Indonesia",1979,806,"local issues",1,"local issues",1791
+850,"Indonesia",1989,853,"local issues",1,"local issues",-18
+850,"Indonesia",1990,853,"local issues",1,"local issues",-18
+850,"Indonesia",1991,853,"local issues",1,"local issues",-18
+850,"Indonesia",1999,912,"local issues",3,"local issues",3830
+850,"Indonesia",2000,912,"local issues",3,"local issues",3830
+850,"Indonesia",2001,912,"local issues",3,"local issues",3830
+850,"Indonesia",2002,912,"local issues",3,"local issues",3830
+850,"Indonesia",2003,930,"local issues",1,"local issues",1550
+910,"Papua New Guinea",1989,854,"local issues",7,"local issues",-18
+910,"Papua New Guinea",1990,854,"local issues",7,"local issues",-18
+910,"Papua New Guinea",1991,854,"local issues",7,"local issues",-18
+910,"Papua New Guinea",1992,854,"local issues",7,"local issues",-18
