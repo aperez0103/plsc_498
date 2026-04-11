@@ -31,3 +31,16 @@ For Figure 3, I elected to include the names of presidents in their respective t
 ## Interpretation
 
 I see a constant net-growth in unemployment over time, with more volatility to come in the long-run. The data shows a constant growing period the predicates a sharp decrease in unemployment rates. These decreases seldom ever dip below the previous trough, meaning unemployment rarely falls below its most recent decline. Unemployment follows the same pattern of growth and decay, seeing large growths in unemployment numbers and even more drastic falls in unemployment, relative to time. The rolling mean gives accurate depictions of when the economy experienced short-term recessions, including their start and end years. The LOESS smoothing method generalizes the trend to show overall economic growth and decay, identifying when the economy in an overall "recession" as opposed to growth period across the entire data set. Anointing presidential terms has the potential to add context to the unemployment story, however, as it stands as at the moment, the addition of presidential terms distracts from the story. In more specificity, it adds context regarding what each president was seeming responsibly for in regards to the economy, whether they brought the country out of a recession or not, and if they led the country into a recession. However, the addition coloring adds visual clutter that detracts from this context. In the GDP comparisons, it is clear that the four selected countries (China, Germany, Italy, and Japan) see a growth over time, though China's GDP growth isn't as linear as the other three countries. In fact, China has the slowest climbing GDP rate of the three countries, with Japan, Germany and Italy having roughly similar growth patterns. For Figure 4, the GDP Per Capita: By Country visualization, I elected to have the y-axis fixed rather than free for each facet for two reasons. First, it allows for instant comparison to be more intuitive without concerning the reader with the scales. Second, with a free y-axis, the growth in China will seem to be as large and rapid as the other three countries, despite the magnitude of growth remaining relatively small.
+
+## Angels-MacBook-Pro:12_week angel$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+## Angels-MacBook-Pro:12_week angel$ git log -1
+commit 4bc0e44ba63b3bdee755417282cece396faab1eb (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Fri Apr 10 22:48:38 2026 -0400
+
+    Time series lab: unemployement + GDP trends
