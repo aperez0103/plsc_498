@@ -1,5 +1,16 @@
 # APPROACH 4: Modern Shiny App with bslib Theming
-# Interstate Conflicts Dashboard
+# ISIS Mobilization Explorer  (International Relations dataset)
+#
+# Data: isis_mobilization.rds
+#   Built in create_data.R from the Edgerton (2023, JCR) replication archive:
+#     https://github.com/jfedgerton/Edgerton-2023-JCR
+#   The raw PRIO-GRID cell-year file is aggregated to country-year.
+#
+#   Columns:
+#     country_name, year, isis_fighters, isis_attacks, n_cells,
+#     mean_nightlights, mean_gcp_ppp, total_population, mean_unemployment,
+#     mean_polity, mean_gov_effect, any_sunni_excluded
+#
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
 library(shiny)
@@ -8,116 +19,121 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-# Load data
-cow_data <- readRDS("cow_wars.rds")
+# Load data -------------------------------------------------------------------
+data_file <- if (file.exists("isis_mobilization.rds")) {
+  "isis_mobilization.rds"
+} else {
+  "15_week/data/isis_mobilization.rds"
+}
+isis <- readRDS(data_file)
 
-# Prepare data
-cow_data <- cow_data %>%
-  mutate(
-    year = as.numeric(year),
-    war_type = coalesce(cow_war_wartype, "Unknown"),
-    initiator = ifelse(cow_war_initiator == 1, "Initiator", "Participant")
-  ) %>%
-  filter(!is.na(cow_war_warnum))
+year_min <- min(isis$year, na.rm = TRUE)
+year_max <- max(isis$year, na.rm = TRUE)
 
-# Define custom theme
-theme <- bs_theme(
-  version = 5,
-  primary = "#1f77b4",
+# Theme -----------------------------------------------------------------------
+theme_obj <- bs_theme(
+  version   = 5,
+  primary   = "#1f77b4",
   secondary = "#d62728",
-  success = "#2ca02c",
-  danger = "#ff7f0e",
+  success   = "#2ca02c",
+  danger    = "#ff7f0e",
   base_font = font_google("Roboto")
 )
 
-# Define UI
+# UI --------------------------------------------------------------------------
 ui <- page_navbar(
-  title = "Interstate Conflicts Explorer",
-  theme = theme,
-  bg = "#ffffff",
+  title   = "ISIS Mobilization Explorer",
+  theme   = theme_obj,
+  bg      = "#ffffff",
   underline = TRUE,
 
-  # Page 1: Dashboard
+  # ---- Dashboard ----
   nav_panel(
     "Dashboard",
     layout_sidebar(
       sidebar = sidebar(
         h4("Filters"),
         sliderInput(
-          "year_range_dash",
-          "Year Range:",
-          min = min(cow_data$year, na.rm = TRUE),
-          max = max(cow_data$year, na.rm = TRUE),
-          value = c(1945, max(cow_data$year, na.rm = TRUE)),
-          step = 1
+          "year_range", "Year:",
+          min   = year_min,
+          max   = year_max,
+          value = c(year_min, year_max),
+          step  = 1,
+          sep   = ""
         ),
-        checkboxGroupInput(
-          "war_type_filter_dash",
-          "War Type:",
-          choices = unique(cow_data$war_type),
-          selected = unique(cow_data$war_type)[1:min(2, length(unique(cow_data$war_type)))]
+        sliderInput(
+          "min_fighters", "Min ISIS fighters per country-year:",
+          min   = 0,
+          max   = max(isis$isis_fighters, na.rm = TRUE),
+          value = 0
+        ),
+        checkboxInput(
+          "sunni_only",
+          "Only countries with politically excluded Sunni populations",
+          value = FALSE
         ),
         hr(),
-        p("This dashboard provides interactive exploration of interstate conflicts",
-          "from the Correlates of War project.", style = "font-size: 0.9em;")
+        p("Country-year aggregates of the PRIO-GRID cell-level ISIS",
+          "mobilization data from Edgerton (2023, JCR).",
+          style = "font-size: 0.9em;")
       ),
       navset_card_tab(
         nav_panel(
           "Overview",
           layout_column_wrap(
             value_box(
-              title = "Total Conflicts",
-              value = textOutput("total_conflicts_dash"),
+              title = "Countries with ISIS activity",
+              value = textOutput("n_countries"),
               theme = "primary"
             ),
             value_box(
-              title = "Total Fatalities",
-              value = textOutput("total_fatalities_dash"),
+              title = "Total fighters (grid-cell count)",
+              value = textOutput("total_fighters"),
               theme = "danger"
             ),
             value_box(
-              title = "Countries Involved",
-              value = textOutput("countries_involved_dash"),
+              title = "Total attacks",
+              value = textOutput("total_attacks"),
               theme = "success"
             ),
             col_widths = c(4, 4, 4)
           ),
           br(),
-          plotOutput("timeline_dash", height = "400px"),
+          plotOutput("fighters_timeline", height = "400px"),
           br(),
           layout_column_wrap(
             card(
               full_screen = TRUE,
-              card_header("Fatalities by Year"),
-              plotlyOutput("fatalities_over_time_dash")
+              card_header("Attacks over time"),
+              plotlyOutput("attacks_over_time")
             ),
             card(
               full_screen = TRUE,
-              card_header("War Type Distribution"),
-              plotOutput("wartype_pie_dash")
+              card_header("Top 10 source countries (fighters)"),
+              plotOutput("top_countries_bar")
             ),
             col_widths = c(6, 6)
           )
         ),
         nav_panel(
-          "Trends",
+          "Correlates",
           br(),
           card(
             full_screen = TRUE,
-            card_header("Conflict Intensity Over Time"),
-            plotlyOutput("intensity_plot_dash", height = "500px")
+            card_header("Unemployment vs. ISIS fighters"),
+            plotlyOutput("unemp_scatter", height = "450px")
           ),
           br(),
           layout_column_wrap(
             card(
               full_screen = TRUE,
-              card_header("Duration Distribution"),
-              plotlyOutput("duration_plot_dash")
+              card_header("Polity vs. fighters"),
+              plotlyOutput("polity_scatter")
             ),
             card(
               full_screen = TRUE,
-              card_header("Top Combatants"),
-              tableOutput("top_combatants_dash")
+              card_header("Government effectiveness vs. fighters"),
+              plotlyOutput("goveffect_scatter")
             ),
             col_widths = c(6, 6)
           )
@@ -126,19 +142,18 @@ ui <- page_navbar(
     )
   ),
 
-  # Page 2: Country Analysis
+  # ---- Country Profile ----
   nav_panel(
-    "Countries",
+    "Country",
     layout_sidebar(
       sidebar = sidebar(
         selectInput(
-          "country_select",
-          "Select Country:",
-          choices = sort(unique(cow_data$state_name)),
-          selected = "United States"
+          "country_select", "Select country:",
+          choices  = sort(unique(isis$country_name)),
+          selected = "Iraq"
         ),
         hr(),
-        p("View conflict participation by country.",
+        p("Drill down into one country's ISIS-mobilization time series.",
           style = "font-size: 0.9em;")
       ),
       navset_card_tab(
@@ -146,27 +161,21 @@ ui <- page_navbar(
           "Profile",
           br(),
           layout_column_wrap(
-            value_box(
-              title = "Conflicts",
-              value = textOutput("country_conflicts"),
-              theme = "primary"
-            ),
-            value_box(
-              title = "Fatalities",
-              value = textOutput("country_fatalities"),
-              theme = "danger"
-            ),
-            value_box(
-              title = "Avg Duration",
-              value = textOutput("country_duration"),
-              theme = "info"
-            ),
+            value_box(title = "Total fighters",
+                      value = textOutput("country_fighters"),
+                      theme = "primary"),
+            value_box(title = "Total attacks",
+                      value = textOutput("country_attacks"),
+                      theme = "danger"),
+            value_box(title = "Mean unemployment",
+                      value = textOutput("country_unemployment"),
+                      theme = "info"),
             col_widths = c(4, 4, 4)
           ),
           br(),
           card(
-            card_header("Conflict Timeline"),
-            plotOutput("country_timeline")
+            card_header("Fighters and attacks by year"),
+            plotOutput("country_timeline", height = "420px")
           )
         ),
         nav_panel(
@@ -174,7 +183,7 @@ ui <- page_navbar(
           br(),
           card(
             full_screen = TRUE,
-            card_header("Most Involved Countries"),
+            card_header("Top-15 source countries vs. the selected country"),
             plotlyOutput("country_comparison")
           )
         )
@@ -182,23 +191,23 @@ ui <- page_navbar(
     )
   ),
 
-  # Page 3: Data Explorer
+  # ---- Data ----
   nav_panel(
     "Data",
     br(),
     layout_column_wrap(
       card(
         full_screen = TRUE,
-        card_header("Raw Data"),
-        downloadButton("download_data_page", "Download CSV"),
+        card_header("Raw country-year data"),
+        downloadButton("download_data", "Download CSV"),
         br(), br(),
-        dataTableOutput("data_explorer")
+        dataTableOutput("data_table")
       ),
       col_widths = 12
     )
   ),
 
-  # Page 4: About
+  # ---- About ----
   nav_panel(
     "About",
     br(),
@@ -206,36 +215,36 @@ ui <- page_navbar(
       card(
         full_screen = TRUE,
         markdown(
-          "## Interstate Conflicts Explorer
+"## ISIS Mobilization Explorer
 
-This interactive application visualizes data from the **Correlates of War** project,
-a comprehensive dataset on interstate conflicts and wars.
+This interactive application explores country-year patterns of ISIS mobilization
+built from the replication archive for:
 
-### Key Features
+**Edgerton, Jared (2023).** *Journal of Conflict Resolution.*
+Repository: <https://github.com/jfedgerton/Edgerton-2023-JCR>
 
-- **Real-time filtering** by year and conflict type
-- **Interactive visualizations** with Plotly
-- **Country-level analysis** for detailed exploration
-- **Data export** capabilities for further analysis
+### What you are looking at
 
-### About Correlates of War
+The underlying data are PRIO-GRID cell-year observations of ISIS fighter counts
+and ISIS attacks, merged with a range of geographic, economic, and political
+covariates. `create_data.R` aggregates those cells up to the country-year level
+for use in this classroom app.
 
-The Correlates of War (COW) project is a research initiative that provides data on
-various aspects of international conflict and cooperation. The interstate war dataset
-includes information on wars between two or more states since 1816.
+### Variables
 
-### Data Variables
+- **isis_fighters** - sum of the cell-level ISIS fighter `count`
+- **isis_attacks** - sum of ISIS attacks across grid cells
+- **mean_unemployment** - WDI male unemployment (country mean over cells)
+- **mean_polity** - Polity2 score
+- **mean_gov_effect** - WBGI government effectiveness
+- **any_sunni_excluded** - whether any cell belongs to a politically
+  excluded Sunni group
 
-- **War Number**: Unique identifier for each conflict
-- **Duration**: Length of conflict in years
-- **Fatalities**: Battle-related deaths
-- **War Type**: Inter-state or intra-state classification
-- **Initiator**: Which party initiated the conflict
+### Caveats
 
-### Data Source
-
-Visit [Correlates of War](https://correlatesofwar.org/) for more information.
-"
+These aggregates are illustrative and should not be used for inference outside
+of the classroom. See the original paper and replication code for the
+cell-level models used in Edgerton (2023)."
         )
       ),
       col_widths = 12
@@ -243,220 +252,195 @@ Visit [Correlates of War](https://correlatesofwar.org/) for more information.
   )
 )
 
-# Define server
+# Server ----------------------------------------------------------------------
 server <- function(input, output, session) {
-  # Reactive filtered data
-  filtered_data_dash <- reactive({
-    cow_data %>%
-      filter(
-        year >= input$year_range_dash[1],
-        year <= input$year_range_dash[2],
-        war_type %in% input$war_type_filter_dash
-      )
+
+  filtered <- reactive({
+    df <- isis %>%
+      filter(year         >= input$year_range[1],
+             year         <= input$year_range[2],
+             isis_fighters >= input$min_fighters)
+    if (isTRUE(input$sunni_only)) {
+      df <- df %>% filter(any_sunni_excluded == 1)
+    }
+    df
   })
 
-  # Country-specific data
-  country_data <- reactive({
-    cow_data %>%
-      filter(state_name == input$country_select)
+  country_df <- reactive({
+    isis %>% filter(country_name == input$country_select)
   })
 
-  # ===== Dashboard Tab =====
-  output$total_conflicts_dash <- renderText({
-    length(unique(filtered_data_dash()$cow_war_warnum))
+  # ---- Overview value boxes ----
+  output$n_countries <- renderText({
+    length(unique(filtered()$country_name))
+  })
+  output$total_fighters <- renderText({
+    format(sum(filtered()$isis_fighters, na.rm = TRUE), big.mark = ",")
+  })
+  output$total_attacks <- renderText({
+    format(sum(filtered()$isis_attacks, na.rm = TRUE), big.mark = ",")
   })
 
-  output$total_fatalities_dash <- renderText({
-    format(sum(filtered_data_dash()$cow_war_fatalities, na.rm = TRUE), big.mark = ",")
-  })
-
-  output$countries_involved_dash <- renderText({
-    length(unique(filtered_data_dash()$state_name))
-  })
-
-  output$timeline_dash <- renderPlot({
-    df <- filtered_data_dash() %>%
+  output$fighters_timeline <- renderPlot({
+    df <- filtered() %>%
       group_by(year) %>%
-      summarize(
-        n_wars = n_distinct(cow_war_warnum),
-        total_deaths = sum(cow_war_fatalities, na.rm = TRUE),
-        .groups = "drop"
-      )
-
-    ggplot(df, aes(x = year, y = n_wars)) +
+      summarize(fighters = sum(isis_fighters, na.rm = TRUE), .groups = "drop")
+    validate(need(nrow(df) > 0, "No data for the current filters."))
+    ggplot(df, aes(x = year, y = fighters)) +
       geom_area(fill = "#1f77b4", alpha = 0.5) +
       geom_line(color = "#1f77b4", size = 1) +
+      geom_point(color = "#1f77b4", size = 2.5) +
       labs(
-        title = "Number of Interstate Wars Over Time",
-        x = "Year",
-        y = "Number of Wars",
-        caption = "Source: Correlates of War"
+        title   = "Total ISIS fighters over time",
+        x       = "Year",
+        y       = "Fighters (grid-cell count)",
+        caption = "Source: Edgerton (2023, JCR)"
       ) +
-      theme_minimal() +
-      theme(
-        plot.title = element_text(face = "bold", size = 12),
-        panel.grid.minor = element_blank()
-      )
+      theme_minimal(base_size = 13) +
+      theme(plot.title = element_text(face = "bold", size = 13))
   })
 
-  output$fatalities_over_time_dash <- renderPlotly({
-    df <- filtered_data_dash() %>%
+  output$attacks_over_time <- renderPlotly({
+    df <- filtered() %>%
       group_by(year) %>%
-      summarize(
-        total_deaths = sum(cow_war_fatalities, na.rm = TRUE),
-        .groups = "drop"
-      )
-
-    plot_ly(df, x = ~year, y = ~total_deaths, type = "scatter", mode = "lines+markers",
+      summarize(attacks = sum(isis_attacks, na.rm = TRUE), .groups = "drop")
+    plot_ly(df, x = ~year, y = ~attacks,
+            type = "scatter", mode = "lines+markers",
             line = list(color = "#d62728", width = 2),
-            marker = list(size = 5)) %>%
-      layout(
-        xaxis = list(title = "Year"),
-        yaxis = list(title = "Total Fatalities"),
-        hovermode = "x unified"
-      )
+            marker = list(size = 6)) %>%
+      layout(xaxis = list(title = "Year"),
+             yaxis = list(title = "ISIS attacks"),
+             hovermode = "x unified")
   })
 
-  output$wartype_pie_dash <- renderPlot({
-    df <- filtered_data_dash() %>%
-      group_by(war_type) %>%
-      summarize(n = n_distinct(cow_war_warnum), .groups = "drop")
-
-    pie(df$n, labels = df$war_type,
-        col = c("#1f77b4", "#d62728", "#2ca02c", "#ff7f0e")[1:nrow(df)])
+  output$top_countries_bar <- renderPlot({
+    df <- filtered() %>%
+      group_by(country_name) %>%
+      summarize(fighters = sum(isis_fighters, na.rm = TRUE), .groups = "drop") %>%
+      arrange(desc(fighters)) %>%
+      slice_head(n = 10)
+    validate(need(nrow(df) > 0, "No data."))
+    ggplot(df, aes(x = reorder(country_name, fighters), y = fighters)) +
+      geom_col(fill = "#1f77b4", alpha = 0.85) +
+      coord_flip() +
+      labs(x = NULL, y = "Total fighters") +
+      theme_minimal(base_size = 13)
   })
 
-  output$intensity_plot_dash <- renderPlotly({
-    df <- filtered_data_dash() %>%
-      group_by(year, war_type) %>%
-      summarize(
-        n_wars = n_distinct(cow_war_warnum),
-        .groups = "drop"
-      )
-
-    plot_ly(df, x = ~year, y = ~n_wars, color = ~war_type, type = "scatter",
-            mode = "lines", fill = "tozeroy") %>%
-      layout(
-        xaxis = list(title = "Year"),
-        yaxis = list(title = "Number of Wars"),
-        hovermode = "x unified",
-        showlegend = TRUE
-      )
+  # ---- Correlate scatters ----
+  output$unemp_scatter <- renderPlotly({
+    df <- filtered()
+    plot_ly(df, x = ~mean_unemployment, y = ~isis_fighters,
+            type = "scatter", mode = "markers",
+            text = ~paste(country_name, year),
+            marker = list(size = 9, color = "#1f77b4", opacity = 0.75)) %>%
+      layout(xaxis = list(title = "Mean unemployment (WDI)"),
+             yaxis = list(title = "ISIS fighters"))
   })
 
-  output$duration_plot_dash <- renderPlotly({
-    df <- filtered_data_dash() %>%
-      filter(!is.na(cow_war_duration))
-
-    plot_ly(df, x = ~cow_war_duration, type = "histogram",
-            marker = list(color = "#1f77b4")) %>%
-      layout(
-        xaxis = list(title = "Duration (years)"),
-        yaxis = list(title = "Frequency"),
-        showlegend = FALSE
-      )
+  output$polity_scatter <- renderPlotly({
+    df <- filtered()
+    plot_ly(df, x = ~mean_polity, y = ~isis_fighters,
+            type = "scatter", mode = "markers",
+            text = ~paste(country_name, year),
+            marker = list(size = 9, color = "#2ca02c", opacity = 0.75)) %>%
+      layout(xaxis = list(title = "Polity2"),
+             yaxis = list(title = "ISIS fighters"))
   })
 
-  output$top_combatants_dash <- renderTable({
-    filtered_data_dash() %>%
-      group_by(state_name) %>%
-      summarize(
-        n_conflicts = n_distinct(cow_war_warnum),
-        total_deaths = sum(cow_war_fatalities, na.rm = TRUE),
-        .groups = "drop"
-      ) %>%
-      arrange(desc(n_conflicts)) %>%
-      slice_head(n = 10) %>%
-      rename(
-        "Country" = state_name,
-        "Conflicts" = n_conflicts,
-        "Deaths" = total_deaths
-      ) %>%
-      mutate(Deaths = format(Deaths, big.mark = ","))
+  output$goveffect_scatter <- renderPlotly({
+    df <- filtered()
+    plot_ly(df, x = ~mean_gov_effect, y = ~isis_fighters,
+            type = "scatter", mode = "markers",
+            text = ~paste(country_name, year),
+            marker = list(size = 9, color = "#d62728", opacity = 0.75)) %>%
+      layout(xaxis = list(title = "Government effectiveness (WBGI)"),
+             yaxis = list(title = "ISIS fighters"))
   })
 
-  # ===== Country Tab =====
-  output$country_conflicts <- renderText({
-    length(unique(country_data()$cow_war_warnum))
+  # ---- Country tab ----
+  output$country_fighters <- renderText({
+    format(sum(country_df()$isis_fighters, na.rm = TRUE), big.mark = ",")
   })
-
-  output$country_fatalities <- renderText({
-    format(sum(country_data()$cow_war_fatalities, na.rm = TRUE), big.mark = ",")
+  output$country_attacks <- renderText({
+    format(sum(country_df()$isis_attacks, na.rm = TRUE), big.mark = ",")
   })
-
-  output$country_duration <- renderText({
-    dur <- mean(country_data()$cow_war_duration, na.rm = TRUE)
-    sprintf("%.1f years", dur)
+  output$country_unemployment <- renderText({
+    v <- mean(country_df()$mean_unemployment, na.rm = TRUE)
+    if (is.nan(v)) "N/A" else sprintf("%.1f%%", v)
   })
 
   output$country_timeline <- renderPlot({
-    df <- country_data() %>%
-      group_by(year) %>%
-      summarize(
-        n_wars = n_distinct(cow_war_warnum),
-        .groups = "drop"
-      )
-
-    if (nrow(df) == 0) {
-      plot.new()
-      text(0.5, 0.5, "No conflicts for this country")
-    } else {
-      ggplot(df, aes(x = year, y = n_wars)) +
-        geom_col(fill = "#1f77b4", alpha = 0.7) +
-        labs(
-          x = "Year",
-          y = "Number of Conflicts",
-          title = paste(input$country_select, "- Conflict Participation")
-        ) +
-        theme_minimal() +
-        theme(plot.title = element_text(face = "bold"))
-    }
+    df <- country_df()
+    validate(need(nrow(df) > 0, "No data for this country."))
+    df_long <- tidyr::pivot_longer(
+      df,
+      cols      = c(isis_fighters, isis_attacks),
+      names_to  = "metric",
+      values_to = "value"
+    )
+    ggplot(df_long, aes(x = year, y = value, color = metric)) +
+      geom_line(linewidth = 1) +
+      geom_point(size = 2.5) +
+      scale_color_manual(values = c("isis_fighters" = "#1f77b4",
+                                    "isis_attacks"  = "#d62728"),
+                         labels = c("Fighters", "Attacks"),
+                         name   = NULL) +
+      labs(
+        title = paste(input$country_select,
+                      "- ISIS fighters and attacks by year"),
+        x = "Year", y = "Count"
+      ) +
+      theme_minimal(base_size = 13) +
+      theme(plot.title      = element_text(face = "bold"),
+            legend.position = "bottom")
   })
 
   output$country_comparison <- renderPlotly({
-    df <- cow_data %>%
-      group_by(state_name) %>%
-      summarize(
-        n_conflicts = n_distinct(cow_war_warnum),
-        .groups = "drop"
-      ) %>%
-      arrange(desc(n_conflicts)) %>%
+    df <- isis %>%
+      group_by(country_name) %>%
+      summarize(fighters = sum(isis_fighters, na.rm = TRUE), .groups = "drop") %>%
+      arrange(desc(fighters)) %>%
       slice_head(n = 15)
 
-    plot_ly(df, x = ~reorder(state_name, n_conflicts), y = ~n_conflicts,
-            type = "bar", marker = list(color = "#1f77b4")) %>%
-      layout(
-        xaxis = list(title = "", tickangle = -45),
-        yaxis = list(title = "Number of Conflicts"),
-        showlegend = FALSE,
-        margin = list(b = 100)
-      )
+    df$highlight <- ifelse(df$country_name == input$country_select,
+                           "Selected", "Other")
+
+    plot_ly(df, x = ~reorder(country_name, fighters), y = ~fighters,
+            color = ~highlight, colors = c("Other" = "#1f77b4",
+                                           "Selected" = "#d62728"),
+            type = "bar") %>%
+      layout(xaxis = list(title = "", tickangle = -45),
+             yaxis = list(title = "Total fighters"),
+             showlegend = FALSE,
+             margin = list(b = 100))
   })
 
-  # ===== Data Tab =====
-  output$data_explorer <- renderDataTable({
-    cow_data %>%
-      select(state_name, year, cow_war_warnum, war_type = cow_war_wartype,
-             duration = cow_war_duration, fatalities = cow_war_fatalities) %>%
+  # ---- Data tab ----
+  output$data_table <- renderDataTable({
+    isis %>%
+      mutate(across(where(is.numeric), ~ round(.x, 3))) %>%
       rename(
-        "Country" = state_name,
-        "Year" = year,
-        "War ID" = cow_war_warnum,
-        "Type" = war_type,
-        "Duration" = duration,
-        "Fatalities" = fatalities
+        "Country"         = country_name,
+        "Year"            = year,
+        "Fighters"        = isis_fighters,
+        "Attacks"         = isis_attacks,
+        "Grid cells"      = n_cells,
+        "Mean nightlights"= mean_nightlights,
+        "Mean GCP (ppp)"  = mean_gcp_ppp,
+        "Population"      = total_population,
+        "Unemployment"    = mean_unemployment,
+        "Polity2"         = mean_polity,
+        "Gov effectiveness" = mean_gov_effect,
+        "Sunni excluded"  = any_sunni_excluded
       )
   })
 
-  output$download_data_page <- downloadHandler(
-    filename = function() {
-      paste0("cow_conflicts_", Sys.Date(), ".csv")
-    },
-    content = function(file) {
-      write.csv(cow_data, file, row.names = FALSE)
-    }
+  output$download_data <- downloadHandler(
+    filename = function() paste0("isis_mobilization_", Sys.Date(), ".csv"),
+    content  = function(file) write.csv(isis, file, row.names = FALSE)
   )
 }
 
-# Run the application
+# Run -------------------------------------------------------------------------
 shinyApp(ui = ui, server = server)

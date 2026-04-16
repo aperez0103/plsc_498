@@ -1,5 +1,12 @@
-# APPROACH 3: Shiny Dashboard for Correlates of War Data
-# Interstate Conflicts Explorer
+# APPROACH 3: Shiny Dashboard with shinydashboard
+# US State Crime and Demographics Explorer  (American Politics dataset #3)
+#
+# Data: state_crime.rds
+#   Built in create_data.R from
+#     13_week/data/us_arrests.rds  (1973 arrests per 100k)
+#   and
+#     13_week/data/state_data.rds  (state demographics from state.x77).
+#
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
 library(shiny)
@@ -8,399 +15,285 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-# Load data
-cow_data <- readRDS("cow_wars.rds")
+# Load data -------------------------------------------------------------------
+data_file <- if (file.exists("state_crime.rds")) {
+  "state_crime.rds"
+} else {
+  "15_week/data/state_crime.rds"
+}
+state_crime <- readRDS(data_file)
 
-# Prepare data
-cow_data <- cow_data %>%
-  mutate(
-    year = as.numeric(year),
-    war_type = coalesce(cow_war_wartype, "Unknown"),
-    initiator = ifelse(cow_war_initiator == 1, "Initiator", "Participant")
-  ) %>%
-  filter(!is.na(cow_war_warnum))
+region_choices <- sort(unique(state_crime$region))
+crime_metrics  <- c("Murder" = "murder",
+                    "Assault" = "assault",
+                    "Rape"   = "rape")
 
-# Define UI
+# UI --------------------------------------------------------------------------
 ui <- dashboardPage(
-  # Header
-  dashboardHeader(
-    title = "Correlates of War Explorer",
-    titleWidth = 300
-  ),
+  dashboardHeader(title = "US State Crime Explorer", titleWidth = 300),
 
-  # Sidebar
   dashboardSidebar(
     width = 250,
     sidebarMenu(
-      menuItem(
-        "Overview",
-        tabName = "overview",
-        icon = icon("chart-line")
-      ),
-      menuItem(
-        "Conflict Analysis",
-        tabName = "conflicts",
-        icon = icon("exclamation-triangle")
-      ),
-      menuItem(
-        "Countries",
-        tabName = "countries",
-        icon = icon("globe")
-      ),
-      menuItem(
-        "Data Explorer",
-        tabName = "data",
-        icon = icon("table")
-      )
+      menuItem("Overview",  tabName = "overview", icon = icon("chart-line")),
+      menuItem("Crime",     tabName = "crime",    icon = icon("exclamation-triangle")),
+      menuItem("Contexts",  tabName = "context",  icon = icon("balance-scale")),
+      menuItem("Data",      tabName = "data",     icon = icon("table"))
     ),
     hr(),
     h4("Filters", style = "padding: 10px;"),
-    sliderInput(
-      "year_range",
-      "Year Range:",
-      min = min(cow_data$year, na.rm = TRUE),
-      max = max(cow_data$year, na.rm = TRUE),
-      value = c(min(cow_data$year, na.rm = TRUE), max(cow_data$year, na.rm = TRUE)),
-      step = 1
-    ),
     checkboxGroupInput(
-      "war_type_filter",
-      "War Type:",
-      choices = unique(cow_data$war_type),
-      selected = unique(cow_data$war_type)
+      "region_filter", "Region:",
+      choices  = region_choices,
+      selected = region_choices
     ),
     selectInput(
-      "country_filter",
-      "Country (Optional):",
-      choices = c("All", sort(unique(cow_data$state_name))),
-      selected = "All"
+      "crime_metric", "Crime metric:",
+      choices  = crime_metrics,
+      selected = "murder"
+    ),
+    sliderInput(
+      "urban_range", "Urban population (%):",
+      min   = min(state_crime$urban_pop, na.rm = TRUE),
+      max   = max(state_crime$urban_pop, na.rm = TRUE),
+      value = c(min(state_crime$urban_pop, na.rm = TRUE),
+                max(state_crime$urban_pop, na.rm = TRUE)),
+      step  = 1
     )
   ),
 
-  # Body
   dashboardBody(
     tabItems(
-      # Tab 1: Overview
+      # ---- Overview ----
       tabItem(
         tabName = "overview",
-        h2("Conflict Overview"),
+        h2("State overview"),
         fluidRow(
-          valueBoxOutput("total_wars", width = 3),
-          valueBoxOutput("total_deaths", width = 3),
-          valueBoxOutput("avg_duration", width = 3),
-          valueBoxOutput("countries_involved", width = 3)
+          valueBoxOutput("n_states",      width = 3),
+          valueBoxOutput("mean_crime",    width = 3),
+          valueBoxOutput("mean_income",   width = 3),
+          valueBoxOutput("mean_life_exp", width = 3)
         ),
         fluidRow(
-          box(
-            title = "Conflicts Over Time",
-            plotOutput("conflicts_timeline", height = "400px"),
-            width = 12
-          )
+          box(title = paste0("Top 10 states by selected crime metric"),
+              plotOutput("top_states_plot", height = "420px"), width = 12)
         ),
         fluidRow(
-          box(
-            title = "War Type Distribution",
-            plotOutput("wartype_dist", height = "350px"),
-            width = 6
-          ),
-          box(
-            title = "Deadliest Conflicts",
-            tableOutput("deadliest_conflicts"),
-            width = 6
-          )
+          box(title = "Crime by region",
+              plotOutput("region_box", height = "350px"), width = 6),
+          box(title = "Most violent states (all crimes)",
+              tableOutput("most_violent"), width = 6)
         )
       ),
 
-      # Tab 2: Conflict Analysis
+      # ---- Crime analysis ----
       tabItem(
-        tabName = "conflicts",
-        h2("Interstate Conflict Analysis"),
+        tabName = "crime",
+        h2("Crime analysis"),
         fluidRow(
-          box(
-            title = "Fatalities by War Type",
-            plotlyOutput("fatalities_wartype", height = "400px"),
-            width = 6
-          ),
-          box(
-            title = "Conflict Duration Distribution",
-            plotlyOutput("duration_dist", height = "400px"),
-            width = 6
-          )
+          box(title = "Crime vs. urbanization",
+              plotlyOutput("crime_urban", height = "400px"), width = 6),
+          box(title = "Crime vs. income",
+              plotlyOutput("crime_income", height = "400px"), width = 6)
         ),
         fluidRow(
-          box(
-            title = "Initiators vs Participants",
-            plotOutput("initiator_pie", height = "350px"),
-            width = 6
-          ),
-          box(
-            title = "Wars by Year",
-            plotOutput("wars_year_count", height = "350px"),
-            width = 6
-          )
+          box(title = "Correlation matrix of crime metrics",
+              plotOutput("crime_corr", height = "350px"), width = 12)
         )
       ),
 
-      # Tab 3: Countries
+      # ---- Contextual variables ----
       tabItem(
-        tabName = "countries",
-        h2("Country-Level Analysis"),
+        tabName = "context",
+        h2("Socio-economic context"),
         fluidRow(
-          box(
-            title = "Most Involved Countries",
-            tableOutput("top_countries"),
-            width = 6
-          ),
-          box(
-            title = "Conflict Participation by Country",
-            plotOutput("country_involvement", height = "400px"),
-            width = 6
-          )
+          box(title = "Life expectancy by region",
+              plotOutput("life_exp_region", height = "400px"), width = 6),
+          box(title = "Education (% HS graduates) vs. illiteracy",
+              plotlyOutput("education_plot", height = "400px"), width = 6)
         )
       ),
 
-      # Tab 4: Data Explorer
+      # ---- Raw data ----
       tabItem(
         tabName = "data",
-        h2("Raw Data Explorer"),
-        fluidRow(
-          column(
-            12,
-            downloadButton("download_data", "Download Filtered Data"),
-            br(), br()
-          )
-        ),
+        h2("Raw data"),
+        fluidRow(column(12,
+          downloadButton("download_data", "Download filtered CSV"),
+          br(), br()
+        )),
         dataTableOutput("data_table")
       )
     )
   )
 )
 
-# Define server
-server <- function(input, output) {
-  # Reactive filtered data
-  filtered_data <- reactive({
-    df <- cow_data %>%
+# Server ----------------------------------------------------------------------
+server <- function(input, output, session) {
+
+  filtered <- reactive({
+    state_crime %>%
       filter(
-        year >= input$year_range[1],
-        year <= input$year_range[2],
-        war_type %in% input$war_type_filter
+        region     %in% input$region_filter,
+        urban_pop  >= input$urban_range[1],
+        urban_pop  <= input$urban_range[2]
       )
-
-    if (input$country_filter != "All") {
-      df <- df %>% filter(state_name == input$country_filter)
-    }
-
-    df
   })
 
-  # ===== Value Boxes =====
-  output$total_wars <- renderValueBox({
-    n_wars <- length(unique(filtered_data()$cow_war_warnum))
-    valueBox(
-      value = n_wars,
-      subtitle = "Interstate Wars",
-      icon = icon("crosshairs"),
-      color = "red"
-    )
+  # ---- Value boxes ----
+  output$n_states <- renderValueBox({
+    valueBox(nrow(filtered()), "States shown",
+             icon = icon("flag-usa"), color = "blue")
+  })
+  output$mean_crime <- renderValueBox({
+    v <- mean(filtered()[[input$crime_metric]], na.rm = TRUE)
+    valueBox(round(v, 1),
+             paste("Mean", names(crime_metrics)[crime_metrics == input$crime_metric]),
+             icon = icon("crosshairs"), color = "red")
+  })
+  output$mean_income <- renderValueBox({
+    v <- mean(filtered()$income, na.rm = TRUE)
+    valueBox(format(round(v), big.mark = ","), "Mean income",
+             icon = icon("dollar-sign"), color = "green")
+  })
+  output$mean_life_exp <- renderValueBox({
+    v <- mean(filtered()$life_exp, na.rm = TRUE)
+    valueBox(sprintf("%.1f", v), "Mean life expectancy",
+             icon = icon("heartbeat"), color = "maroon")
   })
 
-  output$total_deaths <- renderValueBox({
-    total_deaths <- sum(filtered_data()$cow_war_fatalities, na.rm = TRUE)
-    valueBox(
-      value = format(total_deaths, big.mark = ","),
-      subtitle = "Total Fatalities",
-      icon = icon("heartbeat"),
-      color = "maroon"
-    )
-  })
+  # ---- Top states bar ----
+  output$top_states_plot <- renderPlot({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No states match the current filters."))
+    metric <- input$crime_metric
 
-  output$avg_duration <- renderValueBox({
-    avg_dur <- mean(filtered_data()$cow_war_duration, na.rm = TRUE)
-    valueBox(
-      value = round(avg_dur, 1),
-      subtitle = "Avg Duration (years)",
-      icon = icon("hourglass-end"),
-      color = "orange"
-    )
-  })
-
-  output$countries_involved <- renderValueBox({
-    n_countries <- length(unique(filtered_data()$state_name))
-    valueBox(
-      value = n_countries,
-      subtitle = "Countries Involved",
-      icon = icon("flag"),
-      color = "blue"
-    )
-  })
-
-  # ===== Plots =====
-  output$conflicts_timeline <- renderPlot({
-    df <- filtered_data() %>%
-      group_by(year) %>%
-      summarize(n_wars = n_distinct(cow_war_warnum), .groups = "drop")
-
-    ggplot(df, aes(x = year, y = n_wars)) +
-      geom_line(color = "#d62728", size = 1) +
-      geom_point(color = "#d62728", size = 3) +
+    df %>%
+      arrange(desc(.data[[metric]])) %>%
+      slice_head(n = 10) %>%
+      ggplot(aes(x = reorder(state, .data[[metric]]),
+                 y = .data[[metric]], fill = region)) +
+      geom_col(alpha = 0.85) +
+      coord_flip() +
       labs(
-        title = "",
-        x = "Year",
-        y = "Number of Wars"
+        x = NULL,
+        y = paste(names(crime_metrics)[crime_metrics == metric],
+                  "(arrests per 100k)"),
+        fill = "Region"
       ) +
-      theme_minimal() +
-      theme(plot.margin = margin(10, 10, 10, 10))
+      theme_minimal(base_size = 13)
   })
 
-  output$wartype_dist <- renderPlot({
-    df <- filtered_data() %>%
-      group_by(war_type) %>%
-      summarize(n = n_distinct(cow_war_warnum), .groups = "drop")
+  output$region_box <- renderPlot({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No states match the current filters."))
+    ggplot(df, aes(x = region, y = .data[[input$crime_metric]], fill = region)) +
+      geom_boxplot(alpha = 0.75, show.legend = FALSE) +
+      labs(x = NULL,
+           y = names(crime_metrics)[crime_metrics == input$crime_metric]) +
+      theme_minimal(base_size = 13)
+  })
 
-    ggplot(df, aes(x = reorder(war_type, -n), y = n, fill = war_type)) +
-      geom_col() +
-      scale_fill_brewer(palette = "Set2", guide = "none") +
-      labs(x = "", y = "Count") +
-      theme_minimal() +
+  output$most_violent <- renderTable({
+    filtered() %>%
+      mutate(total = murder + assault + rape) %>%
+      arrange(desc(total)) %>%
+      slice_head(n = 10) %>%
+      transmute(
+        State   = state,
+        Region  = region,
+        Murder  = murder,
+        Assault = assault,
+        Rape    = rape,
+        Total   = round(total, 1)
+      )
+  })
+
+  # ---- Crime tab plots ----
+  output$crime_urban <- renderPlotly({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No data."))
+    plot_ly(df, x = ~urban_pop, y = ~.data[[input$crime_metric]],
+            type = "scatter", mode = "markers",
+            text = ~state, color = ~region,
+            marker = list(size = 10, opacity = 0.8)) %>%
+      layout(xaxis = list(title = "Urban population (%)"),
+             yaxis = list(title = names(crime_metrics)[crime_metrics == input$crime_metric]))
+  })
+
+  output$crime_income <- renderPlotly({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No data."))
+    plot_ly(df, x = ~income, y = ~.data[[input$crime_metric]],
+            type = "scatter", mode = "markers",
+            text = ~state, color = ~region,
+            marker = list(size = 10, opacity = 0.8)) %>%
+      layout(xaxis = list(title = "Per-capita income"),
+             yaxis = list(title = names(crime_metrics)[crime_metrics == input$crime_metric]))
+  })
+
+  output$crime_corr <- renderPlot({
+    df <- filtered() %>% select(murder, assault, rape, urban_pop,
+                                income, illiteracy, life_exp, hs_grad)
+    validate(need(nrow(df) > 1, "Need at least 2 states for correlations."))
+    cm <- cor(df, use = "pairwise.complete.obs")
+    corr_df <- as.data.frame(as.table(cm))
+    ggplot(corr_df, aes(x = Var1, y = Var2, fill = Freq)) +
+      geom_tile(color = "white") +
+      geom_text(aes(label = sprintf("%.2f", Freq)), size = 3) +
+      scale_fill_gradient2(low = "#1f77b4", mid = "white", high = "#d62728",
+                           midpoint = 0, limits = c(-1, 1)) +
+      labs(x = NULL, y = NULL, fill = "r") +
+      theme_minimal(base_size = 12) +
       theme(axis.text.x = element_text(angle = 45, hjust = 1))
   })
 
-  output$deadliest_conflicts <- renderTable({
-    filtered_data() %>%
-      group_by(cow_war_warnum, state_name, year, war_type) %>%
-      summarize(
-        fatalities = sum(cow_war_fatalities, na.rm = TRUE),
-        duration = first(cow_war_duration),
-        .groups = "drop"
-      ) %>%
-      arrange(desc(fatalities)) %>%
-      slice_head(n = 10) %>%
-      rename(
-        "War #" = cow_war_warnum,
-        "Country" = state_name,
-        "Year" = year,
-        "Type" = war_type,
-        "Deaths" = fatalities,
-        "Duration" = duration
-      ) %>%
-      mutate(Deaths = format(Deaths, big.mark = ","))
+  # ---- Context tab ----
+  output$life_exp_region <- renderPlot({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No data."))
+    ggplot(df, aes(x = region, y = life_exp, fill = region)) +
+      geom_boxplot(alpha = 0.75, show.legend = FALSE) +
+      labs(x = NULL, y = "Life expectancy (years)") +
+      theme_minimal(base_size = 13)
   })
 
-  output$fatalities_wartype <- renderPlotly({
-    df <- filtered_data() %>%
-      group_by(war_type) %>%
-      summarize(total_deaths = sum(cow_war_fatalities, na.rm = TRUE), .groups = "drop")
-
-    plot_ly(df, x = ~war_type, y = ~total_deaths, type = "bar",
-            marker = list(color = ~total_deaths, colorscale = "Reds")) %>%
-      layout(
-        title = "",
-        xaxis = list(title = ""),
-        yaxis = list(title = "Total Fatalities"),
-        showlegend = FALSE
-      )
+  output$education_plot <- renderPlotly({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No data."))
+    plot_ly(df, x = ~hs_grad, y = ~illiteracy,
+            type = "scatter", mode = "markers",
+            text = ~state, color = ~region,
+            marker = list(size = 10, opacity = 0.8)) %>%
+      layout(xaxis = list(title = "% HS graduates"),
+             yaxis = list(title = "Illiteracy (%)"))
   })
 
-  output$duration_dist <- renderPlotly({
-    df <- filtered_data() %>%
-      filter(!is.na(cow_war_duration)) %>%
-      group_by(cow_war_warnum) %>%
-      slice_head(n = 1)
-
-    plot_ly(df, x = ~cow_war_duration, type = "histogram",
-            marker = list(color = "#1f77b4")) %>%
-      layout(
-        title = "",
-        xaxis = list(title = "Duration (years)"),
-        yaxis = list(title = "Frequency"),
-        showlegend = FALSE
-      )
-  })
-
-  output$initiator_pie <- renderPlot({
-    df <- filtered_data() %>%
-      filter(!is.na(cow_war_initiator)) %>%
-      group_by(initiator) %>%
-      summarize(n = n_distinct(cow_war_warnum), .groups = "drop")
-
-    if (nrow(df) == 0) {
-      plot.new()
-      text(0.5, 0.5, "No data available")
-    } else {
-      pie(df$n, labels = df$initiator, col = c("#d62728", "#1f77b4"),
-          main = "")
-    }
-  })
-
-  output$wars_year_count <- renderPlot({
-    df <- filtered_data() %>%
-      group_by(year) %>%
-      summarize(n_wars = n_distinct(cow_war_warnum), .groups = "drop")
-
-    ggplot(df, aes(x = year, y = n_wars, fill = n_wars)) +
-      geom_col() +
-      scale_fill_gradient(low = "#fee5d9", high = "#d62728", guide = "none") +
-      labs(x = "Year", y = "Number of Wars") +
-      theme_minimal()
-  })
-
-  output$top_countries <- renderTable({
-    filtered_data() %>%
-      group_by(state_name) %>%
-      summarize(
-        n_wars = n_distinct(cow_war_warnum),
-        total_deaths = sum(cow_war_fatalities, na.rm = TRUE),
-        .groups = "drop"
-      ) %>%
-      arrange(desc(n_wars)) %>%
-      slice_head(n = 10) %>%
-      rename(
-        "Country" = state_name,
-        "Wars" = n_wars,
-        "Deaths" = total_deaths
-      ) %>%
-      mutate(Deaths = format(Deaths, big.mark = ","))
-  })
-
-  output$country_involvement <- renderPlot({
-    df <- filtered_data() %>%
-      group_by(state_name) %>%
-      summarize(n_wars = n_distinct(cow_war_warnum), .groups = "drop") %>%
-      arrange(desc(n_wars)) %>%
-      slice_head(n = 15)
-
-    ggplot(df, aes(x = reorder(state_name, n_wars), y = n_wars)) +
-      geom_col(fill = "#1f77b4") +
-      coord_flip() +
-      labs(x = "", y = "Number of Wars") +
-      theme_minimal()
-  })
-
+  # ---- Data tab ----
   output$data_table <- renderDataTable({
-    filtered_data() %>%
-      select(state_name, year, cow_war_warnum, war_type, cow_war_duration,
-             cow_war_fatalities, initiator) %>%
+    filtered() %>%
       rename(
-        "Country" = state_name,
-        "Year" = year,
-        "War #" = cow_war_warnum,
-        "Type" = war_type,
-        "Duration" = cow_war_duration,
-        "Fatalities" = cow_war_fatalities,
-        "Role" = initiator
+        State      = state,
+        Region     = region,
+        Murder     = murder,
+        Assault    = assault,
+        Rape       = rape,
+        "Urban %"  = urban_pop,
+        Population = population,
+        Income     = income,
+        Illiteracy = illiteracy,
+        "Life Exp" = life_exp,
+        "HS Grad"  = hs_grad,
+        Frost      = frost,
+        Area       = area
       )
   })
 
   output$download_data <- downloadHandler(
-    filename = function() {
-      paste0("cow_wars_", Sys.Date(), ".csv")
-    },
-    content = function(file) {
-      write.csv(filtered_data(), file, row.names = FALSE)
-    }
+    filename = function() paste0("state_crime_", Sys.Date(), ".csv"),
+    content  = function(file) write.csv(filtered(), file, row.names = FALSE)
   )
 }
 
-# Run the application
+# Run -------------------------------------------------------------------------
 shinyApp(ui = ui, server = server)

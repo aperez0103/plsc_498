@@ -1,20 +1,31 @@
 # APPROACH 2: Shiny App with navbarPage for Multi-Tab Navigation
-# US Senate Ideology Visualization
+# 2020 US Presidential Election Explorer  (American Politics dataset #2)
+#
+# Data: election_2020.rds
+#   Built in create_data.R from 09_week/data/state_df.rds
+#   (State-level 2020 presidential election returns plus COVID deaths.)
+#
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
 library(shiny)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 
-# Load data
-senate_data <- readRDS("senate_ideology.rds")
+# Load data -------------------------------------------------------------------
+data_file <- if (file.exists("election_2020.rds")) {
+  "election_2020.rds"
+} else {
+  "15_week/data/election_2020.rds"
+}
+election <- readRDS(data_file)
 
-# Define UI with navbarPage
+# UI --------------------------------------------------------------------------
 ui <- navbarPage(
-  title = "Senate Ideology Explorer",
+  title = "2020 Election Explorer",
   theme = bslib::bs_theme(version = 4, primary = "#003366"),
 
-  # Tab 1: Main visualization
+  # ---- Tab 1: Visualization ----
   tabPanel(
     "Visualization",
     br(),
@@ -22,250 +33,211 @@ ui <- navbarPage(
       column(
         3,
         h4("Controls"),
-        selectInput(
-          "congress_select",
-          "Congress:",
-          choices = sort(unique(senate_data$congress), decreasing = TRUE),
-          selected = max(senate_data$congress)
-        ),
         checkboxGroupInput(
-          "party_filter",
-          "Parties:",
-          choices = c("Democrat" = "D", "Republican" = "R"),
-          selected = c("D", "R")
+          "winner_filter",
+          "Show states where winner was:",
+          choices  = c("Biden", "Trump"),
+          selected = c("Biden", "Trump")
         ),
         sliderInput(
-          "min_ideology",
-          "Ideology Range:",
-          min = -1,
-          max = 1,
-          value = c(-1, 1)
+          "margin_range",
+          "Biden vote margin:",
+          min   = round(min(election$biden_margin), 2),
+          max   = round(max(election$biden_margin), 2),
+          value = c(round(min(election$biden_margin), 2),
+                    round(max(election$biden_margin), 2)),
+          step  = 0.01
+        ),
+        sliderInput(
+          "min_votes",
+          "Minimum total votes cast:",
+          min   = 0,
+          max   = max(election$total_votes),
+          value = 0,
+          step  = 1e5
         ),
         actionButton("reset_filters", "Reset Filters", class = "btn-primary")
       ),
       column(
         9,
-        plotOutput("ideology_plot", height = "600px"),
-        p(
-          em("Hover over points to see senator names. Red = Republican, Blue = Democrat."),
-          style = "font-size: 11px; color: #666;"
-        )
+        plotOutput("margin_plot", height = "600px"),
+        p(em("States ranked by Biden's vote margin. Blue = Biden won, Red = Trump won."),
+          style = "font-size: 11px; color: #666;")
       )
     )
   ),
 
-  # Tab 2: Aggregate statistics
+  # ---- Tab 2: Statistics ----
   tabPanel(
     "Statistics",
     br(),
     fluidRow(
       column(4, wellPanel(
-        h4("Mean Ideology by Party"),
-        textOutput("mean_ideology_dem"),
-        textOutput("mean_ideology_rep")
+        h4("Biden states"),
+        textOutput("n_biden"),
+        textOutput("biden_total_votes")
       )),
       column(4, wellPanel(
-        h4("Polarization Metric"),
-        textOutput("polarization")
+        h4("Trump states"),
+        textOutput("n_trump"),
+        textOutput("trump_total_votes")
       )),
       column(4, wellPanel(
-        h4("N Senators"),
-        textOutput("n_senators_text")
+        h4("Mean COVID deaths"),
+        textOutput("mean_covid_biden"),
+        textOutput("mean_covid_trump")
       ))
     ),
     br(),
-    h4("Party-State Breakdown"),
-    tableOutput("state_stats")
+    h4("COVID deaths vs. Biden vote share"),
+    plotOutput("covid_scatter", height = "450px")
   ),
 
-  # Tab 3: Data explorer
+  # ---- Tab 3: Data Table ----
   tabPanel(
     "Data Table",
     br(),
-    fluidRow(
-      column(12,
-        p("Download the filtered dataset:"),
-        downloadButton("download_data", "Download as CSV")
-      )
-    ),
+    fluidRow(column(12,
+      p("Download the filtered dataset:"),
+      downloadButton("download_data", "Download as CSV")
+    )),
     br(),
     dataTableOutput("full_table")
   ),
 
-  # Tab 4: About
+  # ---- Tab 4: About ----
   tabPanel(
     "About",
     br(),
-    h3("US Senate Ideology Explorer"),
-    p(
-      "This application visualizes ideological positions of US Senators using",
-      strong("DW-NOMINATE scores"),
-      "from the Rvoteview package."
-    ),
-    h4("What are DW-NOMINATE scores?"),
-    p(
-      "DW-NOMINATE (Dynamic Weighted NOMINATE) scores are a measure of ideology",
-      "estimated from legislative voting records. Negative scores indicate liberal positions,",
-      "while positive scores indicate conservative positions."
-    ),
-    h4("Data Source"),
-    p(
-      "Data: ",
-      a("VoteView/Rvoteview", href = "https://voteview.com/"),
-      br(),
-      "Updated: 2024"
-    ),
-    h4("How to Use"),
+    h3("2020 US Presidential Election Explorer"),
+    p("This application visualizes the 2020 US presidential election by state",
+      "along with COVID-19 mortality as of Election Day."),
+    h4("Data source"),
+    p("State-level vote totals come from the MIT Election Lab / state_df.rds",
+      "dataset used in Week 9 of PLSC 498. COVID deaths are cumulative",
+      "through 2020-11-07."),
+    h4("How to use"),
     tags$ol(
-      tags$li("Select a Congress from the Visualization tab"),
-      tags$li("Filter by party affiliation"),
-      tags$li("Adjust the ideology range slider to focus on certain ideological positions"),
-      tags$li("View aggregate statistics in the Statistics tab"),
-      tags$li("Download the data using the Data Table tab")
+      tags$li("Filter by which candidate won the state."),
+      tags$li("Narrow the Biden-margin slider to focus on swing states."),
+      tags$li("Use the Statistics tab to compare COVID mortality across red and blue states."),
+      tags$li("Download the filtered data from the Data Table tab.")
     )
   )
 )
 
-# Define server
+# Server ----------------------------------------------------------------------
 server <- function(input, output, session) {
-  # Reactive data filtering
-  filtered_data <- reactive({
-    senate_data %>%
+
+  filtered <- reactive({
+    election %>%
       filter(
-        congress == input$congress_select,
-        party %in% input$party_filter,
-        dwnom1 >= input$min_ideology[1],
-        dwnom1 <= input$min_ideology[2]
-      ) %>%
-      arrange(dwnom1)
+        winner        %in% input$winner_filter,
+        biden_margin  >= input$margin_range[1],
+        biden_margin  <= input$margin_range[2],
+        total_votes   >= input$min_votes
+      )
   })
 
-  # Reset filters action
   observeEvent(input$reset_filters, {
-    updateSelectInput(session, "congress_select", selected = max(senate_data$congress))
-    updateCheckboxGroupInput(session, "party_filter", selected = c("D", "R"))
-    updateSliderInput(session, "min_ideology", value = c(-1, 1))
+    updateCheckboxGroupInput(session, "winner_filter",
+                             selected = c("Biden", "Trump"))
+    updateSliderInput(session, "margin_range",
+                      value = c(round(min(election$biden_margin), 2),
+                                round(max(election$biden_margin), 2)))
+    updateSliderInput(session, "min_votes", value = 0)
   })
 
-  # Main ideology plot
-  output$ideology_plot <- renderPlot({
-    df <- filtered_data()
+  output$margin_plot <- renderPlot({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No states match the current filters."))
 
-    if (nrow(df) == 0) {
-      plot(NA, xlim = 0:1, ylim = 0:1, bty = "n", axes = FALSE)
-      text(0.5, 0.5, "No senators match current filters", cex = 1.5)
-    } else {
-      ggplot(df, aes(x = dwnom1, y = dwnom2, color = party, size = 3)) +
-        geom_point(alpha = 0.7) +
-        scale_color_manual(
-          name = "Party",
-          values = c("D" = "#1f77b4", "R" = "#d62728"),
-          labels = c("D" = "Democrat", "R" = "Republican")
-        ) +
-        scale_size_identity() +
-        labs(
-          title = paste("Senate Ideology -", input$congress_select, "Congress"),
-          x = "Liberal → Conservative",
-          y = "Racial Dimension",
-          caption = "Source: VoteView/Rvoteview"
-        ) +
-        xlim(-1, 1) +
-        ylim(-1, 1) +
-        theme_minimal() +
-        theme(
-          plot.title = element_text(size = 16, face = "bold"),
-          legend.position = "bottomright",
-          panel.grid = element_line(color = "gray90")
-        )
-    }
+    ggplot(df, aes(x = biden_margin,
+                   y = reorder(state, biden_margin),
+                   fill = winner)) +
+      geom_col(alpha = 0.85) +
+      geom_vline(xintercept = 0, linetype = "dashed", color = "grey40") +
+      scale_fill_manual(values = c("Biden" = "#1f77b4", "Trump" = "#d62728")) +
+      labs(
+        title   = "2020 presidential election: Biden margin by state",
+        x       = "Biden - Trump vote share",
+        y       = NULL,
+        fill    = "Winner",
+        caption = "Source: state_df.rds (Week 9)"
+      ) +
+      theme_minimal(base_size = 12) +
+      theme(plot.title = element_text(face = "bold"))
   })
 
-  # Summary statistics
-  output$mean_ideology_dem <- renderText({
-    df <- filtered_data() %>% filter(party == "D")
-    if (nrow(df) == 0) {
-      "Democrat: N/A"
-    } else {
-      sprintf("Democrat: %.3f", mean(df$dwnom1, na.rm = TRUE))
-    }
+  output$n_biden <- renderText({
+    sprintf("States won: %d", sum(filtered()$winner == "Biden"))
+  })
+  output$n_trump <- renderText({
+    sprintf("States won: %d", sum(filtered()$winner == "Trump"))
+  })
+  output$biden_total_votes <- renderText({
+    sprintf("Biden votes: %s",
+            format(sum(filtered()$biden_votes, na.rm = TRUE), big.mark = ","))
+  })
+  output$trump_total_votes <- renderText({
+    sprintf("Trump votes: %s",
+            format(sum(filtered()$trump_votes, na.rm = TRUE), big.mark = ","))
+  })
+  output$mean_covid_biden <- renderText({
+    x <- filtered() %>% filter(winner == "Biden") %>% pull(covid_deaths)
+    if (length(x) == 0) "Biden: N/A"
+    else sprintf("Biden states: %s", format(round(mean(x, na.rm = TRUE)), big.mark = ","))
+  })
+  output$mean_covid_trump <- renderText({
+    x <- filtered() %>% filter(winner == "Trump") %>% pull(covid_deaths)
+    if (length(x) == 0) "Trump: N/A"
+    else sprintf("Trump states: %s", format(round(mean(x, na.rm = TRUE)), big.mark = ","))
   })
 
-  output$mean_ideology_rep <- renderText({
-    df <- filtered_data() %>% filter(party == "R")
-    if (nrow(df) == 0) {
-      "Republican: N/A"
-    } else {
-      sprintf("Republican: %.3f", mean(df$dwnom1, na.rm = TRUE))
-    }
+  output$covid_scatter <- renderPlot({
+    df <- filtered()
+    validate(need(nrow(df) > 0, "No states match the current filters."))
+
+    ggplot(df, aes(x = biden_share, y = covid_deaths, color = winner)) +
+      geom_point(size = 3.5, alpha = 0.8) +
+      geom_smooth(method = "lm", se = FALSE, color = "grey40", linewidth = 0.6) +
+      scale_color_manual(values = c("Biden" = "#1f77b4", "Trump" = "#d62728")) +
+      labs(
+        x       = "Biden share of the two-party vote",
+        y       = "Cumulative COVID deaths (2020-11-07)",
+        color   = "Winner",
+        caption = "Source: state_df.rds"
+      ) +
+      theme_minimal(base_size = 13)
   })
 
-  output$polarization <- renderText({
-    df <- filtered_data()
-    if (nrow(df) < 2) {
-      "Polarization: N/A"
-    } else {
-      dem_mean <- mean(df[df$party == "D", "dwnom1"]$dwnom1, na.rm = TRUE)
-      rep_mean <- mean(df[df$party == "R", "dwnom1"]$dwnom1, na.rm = TRUE)
-      sprintf("Gap: %.3f", abs(dem_mean - rep_mean))
-    }
-  })
-
-  output$n_senators_text <- renderText({
-    sprintf("Total: %d", nrow(filtered_data()))
-  })
-
-  # State statistics table
-  output$state_stats <- renderTable({
-    filtered_data() %>%
-      group_by(state, party) %>%
-      summarize(
-        n = n(),
-        mean_ideology = round(mean(dwnom1, na.rm = TRUE), 3),
-        .groups = "drop"
-      ) %>%
-      pivot_wider(
-        names_from = party,
-        values_from = c(n, mean_ideology),
-        values_fill = list(n = 0, mean_ideology = NA)
-      ) %>%
-      rename(
-        "State" = state,
-        "D Count" = "n_D",
-        "R Count" = "n_R",
-        "D Ideology" = "mean_ideology_D",
-        "R Ideology" = "mean_ideology_R"
-      )
-  })
-
-  # Full data table
   output$full_table <- renderDataTable({
-    filtered_data() %>%
+    filtered() %>%
       mutate(
-        party_name = ifelse(party == "D", "Democrat", "Republican"),
-        dwnom1 = round(dwnom1, 3),
-        dwnom2 = round(dwnom2, 3)
+        biden_share  = round(biden_share, 3),
+        trump_share  = round(trump_share, 3),
+        biden_margin = round(biden_margin, 3)
       ) %>%
-      select(name, state, party_name, congress, dwnom1, dwnom2) %>%
       rename(
-        "Name" = name,
-        "State" = state,
-        "Party" = party_name,
-        "Congress" = congress,
-        "Lib-Con" = dwnom1,
-        "Racial" = dwnom2
+        "State"       = state,
+        "PO"          = state_po,
+        "Total votes" = total_votes,
+        "Biden"       = biden_votes,
+        "Trump"       = trump_votes,
+        "Biden %"     = biden_share,
+        "Trump %"     = trump_share,
+        "Margin"      = biden_margin,
+        "Winner"      = winner,
+        "COVID deaths" = covid_deaths,
+        "Pneumonia deaths" = pneumonia_deaths
       )
   })
 
-  # Download handler
   output$download_data <- downloadHandler(
-    filename = function() {
-      paste0("senate_ideology_", input$congress_select, ".csv")
-    },
-    content = function(file) {
-      write.csv(filtered_data(), file, row.names = FALSE)
-    }
+    filename = function() "election_2020_filtered.csv",
+    content  = function(file) write.csv(filtered(), file, row.names = FALSE)
   )
 }
 
-# Run the application
+# Run -------------------------------------------------------------------------
 shinyApp(ui = ui, server = server)
