@@ -13,6 +13,14 @@
 #
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
+# Install any missing packages automatically --------------------------------
+required_packages <- c("shiny", "bslib", "dplyr", "ggplot2", "plotly", "tidyr")
+for (pkg in required_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
 library(shiny)
 library(bslib)
 library(dplyr)
@@ -113,6 +121,25 @@ ui <- page_navbar(
               plotOutput("top_countries_bar")
             ),
             col_widths = c(6, 6)
+          )
+        ),
+        nav_panel(
+          "Map",
+          br(),
+          fluidRow(
+            column(4,
+              selectInput(
+                "map_metric", "Metric to display:",
+                choices  = c("ISIS fighters" = "isis_fighters",
+                             "ISIS attacks"   = "isis_attacks"),
+                selected = "isis_fighters"
+              )
+            )
+          ),
+          card(
+            full_screen = TRUE,
+            card_header("Global ISIS Activity (log scale)"),
+            plotOutput("world_map", height = "550px")
           )
         ),
         nav_panel(
@@ -288,7 +315,7 @@ server <- function(input, output, session) {
     validate(need(nrow(df) > 0, "No data for the current filters."))
     ggplot(df, aes(x = year, y = fighters)) +
       geom_area(fill = "#1f77b4", alpha = 0.5) +
-      geom_line(color = "#1f77b4", size = 1) +
+      geom_line(color = "#1f77b4", linewidth = 1) +
       geom_point(color = "#1f77b4", size = 2.5) +
       labs(
         title   = "Total ISIS fighters over time",
@@ -325,6 +352,74 @@ server <- function(input, output, session) {
       coord_flip() +
       labs(x = NULL, y = "Total fighters") +
       theme_minimal(base_size = 13)
+  })
+
+  # ---- World map ----
+  output$world_map <- renderPlot({
+    df <- filtered()
+    metric <- input$map_metric
+    validate(need(nrow(df) > 0, "No data for the current filters."))
+
+    # Aggregate to country totals
+    country_totals <- df %>%
+      group_by(country_name) %>%
+      summarize(total = sum(.data[[metric]], na.rm = TRUE), .groups = "drop")
+
+    # Map ISIS country names to map_data("world") names
+    name_map <- c(
+      "Bosnia-Herzegovina"                  = "Bosnia and Herzegovina",
+      "German Federal Republic"             = "Germany",
+      "Iran (Persia)"                       = "Iran",
+      "Italy/Sardinia"                      = "Italy",
+      "Kosovo"                              = "Kosovo",
+      "Kyrgyz Republic"                     = "Kyrgyzstan",
+      "Macedonia (Former Yugoslav Republic of)" = "North Macedonia",
+      "Russia (Soviet Union)"               = "Russia",
+      "Tanzania/Tanganyika"                 = "Tanzania",
+      "Turkey (Ottoman Empire)"             = "Turkey",
+      "United Kingdom"                      = "UK",
+      "United States of America"            = "USA",
+      "Yemen (Arab Republic of Yemen)"      = "Yemen"
+    )
+    country_totals$map_name <- ifelse(
+      country_totals$country_name %in% names(name_map),
+      name_map[country_totals$country_name],
+      country_totals$country_name
+    )
+
+    # Log transform (add 1 to handle zeros)
+    country_totals$log_total <- log1p(country_totals$total)
+
+    # Get world map polygons
+    world <- ggplot2::map_data("world")
+
+    # Join
+    world_merged <- world %>%
+      left_join(country_totals, by = c("region" = "map_name"))
+
+    metric_label <- ifelse(metric == "isis_fighters", "Fighters", "Attacks")
+
+    ggplot(world_merged, aes(x = long, y = lat, group = group)) +
+      geom_polygon(aes(fill = log_total), color = "grey70", linewidth = 0.1) +
+      scale_fill_gradient(
+        low      = "#fff7ec",
+        high     = "#d62728",
+        na.value = "#f0f0f0",
+        name     = paste0("log(", metric_label, " + 1)"),
+        labels   = function(x) format(round(x, 1), nsmall = 1)
+      ) +
+      coord_fixed(1.3, xlim = c(-170, 170), ylim = c(-55, 80)) +
+      labs(
+        title   = paste("Global ISIS", metric_label, "(log scale)"),
+        caption = "Source: Edgerton (2023, JCR) | Grey = no data"
+      ) +
+      theme_void(base_size = 12) +
+      theme(
+        plot.title      = element_text(face = "bold", hjust = 0.5, size = 14),
+        plot.caption    = element_text(size = 9, color = "grey50"),
+        legend.position = "bottom",
+        legend.key.width = unit(1.5, "cm")
+      )
   })
 
   # ---- Correlate scatters ----

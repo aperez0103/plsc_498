@@ -1,16 +1,31 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Interactive Visualization with R Shiny</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jared Edgerton" />
+    <script src="15_01_week_files/header-attrs-2.30/header-attrs.js"></script>
+    <link href="15_01_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="15_01_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="15_01_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="plsc498.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Interactive Visualization with R Shiny
+]
+.subtitle[
+## PLSC 498 - Week 15, Lecture 1
+]
+.author[
+### Jared Edgerton
+]
+
 ---
-title: "Interactive Visualization with R Shiny"
-subtitle: "PLSC 498 - Week 15, Lecture 1"
-author: "Jared Edgerton"
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts, plsc498.css]
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      slideNumberFormat: ""
----
+
 
 # What is R Shiny?
 
@@ -47,7 +62,7 @@ Every Shiny app has two key components:
 library(shiny)
 
 # 1. UI (User Interface) - defines layout and controls
-ui <- fluidPage(
+ui &lt;- fluidPage(
   titlePanel("My App"),
   sidebarLayout(
     sidebarPanel(
@@ -71,8 +86,8 @@ Every Shiny app has two key components:
 ```r
 
 # 2. Server - defines reactive logic
-server <- function(input, output) {
-  output$plot <- renderPlot({
+server &lt;- function(input, output) {
+  output$plot &lt;- renderPlot({
     plot(1:input$n, main = paste("Plot with", input$n, "points"))
   })
 }
@@ -133,9 +148,9 @@ This happens **instantly** in the browser.
 
 **In server:**
 ```r
-output$scatter <- renderPlot({ ggplot(...) })
-output$summary <- renderText({ "Summary here" })
-output$data <- renderTable({ my_data })
+output$scatter &lt;- renderPlot({ ggplot(...) })
+output$summary &lt;- renderText({ "Summary here" })
+output$data &lt;- renderTable({ my_data })
 ```
 
 ---
@@ -190,23 +205,23 @@ fluidRow(
 A **reactive expression** recalculates whenever its inputs change:
 
 ```r
-server <- function(input, output) {
+server &lt;- function(input, output) {
 
   # Define a reactive expression
-  filtered_data <- reactive({
-    data %>%
-      filter(year >= input$year_min,
-             year <= input$year_max,
+  filtered_data &lt;- reactive({
+    data %&gt;%
+      filter(year &gt;= input$year_min,
+             year &lt;= input$year_max,
              party %in% input$party_choice)
   })
 
   # Use the reactive expression in outputs
-  output$plot <- renderPlot({
+  output$plot &lt;- renderPlot({
     ggplot(filtered_data(), aes(x = ideology, y = votes)) +
       geom_point()
   })
 
-  output$table <- renderTable({
+  output$table &lt;- renderTable({
     filtered_data()
   })
 
@@ -241,10 +256,10 @@ library(dplyr)
 library(ggplot2)
 
 # Load data
-senate_data <- readRDS("senate_ideology.rds")
+senate_data &lt;- readRDS("senate_ideology.rds")
 
 # UI
-ui <- fluidPage(
+ui &lt;- fluidPage(
   titlePanel("US Senate Ideology"),
   sidebarLayout(
     sidebarPanel(
@@ -267,22 +282,22 @@ ui <- fluidPage(
 ```r
 
 # Server
-server <- function(input, output) {
-  filtered <- reactive({
-    senate_data %>%
+server &lt;- function(input, output) {
+  filtered &lt;- reactive({
+    senate_data %&gt;%
       filter(congress == input$congress,
              party %in% input$party)
   })
 
-  output$plot <- renderPlot({
+  output$plot &lt;- renderPlot({
     ggplot(filtered(), aes(x = dwnom1, y = dwnom2, color = party)) +
       geom_point(size = 3) +
       scale_color_manual(values = c("D" = "blue", "R" = "red"))
   })
 
-  output$summary <- renderTable({
-    filtered() %>%
-      group_by(party) %>%
+  output$summary &lt;- renderTable({
+    filtered() %&gt;%
+      group_by(party) %&gt;%
       summarize(mean_ideology = mean(dwnom1))
   })
 }
@@ -363,13 +378,13 @@ plot(filtered_data())  # Call the function with ()
 
 ```r
 # Inefficient - recalculates everything
-output$plot1 <- renderPlot({ data %>% filter(...) %>% plot() })
-output$plot2 <- renderPlot({ data %>% filter(...) %>% summary() })
+output$plot1 &lt;- renderPlot({ data %&gt;% filter(...) %&gt;% plot() })
+output$plot2 &lt;- renderPlot({ data %&gt;% filter(...) %&gt;% summary() })
 
 # Better - calculate once, reuse
-filtered <- reactive({ data %>% filter(...) })
-output$plot1 <- renderPlot({ plot(filtered()) })
-output$plot2 <- renderPlot({ summary(filtered()) })
+filtered &lt;- reactive({ data %&gt;% filter(...) })
+output$plot1 &lt;- renderPlot({ plot(filtered()) })
+output$plot2 &lt;- renderPlot({ summary(filtered()) })
 ```
 
 ---
@@ -381,7 +396,7 @@ output$plot2 <- renderPlot({ summary(filtered()) })
 ```r
 # Easy to forget:
 library(shiny)
-library(dplyr)  # Need this for %>%
+library(dplyr)  # Need this for %&gt;%
 library(ggplot2)  # Need this for ggplot()
 ```
 
@@ -428,3 +443,140 @@ This approach is ideal for **simple, focused dashboards** with a few outputs.
 5. **Sidebar layout** is simple and effective for basic apps
 6. **Reactive expressions** avoid code duplication
 7. **Always remember:** call reactives with parentheses `reactive()`
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "slideNumberFormat": ""
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

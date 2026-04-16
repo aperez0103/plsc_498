@@ -9,6 +9,14 @@
 #
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
+# Install any missing packages automatically --------------------------------
+required_packages <- c("shiny", "shinydashboard", "dplyr", "ggplot2", "plotly")
+for (pkg in required_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
 library(shiny)
 library(shinydashboard)
 library(dplyr)

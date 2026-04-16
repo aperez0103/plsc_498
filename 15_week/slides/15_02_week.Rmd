@@ -729,8 +729,8 @@ COPY app.R /srv/shiny-server/app/app.R
 **Our Course Files:**
 - `senate_app_01_basic.R` - Sidebar layout
 - `senate_app_02_navbar.R` - Navigation bar
-- `cow_app_03_dashboard.R` - Shinydashboard
-- `cow_app_04_bslib.R` - Modern bslib design
+- `state_crime_app_03_dashboard.R` - Shinydashboard (US state crime data)
+- `isis_app_04_bslib.R` - Modern bslib design (ISIS mobilization data)
 
 **Practice:**
 - Modify apps with different data

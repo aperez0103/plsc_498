@@ -7,6 +7,15 @@
 #
 # PLSC 498 - Week 15: Interactive Visualization with R Shiny
 
+# Install any missing packages automatically --------------------------------
+required_packages <- c("shiny", "bslib", "dplyr", "ggplot2", "plotly",
+                       "bsicons", "scales")
+for (pkg in required_packages) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
+}
+
 library(shiny)
 library(bslib)
 library(dplyr)
@@ -216,7 +225,7 @@ server <- function(input, output, session) {
       summarize(deaths = sum(battle_deaths, na.rm = TRUE), .groups = "drop")
     validate(need(nrow(df) > 0, "No data for the current filters."))
     p <- ggplot(df, aes(x = year, y = deaths, color = region)) +
-      geom_line(size = 1) +
+      geom_line(linewidth = 1) +
       geom_point(size = 1.8, alpha = 0.8) +
       scale_y_continuous(labels = scales::comma) +
       labs(x = "Year", y = "Battle deaths", color = "Region") +
@@ -264,7 +273,7 @@ server <- function(input, output, session) {
                   "No observations for that country under the current filters."))
     ggplot(df, aes(x = year, y = battle_deaths)) +
       geom_area(fill = "#b2182b", alpha = 0.4) +
-      geom_line(color = "#b2182b", size = 1) +
+      geom_line(color = "#b2182b", linewidth = 1) +
       geom_point(color = "#b2182b", size = 2.5) +
       scale_y_continuous(labels = scales::comma) +
       labs(

@@ -14,7 +14,20 @@
       "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" 15_week/data/create_data.R)",
       "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" 15_week/data/_tmp_test.R)",
       "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" 15_week/data/_tmp_validate.R)",
-      "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" -e 'install.packages\\(c\\(\"shinydashboard\",\"scales\"\\), repos=\"https://cloud.r-project.org\"\\)')"
+      "Bash(\"/c/Program Files/R/R-4.5.0/bin/Rscript.exe\" -e 'install.packages\\(c\\(\"shinydashboard\",\"scales\"\\), repos=\"https://cloud.r-project.org\"\\)')",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"cat\\('hello\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(shiny\\); cat\\('shiny OK\\\\n'\\)\")",
+      "Bash('/c/Program Files/R/R-4.4.1/bin/Rscript.exe' --vanilla -e ':*)",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(dplyr\\); cat\\('dplyr OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(ggplot2\\); cat\\('ggplot2 OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(plotly\\); cat\\('plotly OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(shinydashboard\\); cat\\('shinydashboard OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(bslib\\); cat\\('bslib OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(bsicons\\); cat\\('bsicons OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(scales\\); cat\\('scales OK\\\\n'\\)\")",
+      "Bash(\"/c/Program Files/R/R-4.4.1/bin/Rscript.exe\" --vanilla -e \"library\\(tidyr\\); cat\\('tidyr OK\\\\n'\\)\")",
+      "Bash(mv cow_app_03_dashboard.R state_crime_app_03_dashboard.R)",
+      "Bash(mv cow_app_04_bslib.R isis_app_04_bslib.R)"
     ]
   }
 }
