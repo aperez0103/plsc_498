@@ -16,10 +16,11 @@ This folder contains all course materials for Week 15, focusing on building inte
 │   └── [compiled HTML files]
 ├── data/
 │   ├── create_data.R           # Data curation script
-│   ├── senate_app_01_basic.R   # Approach 1: Basic sidebar layout
+│   ├── election_covid_app_01_basic.R   # Approach 1: Basic sidebar layout
 │   ├── senate_app_02_navbar.R  # Approach 2: Navigation bar
-│   ├── cow_app_03_dashboard.R  # Approach 3: Shinydashboard
-│   └── cow_app_04_bslib.R      # Approach 4: Modern bslib theming
+│   ├── state_crime_app_03_dashboard.R  # Approach 3: Shinydashboard
+│   ├── isis_app_04_bslib.R      # Approach 4: Modern bslib theming
+│   └── battle_deaths_app_05.R   # Approach 5: Page sidebar + plotly
 ├── problem_set/
 │   └── [problem set files]
 └── README.md                   # This file
@@ -61,18 +62,19 @@ This folder contains all course materials for Week 15, focusing on building inte
 
 Four different approaches to building Shiny apps, each demonstrating a different layout style:
 
-### **Approach 1: Basic Sidebar Layout** (`senate_app_01_basic.R`)
-- **Dataset:** US Senate ideology scores (DW-NOMINATE)
-- **Controls:** Congress selector, party filter, slider
-- **Outputs:** Scatter plot, histogram, data table
+### **Approach 1: Basic Sidebar Layout** (`election_covid_app_01_basic.R`)
+- **Dataset:** 2020 US presidential election returns + COVID deaths by state
+- **Controls:** Winner filter, Biden margin slider, minimum COVID deaths slider
+- **Outputs:** Vote margin bar chart, COVID vs. vote share scatter, COVID deaths bar chart, data table
 - **Use case:** Simple apps with few controls
-- **Lines:** 168
-- **Dependencies:** shiny, dplyr, ggplot2, Rvoteview
+- **Lines:** 175
+- **Dependencies:** shiny, dplyr, ggplot2
 
 **Features:**
 - Straightforward sidebar + main panel layout
-- Three tabbed outputs
+- Four tabbed outputs
 - Reactive data filtering
+- State-level labels on scatter plot
 - Clean, minimal design
 
 ### **Approach 2: Navigation Bar Layout** (`senate_app_02_navbar.R`)
@@ -90,8 +92,8 @@ Four different approaches to building Shiny apps, each demonstrating a different
 - State-level breakdown table
 - CSV download functionality
 
-### **Approach 3: Shinydashboard** (`cow_app_03_dashboard.R`)
-- **Dataset:** Correlates of War interstate conflicts
+### **Approach 3: Shinydashboard** (`state_crime_app_03_dashboard.R`)
+- **Dataset:** US state crime and demographics (1973 arrests + state.x77)
 - **Components:** Value boxes, sidebar menu, tabbed content
 - **Use case:** Professional dashboards for monitoring KPIs
 - **Lines:** 406
@@ -100,13 +102,13 @@ Four different approaches to building Shiny apps, each demonstrating a different
 **Features:**
 - Dashboard header with title
 - Left sidebar with filters and menu
-- KPI value boxes (total wars, deaths, duration, countries)
+- KPI value boxes (states shown, mean crime, mean income, life expectancy)
 - Multiple analysis tabs
 - Plotly interactive visualizations
 - Data explorer with raw data
 
-### **Approach 4: Modern bslib Design** (`cow_app_04_bslib.R`)
-- **Dataset:** Correlates of War interstate conflicts
+### **Approach 4: Modern bslib Design** (`isis_app_04_bslib.R`)
+- **Dataset:** ISIS mobilization (Edgerton 2023, JCR)
 - **Framework:** Bootstrap 5 with bslib
 - **Components:** Page navbar, responsive cards, modern theme
 - **Use case:** Modern, mobile-responsive applications
@@ -176,10 +178,10 @@ install.packages("peacesciencer")  # For COW data
 **Option 2: Console**
 ```r
 setwd("15_week/data")
-shiny::runApp("senate_app_01_basic.R")
+shiny::runApp("election_covid_app_01_basic.R")
 shiny::runApp("senate_app_02_navbar.R")
-shiny::runApp("cow_app_03_dashboard.R")
-shiny::runApp("cow_app_04_bslib.R")
+shiny::runApp("state_crime_app_03_dashboard.R")
+shiny::runApp("isis_app_04_bslib.R")
 ```
 
 **Option 3: From Outside the Directory**
@@ -189,8 +191,11 @@ shiny::runApp("path/to/15_week/data/senate_app_01_basic.R")
 
 ### Data Requirements
 Apps expect to find `.rds` files in the same directory:
+- `election_2020.rds`
 - `senate_ideology.rds`
-- `cow_wars.rds`
+- `state_crime.rds`
+- `isis_mobilization.rds`
+- `battle_deaths.rds`
 
 Run `create_data.R` first to generate these files.
 
@@ -201,7 +206,7 @@ Run `create_data.R` first to generate these files.
 | Feature | Basic | Navbar | Dashboard | bslib |
 |---------|-------|--------|-----------|-------|
 | **Learning Curve** | Very Easy | Easy | Medium | Medium |
-| **Lines of Code** | 168 | 271 | 406 | 462 |
+| **Lines of Code** | 175 | 271 | 406 | 462 |
 | **Visual Appeal** | Good | Good | Professional | Excellent |
 | **Mobile Responsive** | Yes | Yes | Yes | Yes |
 | **Best For** | Simple apps | Multi-section | KPI monitoring | Modern design |
@@ -247,7 +252,7 @@ Run `create_data.R` first to generate these files.
 ## Learning Path
 
 1. **Start Here:** Read Lecture 1 slides
-2. **Run the basic app:** `senate_app_01_basic.R`
+2. **Run the basic app:** `election_covid_app_01_basic.R`
 3. **Read Lecture 2 slides**
 4. **Explore each approach:**
    - Senate navbarPage approach
@@ -260,7 +265,7 @@ Run `create_data.R` first to generate these files.
 
 ## Common Issues and Solutions
 
-### "Error: object 'senate_data' not found"
+### "Error: object 'election' / 'senate_data' not found"
 - **Cause:** Data file not in working directory
 - **Solution:** Run `create_data.R` first, or check working directory with `getwd()`
 
@@ -299,7 +304,7 @@ rsconnect::deployApp("path/to/app")
 ### Docker
 ```dockerfile
 FROM rocker/shiny:latest
-COPY data/senate_app_01_basic.R /srv/shiny-server/app/app.R
+COPY data/election_covid_app_01_basic.R /srv/shiny-server/app/app.R
 ```
 
 ---
@@ -334,10 +339,10 @@ COPY data/senate_app_01_basic.R /srv/shiny-server/app/app.R
 | `15_02_week.Rmd` | Lecture | 752 | Advanced layouts and case studies |
 | `plsc498.css` | Style | 5 | Custom CSS for xaringan slides |
 | `create_data.R` | Script | 202 | Data curation (Senate + COW) |
-| `senate_app_01_basic.R` | Shiny App | 168 | Basic sidebar layout (Senate) |
+| `election_covid_app_01_basic.R` | Shiny App | 175 | Basic sidebar layout (Election + COVID) |
 | `senate_app_02_navbar.R` | Shiny App | 271 | Navigation bar layout (Senate) |
-| `cow_app_03_dashboard.R` | Shiny App | 406 | Shinydashboard approach (COW) |
-| `cow_app_04_bslib.R` | Shiny App | 462 | Modern bslib design (COW) |
+| `state_crime_app_03_dashboard.R` | Shiny App | 406 | Shinydashboard approach (US state crime) |
+| `isis_app_04_bslib.R` | Shiny App | 462 | Modern bslib design (ISIS mobilization) |
 
 **Total:** 2,689 lines of teaching materials and code
 

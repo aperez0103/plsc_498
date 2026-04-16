@@ -1,310 +1,1037 @@
 "member_id","name","state","party","congress","dwnom1","dwnom2"
-"MS11694659","SHELBY, Richard C.","Alabama","Republican Party",116,0.446,0.57
-"MS11641705","JONES, Gordon Douglas (Doug)","Alabama","Democratic Party",116,-0.088,0.187
-"MS11742102","TUBERVILLE, Thomas Hawley (Tommy)","Alabama","Republican Party",117,0.936,-0.352
-"MS11794659","SHELBY, Richard C.","Alabama","Republican Party",117,0.446,0.57
-"MS11842102","TUBERVILLE, Thomas Hawley (Tommy)","Alabama","Republican Party",118,0.936,-0.352
-"MS11842300","BRITT, Katie Elizabeth","Alabama","Republican Party",118,0.586,0.587
-"MS11641500","SULLIVAN, Daniel Scott","Alaska","Republican Party",116,0.476,0.156
-"MS11640300","MURKOWSKI, Lisa","Alaska","Republican Party",116,0.203,-0.304
-"MS11741500","SULLIVAN, Daniel Scott","Alaska","Republican Party",117,0.476,0.156
-"MS11740300","MURKOWSKI, Lisa","Alaska","Republican Party",117,0.203,-0.304
-"MS11841500","SULLIVAN, Daniel Scott","Alaska","Republican Party",118,0.476,0.156
-"MS11840300","MURKOWSKI, Lisa","Alaska","Republican Party",118,0.203,-0.304
-"MS11621501","MCSALLY, Martha","Arizona","Republican Party",116,0.345,0.027
-"MS11621300","SINEMA, Kyrsten","Arizona","Democratic Party",116,-0.105,0.076
-"MS11641905","KELLY, Mark Edward","Arizona","Democratic Party",116,-0.264,0.29
-"MS11721300","SINEMA, Kyrsten","Arizona","Democratic Party",117,-0.105,0.076
-"MS11741905","KELLY, Mark Edward","Arizona","Democratic Party",117,-0.264,0.29
-"MS11891300","SINEMA, Kyrsten","Arizona","Independent",118,-0.186,0.387
-"MS11841905","KELLY, Mark Edward","Arizona","Democratic Party",118,-0.264,0.29
-"MS11621301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",116,0.578,0.199
-"MS11620101","BOOZMAN, John","Arkansas","Republican Party",116,0.426,0.34
-"MS11721301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",117,0.578,0.199
-"MS11720101","BOOZMAN, John","Arkansas","Republican Party",117,0.426,0.34
-"MS11821301","COTTON, Thomas Bryant (Tom)","Arkansas","Republican Party",118,0.578,0.199
-"MS11820101","BOOZMAN, John","Arkansas","Republican Party",118,0.426,0.34
-"MS11649300","FEINSTEIN, Dianne","California","Democratic Party",116,-0.268,-0.184
-"MS11641701","HARRIS, Kamala Devi","California","Democratic Party",116,-0.709,-0.105
-"MS11749300","FEINSTEIN, Dianne","California","Democratic Party",117,-0.268,-0.184
-"MS11742104","PADILLA, Alejandro (Alex)","California","Democratic Party",117,-0.438,-0.249
-"MS11741701","HARRIS, Kamala Devi","California","Democratic Party",117,-0.709,-0.105
-"MS11849300","FEINSTEIN, Dianne","California","Democratic Party",118,-0.268,-0.184
-"MS11820104","SCHIFF, Adam","California","Democratic Party",118,-0.352,-0.119
-"MS11842104","PADILLA, Alejandro (Alex)","California","Democratic Party",118,-0.438,-0.249
-"MS11842305","BUTLER, Laphonza Romanique","California","Democratic Party",118,-0.447,-0.073
-"MS11621112","GARDNER, Cory","Colorado","Republican Party",116,0.444,-0.029
-"MS11640910","BENNET, Michael F.","Colorado","Democratic Party",116,-0.242,-0.191
-"MS11740910","BENNET, Michael F.","Colorado","Democratic Party",117,-0.242,-0.191
-"MS11742101","HICKENLOOPER, John Wright","Colorado","Democratic Party",117,-0.29,-0.016
-"MS11840910","BENNET, Michael F.","Colorado","Democratic Party",118,-0.242,-0.191
-"MS11842101","HICKENLOOPER, John Wright","Colorado","Democratic Party",118,-0.29,-0.016
-"MS11620707","MURPHY, Christopher","Connecticut","Democratic Party",116,-0.287,-0.258
-"MS11641101","BLUMENTHAL, Richard","Connecticut","Democratic Party",116,-0.434,-0.152
-"MS11720707","MURPHY, Christopher","Connecticut","Democratic Party",117,-0.287,-0.258
-"MS11741101","BLUMENTHAL, Richard","Connecticut","Democratic Party",117,-0.434,-0.152
-"MS11820707","MURPHY, Christopher","Connecticut","Democratic Party",118,-0.287,-0.258
-"MS11841101","BLUMENTHAL, Richard","Connecticut","Democratic Party",118,-0.434,-0.152
-"MS11615015","CARPER, Thomas Richard","Delaware","Democratic Party",116,-0.179,-0.225
-"MS11640916","COONS, Christopher A.","Delaware","Democratic Party",116,-0.238,-0.215
-"MS11715015","CARPER, Thomas Richard","Delaware","Democratic Party",117,-0.179,-0.225
-"MS11740916","COONS, Christopher A.","Delaware","Democratic Party",117,-0.238,-0.215
-"MS11815015","CARPER, Thomas Richard","Delaware","Democratic Party",118,-0.179,-0.225
-"MS11840916","COONS, Christopher A.","Delaware","Democratic Party",118,-0.238,-0.215
-"MS11641903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",116,0.722,-0.037
-"MS11641102","RUBIO, Marco","Florida","Republican Party",116,0.616,-0.184
-"MS11741903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",117,0.722,-0.037
-"MS11741102","RUBIO, Marco","Florida","Republican Party",117,0.616,-0.184
-"MS11841903","SCOTT, Richard Lynn (Rick)","Florida","Republican Party",118,0.722,-0.037
-"MS11841102","RUBIO, Marco","Florida","Republican Party",118,0.616,-0.184
-"MS11641501","PERDUE, David Alfred, Jr.","Georgia","Republican Party",116,0.562,-0.075
-"MS11641904","LOEFFLER, Kelly","Georgia","Republican Party",116,0.555,-0.203
-"MS11629909","ISAKSON, Johnny","Georgia","Republican Party",116,0.402,-0.011
-"MS11741904","LOEFFLER, Kelly","Georgia","Republican Party",117,0.555,-0.203
-"MS11742105","WARNOCK, Raphael Gamaliel","Georgia","Democratic Party",117,-0.431,0.423
-"MS11742103","OSSOFF, Thomas Jonathan (Jon)","Georgia","Democratic Party",117,-0.459,0.475
-"MS11842105","WARNOCK, Raphael Gamaliel","Georgia","Democratic Party",118,-0.431,0.423
-"MS11842103","OSSOFF, Thomas Jonathan (Jon)","Georgia","Democratic Party",118,-0.459,0.475
-"MS11641112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",116,-0.448,-0.119
-"MS11620713","HIRONO, Mazie","Hawaii","Democratic Party",116,-0.512,-0.089
-"MS11741112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",117,-0.448,-0.119
-"MS11720713","HIRONO, Mazie","Hawaii","Democratic Party",117,-0.512,-0.089
-"MS11841112","SCHATZ, Brian Emanuel","Hawaii","Democratic Party",118,-0.448,-0.119
-"MS11820713","HIRONO, Mazie","Hawaii","Democratic Party",118,-0.512,-0.089
-"MS11640902","RISCH, James","Idaho","Republican Party",116,0.552,0.384
-"MS11629345","CRAPO, Michael Dean","Idaho","Republican Party",116,0.505,0.291
-"MS11740902","RISCH, James","Idaho","Republican Party",117,0.552,0.384
-"MS11729345","CRAPO, Michael Dean","Idaho","Republican Party",117,0.505,0.291
-"MS11840902","RISCH, James","Idaho","Republican Party",118,0.552,0.384
-"MS11829345","CRAPO, Michael Dean","Idaho","Republican Party",118,0.505,0.291
-"MS11615021","DURBIN, Richard Joseph","Illinois","Democratic Party",116,-0.34,-0.311
-"MS11621325","DUCKWORTH, Tammy","Illinois","Democratic Party",116,-0.345,0.056
-"MS11715021","DURBIN, Richard Joseph","Illinois","Democratic Party",117,-0.34,-0.311
-"MS11721325","DUCKWORTH, Tammy","Illinois","Democratic Party",117,-0.345,0.056
-"MS11815021","DURBIN, Richard Joseph","Illinois","Democratic Party",118,-0.34,-0.311
-"MS11821325","DUCKWORTH, Tammy","Illinois","Democratic Party",118,-0.345,0.056
-"MS11641900","BRAUN, Michael","Indiana","Republican Party",116,0.8,0.6
-"MS11621133","YOUNG, Todd","Indiana","Republican Party",116,0.439,-0.024
-"MS11741900","BRAUN, Michael","Indiana","Republican Party",117,0.8,0.6
-"MS11721133","YOUNG, Todd","Indiana","Republican Party",117,0.439,-0.024
-"MS11841900","BRAUN, Michael","Indiana","Republican Party",118,0.8,0.6
-"MS11821133","YOUNG, Todd","Indiana","Republican Party",118,0.439,-0.024
-"MS11641502","ERNST, Joni","Iowa","Republican Party",116,0.537,-0.032
-"MS11614226","GRASSLEY, Charles Ernest","Iowa","Republican Party",116,0.362,-0.035
-"MS11741502","ERNST, Joni","Iowa","Republican Party",117,0.537,-0.032
-"MS11714226","GRASSLEY, Charles Ernest","Iowa","Republican Party",117,0.362,-0.035
-"MS11841502","ERNST, Joni","Iowa","Republican Party",118,0.537,-0.032
-"MS11814226","GRASSLEY, Charles Ernest","Iowa","Republican Party",118,0.362,-0.035
-"MS11614852","ROBERTS, Charles Patrick (Pat)","Kansas","Republican Party",116,0.413,-0.09
-"MS11629722","MORAN, Jerry","Kansas","Republican Party",116,0.413,0.221
-"MS11721734","MARSHALL, Roger Wayne","Kansas","Republican Party",117,0.607,0.139
-"MS11729722","MORAN, Jerry","Kansas","Republican Party",117,0.413,0.221
-"MS11821734","MARSHALL, Roger Wayne","Kansas","Republican Party",118,0.607,0.139
-"MS11829722","MORAN, Jerry","Kansas","Republican Party",118,0.413,0.221
-"MS11641104","PAUL, Rand","Kentucky","Republican Party",116,0.891,-0.454
-"MS11614921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",116,0.402,0.018
-"MS11741104","PAUL, Rand","Kentucky","Republican Party",117,0.891,-0.454
-"MS11714921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",117,0.402,0.018
-"MS11841104","PAUL, Rand","Kentucky","Republican Party",118,0.891,-0.454
-"MS11814921","MCCONNELL, Addison Mitchell (Mitch)","Kentucky","Republican Party",118,0.402,0.018
-"MS11641703","KENNEDY, John Neely","Louisiana","Republican Party",116,0.56,-0.149
-"MS11620919","CASSIDY, Bill","Louisiana","Republican Party",116,0.464,-0.048
-"MS11741703","KENNEDY, John Neely","Louisiana","Republican Party",117,0.56,-0.149
-"MS11720919","CASSIDY, Bill","Louisiana","Republican Party",117,0.464,-0.048
-"MS11841703","KENNEDY, John Neely","Louisiana","Republican Party",118,0.56,-0.149
-"MS11820919","CASSIDY, Bill","Louisiana","Republican Party",118,0.464,-0.048
-"MS11649703","COLLINS, Susan Margaret","Maine","Republican Party",116,0.124,-0.505
-"MS11641300","KING, Angus Stanley, Jr.","Maine","Independent",116,-0.167,-0.187
-"MS11749703","COLLINS, Susan Margaret","Maine","Republican Party",117,0.124,-0.505
-"MS11741300","KING, Angus Stanley, Jr.","Maine","Independent",117,-0.167,-0.187
-"MS11849703","COLLINS, Susan Margaret","Maine","Republican Party",118,0.124,-0.505
-"MS11841300","KING, Angus Stanley, Jr.","Maine","Independent",118,-0.167,-0.187
-"MS11615408","CARDIN, Benjamin Louis","Maryland","Democratic Party",116,-0.32,-0.224
-"MS11620330","VAN HOLLEN, Christopher","Maryland","Democratic Party",116,-0.398,-0.227
-"MS11715408","CARDIN, Benjamin Louis","Maryland","Democratic Party",117,-0.32,-0.224
-"MS11720330","VAN HOLLEN, Christopher","Maryland","Democratic Party",117,-0.398,-0.227
-"MS11815408","CARDIN, Benjamin Louis","Maryland","Democratic Party",118,-0.32,-0.224
-"MS11820330","VAN HOLLEN, Christopher","Maryland","Democratic Party",118,-0.398,-0.227
-"MS11614435","MARKEY, Edward John","Massachusetts","Democratic Party",116,-0.517,-0.471
-"MS11641301","WARREN, Elizabeth","Massachusetts","Democratic Party",116,-0.745,-0.37
-"MS11714435","MARKEY, Edward John","Massachusetts","Democratic Party",117,-0.517,-0.471
-"MS11741301","WARREN, Elizabeth","Massachusetts","Democratic Party",117,-0.745,-0.37
-"MS11814435","MARKEY, Edward John","Massachusetts","Democratic Party",118,-0.517,-0.471
-"MS11841301","WARREN, Elizabeth","Massachusetts","Democratic Party",118,-0.745,-0.37
-"MS11620923","PETERS, Gary C.","Michigan","Democratic Party",116,-0.25,-0.183
-"MS11629732","STABENOW, Deborah Ann","Michigan","Democratic Party",116,-0.343,-0.019
-"MS11720923","PETERS, Gary C.","Michigan","Democratic Party",117,-0.25,-0.183
-"MS11729732","STABENOW, Deborah Ann","Michigan","Democratic Party",117,-0.343,-0.019
-"MS11820923","PETERS, Gary C.","Michigan","Democratic Party",118,-0.25,-0.183
-"MS11829732","STABENOW, Deborah Ann","Michigan","Democratic Party",118,-0.343,-0.019
-"MS11640700","KLOBUCHAR, Amy","Minnesota","Democratic Party",116,-0.278,-0.325
-"MS11641706","SMITH, Tina","Minnesota","Democratic Party",116,-0.409,-0.121
-"MS11740700","KLOBUCHAR, Amy","Minnesota","Democratic Party",117,-0.278,-0.325
-"MS11741706","SMITH, Tina","Minnesota","Democratic Party",117,-0.409,-0.121
-"MS11840700","KLOBUCHAR, Amy","Minnesota","Democratic Party",118,-0.278,-0.325
-"MS11841706","SMITH, Tina","Minnesota","Democratic Party",118,-0.409,-0.121
-"MS11641707","HYDE-SMITH, Cindy","Mississippi","Republican Party",116,0.449,0.333
-"MS11629534","WICKER, Roger F.","Mississippi","Republican Party",116,0.377,0.341
-"MS11741707","HYDE-SMITH, Cindy","Mississippi","Republican Party",117,0.449,0.333
-"MS11729534","WICKER, Roger F.","Mississippi","Republican Party",117,0.377,0.341
-"MS11841707","HYDE-SMITH, Cindy","Mississippi","Republican Party",118,0.449,0.333
-"MS11829534","WICKER, Roger F.","Mississippi","Republican Party",118,0.377,0.341
-"MS11641901","HAWLEY, Joshua David","Missouri","Republican Party",116,0.83,-0.372
-"MS11629735","BLUNT, Roy","Missouri","Republican Party",116,0.398,0.18
-"MS11741901","HAWLEY, Joshua David","Missouri","Republican Party",117,0.83,-0.372
-"MS11729735","BLUNT, Roy","Missouri","Republican Party",117,0.398,0.18
-"MS11842303","SCHMITT, Eric Stephen","Missouri","Republican Party",118,0.902,0.076
-"MS11841901","HAWLEY, Joshua David","Missouri","Republican Party",118,0.83,-0.372
-"MS11621338","DAINES, Steve","Montana","Republican Party",116,0.59,-0.024
-"MS11640702","TESTER, Jon","Montana","Democratic Party",116,-0.213,0.153
-"MS11721338","DAINES, Steve","Montana","Republican Party",117,0.59,-0.024
-"MS11740702","TESTER, Jon","Montana","Democratic Party",117,-0.213,0.153
-"MS11821338","DAINES, Steve","Montana","Republican Party",118,0.59,-0.024
-"MS11840702","TESTER, Jon","Montana","Democratic Party",118,-0.213,0.153
-"MS11641503","SASSE, Benjamin Eric","Nebraska","Republican Party",116,0.669,-0.25
-"MS11641302","FISCHER, Debra (Deb)","Nebraska","Republican Party",116,0.46,0.335
-"MS11741503","SASSE, Benjamin Eric","Nebraska","Republican Party",117,0.669,-0.25
-"MS11741302","FISCHER, Debra (Deb)","Nebraska","Republican Party",117,0.46,0.335
-"MS11841302","FISCHER, Debra (Deb)","Nebraska","Republican Party",118,0.46,0.335
-"MS11842302","RICKETTS, John Peter (Pete)","Nebraska","Republican Party",118,0.441,0.506
-"MS11621743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",116,-0.286,0.317
-"MS11641700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",116,-0.347,0.35
-"MS11721743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",117,-0.286,0.317
-"MS11741700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",117,-0.347,0.35
-"MS11821743","ROSEN, Jacklyn Sheryl","Nevada","Democratic Party",118,-0.286,0.317
-"MS11841700","CORTEZ MASTO, Catherine Marie","Nevada","Democratic Party",118,-0.347,0.35
-"MS11640906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",116,-0.221,-0.139
-"MS11641702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",116,-0.225,0.019
-"MS11740906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",117,-0.221,-0.139
-"MS11741702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",117,-0.225,0.019
-"MS11840906","SHAHEEN, Jeanne","New Hampshire","Democratic Party",118,-0.221,-0.139
-"MS11841702","HASSAN, Margaret Wood (Maggie)","New Hampshire","Democratic Party",118,-0.225,0.019
-"MS11629373","MENENDEZ, Robert","New Jersey","Democratic Party",116,-0.366,-0.126
-"MS11641308","BOOKER, Cory Anthony","New Jersey","Democratic Party",116,-0.558,-0.25
-"MS11729373","MENENDEZ, Robert","New Jersey","Democratic Party",117,-0.366,-0.126
-"MS11741308","BOOKER, Cory Anthony","New Jersey","Democratic Party",117,-0.558,-0.25
-"MS11842306","HELMY, George S.","New Jersey","Democratic Party",118,-0.347,-0.308
-"MS11829373","MENENDEZ, Robert","New Jersey","Democratic Party",118,-0.366,-0.126
-"MS11821937","KIM, Andy","New Jersey","Democratic Party",118,-0.408,0.231
-"MS11841308","BOOKER, Cory Anthony","New Jersey","Democratic Party",118,-0.558,-0.25
-"MS11620930","HEINRICH, Martin","New Mexico","Democratic Party",116,-0.334,-0.001
-"MS11629924","UDALL, Thomas (Tom)","New Mexico","Democratic Party",116,-0.453,0.161
-"MS11720930","HEINRICH, Martin","New Mexico","Democratic Party",117,-0.334,-0.001
-"MS11720932","LUJÁN, Ben Ray","New Mexico","Democratic Party",117,-0.38,0.032
-"MS11820930","HEINRICH, Martin","New Mexico","Democratic Party",118,-0.334,-0.001
-"MS11820932","LUJÁN, Ben Ray","New Mexico","Democratic Party",118,-0.38,0.032
-"MS11614858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",116,-0.355,-0.411
-"MS11620735","GILLIBRAND, Kirsten","New York","Democratic Party",116,-0.449,-0.308
-"MS11714858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",117,-0.355,-0.411
-"MS11720735","GILLIBRAND, Kirsten","New York","Democratic Party",117,-0.449,-0.308
-"MS11814858","SCHUMER, Charles Ellis (Chuck)","New York","Democratic Party",118,-0.355,-0.411
-"MS11820735","GILLIBRAND, Kirsten","New York","Democratic Party",118,-0.449,-0.308
-"MS11629548","BURR, Richard M.","North Carolina","Republican Party",116,0.435,-0.07
-"MS11641504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",116,0.386,-0.104
-"MS11729548","BURR, Richard M.","North Carolina","Republican Party",117,0.435,-0.07
-"MS11741504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",117,0.386,-0.104
-"MS11821708","BUDD, Theodore Paul","North Carolina","Republican Party",118,0.633,-0.077
-"MS11841504","TILLIS, Thomas Roland (Thom)","North Carolina","Republican Party",118,0.386,-0.104
-"MS11641107","HOEVEN, John","North Dakota","Republican Party",116,0.401,0.449
-"MS11621350","CRAMER, Kevin","North Dakota","Republican Party",116,0.4,0.367
-"MS11741107","HOEVEN, John","North Dakota","Republican Party",117,0.401,0.449
-"MS11721350","CRAMER, Kevin","North Dakota","Republican Party",117,0.4,0.367
-"MS11841107","HOEVEN, John","North Dakota","Republican Party",118,0.401,0.449
-"MS11821350","CRAMER, Kevin","North Dakota","Republican Party",118,0.4,0.367
-"MS11629386","PORTMAN, Robert Jones (Rob)","Ohio","Republican Party",116,0.371,-0.208
-"MS11629389","BROWN, Sherrod","Ohio","Democratic Party",116,-0.425,-0.097
-"MS11729386","PORTMAN, Robert Jones (Rob)","Ohio","Republican Party",117,0.371,-0.208
-"MS11729389","BROWN, Sherrod","Ohio","Democratic Party",117,-0.425,-0.097
-"MS11842304","VANCE, James David","Ohio","Republican Party",118,0.85,-0.527
-"MS11829389","BROWN, Sherrod","Ohio","Democratic Party",118,-0.425,-0.097
-"MS11621166","LANKFORD, James","Oklahoma","Republican Party",116,0.59,0.148
-"MS11615424","INHOFE, James Mountain","Oklahoma","Republican Party",116,0.552,0.045
-"MS11721166","LANKFORD, James","Oklahoma","Republican Party",117,0.59,0.148
-"MS11715424","INHOFE, James Mountain","Oklahoma","Republican Party",117,0.552,0.045
-"MS11821166","LANKFORD, James","Oklahoma","Republican Party",118,0.59,0.148
-"MS11821355","MULLIN, Markwayne","Oklahoma","Republican Party",118,0.531,0.251
-"MS11614871","WYDEN, Ronald Lee","Oregon","Democratic Party",116,-0.334,-0.487
-"MS11640908","MERKLEY, Jeff","Oregon","Democratic Party",116,-0.453,-0.719
-"MS11714871","WYDEN, Ronald Lee","Oregon","Democratic Party",117,-0.334,-0.487
-"MS11740908","MERKLEY, Jeff","Oregon","Democratic Party",117,-0.453,-0.719
-"MS11814871","WYDEN, Ronald Lee","Oregon","Democratic Party",118,-0.334,-0.487
-"MS11840908","MERKLEY, Jeff","Oregon","Democratic Party",118,-0.453,-0.719
-"MS11629935","TOOMEY, Patrick Joseph","Pennsylvania","Republican Party",116,0.624,-0.378
-"MS11640703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",116,-0.313,0.166
-"MS11729935","TOOMEY, Patrick Joseph","Pennsylvania","Republican Party",117,0.624,-0.378
-"MS11740703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",117,-0.313,0.166
-"MS11842301","FETTERMAN, John Karl","Pennsylvania","Democratic Party",118,-0.186,0.146
-"MS11840703","CASEY, Robert (Bob), Jr.","Pennsylvania","Democratic Party",118,-0.313,0.166
-"MS11640704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",116,-0.349,-0.112
-"MS11629142","REED, John F. (Jack)","Rhode Island","Democratic Party",116,-0.36,-0.155
-"MS11740704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",117,-0.349,-0.112
-"MS11729142","REED, John F. (Jack)","Rhode Island","Democratic Party",117,-0.36,-0.155
-"MS11840704","WHITEHOUSE, Sheldon","Rhode Island","Democratic Party",118,-0.349,-0.112
-"MS11829142","REED, John F. (Jack)","Rhode Island","Democratic Party",118,-0.36,-0.155
-"MS11621173","SCOTT, Tim","South Carolina","Republican Party",116,0.629,0.023
-"MS11629566","GRAHAM, Lindsey O.","South Carolina","Republican Party",116,0.367,-0.269
-"MS11721173","SCOTT, Tim","South Carolina","Republican Party",117,0.629,0.023
-"MS11729566","GRAHAM, Lindsey O.","South Carolina","Republican Party",117,0.367,-0.269
-"MS11821173","SCOTT, Tim","South Carolina","Republican Party",118,0.629,0.023
-"MS11829566","GRAHAM, Lindsey O.","South Carolina","Republican Party",118,0.367,-0.269
-"MS11629754","THUNE, John","South Dakota","Republican Party",116,0.432,0.226
-"MS11641505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",116,0.351,0.086
-"MS11729754","THUNE, John","South Dakota","Republican Party",117,0.432,0.226
-"MS11741505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",117,0.351,0.086
-"MS11829754","THUNE, John","South Dakota","Republican Party",118,0.432,0.226
-"MS11841505","ROUNDS, Marion Michael (Mike)","South Dakota","Republican Party",118,0.351,0.086
-"MS11620351","BLACKBURN, Marsha","Tennessee","Republican Party",116,0.632,0.141
-"MS11640304","ALEXANDER, Lamar","Tennessee","Republican Party",116,0.324,-0.176
-"MS11742100","HAGERTY, William Francis (Bill)","Tennessee","Republican Party",117,0.679,-0.085
-"MS11720351","BLACKBURN, Marsha","Tennessee","Republican Party",117,0.632,0.141
-"MS11842100","HAGERTY, William Francis (Bill)","Tennessee","Republican Party",118,0.679,-0.085
-"MS11820351","BLACKBURN, Marsha","Tennessee","Republican Party",118,0.632,0.141
-"MS11641304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",116,0.781,-0.179
-"MS11640305","CORNYN, John","Texas","Republican Party",116,0.471,-0.062
-"MS11741304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",117,0.781,-0.179
-"MS11740305","CORNYN, John","Texas","Republican Party",117,0.471,-0.062
-"MS11841304","CRUZ, Rafael Edward (Ted)","Texas","Republican Party",118,0.781,-0.179
-"MS11840305","CORNYN, John","Texas","Republican Party",118,0.471,-0.062
-"MS11641110","LEE, Mike","Utah","Republican Party",116,0.891,-0.454
-"MS11641902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",116,0.286,0.294
-"MS11741110","LEE, Mike","Utah","Republican Party",117,0.891,-0.454
-"MS11741902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",117,0.286,0.294
-"MS11841110","LEE, Mike","Utah","Republican Party",118,0.891,-0.454
-"MS11841902","ROMNEY, Willard Mitt (Mitt)","Utah","Republican Party",118,0.286,0.294
-"MS11614307","LEAHY, Patrick Joseph","Vermont","Democratic Party",116,-0.36,-0.121
-"MS11629147","SANDERS, Bernard","Vermont","Independent",116,-0.545,-0.428
-"MS11714307","LEAHY, Patrick Joseph","Vermont","Democratic Party",117,-0.36,-0.121
-"MS11729147","SANDERS, Bernard","Vermont","Independent",117,-0.545,-0.428
-"MS11820750","WELCH, Peter","Vermont","Democratic Party",118,-0.401,-0.405
-"MS11829147","SANDERS, Bernard","Vermont","Independent",118,-0.545,-0.428
-"MS11640909","WARNER, Mark R.","Virginia","Democratic Party",116,-0.213,-0.037
-"MS11641305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",116,-0.237,-0.112
-"MS11740909","WARNER, Mark R.","Virginia","Democratic Party",117,-0.213,-0.037
-"MS11741305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",117,-0.237,-0.112
-"MS11840909","WARNER, Mark R.","Virginia","Democratic Party",118,-0.213,-0.037
-"MS11841305","KAINE, Timothy Michael (Tim)","Virginia","Democratic Party",118,-0.237,-0.112
-"MS11639310","CANTWELL, Maria E.","Washington","Democratic Party",116,-0.308,-0.402
-"MS11649308","MURRAY, Patty","Washington","Democratic Party",116,-0.356,-0.314
-"MS11739310","CANTWELL, Maria E.","Washington","Democratic Party",117,-0.308,-0.402
-"MS11749308","MURRAY, Patty","Washington","Democratic Party",117,-0.356,-0.314
-"MS11839310","CANTWELL, Maria E.","Washington","Democratic Party",118,-0.308,-0.402
-"MS11849308","MURRAY, Patty","Washington","Democratic Party",118,-0.356,-0.314
-"MS11620146","CAPITO, Shelley Moore","West Virginia","Republican Party",116,0.284,0.144
-"MS11640915","MANCHIN, Joe, III","West Virginia","Democratic Party",116,-0.057,0.4
-"MS11720146","CAPITO, Shelley Moore","West Virginia","Republican Party",117,0.284,0.144
-"MS11740915","MANCHIN, Joe, III","West Virginia","Democratic Party",117,-0.057,0.4
-"MS11820146","CAPITO, Shelley Moore","West Virginia","Republican Party",118,0.284,0.144
-"MS11840915","MANCHIN, Joe, III","West Virginia","Democratic Party",118,-0.057,0.4
-"MS11890915","MANCHIN, Joe, III","West Virginia","Independent",118,-0.06,-0.805
-"MS11641111","JOHNSON, Ron","Wisconsin","Republican Party",116,0.643,-0.144
-"MS11629940","BALDWIN, Tammy","Wisconsin","Democratic Party",116,-0.486,-0.124
-"MS11741111","JOHNSON, Ron","Wisconsin","Republican Party",117,0.643,-0.144
-"MS11729940","BALDWIN, Tammy","Wisconsin","Democratic Party",117,-0.486,-0.124
-"MS11841111","JOHNSON, Ron","Wisconsin","Republican Party",118,0.643,-0.144
-"MS11829940","BALDWIN, Tammy","Wisconsin","Democratic Party",118,-0.486,-0.124
-"MS11649706","ENZI, Michael B.","Wyoming","Republican Party",116,0.545,0.199
-"MS11640707","BARRASSO, John A.","Wyoming","Republican Party",116,0.54,0.193
-"MS11720953","LUMMIS, Cynthia M.","Wyoming","Republican Party",117,0.685,-0.327
-"MS11740707","BARRASSO, John A.","Wyoming","Republican Party",117,0.54,0.193
-"MS11820953","LUMMIS, Cynthia M.","Wyoming","Republican Party",118,0.685,-0.327
-"MS11840707","BARRASSO, John A.","Wyoming","Republican Party",118,0.54,0.193
+12109,"STEVENS, Theodore Fulton (Ted)","AK","R",110,0.219,-0.5
+40300,"MURKOWSKI, Lisa","AK","R",110,0.203,-0.304
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",110,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",110,0.446,0.57
+29305,"LINCOLN, Blanche Lambert","AR","D",110,-0.166,0.178
+40301,"PRYOR, Mark","AR","D",110,-0.199,0.463
+15429,"KYL, Jon Llewellyn","AZ","R",110,0.548,-0.413
+15039,"McCAIN, John Sidney, III","AZ","R",110,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",110,-0.268,-0.184
+15011,"BOXER, Barbara","CA","D",110,-0.45,-0.423
+29108,"ALLARD, A. Wayne","CO","R",110,0.572,-0.121
+40500,"SALAZAR, Kenneth Lee","CO","D",110,-0.223,0.042
+15704,"LIEBERMAN, Joseph I.","CT","D",110,-0.205,-0.312
+14213,"DODD, Christopher John","CT","D",110,-0.328,-0.317
+15015,"CARPER, Thomas Richard","DE","D",110,-0.179,-0.225
+14101,"BIDEN, Joseph Robinette, Jr.","DE","D",110,-0.314,-0.042
+40501,"MARTINEZ, Melquiades R. (Mel)","FL","R",110,0.333,-0.417
+14651,"NELSON, Clarence William (Bill)","FL","D",110,-0.193,0.337
+29512,"CHAMBLISS, Saxby","GA","R",110,0.423,0.205
+29909,"ISAKSON, Johnny","GA","R",110,0.402,-0.011
+4812,"INOUYE, Daniel Ken","HI","D",110,-0.319,0.062
+14400,"AKAKA, Daniel Kahikina","HI","D",110,-0.419,0.273
+14226,"GRASSLEY, Charles Ernest","IA","R",110,0.362,-0.034
+14230,"HARKIN, Thomas Richard (Tom)","IA","D",110,-0.351,-0.546
+29345,"CRAPO, Michael Dean","ID","R",110,0.505,0.291
+14809,"CRAIG, Larry Edwin","ID","R",110,0.494,-0.014
+15021,"DURBIN, Richard Joseph","IL","D",110,-0.341,-0.31
+40502,"OBAMA, Barack","IL","D",110,-0.343,-0.434
+14506,"LUGAR, Richard Green","IN","R",110,0.304,-0.466
+49901,"BAYH, Evan","IN","D",110,-0.158,-0.142
+29523,"BROWNBACK, Sam Dale","KS","R",110,0.439,-0.306
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",110,0.413,-0.09
+15406,"BUNNING, James Paul David","KY","R",110,0.521,-0.049
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",110,0.402,0.017
+29918,"VITTER, David","LA","R",110,0.495,0.323
+49702,"LANDRIEU, Mary L.","LA","D",110,-0.203,0.444
+14920,"KERRY, John Forbes","MA","D",110,-0.352,-0.382
+10808,"KENNEDY, Edward Moore (Ted)","MA","D",110,-0.443,-0.49
+15408,"CARDIN, Benjamin Louis","MD","D",110,-0.32,-0.224
+14440,"MIKULSKI, Barbara Ann","MD","D",110,-0.37,-0.128
+49703,"COLLINS, Susan Margaret","ME","R",110,0.124,-0.505
+14661,"SNOWE, Olympia Jean","ME","R",110,0.091,-0.548
+29732,"STABENOW, Deborah Ann","MI","D",110,-0.343,-0.019
+14709,"LEVIN, Carl","MI","D",110,-0.395,-0.116
+40302,"COLEMAN, Norm","MN","R",110,0.185,-0.125
+40700,"KLOBUCHAR, Amy","MN","D",110,-0.279,-0.324
+15501,"BOND, Christopher Samuel (Kit)","MO","R",110,0.31,-0.169
+40701,"McCASKILL, Claire","MO","D",110,-0.143,0.023
+14031,"LOTT, Chester Trent","MS","R",110,0.39,0.194
+29534,"WICKER, Roger F.","MS","R",110,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",110,0.287,0.051
+14203,"BAUCUS, Max Sieben","MT","D",110,-0.212,0.017
+40702,"TESTER, Jon","MT","D",110,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",110,0.435,-0.07
+40303,"DOLE, Elizabeth Hanford","NC","R",110,0.363,0.124
+14812,"DORGAN, Byron Leslie","ND","D",110,-0.267,0.09
+15502,"CONRAD, Kent","ND","D",110,-0.296,0.582
+49704,"HAGEL, Charles Timothy (Chuck)","NE","R",110,0.344,-0.498
+40103,"NELSON, Earl Benjamin (Ben)","NE","D",110,-0.03,0.588
+29740,"SUNUNU, John E.","NH","R",110,0.473,-0.52
+14826,"GREGG, Judd Alan","NH","R",110,0.429,-0.737
+29373,"MENENDEZ, Robert","NJ","D",110,-0.366,-0.126
+14914,"LAUTENBERG, Frank Raleigh","NJ","D",110,-0.382,-0.579
+14103,"DOMENICI, Pete Vichi","NM","R",110,0.257,-0.247
+14912,"BINGAMAN, Jesse Francis, Jr. (Jeff)","NM","D",110,-0.266,0.045
+29537,"ENSIGN, John Eric","NV","R",110,0.508,-0.464
+15054,"REID, Harry","NV","D",110,-0.276,0.258
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",110,-0.355,-0.412
+40105,"CLINTON, Hillary Rodham","NY","D",110,-0.367,-0.243
+49903,"VOINOVICH, George Victor","OH","R",110,0.239,-0.803
+29389,"BROWN, Sherrod","OH","D",110,-0.425,-0.097
+29555,"COBURN, Thomas Allen","OK","R",110,0.782,0.055
+15424,"INHOFE, James Mountain","OK","R",110,0.552,0.045
+49705,"SMITH, Gordon Harold","OR","R",110,0.192,-0.21
+14871,"WYDEN, Ronald Lee","OR","D",110,-0.334,-0.487
+14910,"SPECTER, Arlen","PA","R",110,0.068,-0.627
+40703,"CASEY, Robert (Bob), Jr.","PA","D",110,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",110,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",110,-0.36,-0.157
+29936,"DeMINT, James W.","SC","R",110,0.7,-0.102
+29566,"GRAHAM, Lindsey O.","SC","R",110,0.367,-0.271
+29754,"THUNE, John","SD","R",110,0.432,0.227
+15425,"JOHNSON, Timothy Peter (Tim)","SD","D",110,-0.25,0.143
+40705,"CORKER, Robert (Bob)","TN","R",110,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",110,0.324,-0.176
+40305,"CORNYN, John","TX","R",110,0.47,-0.061
+49306,"HUTCHISON, Kathryn Ann Bailey (Kay)","TX","R",110,0.356,0.012
+14503,"HATCH, Orrin Grant","UT","R",110,0.382,-0.004
+49307,"BENNETT, Robert","UT","R",110,0.331,-0.11
+14712,"WARNER, John William","VA","R",110,0.262,-0.131
+40706,"WEBB, James H. (Jim)","VA","D",110,-0.169,0.023
+14307,"LEAHY, Patrick Joseph","VT","D",110,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",110,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",110,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",110,-0.357,-0.314
+15703,"KOHL, Herbert H.","WI","D",110,-0.256,-0.406
+49309,"FEINGOLD, Russell Dana","WI","D",110,-0.308,-0.951
+1366,"BYRD, Robert Carlyle","WV","D",110,-0.309,0.729
+14922,"ROCKEFELLER, John Davison IV (Jay)","WV","D",110,-0.326,0.177
+49706,"ENZI, Michael B.","WY","R",110,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",110,0.54,0.194
+15633,"THOMAS, Craig Lyle","WY","R",110,0.446,-0.128
+40300,"MURKOWSKI, Lisa","AK","R",111,0.203,-0.304
+40900,"BEGICH, Mark","AK","D",111,-0.235,0.15
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",111,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",111,0.446,0.57
+29305,"LINCOLN, Blanche Lambert","AR","D",111,-0.166,0.178
+40301,"PRYOR, Mark","AR","D",111,-0.199,0.463
+15429,"KYL, Jon Llewellyn","AZ","R",111,0.548,-0.413
+15039,"McCAIN, John Sidney, III","AZ","R",111,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",111,-0.268,-0.184
+15011,"BOXER, Barbara","CA","D",111,-0.45,-0.423
+40500,"SALAZAR, Kenneth Lee","CO","D",111,-0.223,0.042
+40910,"BENNET, Michael F.","CO","D",111,-0.242,-0.189
+29906,"UDALL, Mark","CO","D",111,-0.353,0.049
+15704,"LIEBERMAN, Joseph I.","CT","D",111,-0.205,-0.312
+14213,"DODD, Christopher John","CT","D",111,-0.328,-0.317
+15015,"CARPER, Thomas Richard","DE","D",111,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",111,-0.238,-0.217
+14101,"BIDEN, Joseph Robinette, Jr.","DE","D",111,-0.314,-0.042
+40901,"KAUFMAN, Edward E. (Ted)","DE","D",111,-0.391,-0.126
+40911,"LEMIEUX, George S.","FL","R",111,0.34,0.081
+40501,"MARTINEZ, Melquiades R. (Mel)","FL","R",111,0.333,-0.417
+14651,"NELSON, Clarence William (Bill)","FL","D",111,-0.193,0.337
+29512,"CHAMBLISS, Saxby","GA","R",111,0.423,0.205
+29909,"ISAKSON, Johnny","GA","R",111,0.402,-0.011
+4812,"INOUYE, Daniel Ken","HI","D",111,-0.319,0.062
+14400,"AKAKA, Daniel Kahikina","HI","D",111,-0.419,0.273
+14226,"GRASSLEY, Charles Ernest","IA","R",111,0.362,-0.034
+14230,"HARKIN, Thomas Richard (Tom)","IA","D",111,-0.351,-0.546
+40902,"RISCH, James","ID","R",111,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",111,0.505,0.291
+20115,"KIRK, Mark Steven","IL","R",111,0.274,-0.647
+15021,"DURBIN, Richard Joseph","IL","D",111,-0.341,-0.31
+40903,"BURRIS, Roland","IL","D",111,-0.468,0.044
+14506,"LUGAR, Richard Green","IN","R",111,0.304,-0.466
+49901,"BAYH, Evan","IN","D",111,-0.158,-0.142
+29523,"BROWNBACK, Sam Dale","KS","R",111,0.439,-0.306
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",111,0.413,-0.09
+15406,"BUNNING, James Paul David","KY","R",111,0.521,-0.049
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",111,0.402,0.017
+29918,"VITTER, David","LA","R",111,0.495,0.323
+49702,"LANDRIEU, Mary L.","LA","D",111,-0.203,0.444
+40913,"BROWN, Scott P.","MA","R",111,0.128,-0.294
+14920,"KERRY, John Forbes","MA","D",111,-0.352,-0.382
+10808,"KENNEDY, Edward Moore (Ted)","MA","D",111,-0.443,-0.49
+40912,"KIRK, Paul G., Jr.","MA","D",111,-0.517,0.012
+15408,"CARDIN, Benjamin Louis","MD","D",111,-0.32,-0.224
+14440,"MIKULSKI, Barbara Ann","MD","D",111,-0.37,-0.128
+49703,"COLLINS, Susan Margaret","ME","R",111,0.124,-0.505
+14661,"SNOWE, Olympia Jean","ME","R",111,0.091,-0.548
+29732,"STABENOW, Deborah Ann","MI","D",111,-0.343,-0.019
+14709,"LEVIN, Carl","MI","D",111,-0.395,-0.116
+40700,"KLOBUCHAR, Amy","MN","D",111,-0.279,-0.324
+40904,"FRANKEN, Al","MN","D",111,-0.399,-0.169
+15501,"BOND, Christopher Samuel (Kit)","MO","R",111,0.31,-0.169
+40701,"McCASKILL, Claire","MO","D",111,-0.143,0.023
+29534,"WICKER, Roger F.","MS","R",111,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",111,0.287,0.051
+14203,"BAUCUS, Max Sieben","MT","D",111,-0.212,0.017
+40702,"TESTER, Jon","MT","D",111,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",111,0.435,-0.07
+40907,"HAGAN, Kay","NC","D",111,-0.202,0.281
+14812,"DORGAN, Byron Leslie","ND","D",111,-0.267,0.09
+15502,"CONRAD, Kent","ND","D",111,-0.296,0.582
+40905,"JOHANNS, Mike","NE","R",111,0.391,0.293
+40103,"NELSON, Earl Benjamin (Ben)","NE","D",111,-0.03,0.588
+14826,"GREGG, Judd Alan","NH","R",111,0.429,-0.737
+40906,"SHAHEEN, Jeanne","NH","D",111,-0.221,-0.138
+29373,"MENENDEZ, Robert","NJ","D",111,-0.366,-0.126
+14914,"LAUTENBERG, Frank Raleigh","NJ","D",111,-0.382,-0.579
+14912,"BINGAMAN, Jesse Francis, Jr. (Jeff)","NM","D",111,-0.266,0.045
+29924,"UDALL, Thomas (Tom)","NM","D",111,-0.453,0.161
+29537,"ENSIGN, John Eric","NV","R",111,0.508,-0.464
+15054,"REID, Harry","NV","D",111,-0.276,0.258
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",111,-0.355,-0.412
+40105,"CLINTON, Hillary Rodham","NY","D",111,-0.367,-0.243
+20735,"GILLIBRAND, Kirsten","NY","D",111,-0.449,-0.308
+49903,"VOINOVICH, George Victor","OH","R",111,0.239,-0.803
+29389,"BROWN, Sherrod","OH","D",111,-0.425,-0.097
+29555,"COBURN, Thomas Allen","OK","R",111,0.782,0.055
+15424,"INHOFE, James Mountain","OK","R",111,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",111,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",111,-0.453,-0.722
+14910,"SPECTER, Arlen","PA","R",111,0.068,-0.627
+40703,"CASEY, Robert (Bob), Jr.","PA","D",111,-0.313,0.166
+94910,"SPECTER, Arlen","PA","D",111,-0.321,0.036
+40704,"WHITEHOUSE, Sheldon","RI","D",111,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",111,-0.36,-0.157
+29936,"DeMINT, James W.","SC","R",111,0.7,-0.102
+29566,"GRAHAM, Lindsey O.","SC","R",111,0.367,-0.271
+29754,"THUNE, John","SD","R",111,0.432,0.227
+15425,"JOHNSON, Timothy Peter (Tim)","SD","D",111,-0.25,0.143
+40705,"CORKER, Robert (Bob)","TN","R",111,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",111,0.324,-0.176
+40305,"CORNYN, John","TX","R",111,0.47,-0.061
+49306,"HUTCHISON, Kathryn Ann Bailey (Kay)","TX","R",111,0.356,0.012
+14503,"HATCH, Orrin Grant","UT","R",111,0.382,-0.004
+49307,"BENNETT, Robert","UT","R",111,0.331,-0.11
+40706,"WEBB, James H. (Jim)","VA","D",111,-0.169,0.023
+40909,"WARNER, Mark","VA","D",111,-0.212,-0.038
+14307,"LEAHY, Patrick Joseph","VT","D",111,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",111,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",111,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",111,-0.357,-0.314
+15703,"KOHL, Herbert H.","WI","D",111,-0.256,-0.406
+49309,"FEINGOLD, Russell Dana","WI","D",111,-0.308,-0.951
+40915,"MANCHIN, Joe, III","WV","D",111,-0.057,0.4
+1366,"BYRD, Robert Carlyle","WV","D",111,-0.309,0.729
+14922,"ROCKEFELLER, John Davison IV (Jay)","WV","D",111,-0.326,0.177
+40914,"GOODWIN, Carte P.","WV","D",111,-0.747,-0.063
+49706,"ENZI, Michael B.","WY","R",111,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",111,0.54,0.194
+40300,"MURKOWSKI, Lisa","AK","R",112,0.203,-0.304
+40900,"BEGICH, Mark","AK","D",112,-0.235,0.15
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",112,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",112,0.446,0.57
+20101,"BOOZMAN, John","AR","R",112,0.427,0.338
+40301,"PRYOR, Mark","AR","D",112,-0.199,0.463
+15429,"KYL, Jon Llewellyn","AZ","R",112,0.548,-0.413
+15039,"McCAIN, John Sidney, III","AZ","R",112,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",112,-0.268,-0.184
+15011,"BOXER, Barbara","CA","D",112,-0.45,-0.423
+40910,"BENNET, Michael F.","CO","D",112,-0.242,-0.189
+29906,"UDALL, Mark","CO","D",112,-0.353,0.049
+15704,"LIEBERMAN, Joseph I.","CT","D",112,-0.205,-0.312
+41101,"BLUMENTHAL, Richard","CT","D",112,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",112,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",112,-0.238,-0.217
+41102,"RUBIO, Marco","FL","R",112,0.616,-0.184
+14651,"NELSON, Clarence William (Bill)","FL","D",112,-0.193,0.337
+29512,"CHAMBLISS, Saxby","GA","R",112,0.423,0.205
+29909,"ISAKSON, Johnny","GA","R",112,0.402,-0.011
+4812,"INOUYE, Daniel Ken","HI","D",112,-0.319,0.062
+14400,"AKAKA, Daniel Kahikina","HI","D",112,-0.419,0.273
+41112,"SCHATZ, Brian Emanuel","HI","D",112,-0.449,-0.118
+14226,"GRASSLEY, Charles Ernest","IA","R",112,0.362,-0.034
+14230,"HARKIN, Thomas Richard (Tom)","IA","D",112,-0.351,-0.546
+40902,"RISCH, James","ID","R",112,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",112,0.505,0.291
+20115,"KIRK, Mark Steven","IL","R",112,0.274,-0.647
+15021,"DURBIN, Richard Joseph","IL","D",112,-0.341,-0.31
+14806,"COATS, Daniel Ray","IN","R",112,0.375,-0.227
+14506,"LUGAR, Richard Green","IN","R",112,0.304,-0.466
+29722,"MORAN, Jerry","KS","R",112,0.414,0.219
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",112,0.413,-0.09
+41104,"PAUL, Rand","KY","R",112,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",112,0.402,0.017
+29918,"VITTER, David","LA","R",112,0.495,0.323
+49702,"LANDRIEU, Mary L.","LA","D",112,-0.203,0.444
+40913,"BROWN, Scott P.","MA","R",112,0.128,-0.294
+14920,"KERRY, John Forbes","MA","D",112,-0.352,-0.382
+15408,"CARDIN, Benjamin Louis","MD","D",112,-0.32,-0.224
+14440,"MIKULSKI, Barbara Ann","MD","D",112,-0.37,-0.128
+49703,"COLLINS, Susan Margaret","ME","R",112,0.124,-0.505
+14661,"SNOWE, Olympia Jean","ME","R",112,0.091,-0.548
+29732,"STABENOW, Deborah Ann","MI","D",112,-0.343,-0.019
+14709,"LEVIN, Carl","MI","D",112,-0.395,-0.116
+40700,"KLOBUCHAR, Amy","MN","D",112,-0.279,-0.324
+40904,"FRANKEN, Al","MN","D",112,-0.399,-0.169
+29735,"BLUNT, Roy","MO","R",112,0.398,0.18
+40701,"McCASKILL, Claire","MO","D",112,-0.143,0.023
+29534,"WICKER, Roger F.","MS","R",112,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",112,0.287,0.051
+14203,"BAUCUS, Max Sieben","MT","D",112,-0.212,0.017
+40702,"TESTER, Jon","MT","D",112,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",112,0.435,-0.07
+40907,"HAGAN, Kay","NC","D",112,-0.202,0.281
+41107,"HOEVEN, John","ND","R",112,0.4,0.449
+15502,"CONRAD, Kent","ND","D",112,-0.296,0.582
+40905,"JOHANNS, Mike","NE","R",112,0.391,0.293
+40103,"NELSON, Earl Benjamin (Ben)","NE","D",112,-0.03,0.588
+41106,"AYOTTE, Kelly","NH","R",112,0.351,-0.612
+40906,"SHAHEEN, Jeanne","NH","D",112,-0.221,-0.138
+29373,"MENENDEZ, Robert","NJ","D",112,-0.366,-0.126
+14914,"LAUTENBERG, Frank Raleigh","NJ","D",112,-0.382,-0.579
+14912,"BINGAMAN, Jesse Francis, Jr. (Jeff)","NM","D",112,-0.266,0.045
+29924,"UDALL, Thomas (Tom)","NM","D",112,-0.453,0.161
+29537,"ENSIGN, John Eric","NV","R",112,0.508,-0.464
+20730,"HELLER, Dean","NV","R",112,0.463,-0.459
+15054,"REID, Harry","NV","D",112,-0.276,0.258
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",112,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",112,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",112,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",112,-0.425,-0.097
+29555,"COBURN, Thomas Allen","OK","R",112,0.782,0.055
+15424,"INHOFE, James Mountain","OK","R",112,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",112,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",112,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",112,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",112,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",112,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",112,-0.36,-0.157
+29936,"DeMINT, James W.","SC","R",112,0.7,-0.102
+29566,"GRAHAM, Lindsey O.","SC","R",112,0.367,-0.271
+29754,"THUNE, John","SD","R",112,0.432,0.227
+15425,"JOHNSON, Timothy Peter (Tim)","SD","D",112,-0.25,0.143
+40705,"CORKER, Robert (Bob)","TN","R",112,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",112,0.324,-0.176
+40305,"CORNYN, John","TX","R",112,0.47,-0.061
+49306,"HUTCHISON, Kathryn Ann Bailey (Kay)","TX","R",112,0.356,0.012
+41110,"LEE, Mike","UT","R",112,0.891,-0.454
+14503,"HATCH, Orrin Grant","UT","R",112,0.382,-0.004
+40706,"WEBB, James H. (Jim)","VA","D",112,-0.169,0.023
+40909,"WARNER, Mark","VA","D",112,-0.212,-0.038
+14307,"LEAHY, Patrick Joseph","VT","D",112,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",112,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",112,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",112,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",112,0.641,-0.139
+15703,"KOHL, Herbert H.","WI","D",112,-0.256,-0.406
+40915,"MANCHIN, Joe, III","WV","D",112,-0.057,0.4
+14922,"ROCKEFELLER, John Davison IV (Jay)","WV","D",112,-0.326,0.177
+49706,"ENZI, Michael B.","WY","R",112,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",112,0.54,0.194
+40300,"MURKOWSKI, Lisa","AK","R",113,0.203,-0.304
+40900,"BEGICH, Mark","AK","D",113,-0.235,0.15
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",113,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",113,0.446,0.57
+20101,"BOOZMAN, John","AR","R",113,0.427,0.338
+40301,"PRYOR, Mark","AR","D",113,-0.199,0.463
+20100,"FLAKE, Jeff","AZ","R",113,0.855,-0.518
+15039,"McCAIN, John Sidney, III","AZ","R",113,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",113,-0.268,-0.184
+15011,"BOXER, Barbara","CA","D",113,-0.45,-0.423
+40910,"BENNET, Michael F.","CO","D",113,-0.242,-0.189
+29906,"UDALL, Mark","CO","D",113,-0.353,0.049
+20707,"MURPHY, Christopher","CT","D",113,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",113,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",113,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",113,-0.238,-0.217
+41102,"RUBIO, Marco","FL","R",113,0.616,-0.184
+14651,"NELSON, Clarence William (Bill)","FL","D",113,-0.193,0.337
+29512,"CHAMBLISS, Saxby","GA","R",113,0.423,0.205
+29909,"ISAKSON, Johnny","GA","R",113,0.402,-0.011
+41112,"SCHATZ, Brian Emanuel","HI","D",113,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",113,-0.513,-0.089
+14226,"GRASSLEY, Charles Ernest","IA","R",113,0.362,-0.034
+14230,"HARKIN, Thomas Richard (Tom)","IA","D",113,-0.351,-0.546
+40902,"RISCH, James","ID","R",113,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",113,0.505,0.291
+20115,"KIRK, Mark Steven","IL","R",113,0.274,-0.647
+15021,"DURBIN, Richard Joseph","IL","D",113,-0.341,-0.31
+14806,"COATS, Daniel Ray","IN","R",113,0.375,-0.227
+20717,"DONNELLY, Joe","IN","D",113,-0.119,0.435
+29722,"MORAN, Jerry","KS","R",113,0.414,0.219
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",113,0.413,-0.09
+41104,"PAUL, Rand","KY","R",113,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",113,0.402,0.017
+29918,"VITTER, David","LA","R",113,0.495,0.323
+49702,"LANDRIEU, Mary L.","LA","D",113,-0.203,0.444
+14920,"KERRY, John Forbes","MA","D",113,-0.352,-0.382
+41306,"COWAN, William (Mo)","MA","D",113,-0.462,0.348
+14435,"MARKEY, Edward John","MA","D",113,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",113,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",113,-0.32,-0.224
+14440,"MIKULSKI, Barbara Ann","MD","D",113,-0.37,-0.128
+49703,"COLLINS, Susan Margaret","ME","R",113,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",113,-0.167,-0.187
+29732,"STABENOW, Deborah Ann","MI","D",113,-0.343,-0.019
+14709,"LEVIN, Carl","MI","D",113,-0.395,-0.116
+40700,"KLOBUCHAR, Amy","MN","D",113,-0.279,-0.324
+40904,"FRANKEN, Al","MN","D",113,-0.399,-0.169
+29735,"BLUNT, Roy","MO","R",113,0.398,0.18
+40701,"McCASKILL, Claire","MO","D",113,-0.143,0.023
+29534,"WICKER, Roger F.","MS","R",113,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",113,0.287,0.051
+14203,"BAUCUS, Max Sieben","MT","D",113,-0.212,0.017
+40702,"TESTER, Jon","MT","D",113,-0.213,0.153
+41309,"WALSH, John E.","MT","D",113,-0.255,0.462
+29548,"BURR, Richard M.","NC","R",113,0.435,-0.07
+40907,"HAGAN, Kay","NC","D",113,-0.202,0.281
+41107,"HOEVEN, John","ND","R",113,0.4,0.449
+41303,"HEITKAMP, Mary Kathryn (Heidi)","ND","D",113,-0.122,0.399
+41302,"FISCHER, Debra (Deb)","NE","R",113,0.46,0.334
+40905,"JOHANNS, Mike","NE","R",113,0.391,0.293
+41106,"AYOTTE, Kelly","NH","R",113,0.351,-0.612
+40906,"SHAHEEN, Jeanne","NH","D",113,-0.221,-0.138
+41307,"CHIESA, Jeffrey Scott","NJ","R",113,0.218,0.384
+29373,"MENENDEZ, Robert","NJ","D",113,-0.366,-0.126
+14914,"LAUTENBERG, Frank Raleigh","NJ","D",113,-0.382,-0.579
+41308,"BOOKER, Cory Anthony","NJ","D",113,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",113,-0.334,-0.002
+29924,"UDALL, Thomas (Tom)","NM","D",113,-0.453,0.161
+20730,"HELLER, Dean","NV","R",113,0.463,-0.459
+15054,"REID, Harry","NV","D",113,-0.276,0.258
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",113,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",113,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",113,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",113,-0.425,-0.097
+29555,"COBURN, Thomas Allen","OK","R",113,0.782,0.055
+15424,"INHOFE, James Mountain","OK","R",113,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",113,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",113,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",113,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",113,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",113,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",113,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",113,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",113,0.367,-0.271
+29754,"THUNE, John","SD","R",113,0.432,0.227
+15425,"JOHNSON, Timothy Peter (Tim)","SD","D",113,-0.25,0.143
+40705,"CORKER, Robert (Bob)","TN","R",113,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",113,0.324,-0.176
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",113,0.781,-0.179
+40305,"CORNYN, John","TX","R",113,0.47,-0.061
+41110,"LEE, Mike","UT","R",113,0.891,-0.454
+14503,"HATCH, Orrin Grant","UT","R",113,0.382,-0.004
+40909,"WARNER, Mark","VA","D",113,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",113,-0.238,-0.111
+14307,"LEAHY, Patrick Joseph","VT","D",113,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",113,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",113,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",113,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",113,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",113,-0.487,-0.124
+40915,"MANCHIN, Joe, III","WV","D",113,-0.057,0.4
+14922,"ROCKEFELLER, John Davison IV (Jay)","WV","D",113,-0.326,0.177
+49706,"ENZI, Michael B.","WY","R",113,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",113,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",114,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",114,0.203,-0.304
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",114,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",114,0.446,0.57
+21301,"COTTON, Tom","AR","R",114,0.579,0.196
+20101,"BOOZMAN, John","AR","R",114,0.427,0.338
+20100,"FLAKE, Jeff","AZ","R",114,0.855,-0.518
+15039,"McCAIN, John Sidney, III","AZ","R",114,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",114,-0.268,-0.184
+15011,"BOXER, Barbara","CA","D",114,-0.45,-0.423
+21112,"GARDNER, Cory","CO","R",114,0.444,-0.029
+40910,"BENNET, Michael F.","CO","D",114,-0.242,-0.189
+20707,"MURPHY, Christopher","CT","D",114,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",114,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",114,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",114,-0.238,-0.217
+41102,"RUBIO, Marco","FL","R",114,0.616,-0.184
+14651,"NELSON, Clarence William (Bill)","FL","D",114,-0.193,0.337
+41501,"PERDUE, David Alfred, Jr.","GA","R",114,0.562,-0.075
+29909,"ISAKSON, Johnny","GA","R",114,0.402,-0.011
+41112,"SCHATZ, Brian Emanuel","HI","D",114,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",114,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",114,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",114,0.362,-0.034
+40902,"RISCH, James","ID","R",114,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",114,0.505,0.291
+20115,"KIRK, Mark Steven","IL","R",114,0.274,-0.647
+15021,"DURBIN, Richard Joseph","IL","D",114,-0.341,-0.31
+14806,"COATS, Daniel Ray","IN","R",114,0.375,-0.227
+20717,"DONNELLY, Joe","IN","D",114,-0.119,0.435
+29722,"MORAN, Jerry","KS","R",114,0.414,0.219
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",114,0.413,-0.09
+41104,"PAUL, Rand","KY","R",114,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",114,0.402,0.017
+29918,"VITTER, David","LA","R",114,0.495,0.323
+20919,"CASSIDY, Bill","LA","R",114,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",114,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",114,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",114,-0.32,-0.224
+14440,"MIKULSKI, Barbara Ann","MD","D",114,-0.37,-0.128
+49703,"COLLINS, Susan Margaret","ME","R",114,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",114,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",114,-0.25,-0.184
+29732,"STABENOW, Deborah Ann","MI","D",114,-0.343,-0.019
+40700,"KLOBUCHAR, Amy","MN","D",114,-0.279,-0.324
+40904,"FRANKEN, Al","MN","D",114,-0.399,-0.169
+29735,"BLUNT, Roy","MO","R",114,0.398,0.18
+40701,"McCASKILL, Claire","MO","D",114,-0.143,0.023
+29534,"WICKER, Roger F.","MS","R",114,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",114,0.287,0.051
+21338,"DAINES, Steve","MT","R",114,0.589,-0.024
+40702,"TESTER, Jon","MT","D",114,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",114,0.435,-0.07
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",114,0.388,-0.111
+41107,"HOEVEN, John","ND","R",114,0.4,0.449
+41303,"HEITKAMP, Mary Kathryn (Heidi)","ND","D",114,-0.122,0.399
+41503,"SASSE, Benjamin Eric","NE","R",114,0.669,-0.25
+41302,"FISCHER, Debra (Deb)","NE","R",114,0.46,0.334
+41106,"AYOTTE, Kelly","NH","R",114,0.351,-0.612
+40906,"SHAHEEN, Jeanne","NH","D",114,-0.221,-0.138
+29373,"MENENDEZ, Robert","NJ","D",114,-0.366,-0.126
+41308,"BOOKER, Cory Anthony","NJ","D",114,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",114,-0.334,-0.002
+29924,"UDALL, Thomas (Tom)","NM","D",114,-0.453,0.161
+20730,"HELLER, Dean","NV","R",114,0.463,-0.459
+15054,"REID, Harry","NV","D",114,-0.276,0.258
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",114,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",114,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",114,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",114,-0.425,-0.097
+21166,"LANKFORD, James","OK","R",114,0.591,0.147
+15424,"INHOFE, James Mountain","OK","R",114,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",114,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",114,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",114,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",114,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",114,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",114,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",114,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",114,0.367,-0.271
+29754,"THUNE, John","SD","R",114,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",114,0.351,0.086
+40705,"CORKER, Robert (Bob)","TN","R",114,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",114,0.324,-0.176
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",114,0.781,-0.179
+40305,"CORNYN, John","TX","R",114,0.47,-0.061
+41110,"LEE, Mike","UT","R",114,0.891,-0.454
+14503,"HATCH, Orrin Grant","UT","R",114,0.382,-0.004
+40909,"WARNER, Mark","VA","D",114,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",114,-0.238,-0.111
+14307,"LEAHY, Patrick Joseph","VT","D",114,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",114,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",114,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",114,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",114,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",114,-0.487,-0.124
+20146,"CAPITO, Shelley Moore","WV","R",114,0.284,0.143
+40915,"MANCHIN, Joe, III","WV","D",114,-0.057,0.4
+49706,"ENZI, Michael B.","WY","R",114,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",114,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",115,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",115,0.203,-0.304
+41704,"STRANGE, Luther  Johnson, III","AL","R",115,0.56,0.18
+49700,"SESSIONS, Jefferson Beauregard III (Jeff)","AL","R",115,0.549,0.13
+94659,"SHELBY, Richard C.","AL","R",115,0.446,0.57
+41705,"JONES, Gordon Douglas (Doug)","AL","D",115,-0.088,0.187
+21301,"COTTON, Tom","AR","R",115,0.579,0.196
+20101,"BOOZMAN, John","AR","R",115,0.427,0.338
+20100,"FLAKE, Jeff","AZ","R",115,0.855,-0.518
+15429,"KYL, Jon Llewellyn","AZ","R",115,0.548,-0.413
+15039,"McCAIN, John Sidney, III","AZ","R",115,0.381,-0.626
+49300,"FEINSTEIN, Dianne","CA","D",115,-0.268,-0.184
+41701,"HARRIS, Kamala Devi","CA","D",115,-0.709,-0.105
+21112,"GARDNER, Cory","CO","R",115,0.444,-0.029
+40910,"BENNET, Michael F.","CO","D",115,-0.242,-0.189
+20707,"MURPHY, Christopher","CT","D",115,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",115,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",115,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",115,-0.238,-0.217
+41102,"RUBIO, Marco","FL","R",115,0.616,-0.184
+14651,"NELSON, Clarence William (Bill)","FL","D",115,-0.193,0.337
+41501,"PERDUE, David Alfred, Jr.","GA","R",115,0.562,-0.075
+29909,"ISAKSON, Johnny","GA","R",115,0.402,-0.011
+41112,"SCHATZ, Brian Emanuel","HI","D",115,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",115,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",115,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",115,0.362,-0.034
+40902,"RISCH, James","ID","R",115,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",115,0.505,0.291
+15021,"DURBIN, Richard Joseph","IL","D",115,-0.341,-0.31
+21325,"DUCKWORTH, Tammy","IL","D",115,-0.344,0.056
+21133,"YOUNG, Todd","IN","R",115,0.438,-0.022
+20717,"DONNELLY, Joe","IN","D",115,-0.119,0.435
+29722,"MORAN, Jerry","KS","R",115,0.414,0.219
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",115,0.413,-0.09
+41104,"PAUL, Rand","KY","R",115,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",115,0.402,0.017
+41703,"KENNEDY, John Neely","LA","R",115,0.561,-0.153
+20919,"CASSIDY, Bill","LA","R",115,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",115,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",115,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",115,-0.32,-0.224
+20330,"VAN HOLLEN, Christopher","MD","D",115,-0.398,-0.227
+49703,"COLLINS, Susan Margaret","ME","R",115,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",115,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",115,-0.25,-0.184
+29732,"STABENOW, Deborah Ann","MI","D",115,-0.343,-0.019
+40700,"KLOBUCHAR, Amy","MN","D",115,-0.279,-0.324
+40904,"FRANKEN, Al","MN","D",115,-0.399,-0.169
+41706,"SMITH, Tina","MN","D",115,-0.409,-0.122
+29735,"BLUNT, Roy","MO","R",115,0.398,0.18
+40701,"McCASKILL, Claire","MO","D",115,-0.143,0.023
+41707,"HYDE-SMITH, Cindy","MS","R",115,0.452,0.328
+29534,"WICKER, Roger F.","MS","R",115,0.377,0.341
+14009,"COCHRAN, William Thad","MS","R",115,0.287,0.051
+21338,"DAINES, Steve","MT","R",115,0.589,-0.024
+40702,"TESTER, Jon","MT","D",115,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",115,0.435,-0.07
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",115,0.388,-0.111
+41107,"HOEVEN, John","ND","R",115,0.4,0.449
+41303,"HEITKAMP, Mary Kathryn (Heidi)","ND","D",115,-0.122,0.399
+41503,"SASSE, Benjamin Eric","NE","R",115,0.669,-0.25
+41302,"FISCHER, Debra (Deb)","NE","R",115,0.46,0.334
+40906,"SHAHEEN, Jeanne","NH","D",115,-0.221,-0.138
+41702,"HASSAN, Margaret (Maggie)","NH","D",115,-0.226,0.025
+29373,"MENENDEZ, Robert","NJ","D",115,-0.366,-0.126
+41308,"BOOKER, Cory Anthony","NJ","D",115,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",115,-0.334,-0.002
+29924,"UDALL, Thomas (Tom)","NM","D",115,-0.453,0.161
+20730,"HELLER, Dean","NV","R",115,0.463,-0.459
+41700,"CORTEZ MASTO, Catherine Marie","NV","D",115,-0.347,0.351
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",115,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",115,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",115,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",115,-0.425,-0.097
+21166,"LANKFORD, James","OK","R",115,0.591,0.147
+15424,"INHOFE, James Mountain","OK","R",115,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",115,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",115,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",115,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",115,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",115,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",115,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",115,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",115,0.367,-0.271
+29754,"THUNE, John","SD","R",115,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",115,0.351,0.086
+40705,"CORKER, Robert (Bob)","TN","R",115,0.395,-0.344
+40304,"ALEXANDER, Lamar","TN","R",115,0.324,-0.176
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",115,0.781,-0.179
+40305,"CORNYN, John","TX","R",115,0.47,-0.061
+41110,"LEE, Mike","UT","R",115,0.891,-0.454
+14503,"HATCH, Orrin Grant","UT","R",115,0.382,-0.004
+40909,"WARNER, Mark","VA","D",115,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",115,-0.238,-0.111
+14307,"LEAHY, Patrick Joseph","VT","D",115,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",115,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",115,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",115,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",115,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",115,-0.487,-0.124
+20146,"CAPITO, Shelley Moore","WV","R",115,0.284,0.143
+40915,"MANCHIN, Joe, III","WV","D",115,-0.057,0.4
+49706,"ENZI, Michael B.","WY","R",115,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",115,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",116,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",116,0.203,-0.304
+94659,"SHELBY, Richard C.","AL","R",116,0.446,0.57
+41705,"JONES, Gordon Douglas (Doug)","AL","D",116,-0.088,0.187
+21301,"COTTON, Tom","AR","R",116,0.579,0.196
+20101,"BOOZMAN, John","AR","R",116,0.427,0.338
+21501,"McSALLY, Martha","AZ","R",116,0.345,0.027
+21300,"SINEMA, Kyrsten","AZ","D",116,-0.105,0.076
+41905,"KELLY, Mark Edward","AZ","D",116,-0.263,0.288
+49300,"FEINSTEIN, Dianne","CA","D",116,-0.268,-0.184
+41701,"HARRIS, Kamala Devi","CA","D",116,-0.709,-0.105
+21112,"GARDNER, Cory","CO","R",116,0.444,-0.029
+40910,"BENNET, Michael F.","CO","D",116,-0.242,-0.189
+20707,"MURPHY, Christopher","CT","D",116,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",116,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",116,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",116,-0.238,-0.217
+41903,"SCOTT, Richard Lynn (Rick)","FL","R",116,0.717,-0.023
+41102,"RUBIO, Marco","FL","R",116,0.616,-0.184
+41501,"PERDUE, David Alfred, Jr.","GA","R",116,0.562,-0.075
+41904,"LOEFFLER, Kelly","GA","R",116,0.555,-0.203
+29909,"ISAKSON, Johnny","GA","R",116,0.402,-0.011
+41112,"SCHATZ, Brian Emanuel","HI","D",116,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",116,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",116,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",116,0.362,-0.034
+40902,"RISCH, James","ID","R",116,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",116,0.505,0.291
+15021,"DURBIN, Richard Joseph","IL","D",116,-0.341,-0.31
+21325,"DUCKWORTH, Tammy","IL","D",116,-0.344,0.056
+41900,"BRAUN, Michael","IN","R",116,0.8,0.6
+21133,"YOUNG, Todd","IN","R",116,0.438,-0.022
+29722,"MORAN, Jerry","KS","R",116,0.414,0.219
+14852,"ROBERTS, Charles Patrick (Pat)","KS","R",116,0.413,-0.09
+41104,"PAUL, Rand","KY","R",116,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",116,0.402,0.017
+41703,"KENNEDY, John Neely","LA","R",116,0.561,-0.153
+20919,"CASSIDY, Bill","LA","R",116,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",116,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",116,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",116,-0.32,-0.224
+20330,"VAN HOLLEN, Christopher","MD","D",116,-0.398,-0.227
+49703,"COLLINS, Susan Margaret","ME","R",116,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",116,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",116,-0.25,-0.184
+29732,"STABENOW, Deborah Ann","MI","D",116,-0.343,-0.019
+40700,"KLOBUCHAR, Amy","MN","D",116,-0.279,-0.324
+41706,"SMITH, Tina","MN","D",116,-0.409,-0.122
+41901,"HAWLEY, Joshua David","MO","R",116,0.83,-0.371
+29735,"BLUNT, Roy","MO","R",116,0.398,0.18
+41707,"HYDE-SMITH, Cindy","MS","R",116,0.452,0.328
+29534,"WICKER, Roger F.","MS","R",116,0.377,0.341
+21338,"DAINES, Steve","MT","R",116,0.589,-0.024
+40702,"TESTER, Jon","MT","D",116,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",116,0.435,-0.07
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",116,0.388,-0.111
+41107,"HOEVEN, John","ND","R",116,0.4,0.449
+21350,"CRAMER, Kevin","ND","R",116,0.398,0.368
+41503,"SASSE, Benjamin Eric","NE","R",116,0.669,-0.25
+41302,"FISCHER, Debra (Deb)","NE","R",116,0.46,0.334
+40906,"SHAHEEN, Jeanne","NH","D",116,-0.221,-0.138
+41702,"HASSAN, Margaret (Maggie)","NH","D",116,-0.226,0.025
+29373,"MENENDEZ, Robert","NJ","D",116,-0.366,-0.126
+41308,"BOOKER, Cory Anthony","NJ","D",116,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",116,-0.334,-0.002
+29924,"UDALL, Thomas (Tom)","NM","D",116,-0.453,0.161
+21743,"ROSEN, Jacklyn Sheryl","NV","D",116,-0.286,0.317
+41700,"CORTEZ MASTO, Catherine Marie","NV","D",116,-0.347,0.351
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",116,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",116,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",116,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",116,-0.425,-0.097
+21166,"LANKFORD, James","OK","R",116,0.591,0.147
+15424,"INHOFE, James Mountain","OK","R",116,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",116,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",116,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",116,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",116,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",116,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",116,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",116,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",116,0.367,-0.271
+29754,"THUNE, John","SD","R",116,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",116,0.351,0.086
+20351,"BLACKBURN, Marsha","TN","R",116,0.632,0.141
+40304,"ALEXANDER, Lamar","TN","R",116,0.324,-0.176
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",116,0.781,-0.179
+40305,"CORNYN, John","TX","R",116,0.47,-0.061
+41110,"LEE, Mike","UT","R",116,0.891,-0.454
+41902,"ROMNEY, Willard Mitt (Mitt)","UT","R",116,0.286,0.294
+40909,"WARNER, Mark","VA","D",116,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",116,-0.238,-0.111
+14307,"LEAHY, Patrick Joseph","VT","D",116,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",116,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",116,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",116,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",116,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",116,-0.487,-0.124
+20146,"CAPITO, Shelley Moore","WV","R",116,0.284,0.143
+40915,"MANCHIN, Joe, III","WV","D",116,-0.057,0.4
+49706,"ENZI, Michael B.","WY","R",116,0.545,0.199
+40707,"BARRASSO, John A.","WY","R",116,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",117,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",117,0.203,-0.304
+42102,"TUBERVILLE, Thomas Hawley (Tommy)","AL","R",117,0.936,-0.352
+94659,"SHELBY, Richard C.","AL","R",117,0.446,0.57
+21301,"COTTON, Tom","AR","R",117,0.579,0.196
+20101,"BOOZMAN, John","AR","R",117,0.427,0.338
+21300,"SINEMA, Kyrsten","AZ","D",117,-0.105,0.076
+41905,"KELLY, Mark Edward","AZ","D",117,-0.263,0.288
+49300,"FEINSTEIN, Dianne","CA","D",117,-0.268,-0.184
+42104,"PADILLA, Alejandro (Alex)","CA","D",117,-0.429,-0.254
+41701,"HARRIS, Kamala Devi","CA","D",117,-0.709,-0.105
+40910,"BENNET, Michael F.","CO","D",117,-0.242,-0.189
+42101,"HICKENLOOPER, John Wright","CO","D",117,-0.288,-0.01
+20707,"MURPHY, Christopher","CT","D",117,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",117,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",117,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",117,-0.238,-0.217
+41903,"SCOTT, Richard Lynn (Rick)","FL","R",117,0.717,-0.023
+41102,"RUBIO, Marco","FL","R",117,0.616,-0.184
+41904,"LOEFFLER, Kelly","GA","R",117,0.555,-0.203
+42105,"WARNOCK, Raphael Gamaliel","GA","D",117,-0.43,0.422
+42103,"OSSOFF, Thomas Jonathan (Jon)","GA","D",117,-0.462,0.479
+41112,"SCHATZ, Brian Emanuel","HI","D",117,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",117,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",117,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",117,0.362,-0.034
+40902,"RISCH, James","ID","R",117,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",117,0.505,0.291
+15021,"DURBIN, Richard Joseph","IL","D",117,-0.341,-0.31
+21325,"DUCKWORTH, Tammy","IL","D",117,-0.344,0.056
+41900,"BRAUN, Michael","IN","R",117,0.8,0.6
+21133,"YOUNG, Todd","IN","R",117,0.438,-0.022
+21734,"MARSHALL, Roger Wayne","KS","R",117,0.607,0.139
+29722,"MORAN, Jerry","KS","R",117,0.414,0.219
+41104,"PAUL, Rand","KY","R",117,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",117,0.402,0.017
+41703,"KENNEDY, John Neely","LA","R",117,0.561,-0.153
+20919,"CASSIDY, Bill","LA","R",117,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",117,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",117,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",117,-0.32,-0.224
+20330,"VAN HOLLEN, Christopher","MD","D",117,-0.398,-0.227
+49703,"COLLINS, Susan Margaret","ME","R",117,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",117,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",117,-0.25,-0.184
+29732,"STABENOW, Deborah Ann","MI","D",117,-0.343,-0.019
+40700,"KLOBUCHAR, Amy","MN","D",117,-0.279,-0.324
+41706,"SMITH, Tina","MN","D",117,-0.409,-0.122
+41901,"HAWLEY, Joshua David","MO","R",117,0.83,-0.371
+29735,"BLUNT, Roy","MO","R",117,0.398,0.18
+41707,"HYDE-SMITH, Cindy","MS","R",117,0.452,0.328
+29534,"WICKER, Roger F.","MS","R",117,0.377,0.341
+21338,"DAINES, Steve","MT","R",117,0.589,-0.024
+40702,"TESTER, Jon","MT","D",117,-0.213,0.153
+29548,"BURR, Richard M.","NC","R",117,0.435,-0.07
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",117,0.388,-0.111
+41107,"HOEVEN, John","ND","R",117,0.4,0.449
+21350,"CRAMER, Kevin","ND","R",117,0.398,0.368
+41503,"SASSE, Benjamin Eric","NE","R",117,0.669,-0.25
+41302,"FISCHER, Debra (Deb)","NE","R",117,0.46,0.334
+40906,"SHAHEEN, Jeanne","NH","D",117,-0.221,-0.138
+41702,"HASSAN, Margaret (Maggie)","NH","D",117,-0.226,0.025
+29373,"MENENDEZ, Robert","NJ","D",117,-0.366,-0.126
+41308,"BOOKER, Cory Anthony","NJ","D",117,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",117,-0.334,-0.002
+20932,"LUJÁN, Ben Ray","NM","D",117,-0.38,0.031
+21743,"ROSEN, Jacklyn Sheryl","NV","D",117,-0.286,0.317
+41700,"CORTEZ MASTO, Catherine Marie","NV","D",117,-0.347,0.351
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",117,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",117,-0.449,-0.308
+29386,"PORTMAN, Robert Jones (Rob)","OH","R",117,0.371,-0.208
+29389,"BROWN, Sherrod","OH","D",117,-0.425,-0.097
+21166,"LANKFORD, James","OK","R",117,0.591,0.147
+15424,"INHOFE, James Mountain","OK","R",117,0.552,0.045
+14871,"WYDEN, Ronald Lee","OR","D",117,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",117,-0.453,-0.722
+29935,"TOOMEY, Patrick Joseph","PA","R",117,0.624,-0.378
+40703,"CASEY, Robert (Bob), Jr.","PA","D",117,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",117,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",117,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",117,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",117,0.367,-0.271
+29754,"THUNE, John","SD","R",117,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",117,0.351,0.086
+42100,"HAGERTY, William Francis (Bill)","TN","R",117,0.679,-0.087
+20351,"BLACKBURN, Marsha","TN","R",117,0.632,0.141
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",117,0.781,-0.179
+40305,"CORNYN, John","TX","R",117,0.47,-0.061
+41110,"LEE, Mike","UT","R",117,0.891,-0.454
+41902,"ROMNEY, Willard Mitt (Mitt)","UT","R",117,0.286,0.294
+40909,"WARNER, Mark","VA","D",117,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",117,-0.238,-0.111
+14307,"LEAHY, Patrick Joseph","VT","D",117,-0.36,-0.121
+29147,"SANDERS, Bernard","VT","I",117,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",117,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",117,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",117,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",117,-0.487,-0.124
+20146,"CAPITO, Shelley Moore","WV","R",117,0.284,0.143
+40915,"MANCHIN, Joe, III","WV","D",117,-0.057,0.4
+20953,"LUMMIS, Cynthia M.","WY","R",117,0.685,-0.327
+40707,"BARRASSO, John A.","WY","R",117,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",118,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",118,0.203,-0.304
+42102,"TUBERVILLE, Thomas Hawley (Tommy)","AL","R",118,0.936,-0.352
+42300,"BRITT, Katie Elizabeth","AL","R",118,0.588,0.575
+21301,"COTTON, Tom","AR","R",118,0.579,0.196
+20101,"BOOZMAN, John","AR","R",118,0.427,0.338
+91300,"SINEMA, Kyrsten","AZ","I",118,-0.186,0.387
+41905,"KELLY, Mark Edward","AZ","D",118,-0.263,0.288
+49300,"FEINSTEIN, Dianne","CA","D",118,-0.268,-0.184
+20104,"SCHIFF, Adam","CA","D",118,-0.352,-0.119
+42104,"PADILLA, Alejandro (Alex)","CA","D",118,-0.429,-0.254
+42305,"BUTLER, Laphonza Romanique","CA","D",118,-0.447,-0.073
+40910,"BENNET, Michael F.","CO","D",118,-0.242,-0.189
+42101,"HICKENLOOPER, John Wright","CO","D",118,-0.288,-0.01
+20707,"MURPHY, Christopher","CT","D",118,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",118,-0.435,-0.152
+15015,"CARPER, Thomas Richard","DE","D",118,-0.179,-0.225
+40916,"COONS, Christopher A.","DE","D",118,-0.238,-0.217
+41903,"SCOTT, Richard Lynn (Rick)","FL","R",118,0.717,-0.023
+41102,"RUBIO, Marco","FL","R",118,0.616,-0.184
+42105,"WARNOCK, Raphael Gamaliel","GA","D",118,-0.43,0.422
+42103,"OSSOFF, Thomas Jonathan (Jon)","GA","D",118,-0.462,0.479
+41112,"SCHATZ, Brian Emanuel","HI","D",118,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",118,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",118,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",118,0.362,-0.034
+40902,"RISCH, James","ID","R",118,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",118,0.505,0.291
+15021,"DURBIN, Richard Joseph","IL","D",118,-0.341,-0.31
+21325,"DUCKWORTH, Tammy","IL","D",118,-0.344,0.056
+41900,"BRAUN, Michael","IN","R",118,0.8,0.6
+21133,"YOUNG, Todd","IN","R",118,0.438,-0.022
+21734,"MARSHALL, Roger Wayne","KS","R",118,0.607,0.139
+29722,"MORAN, Jerry","KS","R",118,0.414,0.219
+41104,"PAUL, Rand","KY","R",118,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",118,0.402,0.017
+41703,"KENNEDY, John Neely","LA","R",118,0.561,-0.153
+20919,"CASSIDY, Bill","LA","R",118,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",118,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",118,-0.744,-0.371
+15408,"CARDIN, Benjamin Louis","MD","D",118,-0.32,-0.224
+20330,"VAN HOLLEN, Christopher","MD","D",118,-0.398,-0.227
+49703,"COLLINS, Susan Margaret","ME","R",118,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",118,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",118,-0.25,-0.184
+29732,"STABENOW, Deborah Ann","MI","D",118,-0.343,-0.019
+40700,"KLOBUCHAR, Amy","MN","D",118,-0.279,-0.324
+41706,"SMITH, Tina","MN","D",118,-0.409,-0.122
+42303,"SCHMITT, Eric Stephen","MO","R",118,0.906,0.071
+41901,"HAWLEY, Joshua David","MO","R",118,0.83,-0.371
+41707,"HYDE-SMITH, Cindy","MS","R",118,0.452,0.328
+29534,"WICKER, Roger F.","MS","R",118,0.377,0.341
+21338,"DAINES, Steve","MT","R",118,0.589,-0.024
+40702,"TESTER, Jon","MT","D",118,-0.213,0.153
+21708,"BUDD, Theodore Paul","NC","R",118,0.633,-0.076
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",118,0.388,-0.111
+41107,"HOEVEN, John","ND","R",118,0.4,0.449
+21350,"CRAMER, Kevin","ND","R",118,0.398,0.368
+41302,"FISCHER, Debra (Deb)","NE","R",118,0.46,0.334
+42302,"RICKETTS, John Peter (Pete)","NE","R",118,0.437,0.52
+40906,"SHAHEEN, Jeanne","NH","D",118,-0.221,-0.138
+41702,"HASSAN, Margaret (Maggie)","NH","D",118,-0.226,0.025
+42306,"HELMY, George S.","NJ","D",118,-0.347,-0.308
+29373,"MENENDEZ, Robert","NJ","D",118,-0.366,-0.126
+21937,"KIM, Andy","NJ","D",118,-0.401,0.222
+41308,"BOOKER, Cory Anthony","NJ","D",118,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",118,-0.334,-0.002
+20932,"LUJÁN, Ben Ray","NM","D",118,-0.38,0.031
+21743,"ROSEN, Jacklyn Sheryl","NV","D",118,-0.286,0.317
+41700,"CORTEZ MASTO, Catherine Marie","NV","D",118,-0.347,0.351
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",118,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",118,-0.449,-0.308
+42304,"VANCE, James David","OH","R",118,0.85,-0.527
+29389,"BROWN, Sherrod","OH","D",118,-0.425,-0.097
+21166,"LANKFORD, James","OK","R",118,0.591,0.147
+21355,"MULLIN, Markwayne","OK","R",118,0.532,0.25
+14871,"WYDEN, Ronald Lee","OR","D",118,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",118,-0.453,-0.722
+42301,"FETTERMAN, John Karl","PA","D",118,-0.185,0.14
+40703,"CASEY, Robert (Bob), Jr.","PA","D",118,-0.313,0.166
+40704,"WHITEHOUSE, Sheldon","RI","D",118,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",118,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",118,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",118,0.367,-0.271
+29754,"THUNE, John","SD","R",118,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",118,0.351,0.086
+42100,"HAGERTY, William Francis (Bill)","TN","R",118,0.679,-0.087
+20351,"BLACKBURN, Marsha","TN","R",118,0.632,0.141
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",118,0.781,-0.179
+40305,"CORNYN, John","TX","R",118,0.47,-0.061
+41110,"LEE, Mike","UT","R",118,0.891,-0.454
+41902,"ROMNEY, Willard Mitt (Mitt)","UT","R",118,0.286,0.294
+40909,"WARNER, Mark","VA","D",118,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",118,-0.238,-0.111
+20750,"WELCH, Peter","VT","D",118,-0.403,-0.401
+29147,"SANDERS, Bernard","VT","I",118,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",118,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",118,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",118,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",118,-0.487,-0.124
+20146,"CAPITO, Shelley Moore","WV","R",118,0.284,0.143
+40915,"MANCHIN, Joe, III","WV","D",118,-0.057,0.4
+90915,"MANCHIN, Joe, III","WV","I",118,-0.06,-0.805
+20953,"LUMMIS, Cynthia M.","WY","R",118,0.685,-0.327
+40707,"BARRASSO, John A.","WY","R",118,0.54,0.194
+41500,"SULLIVAN, Daniel Scott","AK","R",119,0.477,0.154
+40300,"MURKOWSKI, Lisa","AK","R",119,0.203,-0.304
+42102,"TUBERVILLE, Thomas Hawley (Tommy)","AL","R",119,0.936,-0.352
+42300,"BRITT, Katie Elizabeth","AL","R",119,0.588,0.575
+21301,"COTTON, Tom","AR","R",119,0.579,0.196
+20101,"BOOZMAN, John","AR","R",119,0.427,0.338
+41905,"KELLY, Mark Edward","AZ","D",119,-0.263,0.288
+21502,"GALLEGO, Ruben","AZ","D",119,-0.358,0.139
+20104,"SCHIFF, Adam","CA","D",119,-0.352,-0.119
+42104,"PADILLA, Alejandro (Alex)","CA","D",119,-0.429,-0.254
+40910,"BENNET, Michael F.","CO","D",119,-0.242,-0.189
+42101,"HICKENLOOPER, John Wright","CO","D",119,-0.288,-0.01
+20707,"MURPHY, Christopher","CT","D",119,-0.287,-0.257
+41101,"BLUMENTHAL, Richard","CT","D",119,-0.435,-0.152
+40916,"COONS, Christopher A.","DE","D",119,-0.238,-0.217
+21706,"BLUNT ROCHESTER, Lisa","DE","D",119,-0.385,-0.121
+42506,"MOODY, Ashley Brooke","FL","R",119,0.735,0.214
+41903,"SCOTT, Richard Lynn (Rick)","FL","R",119,0.717,-0.023
+41102,"RUBIO, Marco","FL","R",119,0.616,-0.184
+42105,"WARNOCK, Raphael Gamaliel","GA","D",119,-0.43,0.422
+42103,"OSSOFF, Thomas Jonathan (Jon)","GA","D",119,-0.462,0.479
+41112,"SCHATZ, Brian Emanuel","HI","D",119,-0.449,-0.118
+20713,"HIRONO, Mazie","HI","D",119,-0.513,-0.089
+41502,"ERNST, Joni","IA","R",119,0.538,-0.033
+14226,"GRASSLEY, Charles Ernest","IA","R",119,0.362,-0.034
+40902,"RISCH, James","ID","R",119,0.551,0.385
+29345,"CRAPO, Michael Dean","ID","R",119,0.505,0.291
+15021,"DURBIN, Richard Joseph","IL","D",119,-0.341,-0.31
+21325,"DUCKWORTH, Tammy","IL","D",119,-0.344,0.056
+21702,"BANKS, James E.","IN","R",119,0.648,0.014
+21133,"YOUNG, Todd","IN","R",119,0.438,-0.022
+21734,"MARSHALL, Roger Wayne","KS","R",119,0.607,0.139
+29722,"MORAN, Jerry","KS","R",119,0.414,0.219
+41104,"PAUL, Rand","KY","R",119,0.891,-0.454
+14921,"McCONNELL, Addison Mitchell (Mitch)","KY","R",119,0.402,0.017
+41703,"KENNEDY, John Neely","LA","R",119,0.561,-0.153
+20919,"CASSIDY, Bill","LA","R",119,0.463,-0.047
+14435,"MARKEY, Edward John","MA","D",119,-0.517,-0.47
+41301,"WARREN, Elizabeth","MA","D",119,-0.744,-0.371
+20330,"VAN HOLLEN, Christopher","MD","D",119,-0.398,-0.227
+42500,"ALSOBROOKS, Angela Deneece","MD","D",119,-0.443,0.046
+49703,"COLLINS, Susan Margaret","ME","R",119,0.124,-0.505
+41300,"KING, Angus Stanley, Jr.","ME","I",119,-0.167,-0.187
+20923,"PETERS, Gary C.","MI","D",119,-0.25,-0.184
+21965,"SLOTKIN, Elissa","MI","D",119,-0.368,0.782
+40700,"KLOBUCHAR, Amy","MN","D",119,-0.279,-0.324
+41706,"SMITH, Tina","MN","D",119,-0.409,-0.122
+42303,"SCHMITT, Eric Stephen","MO","R",119,0.906,0.071
+41901,"HAWLEY, Joshua David","MO","R",119,0.83,-0.371
+41707,"HYDE-SMITH, Cindy","MS","R",119,0.452,0.328
+29534,"WICKER, Roger F.","MS","R",119,0.377,0.341
+42503,"SHEEHY, Timothy Patrick","MT","R",119,0.666,0.746
+21338,"DAINES, Steve","MT","R",119,0.589,-0.024
+21708,"BUDD, Theodore Paul","NC","R",119,0.633,-0.076
+41504,"TILLIS, Thomas Roland (Thom)","NC","R",119,0.388,-0.111
+41107,"HOEVEN, John","ND","R",119,0.4,0.449
+21350,"CRAMER, Kevin","ND","R",119,0.398,0.368
+41302,"FISCHER, Debra (Deb)","NE","R",119,0.46,0.334
+42302,"RICKETTS, John Peter (Pete)","NE","R",119,0.437,0.52
+40906,"SHAHEEN, Jeanne","NH","D",119,-0.221,-0.138
+41702,"HASSAN, Margaret (Maggie)","NH","D",119,-0.226,0.025
+21937,"KIM, Andy","NJ","D",119,-0.401,0.222
+41308,"BOOKER, Cory Anthony","NJ","D",119,-0.556,-0.251
+20930,"HEINRICH, Martin","NM","D",119,-0.334,-0.002
+20932,"LUJÁN, Ben Ray","NM","D",119,-0.38,0.031
+21743,"ROSEN, Jacklyn Sheryl","NV","D",119,-0.286,0.317
+41700,"CORTEZ MASTO, Catherine Marie","NV","D",119,-0.347,0.351
+14858,"SCHUMER, Charles Ellis (Chuck)","NY","D",119,-0.355,-0.412
+20735,"GILLIBRAND, Kirsten","NY","D",119,-0.449,-0.308
+42304,"VANCE, James David","OH","R",119,0.85,-0.527
+42502,"MORENO, Bernardo (Bernie)","OH","R",119,0.75,0.232
+42505,"HUSTED, Jon Allen","OH","R",119,0.699,0.615
+21166,"LANKFORD, James","OK","R",119,0.591,0.147
+21355,"MULLIN, Markwayne","OK","R",119,0.532,0.25
+14871,"WYDEN, Ronald Lee","OR","D",119,-0.334,-0.487
+40908,"MERKLEY, Jeff","OR","D",119,-0.453,-0.722
+42501,"MCCORMICK, David Harold","PA","R",119,0.579,0.575
+42301,"FETTERMAN, John Karl","PA","D",119,-0.185,0.14
+40704,"WHITEHOUSE, Sheldon","RI","D",119,-0.349,-0.113
+29142,"REED, John F. (Jack)","RI","D",119,-0.36,-0.157
+21173,"SCOTT, Tim","SC","R",119,0.629,0.022
+29566,"GRAHAM, Lindsey O.","SC","R",119,0.367,-0.271
+29754,"THUNE, John","SD","R",119,0.432,0.227
+41505,"ROUNDS, Marion Michael (Mike)","SD","R",119,0.351,0.086
+42100,"HAGERTY, William Francis (Bill)","TN","R",119,0.679,-0.087
+20351,"BLACKBURN, Marsha","TN","R",119,0.632,0.141
+41304,"CRUZ, Rafael Edward (Ted)","TX","R",119,0.781,-0.179
+40305,"CORNYN, John","TX","R",119,0.47,-0.061
+41110,"LEE, Mike","UT","R",119,0.891,-0.454
+21755,"CURTIS, John R.","UT","R",119,0.45,0.118
+40909,"WARNER, Mark","VA","D",119,-0.212,-0.038
+41305,"KAINE, Timothy Michael (Tim)","VA","D",119,-0.238,-0.111
+20750,"WELCH, Peter","VT","D",119,-0.403,-0.401
+29147,"SANDERS, Bernard","VT","I",119,-0.544,-0.428
+39310,"CANTWELL, Maria E.","WA","D",119,-0.308,-0.403
+49308,"MURRAY, Patty","WA","D",119,-0.357,-0.314
+41111,"JOHNSON, Ron","WI","R",119,0.641,-0.139
+29940,"BALDWIN, Tammy","WI","D",119,-0.487,-0.124
+42504,"JUSTICE, James Conley, II","WV","R",119,0.565,0.33
+20146,"CAPITO, Shelley Moore","WV","R",119,0.284,0.143
+20953,"LUMMIS, Cynthia M.","WY","R",119,0.685,-0.327
+40707,"BARRASSO, John A.","WY","R",119,0.54,0.194
