@@ -40,3 +40,16 @@ I would prefer [Figure 1](../figures/murder_rate_map.png), “Murder Rates by St
 
 Across all choropleths, I elected to use black borders to increase contrast between states, as well as identify potential states that were filled white against a white background. Doing this allowed for each state to be visually represented without prior knowledge of U.S. geography across many different backgrounds. 
 
+## Push Proof 
+### Angels-MacBook-Pro:13_week angel$ git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+### Angels-MacBook-Pro:13_week angel$ git log -1 
+commit 586c795b8f1b27b79b674de11b76defaaf800b65 (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Fri Apr 17 20:32:01 2026 -0400
+
+    Geospatial lab: choropleths + state data
