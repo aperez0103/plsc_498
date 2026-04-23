@@ -92,16 +92,14 @@ df_survey %>%
 
 # Starter pattern: dot plot with error bars
 
-```{r, fig.width=7, fig.height=4}
-df_climate <- df_survey %>% filter(policy == "Climate") %>%
-  mutate(country = reorder(country, estimate))
+```{r fig.height=4, fig.width=7, warning=FALSE, message=FALSE}
+df_climate <- df_survey %>% filter(policy == "Climate") %>%  mutate(country = reorder(country, estimate))
 
 ggplot(df_climate, aes(x = estimate, y = country)) +
   geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
   geom_point(size = 3) +
   theme_classic() +
-  labs(x = "Support (%)", y = NULL,
-       title = "Climate policy support with 95% CIs")
+  labs(x = "Support (%)", y = NULL, title = "Climate policy support with 95% CIs")
 ```
 
 ---
@@ -109,8 +107,7 @@ ggplot(df_climate, aes(x = estimate, y = country)) +
 # Starter pattern: grouped error bars
 
 ```{r, fig.width=7, fig.height=5}
-df_survey <- df_survey %>%
-  mutate(country = factor(country))
+df_survey <- df_survey %>% mutate(country = factor(country))
 
 ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
   geom_errorbarh(aes(xmin = lower, xmax = upper),
@@ -118,8 +115,7 @@ ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
   geom_point(size = 2.5, position = position_dodge(0.6)) +
   theme_classic() +
   theme(legend.position = "bottom") +
-  labs(x = "Support (%)", y = NULL, color = NULL,
-       title = "Policy support by country and topic")
+  labs(x = "Support (%)", y = NULL, color = NULL, title = "Policy support by country and topic")
 ```
 
 ---
@@ -192,21 +188,14 @@ Apply each checklist item one at a time:
 
 # After the checklist
 
-```{r, fig.width=7, fig.height=4}
+```{r, fig.width=7, fig.height=4, message=FALSE, warning=FALSE}
 p_after <- ggplot(df_climate, aes(x = estimate, y = country)) +
   geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.4) +
   geom_errorbarh(aes(xmin = lower, xmax = upper),
                  height = 0.2, color = "grey50") +
   geom_point(size = 3, color = "steelblue") +
   theme_classic(base_size = 13) +
-  labs(
-    x = "Support (%)",
-    y = NULL,
-    title = "Public support for climate policy",
-    subtitle = "Point estimates with 95% confidence intervals",
-    caption = "Source: Simulated survey data | Dashed line = 50% threshold"
-  )
-
+  labs(x = "Support (%)", y = NULL, title = "Public support for climate policy", subtitle = "Point estimates with 95% confidence intervals", caption = "Source: Simulated survey data | Dashed line = 50% threshold")
 p_after
 ```
 
@@ -266,7 +255,7 @@ library(ggplot2)
 library(dplyr)
 
 ui <- fluidPage(
-  titlePanel("Policy Support Explorer"),
+titlePanel("Policy Support Explorer"),
   sidebarLayout(
     sidebarPanel(
       selectInput("policy", "Choose a policy area:",
@@ -275,6 +264,15 @@ ui <- fluidPage(
     mainPanel(plotOutput("supportPlot"))
   )
 )
+
+```
+
+---
+
+# Shiny starter (for your final project)
+
+
+```r
 
 server <- function(input, output) {
   output$supportPlot <- renderPlot({

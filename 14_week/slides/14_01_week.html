@@ -4,7 +4,7 @@
     <title>Uncertainty, Publishing-Quality Figures, and Shiny</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jared Edgerton" />
-    <script src="14_01_week_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="14_01_week_files/header-attrs-2.30/header-attrs.js"></script>
     <link href="14_01_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="14_01_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="14_01_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -145,13 +145,6 @@ ggplot(df, aes(x = estimate, y = country)) +
 ```
 
 ```
-## Warning: `geom_errobarh()` was deprecated in ggplot2 4.0.0.
-## ℹ Please use the `orientation` argument of `geom_errorbar()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
-```
-
-```
 ## `height` was translated to `width`.
 ```
 
@@ -179,20 +172,15 @@ If intervals overlap substantially, say "the estimates are not clearly different
 
 ``` r
 set.seed(123)
-ts &lt;- data.frame(
-  year = 2000:2024,
-  estimate = cumsum(rnorm(25, 0.3, 1)) + 50
-) %&gt;%
+ts &lt;- data.frame(year = 2000:2024,
+  estimate = cumsum(rnorm(25, 0.3, 1)) + 50) %&gt;%
   mutate(se = runif(25, 1.5, 4),
-         lower = estimate - 1.96 * se,
-         upper = estimate + 1.96 * se)
-
+         lower = estimate - 1.96 * se, upper = estimate + 1.96 * se)
 ggplot(ts, aes(x = year, y = estimate)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
   geom_line(linewidth = 0.7) +
   theme_classic() +
-  labs(x = NULL, y = "Index",
-       title = "Trend with uncertainty ribbon")
+  labs(x = NULL, y = "Index", title = "Trend with uncertainty ribbon")
 ```
 
 ![](14_01_week_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
@@ -293,13 +281,7 @@ ggplot(df, aes(x = estimate, y = country)) +
   geom_point(size = 3, color = "steelblue") +
   geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.5) +
   theme_classic(base_size = 13) +
-  labs(
-    x = "Support (%)",
-    y = NULL,
-    title = "Public support for climate policy",
-    subtitle = "Point estimates with 95% confidence intervals",
-    caption = "Source: Simulated survey data (n varies by country)"
-  )
+  labs(x = "Support (%)", y = NULL, title = "Public support for climate policy", subtitle = "Point estimates with 95% confidence intervals", caption = "Source: Simulated survey data (n varies by country)")
 ```
 
 ```
