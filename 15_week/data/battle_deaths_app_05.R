@@ -9,7 +9,7 @@
 
 # Install any missing packages automatically --------------------------------
 required_packages <- c("shiny", "bslib", "dplyr", "ggplot2", "plotly",
-                       "bsicons", "scales")
+                       "bsicons", "scales", "viridisLite")
 for (pkg in required_packages) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     install.packages(pkg)
@@ -21,12 +21,13 @@ library(bslib)
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(viridisLite)
 
 # Load data -------------------------------------------------------------------
 data_file <- if (file.exists("battle_deaths.rds")) {
   "battle_deaths.rds"
 } else {
-  "15_week/data/battle_deaths.rds"
+  "data/battle_deaths.rds"
 }
 bd <- readRDS(data_file)
 
@@ -69,17 +70,12 @@ ui <- page_sidebar(
       choices  = income_choices,
       selected = income_choices
     ),
-    selectInput(
-      "country_select", "Highlight country:",
-      choices  = c("(none)", sort(unique(bd$country))),
-      selected = "(none)"
-    ),
     hr(),
     p("Country-year battle deaths from PLSC 498 Week 7.",
       style = "font-size: 0.9em; color: #555;")
   ),
 
-  # ---- Value boxes row ----
+  ## ---- Value boxes row ----
   layout_columns(
     col_widths = c(3, 3, 3, 3),
     value_box(
@@ -108,7 +104,7 @@ ui <- page_sidebar(
     )
   ),
 
-  # ---- Navset tabs ----
+  ## ---- Navset tabs ----
   navset_card_tab(
     nav_panel(
       "Trends",
@@ -138,6 +134,19 @@ ui <- page_sidebar(
         card(
           full_screen = TRUE,
           card_header("Highlighted country time series"),
+          div(
+            tags$div(
+              style = "color: #777; font-size: 0.85em; margin-bottom: 6px;",
+              "Note: Income group and Region filters are ignored."
+            ),
+            style = "float: right; width = 250px;",
+            selectInput(
+              "country_select", NULL,
+              choices  = c("(Select a Country)", sort(unique(bd$country))),
+              selected = "(Select a Country)",
+              width = "100%"
+            )
+          ),
           plotOutput("highlight_plot", height = "450px")
         )
       )
@@ -190,7 +199,7 @@ PLSC 498, Week 7 - battle deaths data as prepared in `07_week/data/`.
 # Server ----------------------------------------------------------------------
 server <- function(input, output, session) {
 
-  filtered <- reactive({
+  filtered <- reactive({ #reactive df for *all* filters in sidebar
     bd %>%
       filter(
         year   >= input$year_range[1],
@@ -200,6 +209,16 @@ server <- function(input, output, session) {
       )
   })
 
+  highlight_data <- reactive({ #reactive df for *only* country & year
+    req(input$country_select)
+    
+    bd %>%
+      filter(
+        country == input$country_select,
+        year >= input$year_range[1],
+        year <= input$year_range[2]
+      )
+  })
   # ---- Value boxes ----
   output$total_deaths <- renderText({
     format(sum(filtered()$battle_deaths, na.rm = TRUE), big.mark = ",")
@@ -227,6 +246,7 @@ server <- function(input, output, session) {
     p <- ggplot(df, aes(x = year, y = deaths, color = region)) +
       geom_line(linewidth = 1) +
       geom_point(size = 1.8, alpha = 0.8) +
+      scale_color_viridis_d(option = "D") +
       scale_y_continuous(labels = scales::comma) +
       labs(x = "Year", y = "Battle deaths", color = "Region") +
       theme_minimal(base_size = 13)
@@ -239,6 +259,7 @@ server <- function(input, output, session) {
     ggplot(df, aes(x = income, y = battle_deaths, fill = income)) +
       geom_boxplot(alpha = 0.8, show.legend = FALSE) +
       scale_y_log10(labels = scales::comma) +
+      scale_fill_viridis_d(option = "D") +
       labs(x = NULL, y = "Battle deaths (log10)") +
       theme_minimal(base_size = 12) +
       theme(axis.text.x = element_text(angle = 25, hjust = 1))
@@ -257,18 +278,19 @@ server <- function(input, output, session) {
       geom_col(alpha = 0.9) +
       coord_flip() +
       scale_y_continuous(labels = scales::comma) +
+      scale_fill_viridis_d(option = "D") +
       labs(x = NULL, y = "Total battle deaths", fill = "Region") +
       theme_minimal(base_size = 12)
   })
 
   output$highlight_plot <- renderPlot({
     req(input$country_select)
-    if (identical(input$country_select, "(none)")) {
+    if (identical(input$country_select, "(Select a Country)")) {
       plot.new()
-      title(main = "Pick a country in the sidebar to highlight it.")
+      title(main = "Select a country to highlight it.")
       return()
     }
-    df <- filtered() %>% filter(country == input$country_select)
+    df <- highlight_data()
     validate(need(nrow(df) > 0,
                   "No observations for that country under the current filters."))
     ggplot(df, aes(x = year, y = battle_deaths)) +
@@ -290,16 +312,43 @@ server <- function(input, output, session) {
     df <- filtered() %>%
       group_by(year, region) %>%
       summarize(deaths = sum(battle_deaths, na.rm = TRUE), .groups = "drop")
+    
     validate(need(nrow(df) > 0, "No data."))
-    plot_ly(df, x = ~year, y = ~deaths, color = ~region,
-            type = "scatter", mode = "none", stackgroup = "one") %>%
+    
+    regions <- sort(unique(df$region))
+    
+    region_palette <- setNames(
+      viridisLite::viridis(length(regions), option = "D"),
+      regions
+    )
+    
+    p <- plot_ly()
+    
+    for (r in regions) {
+      df_r <- df %>% filter(region == r)
+      
+      p <- p %>%
+        add_trace(
+          data = df_r,
+          x = ~year,
+          y = ~deaths,
+          type = "scatter",
+          mode = "none",
+          stackgroup = "one",
+          name = r,
+          fillcolor = region_palette[r],
+          line = list(width = 0.5, color = "#FFFFFF")
+        )
+    }
+    
+    p %>%
       layout(
         xaxis = list(title = "Year"),
         yaxis = list(title = "Battle deaths"),
         hovermode = "x unified"
       )
   })
-
+  
   # ---- Data ----
   output$data_table <- renderDataTable({
     filtered() %>%
