@@ -4,7 +4,7 @@
     <title>Coding Assignment: Uncertainty, Redesign, and Publication Quality</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jared Edgerton" />
-    <script src="14_02_week_files/header-attrs-2.29/header-attrs.js"></script>
+    <script src="14_02_week_files/header-attrs-2.30/header-attrs.js"></script>
     <link href="14_02_week_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="14_02_week_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
     <link href="14_02_week_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
@@ -128,19 +128,13 @@ df_survey %&gt;%
 
 
 ``` r
-df_climate &lt;- df_survey %&gt;% filter(policy == "Climate") %&gt;%
-  mutate(country = reorder(country, estimate))
+df_climate &lt;- df_survey %&gt;% filter(policy == "Climate") %&gt;%  mutate(country = reorder(country, estimate))
 
 ggplot(df_climate, aes(x = estimate, y = country)) +
   geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
   geom_point(size = 3) +
   theme_classic() +
-  labs(x = "Support (%)", y = NULL,
-       title = "Climate policy support with 95% CIs")
-```
-
-```
-## `height` was translated to `width`.
+  labs(x = "Support (%)", y = NULL, title = "Climate policy support with 95% CIs")
 ```
 
 ![](14_02_week_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
@@ -151,8 +145,7 @@ ggplot(df_climate, aes(x = estimate, y = country)) +
 
 
 ``` r
-df_survey &lt;- df_survey %&gt;%
-  mutate(country = factor(country))
+df_survey &lt;- df_survey %&gt;% mutate(country = factor(country))
 
 ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
   geom_errorbarh(aes(xmin = lower, xmax = upper),
@@ -160,8 +153,7 @@ ggplot(df_survey, aes(x = estimate, y = country, color = policy)) +
   geom_point(size = 2.5, position = position_dodge(0.6)) +
   theme_classic() +
   theme(legend.position = "bottom") +
-  labs(x = "Support (%)", y = NULL, color = NULL,
-       title = "Policy support by country and topic")
+  labs(x = "Support (%)", y = NULL, color = NULL, title = "Policy support by country and topic")
 ```
 
 ```
@@ -255,19 +247,8 @@ p_after &lt;- ggplot(df_climate, aes(x = estimate, y = country)) +
                  height = 0.2, color = "grey50") +
   geom_point(size = 3, color = "steelblue") +
   theme_classic(base_size = 13) +
-  labs(
-    x = "Support (%)",
-    y = NULL,
-    title = "Public support for climate policy",
-    subtitle = "Point estimates with 95% confidence intervals",
-    caption = "Source: Simulated survey data | Dashed line = 50% threshold"
-  )
-
+  labs(x = "Support (%)", y = NULL, title = "Public support for climate policy", subtitle = "Point estimates with 95% confidence intervals", caption = "Source: Simulated survey data | Dashed line = 50% threshold")
 p_after
-```
-
-```
-## `height` was translated to `width`.
 ```
 
 ![](14_02_week_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
@@ -340,7 +321,7 @@ library(ggplot2)
 library(dplyr)
 
 ui &lt;- fluidPage(
-  titlePanel("Policy Support Explorer"),
+titlePanel("Policy Support Explorer"),
   sidebarLayout(
     sidebarPanel(
       selectInput("policy", "Choose a policy area:",
@@ -349,6 +330,15 @@ ui &lt;- fluidPage(
     mainPanel(plotOutput("supportPlot"))
   )
 )
+
+```
+
+---
+
+# Shiny starter (for your final project)
+
+
+```r
 
 server &lt;- function(input, output) {
   output$supportPlot &lt;- renderPlot({

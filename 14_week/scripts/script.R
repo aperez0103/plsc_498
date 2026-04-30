@@ -65,8 +65,10 @@ p3 <- ggplot(gap_summary, aes(x = year, color = continent, fill = continent)) +
   geom_line(aes(y = mean_le), linewidth = 0.7) +
   theme_classic() +
   theme(legend.position = "bottom") +
+  scale_fill_brewer(palette = "Set2") + 
+  scale_colour_brewer(palette = "Set2") + 
   labs(x = NULL, y = "Life Expectancy (years)", color = NULL, fill = NULL,
-       title = "Life Expectancy by Continent with 95% Confidence Intervals")
+       title = "Life Expectancy by Continent with 95% Confidence Intervals") 
 
 ggsave("figures/life_exp_ribbon.png", plot = p3,
        width = 7, height = 4, dpi = 300, units = "in")
@@ -88,7 +90,7 @@ p4_after <- ggplot(df_survey, aes(x = dem_support, y = country)) +
   geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.5) +
   geom_errorbarh(aes(xmin = lower, xmax = upper),
                  height = 0.25, color = "grey40") +
-  geom_point(size = 3, color = "steelblue") +
+  geom_point(size = 3, color = "grey40") +
   theme_classic(base_size = 13) +
   labs(
     x = "Support for Democracy (%)",
@@ -107,8 +109,7 @@ ggsave("figures/redesign_after.png", plot = p4_after,
 
 gap_2007 <- gap %>% filter(year == 2007)
 
-p5 <- ggplot(gap_2007, aes(x = gdpPercap, y = lifeExp)) +
-  geom_point(alpha = 0.5, aes(size = pop)) +
+  geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", se = TRUE) +
   scale_x_log10(labels = dollar) +
   scale_size_continuous(labels = comma, guide = "none") +
@@ -119,3 +120,37 @@ p5 <- ggplot(gap_2007, aes(x = gdpPercap, y = lifeExp)) +
 
 ggsave("figures/gdp_lifeexp_lm_se.png", plot = p5,
        width = 7, height = 4, dpi = 300, units = "in")
+
+# ----------------------------------------------------------
+# Optional Extension: Shiny App
+# ----------------------------------------------------------
+# Minimal Shiny app: choose a continent from a dropdown and
+# display the life expectancy time series (with uncertainty
+# ribbon) for that continent only.
+
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("Life Expectancy by Continent"),
+  selectInput("continent", "Choose continent:",
+              choices = unique(gap_summary$continent)),
+  plotOutput("lePlot")
+)
+
+server <- function(input, output) {
+  output$lePlot <- renderPlot({
+    df_filtered <- gap_summary %>% filter(continent == input$continent)
+    ggplot(df_filtered, aes(x = year, y = mean_le)) +
+      geom_ribbon(aes(ymin = lower, ymax = upper),
+                  fill = "grey70", alpha = 0.4) +
+      geom_line(linewidth = 0.8) +
+      theme_classic(base_size = 13) +
+      labs(x = NULL, y = "Life expectancy (years)",
+           title = paste0(input$continent,
+                          ": life expectancy over time"),
+           caption = "Source: Gapminder")
+  })
+}
+
+shinyApp(ui, server)
+

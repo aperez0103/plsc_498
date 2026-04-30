@@ -114,7 +114,7 @@ This looks precise. But some estimates are much less certain than others.
 
 # Adding error bars
 
-```{r, fig.width=7, fig.height=4}
+```{r, fig.width=7, fig.height=4, warning=FALSE}
 ggplot(df, aes(x = estimate, y = country)) +
   geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.25) +
   geom_point(size = 3) +
@@ -144,20 +144,15 @@ If intervals overlap substantially, say "the estimates are not clearly different
 
 ```{r, fig.width=7, fig.height=4}
 set.seed(123)
-ts <- data.frame(
-  year = 2000:2024,
-  estimate = cumsum(rnorm(25, 0.3, 1)) + 50
-) %>%
+ts <- data.frame(year = 2000:2024,
+  estimate = cumsum(rnorm(25, 0.3, 1)) + 50) %>%
   mutate(se = runif(25, 1.5, 4),
-         lower = estimate - 1.96 * se,
-         upper = estimate + 1.96 * se)
-
+         lower = estimate - 1.96 * se, upper = estimate + 1.96 * se)
 ggplot(ts, aes(x = year, y = estimate)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), fill = "grey70", alpha = 0.4) +
   geom_line(linewidth = 0.7) +
   theme_classic() +
-  labs(x = NULL, y = "Index",
-       title = "Trend with uncertainty ribbon")
+  labs(x = NULL, y = "Index", title = "Trend with uncertainty ribbon")
 ```
 
 ---
@@ -248,13 +243,7 @@ ggplot(df, aes(x = estimate, y = country)) +
   geom_point(size = 3, color = "steelblue") +
   geom_vline(xintercept = 50, linetype = "dashed", alpha = 0.5) +
   theme_classic(base_size = 13) +
-  labs(
-    x = "Support (%)",
-    y = NULL,
-    title = "Public support for climate policy",
-    subtitle = "Point estimates with 95% confidence intervals",
-    caption = "Source: Simulated survey data (n varies by country)"
-  )
+  labs(x = "Support (%)", y = NULL, title = "Public support for climate policy", subtitle = "Point estimates with 95% confidence intervals", caption = "Source: Simulated survey data (n varies by country)")
 ```
 
 ---
