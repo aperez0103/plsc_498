@@ -355,7 +355,7 @@ display: none;
 <div id="number-of-rows-and-columns-in-gap-gapminder-data" class="section level2">
 <h2>Number of Rows and Columns in <code>gap</code> (gapminder data)</h2>
 <p>1,704 rows, 6 Columns</p>
-<p><code>dim(gap)</code> <code>[1] 1704    6</code></p>
+<p>dim(gap) [1] 1704 6</p>
 </div>
 <div id="range-of-years-in-gap-gapminder-data" class="section level2">
 <h2>Range of years in <code>gap</code> (gapminder data)</h2>
@@ -363,12 +363,59 @@ display: none;
 </div>
 <div id="confirmation-of-df_survey" class="section level2">
 <h2>Confirmation of df_survey</h2>
-<p><code>head(df_survey)</code> country dem_support n se lower upper 1
-United States 72 1200 1.296148 69.45955 69.45955 2 United Kingdom 68
-1000 1.475127 65.10875 65.10875 3 Germany 65 950 1.547494 61.96691
-61.96691 4 France 61 1100 1.470621 58.11758 58.11758 5 Japan 54 800
-1.762101 50.54628 50.54628 6 Brazil 48 600 2.039608 44.00237
-44.00237</p>
+<p>head(df_survey) country dem_support n se lower upper 1 United States
+72 1200 1.296148 69.45955 69.45955 2 United Kingdom 68 1000 1.475127
+65.10875 65.10875 3 Germany 65 950 1.547494 61.96691 61.96691 4 France
+61 1100 1.470621 58.11758 58.11758 5 Japan 54 800 1.762101 50.54628
+50.54628 6 Brazil 48 600 2.039608 44.00237 44.00237</p>
+</div>
+<div id="interpretation" class="section level2">
+<h2>Interpretation</h2>
+<p>The following pairs of countries have overlapping confidence
+intervals in support for democracy: United States &amp; United Kingdom
+(UK), UK &amp; Germany, Germany &amp; France, Japan &amp; Brazil, India
+&amp; Brazil, India &amp; Nigeria. In terms of these overlaps’ effects
+on rankings, since none of the confidence intervals meets any of the
+neighboring point estimates, rankings can rely on the point estimates as
+shown in the plot.</p>
+<p>The uncertainty ribbon on the life expectancy time series provides an
+additional layer of context that aids in understanding what true values
+may be. Without these confidence ribbons, interpretation of this plot
+would follow along the lines of making a strict linear argument, i.e.,
+positing that the average life expectancy for each country follows
+exactly the trends shown. Instead, the ribbons provide a 95% confidence
+that the true average life expectancy for each continent lies somewhere
+within the bounds, with a statistical estimation of what the true
+average may be. </p>
+<p>In the redesign of the Life Expectancy by Continent (with 95%
+confidence ribbons), I first removed the grid background to reduce
+visual clutter. Since the plot is showing a banded estimate of average
+life expectancy, knowing exactly what each year’s average was not
+necessary, thus undermining the need for a grid background. Second, I
+clearly labeled both the X- and Y- axes from their previous “mean_le”
+and “year” to clearly relay what the relationship being shown is
+between. I also added a clear title and subtitle that gives a succinct
+summary of what the plot is meant to accomplish, which is to convey
+trends in average life expectancy for each continent over time. The
+exclusion of such a title, coupled with poorly labeled axes, would leave
+readers confused as to what argument is being made.</p>
+<p>The confidence ribbon around the fitted line shows where the true
+relationship between life expectancy and GDP lies with 95% confidence.
+That is to say, should the data be collected and/or reanalyzed countless
+times, roughly 95% of those instances see a regression line falling
+within the bounds of the confidence ribbon.</p>
+<p>Uncertainty was especially important in the Life Expectancy by
+Continent plot. First, this plot utilized calculated averages based on
+data that cannot physically and accurately capture every continents
+residents’ age at time of death. Because of this, the averages
+calculated are, at best, estimates that may give an idea of where the
+true average for each continent fall but still fails to provide a
+objectively correct value. The confidence intervals mitigate this and
+add to the overall credibility and accuracy of these trend lines, as the
+averages would statistically fall close to the true values. Second, as a
+continuation to the prior point, giving the explicit 95% interval also
+ensures that the reader understands the limits of the plot, and the
+possibility for inaccuracy. </p>
 </div>
 
 
