@@ -27,3 +27,18 @@ In the redesign of the Life Expectancy by Continent (with 95% confidence ribbons
 The confidence ribbon around the fitted line shows where the true relationship between life expectancy and GDP lies with 95% confidence. That is to say, should the data be collected and/or reanalyzed countless times, roughly 95% of those instances see a regression line falling within the bounds of the confidence ribbon. 
 
 Uncertainty was especially important in the Life Expectancy by Continent plot. First, this plot utilized calculated averages based on data that cannot physically and accurately capture every continents residents’ age at time of death. Because of this, the averages calculated are, at best, estimates that may give an idea of where the true average for each continent fall but still fails to provide a objectively correct value. The confidence intervals mitigate this and add to the overall credibility and accuracy of these trend lines, as the averages would statistically fall close to the true values. Second, as a continuation to the prior point, giving the explicit 95% interval also ensures that the reader understands the limits of the plot, and the possibility for inaccuracy.  \n
+
+
+## Proof 
+### Angels-MacBook-Pro:14_week angel$ git status 
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+### Angels-MacBook-Pro:14_week angel$ git log -1 
+commit 2e5d97899d24e1ed2985383f858f8bc2f7a3708f (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Thu Apr 30 19:20:29 2026 -0400
+
+    lab 14 push
