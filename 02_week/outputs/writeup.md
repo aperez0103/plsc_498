@@ -37,3 +37,17 @@ All variables of interest are number classes.
 - Extension 1 makes it easier to see whether men or women have more freedom from torture using size encoding
 
 - Extension 2 adds a lot of information to the visualization, and while adding information about whether men or women escape political killings more frequently, it gets lost within the busyness of the data
+
+
+## Proof 
+Angels-MacBook-Pro:02_week angel$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+Angels-MacBook-Pro:02_week angel$ git log -1
+commit 32cf718d8296da3e1fe3ff03512c668e571e7f5b (HEAD -> main, origin/main, origin/HEAD)
+Author: aperez0103 <angel13per@gmail.com>
+Date:   Fri May 1 18:01:48 2026 -0400
+
+    lab 2 push
