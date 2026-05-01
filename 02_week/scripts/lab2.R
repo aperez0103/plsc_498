@@ -33,4 +33,17 @@ p1 <- ggplot(vdem, aes(
   y = v2clacjstm,
   size = v2cltort
 )) +
-  geom_point()
+  geom_point(alpha = 0.15)
+
+ggsave("figures/plot_extension1.png", plot = p1)
+
+#extension 2
+p2 <- ggplot(vdem, aes(
+  x = v2clacjstw,
+  y = v2clacjstm,
+  size = v2cltort,
+  color = v2clkill
+)) +
+  geom_point(alpha = 0.25)
+
+ggsave("figures/plot_extension2.png", plot = p2)
